@@ -1,7 +1,7 @@
 /**
  * Claude Design System (CDS) - Motion Engine & Physics Presets
  * 
- * 逆向溯源：提取自 /Applications/Claude.app ion-dist 及 Framer Motion 生产环境配置。
+ * 逆向溯源：Claude Desktop 2.42304.0.0 ion-dist（shared-8-B5lJ8U5C.js：stiffness 600 / damping 30）及 Framer Motion 配置。
  * 遵循二阶阻尼谐振子物理公式：
  *   m * x'' + c * x' + k * (x - x_target) = 0
  *   阻尼比 ζ = c / (2 * sqrt(m * k))

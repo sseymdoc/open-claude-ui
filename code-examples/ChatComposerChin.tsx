@@ -4,42 +4,18 @@ import { ModelSelectorEffort, EffortLevel } from './ModelSelectorEffort';
 export interface ChatComposerChinProps {
   currentEffort: EffortLevel;
   onEffortChange: (effort: EffortLevel) => void;
-  failedQueueCount?: number;
-  onRetryQueue?: () => void;
 }
 
 /** Chin 渲染在输入框卡片外、卡片下方（claude.ai 实测），不要放进卡片内部。 */
 export const ChatComposerChin: React.FC<ChatComposerChinProps> = ({
   currentEffort,
-  onEffortChange,
-  failedQueueCount = 0,
-  onRetryQueue
+  onEffortChange
 }) => {
   return (
     <div
       className="cds-root w-full border-t border-[var(--cds-border-subtle,rgba(0,0,0,0.08))] bg-[var(--cds-surface,#FCFBF7)] px-3 py-1.5"
       data-cds="ChatComposerChin"
     >
-      {/* 离线失败消息队列横幅 */}
-      {failedQueueCount > 0 && (
-        <div
-          data-cds="ChatComposerQueuedMessages"
-          className="mb-2 flex items-center justify-between rounded-lg bg-amber-50 px-2.5 py-1.5 text-xs text-amber-800 border border-amber-200"
-        >
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-amber-500" />
-            <span>{failedQueueCount} message(s) failed to send. Staged in local storage.</span>
-          </div>
-          <button
-            type="button"
-            onClick={onRetryQueue}
-            className="font-medium underline hover:text-amber-900"
-          >
-            Retry Now
-          </button>
-        </div>
-      )}
-
       {/* 下颌操作行 (自带触控补偿) */}
       <div
         data-touch-size="true"

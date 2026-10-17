@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
  * ==============================================================================
  * Claude Design System (CDS) - RichComposerWithMentions.tsx
  * 
- * 逆向还原自官方 Claude Desktop / Web 核心输入组件 (REA v6.5.0 取证):
+ * 逆向还原自官方 Claude Desktop / Web 核心输入组件 (Claude Desktop 2.42304.0.0 取证):
  * - `shared-frame-BfjMqbuN.js` (Lm/Rm/zm/Bm/Um WebKit 500ms Post-Composition Delta Guard)
  * - `cb6930dae-BD0W5ZM9.js` (Qo/ar/Xo/as Slash & Mention Tokenizer with 256 file cap)
  * - `frame-shell-chrome-CAw-tYzh.js` (field-sizing fallback, max-h-[min(40svh,24rem)])

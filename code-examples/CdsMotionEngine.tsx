@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 export const CdsMotionEngine: React.FC = () => {
   const [popped, setPopped] = useState(false);
-  const chips = ['AST-Engine', 'Electron-Fuses', 'View-Transitions', 'Scroll-Timeline', 'Off-Line-Bundle'];
+  const chips = ['AST-Engine', 'Electron-Fuses', 'View-Transitions', 'Scroll-Timeline', 'Sibling-Index'];
 
   return (
     <div className="p-6 space-y-6 bg-[#FCFBF7] rounded-xl border border-neutral-200">
-      <h3 className="text-sm font-bold text-neutral-800">CDS 2.0 物理动效引擎实机呈现</h3>
+      <h3 className="text-sm font-bold text-neutral-800">CDS 动效引擎实机呈现</h3>
 
       {/* 1. Pill 弹性过冲 */}
       <div>

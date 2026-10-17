@@ -103,46 +103,57 @@ import {
    - **Where to use**: Session item drag-and-drop placeholder collision, magnetic drawer snapping.
 
 ### 7-Stop Non-Linear Fade Mask
-Never use a linear gradient for scroll fading. Use the calibrated 7-stop non-linear mask:
+Never use a linear gradient for scroll fading. Use the 7-stop non-linear mask from Claude Desktop 2.42304.0.0 (`c6a992d55-sXiDGMFQ.css`; `--cds-scroll-fade-size` 28px, each edge collapses to 0 when scrolled to it):
 ```css
-mask-image: linear-gradient(
-  to bottom,
-  transparent 0%,
-  rgba(0, 0, 0, 0.05) 15%,
-  rgba(0, 0, 0, 0.18) 32%,
-  rgba(0, 0, 0, 0.38) 50%,
-  rgba(0, 0, 0, 0.64) 68%,
-  rgba(0, 0, 0, 0.88) 85%,
-  black 100%
+mask-image: linear-gradient(to bottom,
+  transparent,
+  #0000000d calc(var(--cds-scroll-fade-top) * .15),
+  #00000026 calc(var(--cds-scroll-fade-top) * .3),
+  #0000004d calc(var(--cds-scroll-fade-top) * .45),
+  #00000080 calc(var(--cds-scroll-fade-top) * .6),
+  #000000b3 calc(var(--cds-scroll-fade-top) * .75),
+  #000000d9 calc(var(--cds-scroll-fade-top) * .87),
+  #000 var(--cds-scroll-fade-top),
+  #000 calc(100% - var(--cds-scroll-fade-bottom)),
+  #000000d9 calc(100% - var(--cds-scroll-fade-bottom) * .87),
+  #000000b3 calc(100% - var(--cds-scroll-fade-bottom) * .75),
+  #00000080 calc(100% - var(--cds-scroll-fade-bottom) * .6),
+  #0000004d calc(100% - var(--cds-scroll-fade-bottom) * .45),
+  #00000026 calc(100% - var(--cds-scroll-fade-bottom) * .3),
+  #0000000d calc(100% - var(--cds-scroll-fade-bottom) * .15),
+  transparent
 );
 ```
 See [`code-examples/ScrollFadeContainer.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ScrollFadeContainer.tsx) for dynamic top/bottom edge zeroing logic.
 
 ---
 
-## 🧩 3. Component Directory: 30 Production Modules
+## 🧩 3. Component Directory: 33 Production Modules
 
 Refer to or import from [`code-examples/`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/) when composing UI:
 
 ### Atomic Controls (5)
 * [`CdsButton.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/CdsButton.tsx): 4-tier ladder (XS: 24/6px, SM: 28/7px, MD: 32/8px, LG: 40/10px), neutral-ink Primary plus Secondary, Ghost, Brand (clay, send key only), Outline, Danger; press scales only the `.cds-btn-squish` background layer.
 * [`SegmentedControl.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/SegmentedControl.tsx): control-radius track (SM 7px / MD 8px), 1px padding, thumb radius − 1px, CSS & Framer Motion dual-mode.
-* [`StatusIndicators.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/StatusIndicators.tsx): Clay 2.4s breathing light, 1.2s active run pulse, 3-dot wave, skeleton sweep.
+* [`StatusIndicators.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/StatusIndicators.tsx): Clay 3s breathing light (`dframe-clay-breathe`), 1.2s active run pulse, 3-dot wave, skeleton sweep.
 * [`ConfirmationDialog.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ConfirmationDialog.tsx): 16px corner radius, dual-ring popover shadow, focus trap.
-* [`AttachmentCard.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/AttachmentCard.tsx): desktop card grid (128×96px) and inline composer pill dual-mode.
+* [`AttachmentCard.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/AttachmentCard.tsx): 7.5rem square tiles with mid-truncated file names, plus inline composer pill mode.
 
-### Conversation Stream & Input (6)
+### Conversation Stream & Input (8)
 * [`ChatComposer.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ChatComposer.tsx): `--cds-radius-composer` (.875rem) input terminal, dual-ring shadow, clay send key with squish press, `field-sizing: content` auto-resize.
 * [`ChatMessageBubbles.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ChatMessageBubbles.tsx): User 12px radius (control 8 + 4) with soft tint vs Assistant zero-border transparent layout.
 * [`ThinkingAccordion.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ThinkingAccordion.tsx): Framer Motion height spring expansion, single clay breathing pulse dot, active generation mutex.
 * [`RichComposerWithMentions.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/RichComposerWithMentions.tsx): CJK IME composition guard, `/` command & `@` context dual triggers, token budget estimator.
-* [`ModelSwitcherWithTokenGauge.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ModelSwitcherWithTokenGauge.tsx): 3-tier model switcher, Extended Thinking toggle, Prompt Caching 4-color memory SVG gauge.
+* [`ModelSwitcherWithTokenGauge.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ModelSwitcherWithTokenGauge.tsx): claude.ai model menu (Fable 5.1 / Opus 5.5 / Sonnet 5.5 / Haiku 5.5), adaptive thinking with 5 effort levels, Prompt Caching 4-color SVG gauge.
+* [`ModelSelectorEffort.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ModelSelectorEffort.tsx): model selector with the 5-level effort submenu (`medium` recommended, Max usage warning).
+* [`ChatComposerChin.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ChatComposerChin.tsx): composer chin row with the effort entry point.
 * [`McpToolDecisionCard.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/McpToolDecisionCard.tsx): 3-state authorization lifecycle (`pending_approval` → `running` → `success`/`error`), 3-tier action array.
 
-### Atmosphere & Motion (3)
+### Atmosphere & Motion (4)
 * [`ClaudeMotionPresets.ts`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ClaudeMotionPresets.ts): 4 calibrated physics presets.
 * [`ReasoningAmbientGlow.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ReasoningAmbientGlow.tsx): Warm Clay diffuse light field, `cds-shimmer-text-shine` asymmetric sweep, caustic canvas.
 * [`ScrollFadeContainer.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ScrollFadeContainer.tsx): 7-stop non-linear mask with edge sensors.
+* [`CdsMotionEngine.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/CdsMotionEngine.tsx): `sibling-index()` staggering, View Transitions and scroll-driven fade demos.
 
 ### Audiovisual & Media (8)
 * [`ClaudeAudioPlayer.ts`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ClaudeAudioPlayer.ts): Procedural Web Audio API oscillator synthesis, 30% gentle volume standard, anti-pop gain ramp smoothing.
@@ -156,7 +167,7 @@ Refer to or import from [`code-examples/`](file:///Users/jiahao/Desktop/PythonPr
 
 ### Desktop & System Architecture (8)
 * [`createClaudeMainWindow.ts`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/createClaudeMainWindow.ts): Electron host window factory: `hiddenInset` titlebar, macOS Vibrancy (`under-window`) glass blending, 1200×800 default, 600×400 min.
-* [`ClaudeDesktopHeader.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ClaudeDesktopHeader.tsx): macOS traffic light 74px inverse zoom compensation slot (`ew = 74`), 45px global drag band.
+* [`ClaudeDesktopHeader.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ClaudeDesktopHeader.tsx): macOS traffic light 74px inverse zoom compensation slot (`En = 74` in `shared-10-THQui8pC.js`), 45px drag band.
 * [`DraggableSessionList.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/DraggableSessionList.tsx): `pinnedOrder` optimistic topological reordering, 4px deadzone, tilted ghost shadow.
 * [`CoworkAgentCanvas.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/CoworkAgentCanvas.tsx): Multi-agent task delegation state machine, team-shared artifact asset pool, cross-window `BroadcastChannel` sync.
 * [`useClaudeScrollPinning.ts`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/useClaudeScrollPinning.ts): 150ms cooldown latch against scroll hijacking, 40px bottom-tolerance scroll pin, GPU subpixel blur elimination.

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
  * ==============================================================================
  * Claude Design System (CDS) - McpToolDecisionCard.tsx
  * 
- * 逆向还原自官方 Claude Desktop / Code 交互式工具调用与 MCP 决策卡片 (REA v6.5.0 取证):
+ * 逆向还原自官方 Claude Desktop / Code 交互式工具调用与 MCP 决策卡片 (Claude Desktop 2.42304.0.0 取证):
  * - `c05b96c7f-DklIyA-P.js`: structured_content / ws / onVerdict / PERMISSIONS_ERROR
  * - `cc1aae219-DjR8LnUv.js`: user_denied / policy_denied / settleReason / streamSettled
  * - `frame-shell-chrome-CAw-tYzh.js`: [data-cds=Card] 嵌套下重置 text-inset: 0px 规则

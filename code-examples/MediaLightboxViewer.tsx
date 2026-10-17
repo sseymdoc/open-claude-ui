@@ -2,9 +2,8 @@
  * Claude Design System (CDS) - Multimodal Media Lightbox & Pan/Zoom Gallery
  * 
  * 逆向溯源：
- *   - 核心画廊与缩放平移算法：c4b054ed5-BGjH-Uu6.js
- *   - 共享元素无缝变形 (View Transitions & FLIP Morph)：cd5136de8-BDys1vAN.js
- *   - 会话附件集成与缩略图注册：cd5a31703-B4nKQMBN.js
+ *   - 核心画廊与缩放平移算法：c4b054ed5-C43deEXI.js
+ *   - 共享元素无缝变形 (View Transitions & FLIP Morph)：cd5136de8-DkRyzn25.js
  * 
  * 核心规范与数学物理模型：
  *   1. 仿射平移缩放 (Affine Pan/Zoom)：

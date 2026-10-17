@@ -1,6 +1,6 @@
 /**
  * 维度二：多容器自适应查询与极端弹性排版
- * 逆向还原自 Claude Desktop: c6a992d55-C0zTICcS.css
+ * 逆向还原自 Claude Desktop 2.42304.0.0: c6a992d55-sXiDGMFQ.css
  * 
  * 核心特性：
  * 1. @container 命名容器定义
@@ -18,7 +18,7 @@ export const ContainerResponsiveBar: React.FC<{ children?: React.ReactNode }> = 
         <div className="flex min-w-0 items-center gap-2">
           <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--cds-clay)]" />
           <span className="truncate text-xs font-medium text-[var(--cds-text-primary)] @max-[384px]/toolbar:max-w-[72px]">
-            Claude 3.7 Sonnet
+            Opus 5.5
           </span>
           <span className="rounded bg-[var(--cds-surface-2)] px-1.5 py-0.5 text-[10px] font-medium text-[var(--cds-text-secondary)] @max-[480px]/toolbar:hidden">
             Thinking

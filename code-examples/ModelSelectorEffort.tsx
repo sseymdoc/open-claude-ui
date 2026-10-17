@@ -30,7 +30,7 @@ export const ModelSelectorEffort: React.FC<{
   onEffortChange,
   config = {
     effortLevels: ['low', 'medium', 'high', 'xhigh', 'max'],
-    recommended: 'high',
+    recommended: 'medium',
     modes: ['auto']
   }
 }) => {

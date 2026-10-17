@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
  * ==============================================================================
  * Claude Design System (CDS) - ReasoningAmbientGlow.tsx
  * 
- * 逆向还原自官方 Claude 动态光效与推理氛围感引擎 (REA v6.5.0 取证):
+ * 逆向还原自官方 Claude 动态光效与推理氛围感引擎 (Claude Desktop 2.42304.0.0 取证):
  * - `c6a992d55-sXiDGMFQ.css`: cds-shimmer-text-shine / wl-glow / wl-halo / cds-dot-pulse / epitaxy-linear-sweep
  * - `frame-shell-chrome-CAw-tYzh.js`: --cds-fill-brand / shadow-field-drop / color-mix
  * 

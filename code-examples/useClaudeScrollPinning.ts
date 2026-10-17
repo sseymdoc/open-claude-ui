@@ -1,12 +1,11 @@
 /**
  * 维度一：流式大文本输出与滚动视口物理学
- * 逆向还原自 Claude Desktop: ca2ef848d-Dz47ULRM.js
+ * 逆向还原自 Claude Desktop 2.42304.0.0: ca2ef848d-CWUk7Rll.js
  * 
  * 核心特性：
- * 1. 150ms 用户输入冷却窗口 (performance.now() - lastUserInputAt > 150)
- * 2. 40px 底部容差与图钉锁定
- * 3. 35vh 底部缓冲区 (--chat-extra-space)
- * 4. behavior: "auto" 防抖非平滑瞬时对齐
+ * 1. 150ms 用户输入冷却窗口 (performance.now() - getLastUserInputAt() > 150)
+ * 2. 底部容差与图钉锁定（本实现取 40px）
+ * 3. behavior: "auto" 非平滑瞬时对齐（程序滚动先 markProgrammaticScroll）
  */
 
 import { useEffect, useRef, useState, useCallback } from 'react';

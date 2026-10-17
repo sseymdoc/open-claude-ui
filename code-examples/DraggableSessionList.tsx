@@ -5,9 +5,10 @@ import React, { useState, useRef, useCallback } from 'react';
  * Claude Design System (CDS) - DraggableSessionList.tsx
  * 
  * 逆向还原自官方 Claude Desktop 侧边栏会话拖放与固定物理引擎:
- * - `shared-21-CGGmSsMS.js` (pinReorder / Gce / Wce / onMoveUp / onMoveDown)
- * - `shared-22-DYCF-SVs.js` (data-pin-dragging / data-session-dragging / pinnedOrder)
- * - `c6a992d55-sXiDGMFQ.css` (df-sidebar-row, dframe-drag-ghost)
+ * - `shared-21-IP-SVetq.js` (pinReorder / data-pin-dragging)
+ * - `shared-19-CkPOiIKm.js` (onMoveUp / onMoveDown)
+ * - `shared-22-HztmyUTM.js` (data-pin-dragging / data-session-dragging)
+ * - `cca4865c3-DWRLf_sj.js` (拖拽投影 rotate(-1.5deg))
  * 
  * 核心工程机制:
  * 1. 乐观拓扑重排状态机 (Optimistic Topological Reordering):
