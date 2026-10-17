@@ -200,8 +200,9 @@ export const StreamingDiffViewer: React.FC<StreamingDiffViewerProps> = ({
             type="button"
             onClick={handleCopy}
             aria-label="复制代码差异"
-            className="flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-sans text-[var(--cds-text-muted,#8c8c8c)] hover:text-[var(--cds-text-primary,#1a1a1a)] hover:bg-[var(--cds-alpha-1,rgba(0,0,0,0.05))] active:scale-95 transition-all"
+            className="group/btn relative isolate flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-sans text-[var(--cds-text-muted,#8c8c8c)] hover:text-[var(--cds-text-primary,#1a1a1a)] transition-colors"
           >
+            <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] group-hover/btn:bg-[var(--cds-alpha-1,rgba(0,0,0,0.05))] transition-colors" />
             {copied ? (
               <span className="text-[#10b981] font-medium animate-[cds-fade-in_150ms_ease-out]">✓ 已复制</span>
             ) : (

@@ -202,14 +202,16 @@ export const CoworkAgentCanvas: React.FC = () => {
             <div className="flex items-center gap-2 pt-2">
               <button
                 type="button"
-                className="px-3 py-1.5 rounded-lg bg-[var(--cds-fill-brand,#d97757)] text-white hover:bg-[var(--cds-fill-brand-hover,#c86849)] font-medium active:scale-95 transition-all shadow-xs"
+                className="group/btn relative isolate px-3 py-1.5 rounded-lg text-[var(--cds-on-primary)] font-medium"
               >
+                <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-fill-primary)] group-hover/btn:bg-[var(--cds-fill-primary-hover)] shadow-xs transition-colors" />
                 发送协同指令
               </button>
               <button
                 type="button"
-                className="px-3 py-1.5 rounded-lg border border-[var(--cds-border-subtle,#e5e5e3)] dark:border-[var(--cds-border-subtle,#333331)] bg-[var(--cds-bg-surface,#ffffff)] dark:bg-[var(--cds-bg-surface,#222221)] text-[var(--cds-text-primary,#1a1a1a)] dark:text-[var(--cds-text-primary,#f0f0f0)] hover:bg-[var(--cds-bg-hover,#f5f5f5)] active:scale-95 transition-all font-medium"
+                className="group/btn relative isolate px-3 py-1.5 rounded-lg text-[var(--cds-text-primary,#1a1a1a)] dark:text-[var(--cds-text-primary,#f0f0f0)] font-medium"
               >
+                <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] border border-[var(--cds-border-subtle,#e5e5e3)] dark:border-[var(--cds-border-subtle,#333331)] bg-[var(--cds-bg-surface,#ffffff)] dark:bg-[var(--cds-bg-surface,#222221)] group-hover/btn:bg-[var(--cds-bg-hover,#f5f5f5)] transition-colors" />
                 查看审计日志
               </button>
             </div>

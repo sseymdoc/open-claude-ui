@@ -8,6 +8,7 @@ export interface ChatComposerChinProps {
   onRetryQueue?: () => void;
 }
 
+/** Chin 渲染在输入框卡片外、卡片下方（claude.ai 实测），不要放进卡片内部。 */
 export const ChatComposerChin: React.FC<ChatComposerChinProps> = ({
   currentEffort,
   onEffortChange,

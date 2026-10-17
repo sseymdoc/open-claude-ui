@@ -5,8 +5,8 @@
  * 提取的 .df-pills[data-segmented] 完整轨道与滑动指示器规范。
  * 
  * 核心规范：
- *   - 轨道外壳：严格 1px 内边距 (padding: 1px)
- *   - 滑动指示器：top: 1px, bottom: 1px, border-radius: calc(var(--cds-radius) - 1px)
+ *   - 轨道外壳：严格 1px 内边距 (padding: 1px)，圆角随尺寸取控件圆角（sm 7px / md 8px / lg 10px；claude.ai 实测，不是 999px 胶囊）
+ *   - 滑动指示器：top: 1px, bottom: 1px, border-radius: 控件圆角 − 1px
  *   - 纯几何等分滑动指示器公式：
  *       left = calc(1px + activeIndex * (100% - 2px) / total)
  *       width = calc((100% - 2px) / total)
@@ -72,17 +72,19 @@ export function SegmentedControl({
   };
 
   const isSmall = size === "sm";
+  const radius = isSmall ? 7 : 8;
 
   return (
     <div
       data-cds="SegmentedControl"
       data-segmented=""
       data-pills={normalizedTabs.length}
-      className={`df-pills relative rounded-full select-none flex items-stretch p-[1px] transition-colors ${
+      className={`df-pills relative select-none flex items-stretch p-[1px] transition-colors ${
         isSmall ? "h-7 text-xs" : "h-8 text-xs"
       } ${className}`}
       style={{
-        backgroundColor: "var(--cds-segmented-track, rgba(0, 0, 0, 0.06))",
+        backgroundColor: "var(--cds-segmented-track, rgba(0, 0, 0, 0.05))",
+        borderRadius: radius,
         containerType: "inline-size",
       }}
       role="tablist"
@@ -90,10 +92,11 @@ export function SegmentedControl({
       {/* 1. 原生纯几何定位滑动指示器 */}
       {!useFramerMotion ? (
         <div
-          className="df-pill-indicator absolute top-[1px] bottom-[1px] rounded-full bg-white dark:bg-[#2c2c2a] pointer-events-none transition-all duration-120 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform"
+          className="df-pill-indicator absolute top-[1px] bottom-[1px] bg-[var(--cds-segmented-thumb)] pointer-events-none transition-all duration-120 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform"
           style={{
             left: `calc(1px + ${activeIndex} * (100% - 2px) / ${normalizedTabs.length})`,
             width: `calc((100% - 2px) / ${normalizedTabs.length})`,
+            borderRadius: radius - 1,
             boxShadow:
               "inset 0 0 0 0.5px var(--cds-border, rgba(0,0,0,0.08)), 0 1px 2px rgba(0,0,0,0.06), 0 2px 6px -1px rgba(0,0,0,0.05)",
           }}
@@ -112,7 +115,8 @@ export function SegmentedControl({
             aria-selected={isActive}
             data-active={isActive ? "" : undefined}
             onClick={() => handleSelect(idx)}
-            className={`df-pill relative z-10 flex-1 h-full flex items-center justify-center gap-1.5 px-3 rounded-full transition-colors truncate font-control ${
+            style={{ borderRadius: radius - 1 }}
+            className={`df-pill relative z-10 flex-1 h-full flex items-center justify-center gap-1.5 px-3 transition-colors truncate font-control ${
               isActive
                 ? "text-neutral-900 dark:text-white font-medium"
                 : "text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300 font-normal"
@@ -122,8 +126,9 @@ export function SegmentedControl({
             {useFramerMotion && isActive && (
               <motion.div
                 layoutId="cds-segmented-active-thumb"
-                className="absolute inset-0 rounded-full bg-white dark:bg-[#2c2c2a] -z-10"
+                className="absolute inset-0 bg-[var(--cds-segmented-thumb)] -z-10"
                 style={{
+                  borderRadius: radius - 1,
                   boxShadow:
                     "inset 0 0 0 0.5px var(--cds-border, rgba(0,0,0,0.08)), 0 1px 2px rgba(0,0,0,0.06), 0 2px 6px -1px rgba(0,0,0,0.05)",
                 }}

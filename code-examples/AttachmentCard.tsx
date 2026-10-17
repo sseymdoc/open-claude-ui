@@ -152,9 +152,10 @@ export function AttachmentCard({
               e.stopPropagation();
               onRemove();
             }}
-            className="absolute -end-2 -top-2 z-10 inline-flex size-5 items-center justify-center rounded-full bg-surface-3 text-secondary shadow-card-ring hover:text-primary border border-neutral-200/60 dark:border-neutral-700/60 transition-transform active:scale-90 cursor-pointer"
+            className="group/btn absolute isolate -end-2 -top-2 z-10 inline-flex size-5 items-center justify-center rounded-full text-secondary hover:text-primary cursor-pointer"
             aria-label="Remove file"
           >
+            <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-surface-3 shadow-card-ring border border-neutral-200/60 dark:border-neutral-700/60" />
             <span className="text-xs leading-none">×</span>
           </button>
         )}

@@ -8,12 +8,13 @@ When assisting users with building, modifying, or reviewing frontend components,
 
 ## 🧭 Quick Reference: Core Philosophy & Rules
 
-1. **Editorial Warmth, Not Cyberpunk**:
-   - Main brand accent is warm **Clay / Terracotta (`#d97757` in light mode, `#cc6b49` in dark mode)**.
-   - Surfaces use subtle warm grays (`#fcfcfb`, `#f7f7f5`, `#1b1b19`), never stark pure black `#000` (except code blocks `#0d0d0c`) or harsh pure white `#fff`.
-   - Never use neon blues, magenta, or cold purple gradients.
+1. **Editorial Warmth, Not Cyberpunk** (values measured on claude.ai, see the audit page in `docs/claude-components-storybook.html`):
+   - Primary buttons are **neutral ink**: `--cds-fill-primary` `#0b0b0b` (dark mode `#fff`).
+   - **Clay / Terracotta is reserved for the send key and Spark**: `--cds-fill-brand` `#c6613f` (clay-emphasized), hover `#d97757`. Never use clay for primary buttons or focus rings.
+   - Focus rings and selection checks use the **accent blue** `--cds-fill-accent` `#2a78d6`. Never use neon blues, magenta, or cold purple gradients.
+   - Surfaces use warm grays (`#f9f9f7`, `#fcfcfb`, `#fff`; dark `#0b0b0b`, `#151515`, `#1a1a19`, `#20201f`), never stark pure black `#000` (code blocks `#0d0d0c` excepted).
 2. **Low-Contrast Surface Layering**:
-   - Differentiate layers using micro-luminance contrast (`Surface 0 ~ 3`) and hairline borders (`border-subtle`: `rgba(0,0,0,0.06)` / `rgba(255,255,255,0.08)`).
+   - Differentiate layers using micro-luminance contrast (`Surface 0 ~ 3`) and hairline borders (`--cds-border` = `--cds-alpha-2`: 10% ink / 9% white).
    - Single-stroke border discipline: inside bordered containers (such as cards or the chat composer), secondary buttons and chips must NOT have redundant borders (`border-none`).
 3. **Organic Motion Physics**:
    - Never use generic `linear` or exaggerated bouncy CSS transitions.
@@ -34,36 +35,43 @@ All tokens are defined in [`code-examples/cds-theme.css`](file:///Users/jiahao/D
 ### Surface & Background Tokens
 | Token | Light Mode Value | Dark Mode Value | Usage |
 | :--- | :--- | :--- | :--- |
-| `--cds-bg-surface-0` | `#fcfcfb` | `#1b1b19` | Base application background, page canvas |
-| `--cds-bg-surface-1` | `#fbfbfa` | `#21211e` | Sidebar panels, secondary cards |
-| `--cds-bg-surface-2` | `#f7f7f5` | `#282824` | Input bars, dialog backdrops, floating popovers |
-| `--cds-bg-surface-3` | `#efeee9` | `#32322d` | Active states, hover fills, elevated tags |
-| `--cds-bg-input` | `#fdfdfc` | `#1e1e1b` | Text fields, chat input background |
+| `--cds-surface-0` | `#f9f9f7` | `#0b0b0b` | Sidebar / base canvas (web sidebar mixes it 50% with surface-1) |
+| `--cds-surface-1` | `#fcfcfb` | `#151515` | Page background (`--cds-page-bg`), chat canvas |
+| `--cds-surface-2` | `#ffffff` | `#1a1a19` | Message cards |
+| `--cds-surface-3` | `#ffffff` | `#20201f` | Menus, composer card, dark-mode tooltip |
 
 ### Text & Border Tokens
 | Token | Light Mode Value | Dark Mode Value | Usage |
 | :--- | :--- | :--- | :--- |
-| `--cds-text-primary` | `#1f1e1d` | `#eeede8` | Headings, primary body text, active labels |
-| `--cds-text-secondary` | `#6b6966` | `#b4b2ac` | Timestamps, subtitles, secondary actions |
-| `--cds-text-tertiary` | `#999793` | `#7d7b76` | Placeholders, disabled text, hotkey hints |
-| `--cds-border-subtle` | `rgba(0, 0, 0, 0.06)` | `rgba(255, 255, 255, 0.08)` | Dividers, subtle list borders |
-| `--cds-border-card` | `rgba(0, 0, 0, 0.08)` | `rgba(255, 255, 255, 0.12)` | Component cards, attachments, popovers |
+| `--cds-text-primary` | `#0b0b0b` | `#f0efec` | Headings, primary body text, active labels |
+| `--cds-text-secondary` | `#52514e` | `#c3c2b7` | Timestamps, subtitles, secondary actions |
+| `--cds-text-muted` | `#898781` | `#898781` | Placeholders, disabled text, hotkey hints (same in both modes) |
+| `--cds-border` | `--cds-alpha-2` (10% ink) | `--cds-alpha-2` (9% white) | Dividers, cards, attachments, popover rings |
+| `--cds-border-strong` | `--cds-alpha-3` (20% ink) | `--cds-alpha-3` (18% white) | Hover / focus-within borders |
 
-### Brand Clay Palette
-* `clay-500` (Default brand): `#d97757` (Light) / `#cc6b49` (Dark)
-* `clay-600` (Hover): `#c56445` (Light) / `#e07a58` (Dark)
-* `clay-700` (Active): `#b2563a` (Light) / `#b55a3d` (Dark)
-* Dual-ring focus shadow: `box-shadow: 0 0 0 2px var(--cds-bg-surface-0), 0 0 0 4px rgba(217, 119, 87, 0.4)`
+### Fill, Brand & Focus
+* `--cds-fill-primary` (primary button): `#0b0b0b` → hover `#2c2c2a` (Light) / `#fff` → hover `#e1e0d9` (Dark); text `--cds-on-primary`.
+* `--cds-fill-brand` (send key and Spark only): `#c6613f` → hover `#d97757` in both modes. `--cds-clay` `#d97757` stays for the breathing status dot and drop glow.
+* `--cds-fill-accent`: `#2a78d6` (focus ring, selected check marks).
+* Focus shadow (`--cds-focus-shadow`): `inset 0 0 0 1px <page bg>, 0 0 0 1px #2a78d6, 0 0 6px 1px #cde2fb`; dark mode replaces the last stop with `rgb(24 79 149 / 60%)`.
 
-### Geometric Corner Radii
-* `9999px` (`--cds-radius-pill`): Pill buttons, segmented control tracks, model switcher capsules.
-* `20px` (`--cds-radius-composer`): Main chat composer terminal.
-* `18px` (`--cds-radius-message-bubble`): User message bubbles.
-* `16px` (`--cds-radius-dialog`): Confirmation dialogs, modal popups.
-* `12px` (`--cds-radius-code`): Code blocks, large buttons (`LG`).
-* `10px` (`--cds-radius-card`): Attachment cards, image containers.
-* `8px` (`--cds-radius-btn-md`): Standard interactive buttons (`MD`/`SM`), tool decision cards.
-* `6px` (`--cds-radius-btn-xs`): Compact badge buttons (`XS`), shortcut chips.
+### Geometric Corner Radii (comfortable density; compact in parentheses)
+* `.875rem` = 14px (`--cds-radius-composer`; compact `.75rem` = 12px): Main chat composer.
+* `16px` (`--radius-2xl`): Confirmation dialogs, modal popups.
+* `12px` (`--radius-menu` = control 8 + `--cds-menu-gutter` 4): Menus, concentric with their 8px item highlight.
+* `12px` (`--cds-message-bubble-radius` = control 8 + 4): User message bubbles.
+* `12px` (`--cds-panel-radius` = `.75rem`; `--radius-xl`): Panels, secondary cards, code blocks.
+* `8px` (`--cds-radius`; compact 6px): Controls, `MD` buttons, tool decision cards.
+* `8px` (`--df-radius-pill`; compact 6px): Sidebar rows (32px tall). Despite the name it is a rounded rectangle, not a pill.
+* Buttons `XS / SM / MD / LG` = `24 / 28 / 32 / 40px` tall with `6 / 7 / 8 / 10px` radii.
+* Segmented controls: track padding 1px, track radius follows the control size (`SM` 7px / `LG` 10px), thumb radius = track radius − 1px. Not a 999px capsule.
+
+### Press Feedback
+* Only the background layer `.cds-btn-squish` (absolute, `-z-1`, inside the button) scales: press 60ms `ease-out` to `.975`, release 450ms `--cds-btn-spring`. The button box, icon and label never scale; do not put `active:scale-*` on a whole button.
+
+### Composer Chin & Message Entry
+* The Composer Chin sits **outside and below** the composer card, not inside it.
+* `message-fade-up`: 10px rise over 1.1s with the `--cds-message-spring` `linear()` curve (peak 1.163 at 33%).
 
 ---
 
@@ -83,7 +91,7 @@ import {
 ### The 4 Canonical Spring Presets
 1. **`SPRING_SNAPPY`** (`stiffness: 600, damping: 30, mass: 0.6`, $\zeta = 0.791$):
    - **Overshoot**: `+1.8%`, settle time: `~0.22s`.
-   - **Where to use**: Primary button clicks, segmented control pill switching (`layoutId`), tabs, micro-interactions.
+   - **Where to use**: Segmented control thumb switching (`layoutId`), tabs, micro-interactions. (Button press is the CSS `.cds-btn-squish` layer, not a spring on the whole button.)
 2. **`SPRING_BOUNCY`** (`stiffness: 400, damping: 25, mass: 0.8`, $\zeta = 0.612$):
    - **Overshoot**: `+8.8%`, settle time: `~0.38s`.
    - **Where to use**: Toggle switches, badge growth entrances, success confirmation pop-ins.
@@ -117,15 +125,15 @@ See [`code-examples/ScrollFadeContainer.tsx`](file:///Users/jiahao/Desktop/Pytho
 Refer to or import from [`code-examples/`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/) when composing UI:
 
 ### Atomic Controls (5)
-* [`CdsButton.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/CdsButton.tsx): 4-tier ladder (XS: 24/6px, SM: 28/8px, MD: 32/8px, LG: 40/12px), 5 variants (Primary, Secondary, Ghost, Outline, Danger).
-* [`SegmentedControl.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/SegmentedControl.tsx): 9999px rounded pill track, 2px geometric padding, CSS & Framer Motion dual-mode.
+* [`CdsButton.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/CdsButton.tsx): 4-tier ladder (XS: 24/6px, SM: 28/7px, MD: 32/8px, LG: 40/10px), neutral-ink Primary plus Secondary, Ghost, Brand (clay, send key only), Outline, Danger; press scales only the `.cds-btn-squish` background layer.
+* [`SegmentedControl.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/SegmentedControl.tsx): control-radius track (SM 7px / MD 8px), 1px padding, thumb radius − 1px, CSS & Framer Motion dual-mode.
 * [`StatusIndicators.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/StatusIndicators.tsx): Clay 2.4s breathing light, 1.2s active run pulse, 3-dot wave, skeleton sweep.
 * [`ConfirmationDialog.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ConfirmationDialog.tsx): 16px corner radius, dual-ring popover shadow, focus trap.
-* [`AttachmentCard.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/AttachmentCard.tsx): 10px panel radius, desktop card grid (128×96px) and inline composer pill dual-mode.
+* [`AttachmentCard.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/AttachmentCard.tsx): desktop card grid (128×96px) and inline composer pill dual-mode.
 
 ### Conversation Stream & Input (6)
-* [`ChatComposer.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ChatComposer.tsx): 20px core input terminal, dual-ring focus shadow, `field-sizing: content` auto-resize.
-* [`ChatMessageBubbles.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ChatMessageBubbles.tsx): User 18px radius with soft tint vs Assistant zero-border transparent layout.
+* [`ChatComposer.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ChatComposer.tsx): `--cds-radius-composer` (.875rem) input terminal, dual-ring shadow, clay send key with squish press, `field-sizing: content` auto-resize.
+* [`ChatMessageBubbles.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ChatMessageBubbles.tsx): User 12px radius (control 8 + 4) with soft tint vs Assistant zero-border transparent layout.
 * [`ThinkingAccordion.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ThinkingAccordion.tsx): Framer Motion height spring expansion, single clay breathing pulse dot, active generation mutex.
 * [`RichComposerWithMentions.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/RichComposerWithMentions.tsx): CJK IME composition guard, `/` command & `@` context dual triggers, token budget estimator.
 * [`ModelSwitcherWithTokenGauge.tsx`](file:///Users/jiahao/Desktop/PythonProject/open-claude-ui/code-examples/ModelSwitcherWithTokenGauge.tsx): 3-tier model switcher, Extended Thinking toggle, Prompt Caching 4-color memory SVG gauge.
@@ -161,7 +169,7 @@ Refer to or import from [`code-examples/`](file:///Users/jiahao/Desktop/PythonPr
 ## 🛡️ 4. Agent Coding Invariants (Do's and Don'ts)
 
 ### ✅ DO
-1. **Always use semantic tokens**: Use `var(--cds-bg-surface-0)` or Tailwind classes (`bg-surface-0`, `text-primary`, `bg-clay-500`) instead of arbitrary hardcoded HEX values.
+1. **Always use semantic tokens**: Use `var(--cds-surface-0)` or Tailwind classes (`bg-surface-0`, `text-primary`, `bg-clay`) instead of arbitrary hardcoded HEX values.
 2. **Apply `tabular-nums` for dynamic numbers**: Every timer, countdown, token counter, audio frequency indicator, and line number MUST use `tabular-nums` (or `font-mono`) to prevent layout jitter.
 3. **Guard CJK IME inputs**:
    ```typescript

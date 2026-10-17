@@ -208,8 +208,9 @@ export const McpToolDecisionCard: React.FC<McpToolDecisionCardProps> = ({
           <button
             type="button"
             onClick={() => handleAction('allow_once')}
-            className="px-3.5 py-1.5 rounded-lg text-xs font-medium text-white bg-clay hover:bg-clay-hover shadow-2xs transition-all active:scale-95 cursor-pointer"
+            className="group/btn relative isolate px-3.5 py-1.5 rounded-lg text-xs font-medium text-[var(--cds-on-primary)] cursor-pointer"
           >
+            <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-fill-primary)] group-hover/btn:bg-[var(--cds-fill-primary-hover)] shadow-2xs transition-colors" />
             单次批准 (Allow Once)
           </button>
         </div>

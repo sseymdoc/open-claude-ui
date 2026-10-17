@@ -29,8 +29,9 @@ export const ContainerResponsiveBar: React.FC<{ children?: React.ReactNode }> = 
         <div className="flex items-center gap-1 @[384px]/toolbar:gap-2">
           <button
             type="button"
-            className="flex h-8 items-center gap-1 rounded-md px-2 text-xs font-medium text-[var(--cds-text-secondary)] hover:bg-[var(--cds-surface-2)] active:scale-95 transition-transform"
+            className="group/btn relative isolate flex h-8 items-center gap-1 rounded-md px-2 text-xs font-medium text-[var(--cds-text-secondary)]"
           >
+            <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] group-hover/btn:bg-[var(--cds-surface-2)] transition-colors" />
             <svg className="h-4 w-4 shrink-0" viewBox="0 0 16 16" fill="currentColor">
               <path d="M8 2a6 6 0 100 12A6 6 0 008 2zM0 8a8 8 0 1116 0A8 8 0 010 8z" />
             </svg>
@@ -39,8 +40,9 @@ export const ContainerResponsiveBar: React.FC<{ children?: React.ReactNode }> = 
           
           <button
             type="button"
-            className="flex h-8 items-center gap-1 rounded-md bg-[var(--cds-surface-2)] px-2.5 text-xs font-semibold text-[var(--cds-text-primary)] shadow-sm hover:bg-[var(--cds-surface-3)] active:scale-95 transition-all"
+            className="group/btn relative isolate flex h-8 items-center gap-1 rounded-md px-2.5 text-xs font-semibold text-[var(--cds-text-primary)]"
           >
+            <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-surface-2)] group-hover/btn:bg-[var(--cds-surface-3)] shadow-sm transition-colors" />
             <span>Run</span>
             <span className="font-mono text-[10px] opacity-60 @max-[576px]/toolbar:hidden">⌘⏎</span>
           </button>
