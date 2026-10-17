@@ -776,6 +776,12 @@
     .wa-anim-bar { --wa-anim: 0; width: calc(var(--wa-anim) * 1%); transition: --wa-anim .3s cubic-bezier(.34, 1.3, .64, 1); }
     .wa-anim-host:hover .wa-anim-bar { --wa-anim: 100; }
 
+    /* W13 桌面外壳示意：Windows titleBarOverlay 图标色与无痕反色（桌面主进程 RYn() 原值）；斜纹标出 app-region: drag */
+    .wa-root { --wa-caption-ink: #3d3d3a; --wa-incog-bg: #141412; --wa-incog-ink: #fff; }
+    .dark .wa-root { --wa-caption-ink: #c2c0b6; --wa-incog-bg: #f9f8f4; --wa-incog-ink: #000; }
+    .wa-drag { background-image: repeating-linear-gradient(135deg, color-mix(in srgb, var(--cds-fill-accent) 14%, transparent) 0 6px, transparent 6px 12px); }
+    .wa-drag .wa-nodrag { border-radius: 8px; background: var(--wa-nodrag-bg, var(--cds-page-bg)); }
+
     /* 关键帧（claude.ai 原文；加 wa- 前缀以免与上文同名旧帧冲突） */
     @keyframes wa-ghost-look { 0%, 16.6%, 100% { transform: translate(-1.5px) translateY(0px); } 25%, 41.6% { transform: translate(1.5px) translateY(0px); } 50%, 66.6% { transform: translate(0px) translateY(-1.5px); } 75%, 91.6% { transform: translate(0px) translateY(0px); } }
     @keyframes wa-ghost-blink { 0%, 8% { opacity: 0; } 10%, 12% { opacity: 1; } 14%, 30% { opacity: 0; } 32%, 34% { opacity: 1; } 36%, 100% { opacity: 0; } }
@@ -4710,6 +4716,7 @@ span[data-hang-quote] {
       { id: "wa-tokens", name: "W10 令牌与勘误" },
       { id: "wa-login", name: "W11 登录页" },
       { id: "wa-hidden", name: "W12 隐藏机制" },
+      { id: "wa-desktop", name: "W13 桌面版对照" },
     ];
 
     function WaPart({ children, ...header }) {
@@ -4853,7 +4860,7 @@ span[data-hang-quote] {
         ["data-browser-floor", "chrome:131 · edge:131 · firefox:132 · opera:115 · safari:17 · ios:17 · samsung:28"],
         ["内联字体变量", "--font-user-message: var(--font-sans-serif); --font-claude-response: var(--font-serif)"],
         ["静态资源", "assets-proxy.anthropic.com/claude-ai/v2/assets/v1/"],
-        ["主样式表", "c6a992d55-EXuEGCIT.css（桌面版同模块为 c6a992d55-sXiDGMFQ.css）"],
+        ["主样式表", "c6a992d55-EXuEGCIT.css（桌面版普通账号加载同一份；安装包内置的 c6a992d55-sXiDGMFQ.css 只在 3P 模式使用，见 W13）"],
         ["与桌面同哈希", "c3fde7009-BH42YUtA.css"],
         ["CSSOM", "30 张样式表（29 张可读，共 2,328,919 字符）· 16,933 条规则 · 203 个 @keyframes"],
       ];
@@ -6006,6 +6013,236 @@ span.cds-btn-squish.stacks:transform-none!`,
     }
 
     // --------------------------------------------------------------------------
+    // W13 桌面版对照：REA 静态解包 Claude 2.42304.0.0，逐节对照 W0–W12
+    // --------------------------------------------------------------------------
+    const WA_HOSTS = [
+      { k: "web", label: "浏览器 · data-web" },
+      { k: "win", label: "Windows · data-wco" },
+      { k: "mac", label: "macOS · 交通灯" },
+    ];
+
+    // Windows 系统按钮（最小化 / 最大化 / 关闭）由 Electron titleBarOverlay 原生绘制，这里只画占位
+    function WaCaptionGlyph({ k }) {
+      return (
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
+          {k === "min" && <path d="M0 5.5h10" />}
+          {k === "max" && <rect x=".5" y=".5" width="9" height="9" />}
+          {k === "close" && <path d="M.5.5l9 9M9.5.5l-9 9" />}
+        </svg>
+      );
+    }
+
+    function WaDesktopChrome() {
+      const [host, setHost] = useState("win");
+      const [zoom, setZoom] = useState(1);
+      const [incog, setIncog] = useState(false);
+      const [drag, setDrag] = useState(true);
+      const win = host === "win", mac = host === "mac", web = host === "web";
+      const capDip = Math.max(24, Math.round((incog ? 44 : 36) * zoom)); // 主进程 RYn()：覆盖层高度，单位 DIP
+      const reserve = Math.ceil(140 / zoom);                             // shared-19 RK()：页面给系统按钮让出的 CSS px
+      const lightsDip = Math.max(0, Math.round(22.5 * zoom - 6));       // 主进程 IIi()：交通灯 x = y
+      const css = (dip) => Math.round((dip / zoom) * 10) / 10;           // 原生尺寸不随页面缩放，换算成 CSS px
+      const toastTop = win ? 92 : 56;
+      const newKey = web ? "Ctrl + Shift + O" : mac ? "⌘ N" : "Ctrl + N";
+      const dragCls = drag ? " wa-drag" : "";
+      const rows = win
+        ? [
+            ["覆盖层高度", `max(24, round(${incog ? 44 : 36} × ${zoom})) = ${capDip} DIP ≈ ${css(capDip)} CSS px`],
+            ["系统按钮让位", `ceil(140 ÷ ${zoom}) = ${reserve} CSS px（Linux 为 120）`],
+            ["覆盖层颜色", incog ? "无痕对话：浅色主题 #141412 配白色图标，深色主题 #f9f8f4 配黑色图标" : "底色 #00000000；图标 #3d3d3a（浅色）/ #c2c0b6（深色）"],
+            ["顶栏", ".dframe-chrome-bar：36 高 · z 21 · draggable；侧栏不再渲染自己的 h-11 标题行"],
+            ["Toast 顶距", "92px"],
+            ["新建对话", "Ctrl + N"],
+          ]
+        : mac
+          ? [
+              ["交通灯位置", `round(22.5 × ${zoom} − 6) = ${lightsDip} DIP ≈ ${css(lightsDip)} CSS px`],
+              ["标题行让位", "--df-traffic-light-spacer（CSS 回退值 74px）"],
+              ["顶栏", "没有 chrome bar；侧栏 h-11 标题行本身可以拖动窗口，且没有网页端的 4px 顶内边距"],
+              ["Toast 顶距", "56px"],
+              ["新建对话", "⌘ N"],
+            ]
+          : [
+              ["顶部", "浏览器自带标签栏；页面最上沿是侧栏 h-11 标题行（padding-top 4px）"],
+              ["拖拽区", "app-region 规则照样下发，浏览器不认"],
+              ["Toast 顶距", "56px"],
+              ["新建对话", "Ctrl + Shift + O"],
+            ];
+      const pill = (on) => "h-7 px-2.5 rounded-md text-[11px] font-mono transition-colors " + (on ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700");
+      return (
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {WA_HOSTS.map((h) => <button key={h.k} type="button" onClick={() => setHost(h.k)} className={pill(host === h.k)}>{h.label}</button>)}
+            <label className="ms-2 flex items-center gap-1.5 text-[11px] font-mono text-neutral-500">
+              缩放
+              <select value={zoom} onChange={(e) => setZoom(Number(e.target.value))} className="h-7 rounded-md bg-neutral-100 dark:bg-neutral-800 px-1.5">
+                {[0.5, 0.8, 1, 1.25, 1.5, 2].map((z) => <option key={z} value={z}>{z * 100}%</option>)}
+              </select>
+            </label>
+            <label className="flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 cursor-pointer"><input type="checkbox" checked={incog} onChange={(e) => setIncog(e.target.checked)} />无痕对话（Windows）</label>
+            <label className="flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 cursor-pointer"><input type="checkbox" checked={drag} onChange={(e) => setDrag(e.target.checked)} />显示拖拽区</label>
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-[640px_minmax(0,1fr)] gap-4 items-start">
+            <div className="space-y-2 min-w-0">
+              <div className="overflow-x-auto">
+                <div className="relative overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800" style={{ width: 640, height: 260, background: "var(--cds-page-bg)" }}>
+                  {win && (
+                    <div className={"absolute inset-x-0 top-0 flex items-center" + dragCls} style={{ height: 36, padding: `0 ${12 + reserve}px 0 12px`, zIndex: 21, boxShadow: "inset 0 -1px 0 var(--cds-border)" }}>
+                      <span className="wa-nodrag inline-flex items-center gap-1">
+                        <span className="inline-flex px-1" style={{ color: "var(--cds-clay)" }}><Icon name="spark" size={16} /></span>
+                        <WaTip tip={<>隐藏侧栏<kbd className="wa-kbd">Ctrl+B</kbd></>}><WaBtn size="sm" label="隐藏侧栏" icon={<Icon name="window" size={16} />} /></WaTip>
+                      </span>
+                    </div>
+                  )}
+                  {win && (
+                    <div className="absolute top-0 right-0 flex" aria-hidden="true" style={{ width: reserve, height: css(capDip), zIndex: 22, background: incog ? "var(--wa-incog-bg)" : "transparent", color: incog ? "var(--wa-incog-ink)" : "var(--wa-caption-ink)" }}>
+                      {["min", "max", "close"].map((k) => <span key={k} className="flex-1 grid place-items-center"><WaCaptionGlyph k={k} /></span>)}
+                    </div>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 flex" style={{ top: win ? 36 : 0 }}>
+                    <aside className="flex flex-col shrink-0" style={{ width: 288, background: "var(--df-web-sidebar-bg)", boxShadow: "inset -0.5px 0 0 var(--cds-border)" }}>
+                      {!win && (
+                        <div className={"relative flex items-center" + (mac ? dragCls : "")} style={{ height: 44, padding: web ? "4px 8px 0" : "0 8px", gap: 8, "--wa-nodrag-bg": "var(--df-web-sidebar-bg)" }}>
+                          {mac && (
+                            <span aria-hidden="true" className="absolute flex" style={{ left: css(lightsDip), top: css(lightsDip), gap: css(8) }}>
+                              {[0, 1, 2].map((i) => <i key={i} className="block rounded-full" style={{ width: css(12), height: css(12), background: "var(--cds-alpha-3)" }} />)}
+                            </span>
+                          )}
+                          {mac && <span className="shrink-0" style={{ width: 74 - 8 }} />}
+                          <span className="wa-nodrag inline-flex items-center gap-2">
+                            <WaBtn size="xs" label="收起侧栏" icon={<Icon name="window" size={16} />} />
+                            <span style={{ fontFamily: "var(--wa-serif)", fontSize: 20, lineHeight: "20px", fontWeight: 500 }}>Claude</span>
+                          </span>
+                        </div>
+                      )}
+                      <div style={{ padding: "8px 8px 0" }}>
+                        <div className="wa-row" data-selected="">
+                          <span className="wa-row-lead"><span className="wa-new-circle"><Icon name="plus" size={16} weight="bold" /></span></span>
+                          <span className="wa-row-label" style={{ color: "var(--cds-text-primary)" }}>新建</span>
+                          <span className="wa-kbd" style={{ paddingInlineEnd: 8 }}>{newKey}</span>
+                        </div>
+                        <div className="mt-3 space-y-2.5 px-2" aria-hidden="true">
+                          {[72, 54, 63, 47].map((w) => <div key={w} className="h-2 rounded-full" style={{ width: `${w}%`, background: "var(--cds-alpha-1)" }} />)}
+                        </div>
+                      </div>
+                    </aside>
+                    <div className="flex-1 min-w-0"><div style={{ height: 48, boxShadow: "inset 0 -1px 0 var(--cds-alpha-2)" }} /></div>
+                  </div>
+                  <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-lg px-3 whitespace-nowrap" style={{ top: toastTop, height: 32, zIndex: 30, fontSize: 13, background: "var(--cds-surface-3)", boxShadow: "0 0 0 1px var(--cds-border), var(--cds-shadow-md)", color: "var(--cds-text-primary)" }}>
+                    <Icon name="check" size={14} />链接已复制<span className="wa-kbd">top {toastTop}px</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-[11px] font-mono text-neutral-500 leading-relaxed">按代码结构画的示意，不是截图，按 100% 缩放、640 宽的窗口绘制。斜纹是 app-region: drag，可以拖动窗口；斜纹里挖空的控件是 no-drag。右上角三个系统按钮由 Electron 原生绘制，不在页面 DOM 里。</p>
+            </div>
+            <WaTable head={["项目", "当前值"]} rows={rows} />
+          </div>
+        </div>
+      );
+    }
+
+    function WaDesktopSection() {
+      const fp = [
+        ["安装包", "Claude_2.42304.0.0_x64（MSIX 只读副本）"],
+        ["Electron", "44.7.2（app\\version）"],
+        ["app.asar", "sha256 8f4d3dec…5379da9db · 549 项（507 个文件 · 42 个目录）"],
+        ["主窗口", "BrowserWindow · titleBarStyle hidden · titleBarOverlay · 最小 600×400"],
+        ["主视图", "WebContentsView · 预加载 mainView.js · sandbox"],
+        ["普通账号（1P）加载", "https://claude.ai，与 W0 是同一份线上构建"],
+        ["第三方推理（3P）加载", "app://localhost → 安装包 ion-dist（spa-dev · 1792044185 → 2026-10-15T06:03:05Z）"],
+        ["isClaudeApp", "UA 里能解析出 Claude 版本，且预加载暴露了 window.claudeAppBindings；Windows / Linux 再判为 WCO"],
+      ];
+      const steps = [
+        "REA：open_binary 打开 app.asar，inspect_artifact（record-and-continue）列清单，extract_artifact 解出 506 个文件。6 处完整性不符都出在打包后签名的原生二进制（.node / .exe / .dll）上。",
+        "REA：analyze_javascript_application 重建 mainView.js / mainWindow.js 的 Electron 边界，得到 27 个 contextBridge API、1,377 处 IPC 调用，其中 1,370 处是动态通道。",
+        "只做静态分析：没有启动 claude.exe，没有附加、调试或读取任何正在运行的 Claude 进程，也没有重新打开 claude.ai。网页侧数值沿用 W0–W12。",
+        "开工前检查过目录：只有 MSIX 程序文件，没有 Cookie、SQLite / LevelDB 库、令牌、用户数据目录或启动脚本，开机自启任务为 Enabled=false。",
+        "SPA 的桌面分支取自 ion-dist。它和线上构建同源、早两天，只用来说明线上那份在桌面里会走哪条分支。",
+      ];
+      const diff = [
+        ["W0", "主样式表", "c6a992d55-EXuEGCIT.css（线上 541957a01b）", "普通账号加载同一份；安装包内置的 c6a992d55-sXiDGMFQ.css 只在 3P 模式（app://localhost）使用", "lzaSYO3Q：1P getMainWindowUrl() 返回 anthropicOriginUrl()，即 Ng() 的 \"https://claude.ai\"；3P 返回 ql = \"app://localhost\""],
+        ["W0", "data-cjk-order", "由 navigator.languages 推出（实测 zh-hans）", "先读预加载注入的 window.desktopPreferredLanguages（系统首选语言），取不到才用 navigator.languages", "index.html 内联脚本"],
+        ["W1", "宿主标记", ".dframe-root[data-web]", "Windows / Linux 为 [data-wco]，没有 data-web；macOS 两个都没有；<html> 另加 data-dframe", "shared-22 VN()：\"data-wco\": s || void 0, \"data-web\": !o || void 0 · MN()"],
+        ["W1", "顶栏", "没有；侧栏 h-11 标题行就是页面最上沿", "Windows 顶部多一条 .dframe-chrome-bar：absolute · 通栏 · 36 高 · z 21 · draggable，侧栏开关（Ctrl+B）在这条栏里；侧栏自己的 h-11 标题行不再渲染", "shared-22 IN = Te() ? LN : null · DN() 里 q = P 时 df-titlebar 为 null · [data-wco] { --df-chrome-bar-height: 36px }"],
+        ["W1", "系统按钮", "—", "Electron 覆盖层：底色透明，图标浅色 #3d3d3a、深色 #c2c0b6；高 max(24, round(36 × 缩放)) DIP；页面右侧按 env(titlebar-area-x / -width) 让出 ceil(140 ÷ 缩放) CSS px（Linux 为 120）", "lzaSYO3Q RYn() · shared-25 gl() · shared-19 RK() / zK()"],
+        ["W1", "拖拽区", "app-region 规则同样下发，但浏览器不认", ".draggable → drag；a、button、input、[role=button] 等 → no-drag；导航滚动区 → initial", "CSSOM sheet 3 / 27 / 28，网页与桌面同一份规则"],
+        ["W1", "启动", "页面直接绘制", "预加载声明 bootPlaceholder 后加 html[data-desktop-boot-placeholder]：就绪前背景透明，露出原生窗口底色 #fcfcfb / #151515，顶部留一条 48px 拖拽条；10 秒内没就绪就强制写入 data-boot-ui-ready=timeout", "index.html · lzaSYO3Q MF()：{ light: \"#fcfcfb\", dark: \"#151515\" }"],
+        ["W1", "窗口尺寸", "视口任意，W1 测了 375×812 的手机 sheet", "最小 600×400，所以到不了 375 宽的手机布局；没有保存记录时为 1200×800；上次退出时未登录，则按 600×600 的登录窗口打开", "lzaSYO3Q V6a()：minWidth: 600, minHeight: 400 · oI · V$n · window-state.json"],
+        ["W1", "macOS 交通灯", "—", "按钮位置 x = y = round(22.5 × 缩放 − 6) DIP（100% 时为 17），正好在 44 高标题行里竖直居中；侧栏标题行先让出 --df-traffic-light-spacer（CSS 回退值 74px）", "lzaSYO3Q IIi() / RIi() · shared-22 df-titlebar"],
+        ["W1", "Toast 顶距", "--toast-top-offset: 56px", "Windows 为 92px，让开 36px 顶栏", "shared-22 MN()：t ? \"92px\" : \"56px\""],
+        ["W1", "对话框与弹层", "--desktop-titlebar-inset 没有设置，按 0 算", "自绘标题栏的窗口把标题行底边写进 --desktop-titlebar-inset：对话框 top = max(12vh, inset + 1rem)，max-height = 100dvh − max(2rem, 2 × inset)；弹层定位也读这个值", "cd377abb5 Wn() · shared-frame Td() · CSSOM 里的 .top-[max(12vh,…)] 等工具类"],
+        ["W2", "新建对话快捷键", "Ctrl + Shift + O（侧栏提示与 Tooltip）", "Windows 为 Ctrl + N，macOS 为 ⌘N", "shared-21 OW(e) { return e ? \"cmd+n\" : \"shift+cmd+o\" } · c518a31cc"],
+        ["W2", "快捷键面板", "—", "桌面版另列 Ctrl + W 关闭标签页（开启标签页功能时）、Ctrl + Tab 或 Ctrl + Shift + ] 切到下一个、Ctrl + Shift + [ 切到上一个", "c518a31cc xe()"],
+        ["W2", "用户菜单", "满足条件时出现「下载桌面应用」：需要打开 show_claude_desktop_download_link 和 is_desktop_upsell_enabled 两个开关，且系统是 Windows 或 macOS", "不显示下载项；改为显示「查看更新日志」，Cowork 反馈入口也只在桌面版出现", "shared-19 e0()：appDownload: … && !f && …；changelog: f && …（f = isClaudeApp）"],
+        ["W2", "应用切换 · Code", "没有 Claude Code 网页权限时，点 Code 进入发现页，按钮为「在桌面应用中打开」或「下载桌面应用」", "跳过这套网页可用性判定，Code 标签按本机能力开放", "shared-21 $S()：e || !o ? void 0 : KS({ …, paidCta: a ? \"open_desktop\" : \"download\" })"],
+        ["W3 / W4", "听写 · 麦克风", "没有系统设置入口（Uj() 为假）", "麦克风不可用时多一个「打开系统设置」入口，直达系统隐私设置里的麦克风页（openSystemSettings(\"Privacy_Microphone\")），说明文字分 macOS 和 Windows 两套", "shared-8 Uj() / Wj() / qj()"],
+        ["W3–W10", "组件与令牌", "W3–W10 全部实测值", "普通账号加载的是同一份线上构建，完全一致。3P 内置副本早两天：按钮弹簧、品牌色、composer 阴影、@property --cds-anim、侧栏宽 288 等实测项一致；线上多 128 个自定义属性（其中 15 个 --cds-fizzy-lake-*）和 24 个关键帧（sheet-card-*、timeline-*、vt-image-preview-* 等），副本独有 18 个属性和 bugReportFlash", "CSSOM sheet 27 / 28 ↔ ion-dist c6a992d55-sXiDGMFQ.css + shared-styles-Bl9zqrv-.css，按集合比较"],
+        ["W11", "登录", "浏览器标签页里的 /login，版面随视口变化", "同一个 /login 页面；上次退出时未登录，主窗口按 600×600 打开，登录后换回保存的应用尺寸", "lzaSYO3Q V6a()：u = l ? \"app\" : \"login\" · Z$n() → oI · J$n()"],
+        ["W12", "桌面特性开关", "—", "主进程把 IV() 序列化成 --desktop-features 交给主视图，含 nativeQuickEntry、quickEntryDictation、quickEntryGlobalShortcut、trayIcon、artifactsPane、coworkBrowser 等", "lzaSYO3Q IV()"],
+      ];
+      const only = [
+        ["无痕对话的标题栏", "Windows 主窗口进入无痕对话时，覆盖层换成反色实底：浅色主题 #141412 配白色图标，深色主题 #f9f8f4 配黑色图标，高度从 36 增到 44", "lzaSYO3Q setIncognitoMode → xYn() → RYn()：PYn = 44"],
+        ["模态遮罩", "页面用 reportModalScrim 上报遮罩色，主进程把系统按钮区的底色混成同色，免得三个按钮亮在遮罩外面；遮罩撤掉后延迟 200ms 复原，整页跳转时清除", "lzaSYO3Q EYn() / TYn() · wYn = 200"],
+        ["主题同步", "SPA 调 setThemeMode 改写 nativeTheme.themeSource，原生窗口底色和系统按钮图标色跟着切换", "lzaSYO3Q setThemeMode(e) { nativeTheme.themeSource = e … }"],
+        ["缩放", "主视图缩放范围 25%–500%（按 Chromium 的 1.2^level 换算）；SPA 用 desktop-frame.mainViewZoomFactor.v1 记住当前倍率；覆盖层高度、系统按钮让位宽度和交通灯位置都跟着倍率重算", "lzaSYO3Q EKn = .25 · bF() 上限 5 · DKn = Math.log(1.2) · shared-19 VK"],
+        ["快速输入", "独立窗口 606×470：无边框、透明、不进任务栏、置顶到 pop-up-menu 层级；系统支持时改用原生浮层", "lzaSYO3Q V5r()：I5r = 606, L5r = 470 · IV().quickEntryGlobalShortcut"],
+        ["外链", "主视图的 window.open 由主进程接管：Claude 自己的链接留在应用内或开成弹出窗口，其余交给 shell.openExternal 用系统浏览器打开", "lzaSYO3Q ne() → vv()"],
+        ["页内查找", "由独立的 find_in_page 窗口实现，不用浏览器自带的查找条", ".vite/renderer/find_in_page · findInPage.js"],
+        ["离线", "加载失败页可以附带离线小游戏，受开关 543332958 控制；游戏代码 clawdQuestEngine 在主窗口渲染器里", "lzaSYO3Q dYn(…, { offersOfflineGame })"],
+        ["窗口标题", "主进程把「Claude — 会话标题」推给窗口标题", "lzaSYO3Q yYn() → dispatchUpdateTitleBar"],
+      ];
+      return (
+        <div className="space-y-4">
+          <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-r from-sky-500/5 via-transparent to-clay/5 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h4 className="text-base font-bold text-neutral-900 dark:text-neutral-100">桌面版 2.42304.0.0 × 网页实测</h4>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 font-bold">REA Static</span>
+              </div>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                普通账号下，桌面版主视图加载的就是 https://claude.ai，所以 W3–W10 的组件、令牌、按钮弹簧、图标字体和动效与网页同源，不必另测。差异集中在三处：一是窗口外壳，包括标题栏覆盖层、拖拽区、启动占位和最小尺寸；二是 SPA 在 isClaudeApp 为真时走的分支，包括快捷键、用户菜单、Code 标签和麦克风指引；三是只有主进程才有的能力，例如缩放、快速输入、外链、离线页和窗口标题。
+              </p>
+              <ol className="text-[11px] text-neutral-600 dark:text-neutral-400 space-y-1.5 list-decimal ps-4 leading-relaxed">
+                {steps.map((s) => <li key={s}>{s}</li>)}
+              </ol>
+            </div>
+            <WaTable head={["指纹", "静态值"]} rows={fp} />
+          </div>
+          <ComponentShowcase
+            title="窗口顶部：浏览器 / Windows / macOS"
+            tag=".dframe-root[data-wco]"
+            description="同一份 dframe 在三种宿主下的顶部结构。切换宿主和缩放，看系统按钮让位、交通灯位置、Toast 顶距和新建对话快捷键怎么变。"
+            code={`// 主进程 app.asar/.vite/build/index.chunk-lzaSYO3Q.js（整理后的伪代码，变量名为意译）
+new BrowserWindow({ minWidth: 600, minHeight: 400, titleBarStyle: "hidden", titleBarOverlay: true,
+  trafficLightPosition: lightsAt(zoom), backgroundColor: dark ? "#151515" : "#fcfcfb" });
+function overlay(kind, zoom) {                        // Windows / Linux：win.setTitleBarOverlay()
+  const incognito = kind === "main" && incognitoMode; // setIncognitoMode()
+  const height = Math.max(24, Math.round((incognito ? 44 : 36) * zoom));
+  return dark ? { color: incognito ? "#f9f8f4" : "#00000000", symbolColor: incognito ? "#000" : "#c2c0b6", height }
+              : { color: incognito ? "#141412" : "#00000000", symbolColor: incognito ? "#fff" : "#3d3d3a", height };
+}
+const lightsAt = (z) => ({ x: Math.round(22.5 * z - 6), y: Math.round(22.5 * z - 6) });  // macOS
+
+// SPA ion-dist/assets/v1（shared-0 · shared-25 · shared-22 · shared-19）
+isClaudeApp    = UA 能解析出 Claude 版本 && !!window.claudeAppBindings
+isClaudeAppWco = isClaudeApp({ platform: "windows" }) || isClaudeApp({ platform: "linux" })
+<div class="dframe-root" data-wco={isClaudeAppWco || undefined} data-web={!isClaudeApp || undefined}>
+<div class="dframe-chrome-bar draggable absolute top-0 inset-x-0 h-[36px] z-20"
+     style="--df-chrome-bar-caption-reserve: {Math.ceil(140 / zoom)}px">   <!-- 只在 WCO 下渲染 -->`}
+          >
+            <WaDesktopChrome />
+          </ComponentShowcase>
+          <ComponentShowcase title="逐节对照" tag="W0–W12 × 2.42304.0.0" description="只列有差异或需要说明的项，没列出的实测值在普通账号的桌面版里与网页一致。证据列里 lzaSYO3Q 指 app.asar 的 .vite/build/index.chunk-lzaSYO3Q.js（主进程），其余 chunk 都在 ion-dist/assets/v1 下。">
+            <WaTable head={["节", "项目", "网页（实测）", "桌面 2.42304.0.0", "证据"]} rows={diff} />
+          </ComponentShowcase>
+          <ComponentShowcase title="只有桌面版才有的行为" tag="main process · preload" description="网页里没有对应物，全部由主进程或预加载脚本实现。">
+            <WaTable head={["行为", "桌面 2.42304.0.0", "证据"]} rows={only} />
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
     // 页面
     // --------------------------------------------------------------------------
     function ClaudeAiWebAuditPage() {
@@ -6049,6 +6286,9 @@ span.cds-btn-squish.stacks:transform-none!`,
           </WaPart>
           <WaPart id="wa-hidden" number="W12" title="隐藏机制" enTitle="Hidden Mechanisms" badge="CSSOM" description="界面上看不出来、但决定了观感的实现：功能开关、尺寸令牌重映射、触控增高、滚动渐隐、命中区外扩与首屏静态输入框。">
             <WaHiddenSection />
+          </WaPart>
+          <WaPart id="wa-desktop" number="W13" title="桌面版对照" enTitle="Desktop 2.42304.0.0 Cross-check" badge="REA static" description="用 REA 静态解包 Claude 桌面版 2.42304.0.0（Electron 44.7.2），逐节对照 W0–W12：哪些和网页完全同源，哪些只在桌面版出现或表现不同。">
+            <WaDesktopSection />
           </WaPart>
         </main>
       );
