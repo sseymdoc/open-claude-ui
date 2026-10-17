@@ -102,11 +102,11 @@
       --cds-ring-outer: 1px;
       --cds-ring-color: var(--cds-border);
 
-      /* Claude Official Elevation Shadow Hierarchy (Exact Extracted Tokens) */
-      --cds-shadow-color: rgba(0, 0, 0, 0.08);
-      --cds-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 2px 8px 0 var(--cds-shadow-color);
-      --cds-shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.05), 0 6px 16px 0 var(--cds-shadow-color);
-      --cds-shadow-lg: 0 4px 8px 0 rgba(0, 0, 0, 0.06), 0 12px 28px -2px var(--cds-shadow-color);
+      /* Claude Official Elevation Shadow Hierarchy（claude.ai 实测：基色 rgb 11，近层 6 / 7 / 8%，远层 = --cds-shadow-color） */
+      --cds-shadow-color: rgb(11 11 11 / 8%);
+      --cds-shadow-sm: 0 1px 2px 0 rgb(11 11 11 / 6%), 0 2px 8px 0 var(--cds-shadow-color);
+      --cds-shadow-md: 0 2px 4px 0 rgb(11 11 11 / 7%), 0 6px 16px 0 var(--cds-shadow-color);
+      --cds-shadow-lg: 0 4px 8px 0 rgb(11 11 11 / 8%), 0 12px 28px -2px var(--cds-shadow-color);
       --cds-shadow-popover: inset 0 0 0 var(--cds-ring-inner) var(--cds-ring-color), 
                             0 0 0 var(--cds-ring-outer) var(--cds-ring-color), 
                             0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -128,8 +128,9 @@
       /* Interactive Hover / Fill Tokens */
       --cds-fill-ghost-hover: var(--cds-alpha-1);
       --cds-fill-ghost-selected: var(--cds-alpha-2);
-      --cds-fill-secondary: var(--cds-alpha-2);
-      --cds-fill-secondary-hover: rgba(21, 21, 21, 0.14);
+      --cds-fill-secondary: #ffffff1a; /* claude.ai 实测：再叠 inset 1px --cds-fill-secondary-ring + 0 1px 2px #0000000d */
+      --cds-fill-secondary-hover: var(--cds-alpha-1);
+      --cds-fill-secondary-ring: var(--cds-alpha-2);
       /* 主按钮用中性黑白；陶土只给发送键（--cds-fill-brand）和 Spark */
       --cds-fill-primary: #0b0b0b;
       --cds-fill-primary-hover: #2c2c2a;
@@ -192,13 +193,10 @@
       --cds-ring-outer: 0px;
       --cds-ring-color: rgba(255, 255, 255, 0.10);
 
-      /* Claude Official Elevation Shadow Hierarchy (Dark Mode) */
-      --cds-shadow-color: rgba(0, 0, 0, 0.40);
-      --cds-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 2px 8px 0 var(--cds-shadow-color);
-      --cds-shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 6px 16px 0 var(--cds-shadow-color);
-      --cds-shadow-lg: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 16px 36px -2px var(--cds-shadow-color);
+      /* Claude Official Elevation Shadow Hierarchy (Dark Mode)（claude.ai 实测：只换远层颜色，sm / md / lg 沿用 :root 公式；.dark 挂在 <html> 上） */
+      --cds-shadow-color: #0000003d;
       --cds-shadow-popover: inset 0 0 0 1px rgba(255, 255, 255, 0.10), 
-                            0 8px 28px rgba(0, 0, 0, 0.65), 0 2px 8px rgba(0, 0, 0, 0.45);
+                            0 8px 24px #00000052, 0 2px 6px #0003; /* claude.ai 实测 */
 
       --cds-panel-shadow: 0 0 0 1px var(--cds-border), var(--cds-shadow-sm);
       --cds-panel-shadow-hover: 0 0 0 1px var(--cds-border-strong), 0 6px 20px rgba(0, 0, 0, 0.6);
@@ -214,6 +212,7 @@
       --cds-fill-ghost-selected: var(--cds-alpha-2);
       --cds-fill-secondary: var(--cds-alpha-2);
       --cds-fill-secondary-hover: rgba(255, 255, 255, 0.14);
+      --cds-fill-secondary-ring: transparent; /* 深色无环（claude.ai 实测） */
       --cds-fill-primary: #ffffff;
       --cds-fill-primary-hover: #e1e0d9;
       --cds-on-primary: #0b0b0b;
@@ -1045,8 +1044,8 @@
         { name: "caption", token: "--cds-font-size-caption", px: "10px ~ 11px", leading: "16px (1.55)", weight: "500 / 580", role: "微型标签、快捷键徽章 (Kbd)、时间戳、模型角标", specimen: "Sonnet 3.7 • 10:24 AM • ⌘K", calcPx: "11px", calcLh: "16px" },
         { name: "footnote", token: "--cds-font-size-footnote", px: "11px ~ 12px", leading: "14px (1.25)", weight: "400 / 500", role: "辅助说明、文件大小 (4.2 KB)、Token 统计、次级元信息", specimen: "design-tokens.json • 4.2 KB • 2,410 tokens", calcPx: "12px", calcLh: "14px" },
         { name: "code", token: "--cds-font-size-code", px: "11px ~ 12px", leading: "16px (1.42)", weight: "400 (Mono)", role: "代码块、行内代码、Git Diff 差异对比", specimen: "const scale = calc(16 / 17); // 0.941", calcPx: "12px", calcLh: "16px" },
-        { name: "body (基准)", token: "--cds-font-size-body", px: "12px ~ 14px", leading: "18px (1.46)", weight: "400 (深色减薄 360)", role: "AI 助手对话正文、输入框文本、表单输入", specimen: "在深色背景下，高对比度白字因视网膜光渗效应在视觉上会比实际粗约 10%~15%。", calcPx: "14px", calcLh: "20px" },
-        { name: "prose", token: "--cds-font-size-prose", px: "14px ~ 16px", leading: "22px (1.45)", weight: "400 / 500", role: "长文排版段落、Artifacts 独立文档正文、长回复段落", specimen: "Claude Desktop 采用低对比度表面分层与无边框流式排版，打造通透呼吸感。", calcPx: "15px", calcLh: "22px" },
+        { name: "body (基准)", token: "--cds-font-size-body", px: "12px ~ 14px", leading: "18px (1.46)", weight: "400 (深色减薄 360)", role: "菜单项、SM / MD 按钮、思考摘要（实测均 14/20）", specimen: "在深色背景下，高对比度白字因视网膜光渗效应在视觉上会比实际粗约 10%~15%。", calcPx: "14px", calcLh: "20px" },
+        { name: "prose", token: "--cds-font-size-prose", px: "14px ~ 16px", leading: "22px (1.45)", weight: "400 / 500", role: "助手回复正文（data-size=sm：15/22 衬线）、长文排版段落、Artifacts 独立文档正文", specimen: "Claude Desktop 采用低对比度表面分层与无边框流式排版，打造通透呼吸感。", calcPx: "15px", calcLh: "22px" },
         { name: "heading", token: "--cds-font-size-heading", px: "13px ~ 15px", leading: "17px (1.29)", weight: "580 / 600", role: "卡片小节标题、弹窗对话框标题 (Modal Title)、代码语言", specimen: "Delete Conversation? • TypeScript • IrradiationCompensation.css", calcPx: "16px", calcLh: "20px" },
         { name: "title", token: "--cds-font-size-title", px: "19px ~ 21px", leading: "24px (1.25)", weight: "580 / 600", role: "主页面大标题、Project 项目名称、全屏视窗顶部一级标题", specimen: "Claude Design System (CDS 2.0) • v2.37337.1 Production", calcPx: "20px", calcLh: "24px" },
       ];
@@ -1056,19 +1055,19 @@
         { area: "chat", element: "助手身份标识 ('Claude')", size: "12px", weight: "580 (Semibold)", font: "Sans", roleDesc: "顶栏身份锚点，字重微调至 580" },
         { area: "chat", element: "模型版本角标 ('Sonnet 3.7')", size: "10px", weight: "500 (Medium)", font: "Mono", roleDesc: "等宽微徽章，4px 圆角" },
         { area: "chat", element: "消息时间戳 ('10:24 AM')", size: "11px", weight: "400 (Regular)", font: "Mono", roleDesc: "等宽数字，次级弱化灰度" },
-        { area: "chat", element: "助手回复正文 (Prose Body)", size: "14px (默认)", weight: "400 (深色减薄 360)", font: "Sans", roleDesc: "1.42857 行高，0.75lh 段间距" },
+        { area: "chat", element: "助手回复正文 (Prose Body)", size: "15px", weight: "400 (深色减薄 360)", font: "Serif", roleDesc: "Prose data-size=sm：15/22，段距 .75em（claude.ai 实测）" },
         { area: "chat", element: "用户提问气泡", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "15/20，padding 12×16，底色 alpha 5% 叠色，12px 圆角（= 控件 8 + 4）" },
         { area: "chat", element: "思考折叠触发器 ('Thought for 3.8s')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Medium 强化可点击感，text-muted" },
         { area: "chat", element: "思考链内部日志", size: "11px ~ 12px", weight: "400 (Regular)", font: "Mono", roleDesc: "代码级日志缩进排版，2px 左引导线" },
-        { area: "composer", element: "主输入框文字 (Textarea)", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "与正文同级，field-sizing 自撑开" },
-        { area: "composer", element: "输入框占位符 (Placeholder)", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "text-neutral-400 弱化提示" },
+        { area: "composer", element: "主输入框文字 (Textarea)", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "15/21（claude.ai 实测），field-sizing 自撑开" },
+        { area: "composer", element: "输入框占位符 (Placeholder)", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "text-neutral-400 弱化提示" },
         { area: "composer", element: "操作按钮 ('+ Add content')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Ghost 变体，图标 -0.125em 负偏置" },
         { area: "composer", element: "发送按钮 (Send)", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "陶土 #c6613f（hover #d97757）32×32 · 圆角 8，按压只缩放背景层" },
         { area: "artifacts", element: "代码块语法高亮", size: "12px ~ 13px", weight: "400 (Regular)", font: "Mono", roleDesc: "Fira Code/Menlo，1.46 行高，tabular-nums" },
         { area: "artifacts", element: "Artifact 卡片标题", size: "13px", weight: "580 (Semibold)", font: "Sans", roleDesc: "单行截断，高优先级识别" },
         { area: "artifacts", element: "附件文件名 / 大小", size: "12px / 10px", weight: "500 / 400", font: "Sans / Mono", roleDesc: "文件名称中粗，体积等宽弱化" },
         { area: "controls", element: "标准按钮 (SM 28px / MD 32px)", size: "14px / 14px", weight: "500 (Medium)", font: "Sans", roleDesc: "中粗视觉抓手；按压只缩放背景层 .975（60ms 按下 / 450ms 弹簧回弹）" },
-        { area: "controls", element: "分段控件 Tab", size: "12px", weight: "400 / 500 (激活)", font: "Sans", roleDesc: "激活态切换中粗，绝对几何滑动" },
+        { area: "controls", element: "分段控件 Tab", size: "14px（lg 15px）", weight: "400", font: "Sans", roleDesc: "激活只变色（secondary → primary），不加粗；绝对几何滑动" },
         { area: "controls", element: "弹窗标题 (Modal Title)", size: "15px ~ 16px", weight: "580 (Semibold)", font: "Sans", roleDesc: "强边界阻断，Semibold 强调" },
         { area: "controls", element: "快捷键徽章 (Kbd)", size: "10px ~ 11px", weight: "580 (Semibold)", font: "Mono", roleDesc: "按键微型轮廓，内凹投影" },
       ];
@@ -1506,9 +1505,9 @@
                   {activeShadowTab === "focus" && "Focus Ring • accent 蓝可访问性外环"}
                 </div>
                 <p className="text-xs text-neutral-500 leading-snug">
-                  {activeShadowTab === "sm" && "浅色仅 5% 灰度双层漫射，深色为 35% 紧贴微遮蔽，消除纯黑压抑感。"}
+                  {activeShadowTab === "sm" && "近层 rgb(11 11 11 / 6%) + 远层 8% 双层漫射；深色只把远层换成 #0000003d（claude.ai 实测）。"}
                   {activeShadowTab === "md" && "鼠标悬浮升高或右键展开菜单时的轻量悬空层级，自然脱离背景。"}
-                  {activeShadowTab === "lg" && "对话框与抽屉独享的大弥散度阴影，向下深潜 28px~36px。"}
+                  {activeShadowTab === "lg" && "对话框与抽屉独享的大弥散度阴影，向下深潜 28px。"}
                   {activeShadowTab === "popover" && "暗黑模式外环 0px + 内环 1px 倒角反光，浅色模式 1px 外轮廓，绝不糊边。"}
                   {activeShadowTab === "composer" && "14px 圆角输入框（comfortable .875rem；compact 12px），悬浮与聚焦时向外扩散 24px 双环微投影。"}
                   {activeShadowTab === "focus" && "内嵌 1px 页面底色垫片 + 1px accent 蓝环 (#2a78d6) + 6px 淡蓝光晕 (#cde2fb；深色 rgb(24 79 149 / 60%))。"}
@@ -1520,35 +1519,35 @@
                 <div className="text-[10px] text-neutral-500 uppercase mb-2">CSS 源码定义公式 (Extracted Token)</div>
                 {activeShadowTab === "sm" && (
                   <pre className="text-neutral-300">
-{`/* 浅色模式: 5% 双层漫反射 */
-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 
-            0 2px 8px 0 rgba(0, 0, 0, 0.08);
+{`/* 浅色模式: 近层 6% + 远层 8%，基色 rgb 11（claude.ai 实测） */
+box-shadow: 0 1px 2px 0 rgb(11 11 11 / 6%),
+            0 2px 8px 0 rgb(11 11 11 / 8%);
 
-/* 深色模式: 40% 紧贴微遮蔽 */
-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.40), 
-            0 2px 8px 0 rgba(0, 0, 0, 0.40);`}
+/* 深色模式: 只把远层换成 --cds-shadow-color #0000003d */
+box-shadow: 0 1px 2px 0 rgb(11 11 11 / 6%),
+            0 2px 8px 0 #0000003d;`}
                   </pre>
                 )}
                 {activeShadowTab === "md" && (
                   <pre className="text-neutral-300">
 {`/* 浅色模式: 悬浮菜单/卡片 Hover */
-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05), 
-            0 6px 16px 0 rgba(0, 0, 0, 0.08);
+box-shadow: 0 2px 4px 0 rgb(11 11 11 / 7%),
+            0 6px 16px 0 rgb(11 11 11 / 8%);
 
 /* 深色模式 */
-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.40), 
-            0 6px 16px 0 rgba(0, 0, 0, 0.40);`}
+box-shadow: 0 2px 4px 0 rgb(11 11 11 / 7%),
+            0 6px 16px 0 #0000003d;`}
                   </pre>
                 )}
                 {activeShadowTab === "lg" && (
                   <pre className="text-neutral-300">
 {`/* 浅色模式: 模态遮罩/全屏抽屉 */
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.06), 
-            0 12px 28px -2px rgba(0, 0, 0, 0.08);
+box-shadow: 0 4px 8px 0 rgb(11 11 11 / 8%),
+            0 12px 28px -2px rgb(11 11 11 / 8%);
 
 /* 深色模式 */
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.50), 
-            0 16px 36px -2px rgba(0, 0, 0, 0.40);`}
+box-shadow: 0 4px 8px 0 rgb(11 11 11 / 8%),
+            0 12px 28px -2px #0000003d;`}
                   </pre>
                 )}
                 {activeShadowTab === "popover" && (
@@ -1562,8 +1561,8 @@ box-shadow: inset 0 0 0 0px var(--cds-border),
 /* 深色模式: 0px 外框 + 1px 内部边缘倒角高光! */
 box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10),
             0 0 0 0px transparent,
-            0 8px 28px rgba(0, 0, 0, 0.65), 
-            0 2px 8px rgba(0, 0, 0, 0.45);`}
+            0 8px 24px #00000052,
+            0 2px 6px #0003;`}
                   </pre>
                 )}
                 {activeShadowTab === "composer" && (
@@ -1665,7 +1664,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                   <p className="text-[11px] text-neutral-400 mt-0.5">菜单圆角 12 = 控件 8 + menu-gutter 4，菜单项 8px 高亮与之同心，图标与文字联动变亮。</p>
                 </div>
                 <div className="p-1 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover space-y-0.5">
-                  <div className="px-2.5 py-1.5 rounded-lg text-xs text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer flex items-center justify-between">
+                  <div className="min-h-8 px-2.5 py-1.5 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="copy" size="xs" className="text-neutral-400" />
                       <span>Copy Code</span>
@@ -2206,12 +2205,12 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
 
                         {/* 弹出菜单 (真双环 Popover 阴影) */}
                         {isAddMenuOpen && (
-                          <div className="absolute bottom-full left-0 mb-2 w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1 z-30 animate-fade">
+                          <div className="absolute bottom-full left-0 mb-2 w-max rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1 z-30 animate-fade">
                             <button
                               onClick={() => {
                                 attachFileToComposer({ name: "schema.ts", size: "3.4 KB", type: "CODE", icon: "fileCode" });
                               }}
-                              className="w-full text-left px-2.5 py-1.5 rounded-lg cds-hover-ghost text-xs flex items-center gap-2 text-neutral-800 dark:text-neutral-200"
+                              className="w-full min-h-8 text-left px-2.5 py-1.5 rounded-lg cds-hover-ghost text-sm flex items-center gap-2 text-neutral-800 dark:text-neutral-200"
                             >
                               <Icon name="fileCode" size="xs" className="text-clay" />
                               <span>Attach Code (schema.ts)</span>
@@ -2220,7 +2219,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                               onClick={() => {
                                 attachFileToComposer({ name: "doc.pdf", size: "128 KB", type: "PDF", icon: "fileText" });
                               }}
-                              className="w-full text-left px-2.5 py-1.5 rounded-lg cds-hover-ghost text-xs flex items-center gap-2 text-neutral-800 dark:text-neutral-200"
+                              className="w-full min-h-8 text-left px-2.5 py-1.5 rounded-lg cds-hover-ghost text-sm flex items-center gap-2 text-neutral-800 dark:text-neutral-200"
                             >
                               <Icon name="fileText" size="xs" className="text-blue-500" />
                               <span>Attach PDF (doc.pdf)</span>
@@ -2246,7 +2245,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                               <button
                                 key={name}
                                 onClick={() => { setSelectedModel(name); setIsModelDropdownOpen(false); }}
-                                className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center justify-between cds-hover-ghost ${
+                                className={`w-full min-h-8 text-left px-2.5 py-1.5 rounded-lg text-sm flex items-center justify-between cds-hover-ghost ${
                                   selectedModel === name ? "text-neutral-900 dark:text-white" : "text-neutral-600 dark:text-neutral-300"
                                 }`}
                               >
@@ -2513,8 +2512,8 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                     <span>Primary #0b0b0b</span>
                   </button>
                   <button className="group relative isolate h-8 px-3 rounded-lg text-neutral-800 dark:text-neutral-200 text-sm font-medium">
-                    <span className="cds-btn-squish bg-[var(--cds-fill-secondary)] group-hover:bg-[var(--cds-fill-secondary-hover)] cds-shadow-sm" />
-                    Secondary 柔和填充 (0边框)
+                    <span className="cds-btn-squish bg-[var(--cds-fill-secondary)] group-hover:bg-[var(--cds-fill-secondary-hover)]" style={{ boxShadow: "inset 0 0 0 1px var(--cds-fill-secondary-ring), 0 1px 2px #0000000d" }} />
+                    Secondary 微填充 + 内环
                   </button>
                   <button className="h-8 px-3 rounded-lg text-neutral-600 dark:text-neutral-400 text-sm font-medium cds-hover-ghost transition-all border-0">
                     Ghost 纯悬停 (0边框)
@@ -2531,7 +2530,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                   </button>
                 </div>
                 <p className="text-[11px] text-neutral-400 mt-2 font-mono">
-                  💡 规范法则：Secondary 按钮默认采用 Surface-2 浅底填充，容器内部严禁使用带边框的按钮，防止视觉套娃。最右的陶土方钮是 Brand 变体（#c6613f → hover #d97757），只用于发送。
+                  💡 规范法则：Secondary 按钮浅色是 #ffffff1a 填充 + 1px alpha-2 内环 + 0 1px 2px #0000000d（hover alpha 5%），深色是 alpha 10% 填充、无环（hover 14%）；容器内部严禁使用带边框的按钮，防止视觉套娃。最右的陶土方钮是 Brand 变体（#c6613f → hover #d97757），只用于发送。
                 </p>
               </div>
             </div>
@@ -2544,7 +2543,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
             code={`<div className="relative h-7 p-px rounded-[7px] bg-[var(--cds-segmented-track)]">   {/* sm 28 · r7；lg 40 · r10；track 浅 alpha 5% · 深 #111 */}
   <div className="absolute inset-y-px rounded-[6px] bg-[var(--cds-segmented-thumb)]" style={{ left: "calc(1px + active * (100% - 2px) / total)" }} />   {/* thumb 圆角 = 控件 − 1；浅 #fff · 深 alpha 10% */}
 </div>`}
-            description="圆角跟随控件尺寸（sm 28px · 7px；lg 40px · 10px），不是 999px 胶囊；track 内边距 1px，thumb 圆角 = 控件圆角 − 1（6 / 9）。滑块用纯几何公式绝对定位，支持容器查询 @container (max-width: 254px) 折叠。"
+            description="圆角跟随控件尺寸（sm 28px · 7px；lg 40px · 10px），不是 999px 胶囊；track 内边距 1px，thumb 圆角 = 控件圆角 − 1（6 / 9）。选项字号 sm 14px · lg 15px，未选 text-secondary、选中 text-primary，只变色不加粗。滑块用纯几何公式绝对定位，支持容器查询 @container (max-width: 254px) 折叠。"
           >
             <div className="py-2 space-y-4">
               <div
@@ -2565,10 +2564,10 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                   <button
                     key={tab}
                     onClick={() => setSegmentedIndex(idx)}
-                    className={`relative z-10 flex-1 h-full flex items-center justify-center text-xs font-[470] rounded-[5px] transition-colors truncate ${
+                    className={`relative z-10 flex-1 h-full flex items-center justify-center text-sm rounded-[5px] transition-colors truncate ${
                       segmentedIndex === idx
-                        ? "text-neutral-900 dark:text-white font-semibold"
-                        : "text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300"
+                        ? "text-[color:var(--cds-text-primary)]"
+                        : "text-[color:var(--cds-text-secondary)]"
                     }`}
                   >
                     <span>{tab}</span>
@@ -2776,7 +2775,7 @@ export const irradiationCompensation = {
             title="上下文快捷菜单 (双环 Popover 浮层)"
             tag='data-cds="ContextMenu"'
             code={`<div className="w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1">
-  <div className="px-2.5 py-1.5 rounded-lg text-xs cds-hover-ghost">Duplicate</div>
+  <div className="min-h-8 px-2.5 py-1.5 rounded-lg text-sm cds-hover-ghost">Duplicate</div>
 </div>`}
             description="带有 --cds-shadow-popover 真实双环（深色内高光/浅色外轮廓）深度弥散投影的浮动弹出菜单，支持键盘快捷键勋章。菜单圆角 12px = 控件圆角 8 + --cds-menu-gutter 4，与 8px 菜单项同心（claude.ai 实测）。"
           >
@@ -2788,7 +2787,7 @@ export const irradiationCompensation = {
               ].map((m, idx) => (
                 <div
                   key={idx}
-                  className="px-2.5 py-1.5 rounded-lg flex items-center justify-between text-xs text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer"
+                  className="min-h-8 px-2.5 py-1.5 rounded-lg flex items-center justify-between text-sm text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <Icon name={m.icon} size="xs" className="text-neutral-400" />
@@ -3502,7 +3501,7 @@ export const irradiationCompensation = {
                               setIsEffortOpen(false);
                               setIsEffortSubOpen(false);
                             }}
-                            className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex flex-col gap-0.5 cds-hover-ghost text-neutral-700 dark:text-neutral-300"
+                            className="w-full min-h-8 text-left px-2.5 py-1.5 rounded-lg text-sm flex flex-col gap-0.5 cds-hover-ghost text-neutral-700 dark:text-neutral-300"
                           >
                             <div className="flex items-center gap-1.5 w-full">
                               <span className="font-semibold">{meta.name}</span>
@@ -3531,7 +3530,7 @@ export const irradiationCompensation = {
                           role="menuitemradio"
                           aria-checked={model === m}
                           onClick={() => { setModel(m); setIsEffortOpen(false); }}
-                          className="w-full h-8 px-2.5 rounded-lg text-left text-xs flex items-center justify-between cds-hover-ghost text-neutral-700 dark:text-neutral-300"
+                          className="w-full h-8 px-2.5 rounded-lg text-left text-sm flex items-center justify-between cds-hover-ghost text-neutral-700 dark:text-neutral-300"
                         >
                           <span>{m}</span>
                           {model === m && <Icon name="check" size="xs" className="text-[color:var(--cds-fill-accent)]" />}
@@ -3543,7 +3542,7 @@ export const irradiationCompensation = {
                         aria-haspopup="menu"
                         aria-expanded={isEffortSubOpen}
                         onClick={() => setIsEffortSubOpen(!isEffortSubOpen)}
-                        className={"w-full h-8 px-2.5 rounded-lg text-left text-xs flex items-center gap-2 cds-hover-ghost text-neutral-700 dark:text-neutral-300 " + (isEffortSubOpen ? "bg-neutral-100 dark:bg-neutral-800" : "")}
+                        className={"w-full h-8 px-2.5 rounded-lg text-left text-sm flex items-center gap-2 cds-hover-ghost text-neutral-700 dark:text-neutral-300 " + (isEffortSubOpen ? "bg-neutral-100 dark:bg-neutral-800" : "")}
                       >
                         <span className="flex-1">Effort 努力程度</span>
                         <span className="text-neutral-400">{effortMeta[effortLevel].name}</span>
