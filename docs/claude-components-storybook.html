@@ -45,13 +45,12 @@
             'sm': 'var(--radius-sm, 4px)',
             'md': 'var(--radius-md, 6px)',
             'lg': 'var(--radius-lg, 8px)',
-            'panel': 'var(--cds-panel-radius, 10px)',
+            'panel': 'var(--cds-panel-radius, .75rem)',
             'xl': 'var(--radius-xl, 12px)',
             '2xl': 'var(--radius-2xl, 16px)',
-            'bubble': 'var(--cds-message-bubble-radius, 18px)',
-            'composer': 'var(--cds-radius-composer, 20px)',
-            'chin': 'var(--cds-radius-chin, 12px)',
-            'pill': 'var(--df-radius-pill, 999px)',
+            'bubble': 'var(--cds-message-bubble-radius, 12px)',
+            'composer': 'var(--cds-radius-composer, .875rem)',
+            'pill': 'var(--df-radius-pill, 8px)',
           },
           boxShadow: {
             'card-subtle': '0 0 0 1px var(--cds-border), 0 2px 8px -2px rgba(0, 0, 0, 0.05)',
@@ -79,7 +78,7 @@
        ========================================================================== */
 
     :root {
-      --cds-surface-0: #f5f5f3;
+      --cds-surface-0: #f9f9f7;
       --cds-surface-1: #fcfcfb;
       --cds-surface-2: #ffffff;
       --cds-surface-3: #ffffff;
@@ -120,8 +119,10 @@
       --cds-shadow-composer-hover: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--cds-border-strong);
       --cds-shadow-composer-focus: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 0 0 1px var(--cds-border-strong), 0 0 0 1px var(--cds-border-strong);
 
-      /* Triple-Layer Focus Ring & Drop Glow */
-      --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1.5px var(--cds-clay), 0 0 6px 1px rgba(217, 119, 87, 0.25);
+      /* Triple-Layer Focus Ring & Drop Glow（焦点环是 accent 蓝，claude.ai 实测） */
+      --cds-fill-accent: #2a78d6;
+      --cds-bg-accent: #cde2fb;
+      --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px var(--cds-bg-accent);
       --cds-shadow-drop-glow: inset 0 0 24px -2px rgba(217, 119, 87, 0.20), inset 0 0 0 2px var(--cds-clay);
 
       /* Interactive Hover / Fill Tokens */
@@ -129,10 +130,14 @@
       --cds-fill-ghost-selected: var(--cds-alpha-2);
       --cds-fill-secondary: var(--cds-alpha-2);
       --cds-fill-secondary-hover: rgba(21, 21, 21, 0.14);
+      /* 主按钮用中性黑白；陶土只给发送键（--cds-fill-brand）和 Spark */
+      --cds-fill-primary: #0b0b0b;
+      --cds-fill-primary-hover: #2c2c2a;
+      --cds-on-primary: #ffffff;
 
-      --cds-text-primary: #151515;
-      --cds-text-secondary: #525252;
-      --cds-text-muted: #8a8a8a;
+      --cds-text-primary: #0b0b0b;
+      --cds-text-secondary: #52514e;
+      --cds-text-muted: #898781;
       --cds-bg-tint-blue: #f0f4f8;
       --cds-segmented-track: rgba(0, 0, 0, 0.06);
       --cds-segmented-thumb: #ffffff;
@@ -142,16 +147,14 @@
       --radius-sm: 4px;
       --radius-md: 6px;
       --radius-lg: 8px;
-      --cds-panel-radius: 10px;
+      --cds-panel-radius: .75rem;
       --radius-xl: 12px;
       --radius-2xl: 16px;
-      --cds-message-bubble-radius: 18px;
-      --cds-radius-composer: 20px;
-      --cds-radius-composer-v2: 12px;
-      --cds-radius-chin: 12px;
+      --cds-message-bubble-radius: 12px; /* = 控件 8 + 4 */
+      --cds-radius-composer: .875rem; /* comfortable 14px；compact 密度 .75rem = 12px */
       --cmp-chin-touch-grow: 4px;
       --cds-surface-canvas: #fcfcfb;
-      --df-radius-pill: 999px;
+      --df-radius-pill: 8px; /* 侧栏行圆角：comfortable 8px（compact 6px），名为 pill 实为圆角矩形 */
     }
 
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx), (resolution >= 2x) {
@@ -170,7 +173,7 @@
       --cds-surface-1: #151515;
       --cds-surface-canvas: #151515;
       --cds-surface-2: #1a1a19;
-      --cds-surface-3: #20201e;
+      --cds-surface-3: #20201f;
       --cds-surface-popover: #222220;
       --cds-clay: #d97757;
       --cds-clay-hover: #e08264;
@@ -205,17 +208,20 @@
       --cds-shadow-composer-hover: 0 4px 24px rgba(0, 0, 0, 0.55), inset 0 0 0 1px var(--cds-border-strong);
       --cds-shadow-composer-focus: 0 4px 24px rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.22);
 
-      --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1.5px var(--cds-clay), 0 0 8px 2px rgba(217, 119, 87, 0.35);
+      --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px rgb(24 79 149 / 60%);
       --cds-shadow-drop-glow: inset 0 0 24px -2px rgba(217, 119, 87, 0.30), inset 0 0 0 2px var(--cds-clay);
 
       --cds-fill-ghost-hover: var(--cds-alpha-1);
       --cds-fill-ghost-selected: var(--cds-alpha-2);
       --cds-fill-secondary: var(--cds-alpha-2);
       --cds-fill-secondary-hover: rgba(255, 255, 255, 0.14);
+      --cds-fill-primary: #ffffff;
+      --cds-fill-primary-hover: #e1e0d9;
+      --cds-on-primary: #0b0b0b;
 
-      --cds-text-primary: #f5f5f5;
-      --cds-text-secondary: #a3a3a3;
-      --cds-text-muted: #666666;
+      --cds-text-primary: #f0efec;
+      --cds-text-secondary: #c3c2b7;
+      --cds-text-muted: #898781;
       --cds-bg-tint-blue: rgba(255, 255, 255, 0.06);
       --cds-segmented-track: rgba(255, 255, 255, 0.08);
       --cds-segmented-thumb: #2c2c2a;
@@ -239,16 +245,38 @@
       box-shadow: var(--cds-shadow-composer-focus) !important; 
     }
 
+    /* 按压反馈（claude.ai 实测）：只缩放背景层 span.cds-btn-squish，文字与图标不动；
+       按下 60ms ease-out 缩到 .975，松开 450ms --cds-btn-spring 回弹。按钮本身需 relative + isolate */
+    .cds-btn-squish {
+      position: absolute; inset: 0; z-index: -1; border-radius: inherit; transform-origin: 50% center;
+      transition: transform var(--cds-dur-slow) var(--cds-btn-spring), background-color var(--cds-dur-fast) ease-out;
+    }
+    :not(:disabled):active > .cds-btn-squish {
+      transform: scale(.975);
+      transition: transform var(--cds-dur-fast) ease-out, background-color var(--cds-dur-fast) ease-out;
+    }
+
+    /* Ghost：::before 充当背景层，按压同样只缩放它 */
     .cds-hover-ghost {
-      transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), color 150ms ease, transform 100ms ease;
+      position: relative;
+      isolation: isolate;
+      transition: color 150ms ease;
+    }
+    .cds-hover-ghost::before {
+      content: "";
+      position: absolute; inset: 0; z-index: -1; border-radius: inherit; transform-origin: 50% center;
+      transition: transform var(--cds-dur-slow) var(--cds-btn-spring), background-color 150ms cubic-bezier(0.16, 1, 0.3, 1);
     }
     .cds-hover-ghost:hover {
-      background-color: var(--cds-fill-ghost-hover) !important;
       color: var(--cds-text-primary) !important;
     }
-    .cds-hover-ghost:active {
-      background-color: var(--cds-fill-ghost-selected) !important;
-      transform: scale(0.98);
+    .cds-hover-ghost:hover::before {
+      background-color: var(--cds-fill-ghost-hover);
+    }
+    .cds-hover-ghost:active::before {
+      background-color: var(--cds-fill-ghost-selected);
+      transform: scale(.975);
+      transition: transform var(--cds-dur-fast) ease-out, background-color var(--cds-dur-fast) ease-out;
     }
 
     .cds-card-interactive {
@@ -306,11 +334,6 @@
       22%      { opacity: 1; transform: translateY(-3px); }
       36%, 70% { opacity: 1; transform: translateY(0); }
       90%, 100%{ opacity: 0.2; transform: translateY(0); }
-    }
-
-    @keyframes message-fade-up {
-      0%   { opacity: 0; transform: translateY(12px); }
-      100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes saved-check-decay {
@@ -440,7 +463,9 @@
       --cds-ease-out: cubic-bezier(.165, .84, .44, 1);
       --cds-ease-snap: cubic-bezier(.32, .72, 0, 1);
       --cds-ease-overshoot: cubic-bezier(.34, 1.3, .64, 1);
-      --cds-fill-brand: #d97757;
+      --cds-btn-spring: linear(0, .2459, .6526, .9468, 1.0764, 1.0915, 1.0585, 1.0219, .9993, .9914, .9921, .9957, .9988, 1.0004, 1);
+      --cds-fill-brand: #c6613f; /* clay-emphasized，只用于发送键 */
+      --cds-fill-brand-hover: #d97757;
       --cds-text-accent: #2a78d6;
       --cds-text-disabled: rgba(21, 21, 21, .22);
       /* Cove 8-color categorical palette (light) */
@@ -778,7 +803,7 @@
     }
   </style>
 </head>
-<body class="h-full bg-[#fcfcfb] text-[#151515] font-sans antialiased selection:bg-[#d97757]/20 selection:text-[#d97757]">
+<body class="h-full bg-[#fcfcfb] text-[var(--cds-text-primary)] font-sans antialiased selection:bg-[#d97757]/20 selection:text-[#d97757]">
   <div id="root" class="h-full"></div>
 
   <script type="text/babel">
@@ -787,6 +812,8 @@
     // ==========================================================================
     // Phosphor & Claude Native Vector SVG Icon System
     // Coordinates: viewBox="0 0 256 256" (Phosphor Icons Architecture)
+    // claude.ai 实测图标是 Anthropicons 可变字体（PUA 码位 · ANIM 轴，见 #wa-icons）。
+    // 保留 Phosphor SVG 的原因：仓库不收字体等二进制资源，Anthropicons 也不随仓库分发。
     // ==========================================================================
     function Icon({ name, size = "md", weight = "regular", duotone = false, className = "", style = {} }) {
       const sizePx = {
@@ -977,15 +1004,16 @@
       const [hairlineCompare, setHairlineCompare] = useState("hairline");
 
       const surfaces = [
-        { name: "Surface 0", role: "底基层 / 边框底色", light: "#f5f5f3", dark: "#0b0b0a", desc: "侧边栏最底色、无边框外壳" },
+        { name: "Surface 0", role: "底基层 / 边框底色", light: "#f9f9f7", dark: "#0b0b0a", desc: "侧边栏最底色、无边框外壳" },
         { name: "Surface 1 (主画布)", role: "2.0 冷雪花白 / 暗部墨黑", light: "#fcfcfb", dark: "#151515", desc: "主会话页面底色，从 1.0 暖陶土信纸升格为极致冷雪花白" },
         { name: "Surface 2", role: "独立卡片 / 面板", light: "#ffffff", dark: "#1a1a19", desc: "消息气泡外围、独立卡片底色" },
-        { name: "Surface 3", role: "输入框 / 最高层", light: "#ffffff", dark: "#20201e", desc: "聊天输入框、弹出浮层顶色" },
+        { name: "Surface 3", role: "输入框 / 最高层", light: "#ffffff", dark: "#20201f", desc: "聊天输入框、弹出浮层顶色" },
       ];
 
+      // claude.ai 实测：主按钮是 #0b0b0b（深色 #fff），陶土只给发送键和 Spark
       const clayColors = [
-        { name: "Clay Base", hex: "#d97757", tag: "主品牌色", desc: "品牌 Spark 图标、主按钮、思考点" },
-        { name: "Clay Hover", hex: "#cc5a36", tag: "强调加深", desc: "悬停态、聚焦边框" },
+        { name: "Clay Base", hex: "#d97757", tag: "--cds-clay", desc: "品牌 Spark 图标；发送键悬停色 (--cds-fill-brand-hover)" },
+        { name: "Clay Emphasized", hex: "#c6613f", tag: "--cds-fill-brand", desc: "发送键底色 (brand 变体)，主按钮不用陶土" },
         { name: "Clay Tint", hex: "#fbf3ef", tag: "浅底衬", desc: "徽章背景、高亮浅衬底" },
       ];
 
@@ -994,15 +1022,18 @@
         { token: "--radius-xs", px: "2px", role: "微小分割指示器", cls: "rounded-xs" },
         { token: "--radius-sm", px: "4px", role: "键盘按键、代码微章", cls: "rounded-sm" },
         { token: "--radius-md", px: "6px", role: "XS 按钮 (24px)、紧凑标签", cls: "rounded-md" },
-        { token: "--radius-lg", px: "8px", role: "SM/MD 按钮、输入框、附件磁贴", cls: "rounded-lg" },
-        { token: "--cds-panel-radius", px: "10px", role: "工具栏面板、次级卡片", cls: "rounded-[10px]" },
-        { token: "--radius-xl", px: "12px", role: "LG 按钮 (40px)、代码块、产物卡片", cls: "rounded-xl" },
+        { token: "--cds-radius--sm", px: "7px", role: "SM 按钮 (28px)、分段控件 sm（thumb 6px）", cls: "rounded-[7px]" },
+        { token: "--radius-lg", px: "8px", role: "MD 按钮 (32px)、菜单项、搜索框、附件磁贴", cls: "rounded-lg" },
+        { token: "--df-radius-pill", px: "8px", role: "侧栏导航行（comfortable 8px · compact 6px）", cls: "rounded-pill" },
+        { token: "--cds-radius--lg", px: "10px", role: "LG 按钮 (40px)、分段控件 lg（thumb 9px）", cls: "rounded-[10px]" },
+        { token: "--cds-panel-radius", px: "12px", role: "工具栏面板、次级卡片（.75rem）", cls: "rounded-panel" },
+        { token: "--radius-xl", px: "12px", role: "代码块、产物卡片、菜单（= 控件 8 + menu-gutter 4，同心圆角）", cls: "rounded-xl" },
+        { token: "--cds-message-bubble-radius", px: "12px", role: "用户消息气泡（= 控件 8 + 4）", cls: "rounded-bubble" },
+        { token: "--cds-radius-composer", px: "14px", role: "Chat Composer 输入框（comfortable .875rem；compact .75rem = 12px）", cls: "rounded-composer" },
+        { token: "ChatComposerChin", px: "0px", role: "Chin 在卡片外、卡片下方（-mx-2 · pt-2），自身无底色、无圆角", cls: "-mx-2 pt-2" },
+        { token: "--cmp-chin-touch-grow", px: "4px", role: "触控设备上 Chin 按钮长到 32px，再用等量负 margin 抵消，行高不变", cls: "rounded-none" },
         { token: "--radius-2xl", px: "16px", role: "模态弹窗 (Dialog)、主外壳", cls: "rounded-2xl" },
-        { token: "--cds-message-bubble-radius", px: "18px", role: "用户消息提问气泡", cls: "rounded-[18px]" },
-        { token: "--cds-radius-composer", px: "20px (1.0) → 12px (2.0)", role: "Chat Composer 输入终端 (2.0 扁平化重构)", cls: "rounded-xl" },
-        { token: "--cds-radius-chin", px: "12px", role: "2.0 输入框底部下颌工具栏 (ChatComposerChin)", cls: "rounded-b-xl" },
-        { token: "--cmp-chin-touch-grow", px: "4px", role: "2.0 触控负边距手势补偿扩展量", cls: "rounded-none" },
-        { token: "--df-radius-pill", px: "999px", role: "分段滑动胶囊、状态呼吸灯、头像", cls: "rounded-full" },
+        { token: "rounded-full", px: "999px", role: "状态呼吸灯、头像、回到底部按钮", cls: "rounded-full" },
       ];
 
       // 官方 CDS 7 阶排版音阶体系
@@ -1022,18 +1053,18 @@
         { area: "chat", element: "模型版本角标 ('Sonnet 3.7')", size: "10px", weight: "500 (Medium)", font: "Mono", roleDesc: "等宽微徽章，4px 圆角" },
         { area: "chat", element: "消息时间戳 ('10:24 AM')", size: "11px", weight: "400 (Regular)", font: "Mono", roleDesc: "等宽数字，次级弱化灰度" },
         { area: "chat", element: "助手回复正文 (Prose Body)", size: "14px (默认)", weight: "400 (深色减薄 360)", font: "Sans", roleDesc: "1.42857 行高，0.75lh 段间距" },
-        { area: "chat", element: "用户提问气泡", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "与助手正文同字号，18px 圆角" },
+        { area: "chat", element: "用户提问气泡", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "与助手正文同字号，12px 圆角（= 控件 8 + 4）" },
         { area: "chat", element: "思考折叠触发器 ('Thought for 3.8s')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Medium 强化可点击感，text-muted" },
         { area: "chat", element: "思考链内部日志", size: "11px ~ 12px", weight: "400 (Regular)", font: "Mono", roleDesc: "代码级日志缩进排版，2px 左引导线" },
         { area: "composer", element: "主输入框文字 (Textarea)", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "与正文同级，field-sizing 自撑开" },
         { area: "composer", element: "输入框占位符 (Placeholder)", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "text-neutral-400 弱化提示" },
         { area: "composer", element: "操作按钮 ('+ Add content')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Ghost 变体，图标 -0.125em 负偏置" },
-        { area: "composer", element: "发送主按钮 (Send)", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "实心陶土色胶囊，按压弹性缩放" },
+        { area: "composer", element: "发送按钮 (Send)", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "陶土 #c6613f（hover #d97757）32×32 · 圆角 8，按压只缩放背景层" },
         { area: "artifacts", element: "代码块语法高亮", size: "12px ~ 13px", weight: "400 (Regular)", font: "Mono", roleDesc: "Fira Code/Menlo，1.46 行高，tabular-nums" },
         { area: "artifacts", element: "Artifact 卡片标题", size: "13px", weight: "580 (Semibold)", font: "Sans", roleDesc: "单行截断，高优先级识别" },
         { area: "artifacts", element: "附件文件名 / 大小", size: "12px / 10px", weight: "500 / 400", font: "Sans / Mono", roleDesc: "文件名称中粗，体积等宽弱化" },
-        { area: "controls", element: "标准按钮 (SM 32px / MD 38px)", size: "13px / 14px", weight: "500 (Medium)", font: "Sans", roleDesc: "中粗视觉抓手，active:scale-95" },
-        { area: "controls", element: "分段滑动胶囊 Tab", size: "12px", weight: "400 / 500 (激活)", font: "Sans", roleDesc: "激活态切换中粗，绝对几何滑动" },
+        { area: "controls", element: "标准按钮 (SM 28px / MD 32px)", size: "14px / 14px", weight: "500 (Medium)", font: "Sans", roleDesc: "中粗视觉抓手；按压只缩放背景层 .975（60ms 按下 / 450ms 弹簧回弹）" },
+        { area: "controls", element: "分段控件 Tab", size: "12px", weight: "400 / 500 (激活)", font: "Sans", roleDesc: "激活态切换中粗，绝对几何滑动" },
         { area: "controls", element: "弹窗标题 (Modal Title)", size: "15px ~ 16px", weight: "580 (Semibold)", font: "Sans", roleDesc: "强边界阻断，Semibold 强调" },
         { area: "controls", element: "快捷键徽章 (Kbd)", size: "10px ~ 11px", weight: "580 (Semibold)", font: "Mono", roleDesc: "按键微型轮廓，内凹投影" },
       ];
@@ -1060,7 +1091,7 @@
                   </div>
                   <div
                     className="h-10 rounded-lg mt-3 border border-neutral-200/60 dark:border-neutral-700/60 flex items-center justify-center text-xs font-mono font-medium shadow-inner"
-                    style={{ backgroundColor: isDark ? s.dark : s.light, color: isDark ? "#ffffff" : "#151515" }}
+                    style={{ backgroundColor: isDark ? s.dark : s.light, color: "var(--cds-text-primary)" }}
                   >
                     Sample Fill
                   </div>
@@ -1077,7 +1108,7 @@
                   1.2 生产环境全量圆角阶梯与规范系统 (Border Radius Hierarchy)
                 </h4>
                 <p className="text-xs text-neutral-400 mt-0.5">
-                  Claude 并非全盘使用同一种圆角，而是从 2px 到 999px 构建了严格的视觉阶梯（输入框固定 20px，用户气泡 18px，标准控件 8px）：
+                  Claude 并非全盘使用同一种圆角，而是从 2px 到 999px 构建了严格的视觉阶梯（按钮 xs / sm / md / lg = 6 / 7 / 8 / 10，输入框 14px，用户气泡与菜单 12px = 控件 8 + 4）：
                 </p>
               </div>
               <span className="text-xs font-mono text-clay shrink-0">AST-Extracted Radii</span>
@@ -1125,7 +1156,8 @@
             <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 p-4 bg-white dark:bg-[#1a1a19]">
               <h4 className="text-xs font-mono uppercase text-neutral-400 mb-3 tracking-wider">1.4 灰阶与功能微调色 (Neutral Grays & Tints)</h4>
               <div className="grid grid-cols-5 gap-1.5 mb-3">
-                {["#f9f9f8", "#f2f2f0", "#e5e5e3", "#d4d4d1", "#a3a3a0", "#737370", "#525250", "#40403e", "#262624", "#151515"].map((hex, i) => (
+                {/* 600 / 900 为 claude.ai 实测（text-secondary #52514e / text-primary #0b0b0b） */}
+                {["#f9f9f8", "#f2f2f0", "#e5e5e3", "#d4d4d1", "#a3a3a0", "#737370", "#52514e", "#40403e", "#262624", "#0b0b0b"].map((hex, i) => (
                   <div key={i} className="flex flex-col items-center">
                     <div className="h-8 w-full rounded border border-neutral-200/40 dark:border-neutral-700/40" style={{ backgroundColor: hex }} />
                     <span className="text-[9px] font-mono text-neutral-400 mt-1">{i * 100 || 50}</span>
@@ -1389,12 +1421,12 @@
               <div className="p-3.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 flex flex-col justify-between space-y-2.5">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">2.0px 焦点与吸附</span>
+                    <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">2.0px 拖拽吸附</span>
                     <code className="text-[10px] text-clay font-mono">--cds-shadow-drop-ring</code>
                   </div>
                   <div className="text-[11px] text-neutral-500 font-mono mt-0.5">inset 0 0 0 2px var(--cds-clay)</div>
                   <p className="text-[10px] text-neutral-400 mt-1 leading-snug">
-                    拖拽文件悬停至输入框时的吸附高亮环，以及键盘 Tab 导航聚焦高亮圈。
+                    拖拽文件悬停至输入框时的吸附高亮环。键盘焦点环不用陶土，见 --cds-focus-shadow（1px accent 蓝 + 6px 光晕）。
                   </p>
                 </div>
                 <div className="h-12 rounded-lg bg-white dark:bg-[#111] flex items-center justify-center text-xs font-mono text-clay" style={{ boxShadow: "inset 0 0 0 2px var(--cds-clay)" }}>
@@ -1454,7 +1486,7 @@
                     : activeShadowTab === "composer"
                     ? "var(--cds-shadow-composer-focus)"
                     : "var(--cds-focus-shadow)",
-                  borderRadius: activeShadowTab === "composer" ? "20px" : "16px"
+                  borderRadius: activeShadowTab === "composer" ? "var(--cds-radius-composer)" : "16px"
                 }}
               >
                 <div className="size-9 rounded-full bg-clay/10 text-clay flex items-center justify-center font-bold text-xs">
@@ -1466,15 +1498,15 @@
                   {activeShadowTab === "lg" && "Shadow LG • 全局模态沉浸层"}
                   {activeShadowTab === "popover" && "Dual-Ring Popover • 双环浮动气泡"}
                   {activeShadowTab === "composer" && "Composer Focused • 输入端聚焦呼吸态"}
-                  {activeShadowTab === "focus" && "Focus Ring • 陶土可访问性外环"}
+                  {activeShadowTab === "focus" && "Focus Ring • accent 蓝可访问性外环"}
                 </div>
                 <p className="text-xs text-neutral-500 leading-snug">
                   {activeShadowTab === "sm" && "浅色仅 5% 灰度双层漫射，深色为 35% 紧贴微遮蔽，消除纯黑压抑感。"}
                   {activeShadowTab === "md" && "鼠标悬浮升高或右键展开菜单时的轻量悬空层级，自然脱离背景。"}
                   {activeShadowTab === "lg" && "对话框与抽屉独享的大弥散度阴影，向下深潜 28px~36px。"}
                   {activeShadowTab === "popover" && "暗黑模式外环 0px + 内环 1px 倒角反光，浅色模式 1px 外轮廓，绝不糊边。"}
-                  {activeShadowTab === "composer" && "Claude 最经典的 20px 大圆角输入框，悬浮与聚焦时向外扩散 24px 双环微投影。"}
-                  {activeShadowTab === "focus" && "内嵌 1px 背景垫片隔离环 + 1.5px 陶土高亮环 + 6px 柔和弥散光晕。"}
+                  {activeShadowTab === "composer" && "14px 圆角输入框（comfortable .875rem；compact 12px），悬浮与聚焦时向外扩散 24px 双环微投影。"}
+                  {activeShadowTab === "focus" && "内嵌 1px 页面底色垫片 + 1px accent 蓝环 (#2a78d6) + 6px 淡蓝光晕 (#cde2fb；深色 rgb(24 79 149 / 60%))。"}
                 </p>
               </div>
 
@@ -1545,10 +1577,15 @@ box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08),
                 )}
                 {activeShadowTab === "focus" && (
                   <pre className="text-neutral-300">
-{`/* 全局交互焦点环 (Triple-Layer Ring) */
-box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
-            0 0 0 1.5px var(--cds-clay),          /* 1.5px 陶土高亮 */
-            0 0 6px 1px rgba(217, 119, 87, 0.25); /* 柔和漫反射光晕 */`}
+{`/* 全局交互焦点环 (Triple-Layer Ring)，claude.ai 实测 */
+box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 页面底色垫片 */
+            0 0 0 1px var(--cds-fill-accent),     /* 1px accent 蓝 #2a78d6 */
+            0 0 6px 1px var(--cds-bg-accent);     /* 6px 淡蓝光晕 #cde2fb */
+
+/* 深色：末段换成 accent-600 / 60% */
+box-shadow: inset 0 0 0 1px var(--cds-surface-1),
+            0 0 0 1px var(--cds-fill-accent),
+            0 0 6px 1px rgb(24 79 149 / 60%);`}
                   </pre>
                 )}
               </div>
@@ -1575,13 +1612,13 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
               {/* 1. Ghost Button Feedback */}
               <div
                 onMouseEnter={() => setPlaygroundState("Ghost Button: Hover (5% Alpha)")}
-                onMouseDown={() => setPlaygroundState("Ghost Button: Active Press (scale 0.98)")}
+                onMouseDown={() => setPlaygroundState("Ghost Button: Press (背景层 scale .975)")}
                 onMouseLeave={() => setPlaygroundState("hover over any element")}
                 className="p-4 rounded-xl border border-neutral-100 dark:border-neutral-800/60 bg-neutral-50/50 dark:bg-neutral-900/40 flex flex-col justify-between space-y-3"
               >
                 <div>
                   <span className="text-xs font-semibold text-neutral-900 dark:text-neutral-100">1. 幽灵按钮悬浮与按压</span>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">常态透明，悬浮渐变 5% 灰度底衬，点击轻微回弹缩放。</p>
+                  <p className="text-[11px] text-neutral-400 mt-0.5">常态透明，悬停 5% 底衬；按下只缩放背景层到 .975（60ms），松开 450ms 弹簧回弹，文字不动。</p>
                 </div>
                 <button className="h-9 px-3 rounded-lg text-neutral-600 dark:text-neutral-300 text-xs font-medium cds-hover-ghost flex items-center justify-center gap-1.5 w-full">
                   <Icon name="spark" size="xs" className="text-clay" />
@@ -1620,10 +1657,10 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
               >
                 <div>
                   <span className="text-xs font-semibold text-neutral-900 dark:text-neutral-100">3. 浮动菜单行高亮</span>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">紧凑 4px 圆角高亮胶囊，图标与文字联动变亮。</p>
+                  <p className="text-[11px] text-neutral-400 mt-0.5">菜单圆角 12 = 控件 8 + menu-gutter 4，菜单项 8px 高亮与之同心，图标与文字联动变亮。</p>
                 </div>
                 <div className="p-1 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover space-y-0.5">
-                  <div className="px-2.5 py-1.5 rounded-md text-xs text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer flex items-center justify-between">
+                  <div className="px-2.5 py-1.5 rounded-lg text-xs text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="copy" size="xs" className="text-neutral-400" />
                       <span>Copy Code</span>
@@ -1641,17 +1678,14 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
               >
                 <div>
                   <span className="text-xs font-semibold text-neutral-900 dark:text-neutral-100">4. 焦点呼吸光晕 (Focus)</span>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">点击激活时外展 3 层陶土环境光，彻底取代粗鲁的默认 outline。</p>
+                  <p className="text-[11px] text-neutral-400 mt-0.5">聚焦时外展 3 层 accent 蓝焦点环（1px 垫片 + 1px #2a78d6 + 6px 光晕），取代默认 outline。</p>
                 </div>
                 <input
                   type="text"
                   placeholder="Click to focus..."
                   onFocus={() => setPlaygroundState("Input: Focused with Triple-Layer Glow")}
                   onBlur={() => setPlaygroundState("hover over any element")}
-                  className="w-full h-9 px-3 rounded-lg bg-white dark:bg-[#111] text-xs text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 transition-all duration-200 outline-none border border-neutral-300/80 dark:border-neutral-700 focus:shadow-focus-glow focus:border-clay"
-                  style={{
-                    boxShadow: "var(--cds-shadow-sm)"
-                  }}
+                  className="w-full h-9 px-3 rounded-lg bg-white dark:bg-[#111] text-xs text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 transition-all duration-200 outline-none border border-neutral-300/80 dark:border-neutral-700 shadow-sm focus:shadow-focus-glow focus:border-transparent"
                 />
               </div>
             </div>
@@ -1664,7 +1698,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
     // 2. SECTION: App Shell & macOS Desktop Structure
     // ==========================================================================
     function AppShellSection() {
-      const [activeNav, setActiveNav] = useState("chat");
+      const [activeNav, setActiveNav] = useState("claude");
 
       return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -1681,9 +1715,9 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
   </div>
   <div className="flex-1 text-center font-medium text-xs">Claude 3.7 Sonnet</div>
 </div>`}
-            description="真实的桌面端标题栏，左侧预留 74px 红绿灯交通灯垫片，中央展示当前模型或会话名，右侧为窗口动作工具。"
+            description="真实的桌面端标题栏，左侧预留 74px 红绿灯交通灯垫片，中央展示当前模型或会话名，右侧为窗口动作工具。46px 是桌面端（macOS）的值，予以保留；claude.ai 网页端没有红绿灯，侧栏标题栏实测 44px（h-11 · padding 4px 8px 0）。"
           >
-            <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-[#f5f5f3] dark:bg-[#0b0b0a] overflow-hidden shadow-sm">
+            <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-surface-0 overflow-hidden shadow-sm">
               <div className="h-[46px] px-3 flex items-center justify-between border-b border-neutral-200/80 dark:border-neutral-800">
                 {/* Traffic lights */}
                 <div className="w-[74px] flex items-center gap-2">
@@ -1710,41 +1744,51 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                 </div>
               </div>
               <div className="p-4 text-xs text-neutral-400 font-mono text-center">
-                高度 46px (--cds-h-titlebar) | 交通灯左内边距 74px (--df-traffic-light-spacer)
+                高度 46px (--cds-h-titlebar，桌面端) | 交通灯左内边距 74px (--df-traffic-light-spacer) | 网页端实测 44px
               </div>
             </div>
           </ComponentShowcase>
 
-          {/* 2.2 导航 Hub Rail 与应用切换器 */}
+          {/* 2.2 侧栏顶部的分段式应用切换 */}
           <ComponentShowcase
-            title="主导航 Hub Rail 切换器"
+            title="侧栏应用切换 (SegmentedControl sm)"
             tag=".df-hub-rail"
-            code={`<div className="df-hub-rail flex gap-1 p-1 bg-neutral-200/80 rounded-full">
-  <button className="px-3 py-1 rounded-full text-xs">Chat</button>
-  <button className="px-3 py-1 rounded-full text-xs">Artifacts</button>
+            code={`<div role="radiogroup" className="relative inline-grid grid-flow-col auto-cols-[34px] h-7 p-px rounded-[7px] bg-[var(--cds-segmented-track)]">
+  {/* thumb 34×26 · 圆角 = 控件 7 − 1 */}
+  <span className="absolute inset-y-px left-px w-[34px] rounded-[6px] bg-[var(--cds-segmented-thumb)]" />
+  <button role="radio" aria-label="Claude" className="relative h-[26px] rounded-[5px]">…</button>
+  <button role="radio" aria-label="Code" className="relative h-[26px] rounded-[5px]">…</button>
 </div>`}
-            description="侧边栏顶部的全圆角 999px 滑动药丸胶囊，用于在聊天、产物、项目与历史记录间切换。"
+            description="claude.ai 侧栏标题栏里是分段式应用切换（Claude / Code），不是 999px 胶囊：sm 70×28、圆角 7（跟随控件尺寸，lg 为 10），track 内边距 1px，thumb 34×26、圆角 6（控件圆角 − 1）。项目、Artifacts 等入口是下方 32px 高、圆角 8 的导航行。"
           >
             <div className="space-y-4">
-              <div className="inline-flex p-1 rounded-full bg-neutral-200/70 dark:bg-neutral-800/80 text-xs font-medium select-none shadow-inner">
+              <div role="radiogroup" aria-label="应用切换" className="relative inline-grid grid-flow-col auto-cols-[34px] h-7 p-px rounded-[7px] bg-[var(--cds-segmented-track)] select-none">
+                <span
+                  className="absolute inset-y-px left-px w-[34px] rounded-[6px] bg-[var(--cds-segmented-thumb)] pointer-events-none"
+                  style={{
+                    boxShadow: "inset 0 0 0 1px var(--cds-border), 0 1px 2px #0000000d",
+                    transform: `translateX(${activeNav === "code" ? 34 : 0}px)`,
+                    transition: "transform var(--cds-dur-base) var(--cds-ease-snap)",
+                  }}
+                />
                 {[
-                  { id: "chat", name: "Chats", icon: "chat" },
-                  { id: "artifacts", name: "Artifacts", icon: "fileCode" },
-                  { id: "projects", name: "Projects", icon: "layers" },
+                  { id: "claude", name: "Claude", icon: "spark" },
+                  { id: "code", name: "Code", icon: "code" },
                 ].map((tab) => {
                   const active = activeNav === tab.id;
                   return (
                     <button
                       key={tab.id}
+                      role="radio"
+                      aria-checked={active}
+                      aria-label={tab.name}
+                      title={tab.name}
                       onClick={() => setActiveNav(tab.id)}
-                      className={`px-3.5 py-1.5 rounded-full flex items-center gap-1.5 transition-all duration-150 ${
-                        active
-                          ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-xs font-semibold"
-                          : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200"
+                      className={`relative h-[26px] rounded-[5px] flex items-center justify-center transition-colors ${
+                        active ? "text-neutral-900 dark:text-white" : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200"
                       }`}
                     >
-                      <Icon name={tab.icon} size="xs" className={active ? "text-clay" : ""} />
-                      <span>{tab.name}</span>
+                      <Icon name={tab.icon} size="md" />
                     </button>
                   );
                 })}
@@ -1980,10 +2024,9 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                         </div>
                       )}
 
-                      {/* 用户提问气泡 (严格 18px 圆角规范) */}
+                      {/* 用户提问气泡（12px 圆角 = 控件 8 + 4；入场 message-fade-up 10px · 1.1s linear() 弹簧，复用实测页的 .wa-message-fade-up） */}
                       <div
-                        className="rounded-[18px] px-4 py-2.5 text-[14px] leading-relaxed bg-[#f0f4f8] dark:bg-white/10 text-neutral-900 dark:text-neutral-100 max-w-[85%] sm:max-w-[75%] shadow-xs"
-                        style={{ animation: "message-fade-up 0.4s cubic-bezier(.34, 1.3, .64, 1)" }}
+                        className="wa-message-fade-up rounded-bubble px-4 py-2.5 text-[14px] leading-relaxed bg-[#f0f4f8] dark:bg-white/10 text-neutral-900 dark:text-neutral-100 max-w-[85%] sm:max-w-[75%] shadow-xs"
                       >
                         {m.text}
                       </div>
@@ -1995,7 +2038,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                 const isThinkingOpen = expandedThinkingIds[m.id] ?? false;
 
                 return (
-                  <div key={m.id} className="space-y-3 max-w-2xl" style={{ animation: "message-fade-up 0.45s cubic-bezier(.34, 1.3, .64, 1)" }}>
+                  <div key={m.id} className="wa-message-fade-up space-y-3 max-w-2xl">
                     {/* Header */}
                     <div className="flex items-center gap-2 text-xs text-neutral-400 font-medium">
                       <Icon name="spark" size="xs" className="text-clay" />
@@ -2064,7 +2107,8 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                             <div className="text-[11px] text-neutral-400 font-mono">{m.artifact.version} • {m.artifact.desc}</div>
                           </div>
                         </div>
-                        <button className="h-7 px-3 rounded-lg bg-clay text-white text-xs font-medium hover:bg-clay-hover shadow-xs flex items-center gap-1">
+                        <button className="group relative isolate h-7 px-3 rounded-[7px] text-[var(--cds-on-primary)] text-xs font-medium flex items-center gap-1">
+                          <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
                           <Icon name="play" size="xs" />
                           <span>Open Artifact</span>
                         </button>
@@ -2107,7 +2151,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
             {/* 底部吸附式核心智能输入框终端 (具有完全交互) */}
             <div className="p-4 border-t border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-[#1a1a19]">
               <div className="w-full max-w-2xl mx-auto">
-                <div className="relative flex flex-col w-full rounded-[20px] bg-white dark:bg-[#1a1a19] p-[0.875rem] gap-y-2 cds-composer-shadow">
+                <div className="relative flex flex-col w-full rounded-composer bg-white dark:bg-[#1a1a19] p-[0.875rem] gap-y-2 cds-composer-shadow">
                   {/* 如果输入框有待发送附件 */}
                   {composerAttachments.length > 0 && (
                     <div className="flex items-center gap-2 overflow-x-auto pb-1">
@@ -2131,7 +2175,8 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
+                      // CJK 输入法组字中不提交
+                      if (e.key === "Enter" && !e.shiftKey && !(e.nativeEvent.isComposing || e.keyCode === 229)) {
                         e.preventDefault();
                         handleSendMessage();
                       }
@@ -2220,12 +2265,13 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                       </button>
                     </div>
 
-                    {/* 发送按钮 (圆形陶土色) */}
+                    {/* 发送按钮：brand 陶土 #c6613f → hover #d97757，32×32 · 圆角 8；按压只缩放背景层 */}
                     <button
                       onClick={handleSendMessage}
                       disabled={!inputText.trim() && composerAttachments.length === 0}
-                      className="size-8 rounded-lg flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:cursor-not-allowed bg-clay hover:bg-clay-hover text-white shadow-sm active:scale-95 shrink-0"
+                      className="group relative isolate size-8 rounded-lg flex items-center justify-center text-white disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
                     >
+                      <span className="cds-btn-squish bg-[var(--cds-fill-brand)] group-hover:bg-[var(--cds-fill-brand-hover)]" />
                       <Icon name="arrowRight" size="sm" />
                     </button>
                   </div>
@@ -2301,7 +2347,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                   >
                     <div className="min-h-0 overflow-hidden px-3.5 pb-3 pt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400 font-mono border-t border-neutral-200/70 dark:border-neutral-800/80 space-y-1">
                       <div>&gt; [Phase 1] Resolving Claude AST component hierarchy tokens</div>
-                      <div>&gt; [Phase 2] Computing border-radius matrix: 6px/8px/12px/18px/20px</div>
+                      <div>&gt; [Phase 2] Computing border-radius matrix: 6px/7px/8px/10px/12px/14px</div>
                       <div>&gt; [Phase 3] Attaching real interactive file upload listeners</div>
                       <div className="text-clay font-medium">&gt; [Phase 4] Output ready for client review</div>
                     </div>
@@ -2336,8 +2382,9 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                     />
                     <button
                       onClick={() => fileInputRef.current.click()}
-                      className="h-7 px-2.5 rounded-md bg-clay text-white text-xs font-medium hover:bg-clay-hover shadow-xs flex items-center gap-1 transition-colors"
+                      className="group relative isolate h-7 px-2.5 rounded-[7px] text-[var(--cds-on-primary)] text-xs font-medium flex items-center gap-1"
                     >
+                      <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
                       <Icon name="upload" size="xs" />
                       <span>上传本地文件</span>
                     </button>
@@ -2354,7 +2401,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                         setDemoFiles([...demoFiles, newF]);
                         setTimeout(() => setDemoFiles((prev) => prev.map((f) => (f.id === newF.id ? { ...f, uploading: false } : f))), 500);
                       }}
-                      className="h-7 px-2.5 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-medium transition-colors"
+                      className="h-7 px-2.5 rounded-[7px] border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-medium transition-colors"
                     >
                       + 模拟 JSON
                     </button>
@@ -2424,20 +2471,29 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
           <ComponentShowcase
             title="按钮尺寸阶梯与按压反馈"
             tag=".cds-btn-squish"
-            code={`<button className="h-8 px-3.5 rounded-lg bg-clay text-white text-sm font-medium active:scale-95">
+            code={`<button className="group relative isolate h-8 px-3.5 rounded-lg text-[var(--cds-on-primary)] text-sm font-medium">
+  {/* 背景层：只有它随按压缩放（按下 60ms ease-out → .975，松开 450ms var(--cds-btn-spring)） */}
+  <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
   Primary Button
 </button>`}
-            description="从 24px (XS: rounded-md 6px) 到 40px (LG: rounded-xl 12px) 的规范阶梯，支持 Primary、Secondary、Ghost 变体。"
+            description="24 / 28 / 32 / 40px 四档，圆角 6 / 7 / 8 / 10。主按钮是 #0b0b0b（深色 #fff），陶土 #c6613f 只给发送键。按压只缩放背景层 span.cds-btn-squish：按下 60ms ease-out 缩到 .975，松开 450ms --cds-btn-spring 回弹，文字和图标不动。"
           >
             <div className="space-y-4">
               {/* Sizes */}
               <div>
                 <div className="text-[11px] font-mono text-neutral-400 uppercase mb-2">尺寸与对应圆角阶梯</div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <button className="h-6 px-2 rounded-md bg-clay text-white text-xs font-medium hover:bg-clay-hover active:scale-95 transition-all">XS (24px, 6px)</button>
-                  <button className="h-7 px-2.5 rounded-lg bg-clay text-white text-xs font-medium hover:bg-clay-hover active:scale-95 transition-all">SM (28px, 8px)</button>
-                  <button className="h-8 px-3.5 rounded-lg bg-clay text-white text-sm font-medium hover:bg-clay-hover active:scale-95 transition-all">MD (32px, 8px)</button>
-                  <button className="h-10 px-5 rounded-xl bg-clay text-white text-sm font-medium hover:bg-clay-hover active:scale-95 transition-all">LG (40px, 12px)</button>
+                  {[
+                    ["h-6 px-2 rounded-md text-xs", "XS (24px, 6px)"],
+                    ["h-7 px-2.5 rounded-[7px] text-xs", "SM (28px, 7px)"],
+                    ["h-8 px-3.5 rounded-lg text-sm", "MD (32px, 8px)"],
+                    ["h-10 px-5 rounded-[10px] text-sm", "LG (40px, 10px)"],
+                  ].map(([cls, label]) => (
+                    <button key={label} className={`group relative isolate ${cls} text-[var(--cds-on-primary)] font-medium`}>
+                      <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
+                      {label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -2445,11 +2501,13 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
               <div>
                 <div className="text-[11px] font-mono text-neutral-400 uppercase mb-2">核心变体 (Variants) • 遵循无边框与表面微对比</div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <button className="h-8 px-3.5 rounded-lg bg-clay text-white text-sm font-medium hover:bg-clay-hover cds-shadow-sm active:scale-[0.98] transition-all flex items-center gap-1.5 border-0">
+                  <button className="group relative isolate h-8 px-3.5 rounded-lg text-[var(--cds-on-primary)] text-sm font-medium flex items-center gap-1.5">
+                    <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
                     <Icon name="spark" size="xs" />
-                    <span>Primary 陶土色</span>
+                    <span>Primary #0b0b0b</span>
                   </button>
-                  <button className="h-8 px-3.5 rounded-lg bg-[var(--cds-fill-secondary)] hover:bg-[var(--cds-fill-secondary-hover)] text-neutral-800 dark:text-neutral-200 text-sm font-medium active:scale-[0.98] transition-all border-0 cds-shadow-sm">
+                  <button className="group relative isolate h-8 px-3.5 rounded-lg text-neutral-800 dark:text-neutral-200 text-sm font-medium">
+                    <span className="cds-btn-squish bg-[var(--cds-fill-secondary)] group-hover:bg-[var(--cds-fill-secondary-hover)] cds-shadow-sm" />
                     Secondary 柔和填充 (0边框)
                   </button>
                   <button className="h-8 px-3 rounded-lg text-neutral-600 dark:text-neutral-400 text-sm font-medium cds-hover-ghost transition-all border-0">
@@ -2461,9 +2519,13 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                   <button className="size-8 rounded-lg flex items-center justify-center text-neutral-500 cds-hover-ghost transition-all border-0">
                     <Icon name="settings" size="sm" />
                   </button>
+                  <button title="Brand：只用于发送键" className="group relative isolate size-8 rounded-lg flex items-center justify-center text-white">
+                    <span className="cds-btn-squish bg-[var(--cds-fill-brand)] group-hover:bg-[var(--cds-fill-brand-hover)]" />
+                    <Icon name="arrowRight" size="sm" />
+                  </button>
                 </div>
                 <p className="text-[11px] text-neutral-400 mt-2 font-mono">
-                  💡 规范法则：Secondary 按钮默认采用 Surface-2 浅底填充，容器内部严禁使用带边框的按钮，防止视觉套娃。
+                  💡 规范法则：Secondary 按钮默认采用 Surface-2 浅底填充，容器内部严禁使用带边框的按钮，防止视觉套娃。最右的陶土方钮是 Brand 变体（#c6613f → hover #d97757），只用于发送。
                 </p>
               </div>
             </div>
@@ -2471,24 +2533,24 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
 
           {/* 4.2 分段选择器 Segmented Control */}
           <ComponentShowcase
-            title="分段滑动胶囊 (纯几何比例绝对对齐)"
+            title="分段控件 SegmentedControl (纯几何比例绝对对齐)"
             tag=".df-pills[data-segmented]"
-            code={`<div className="relative h-9 p-[2px] rounded-full bg-neutral-200/80">
-  <div style={{ left: "calc(2px + active * (100% - 4px) / total)" }} />
+            code={`<div className="relative h-7 p-px rounded-[7px] bg-neutral-200/80">   {/* sm 28 · r7；lg 40 · r10 */}
+  <div className="absolute inset-y-px rounded-[6px]" style={{ left: "calc(1px + active * (100% - 2px) / total)" }} />   {/* thumb 圆角 = 控件 − 1 */}
 </div>`}
-            description="全圆角 999px 轨道、2px 内边距、纯几何数学公式绝对对齐滑块，支持容器查询 @container (max-width: 254px) 折叠。"
+            description="圆角跟随控件尺寸（sm 28px · 7px；lg 40px · 10px），不是 999px 胶囊；track 内边距 1px，thumb 圆角 = 控件圆角 − 1（6 / 9）。滑块用纯几何公式绝对定位，支持容器查询 @container (max-width: 254px) 折叠。"
           >
             <div className="py-2 space-y-4">
               <div
-                className="relative h-9 p-[2px] rounded-full bg-neutral-200/80 dark:bg-neutral-800/90 flex items-stretch select-none"
+                className="relative h-7 p-px rounded-[7px] bg-neutral-200/80 dark:bg-neutral-800/90 flex items-stretch select-none"
                 style={{ containerType: "inline-size" }}
               >
-                {/* Absolute Geometric Sliding Indicator */}
+                {/* Absolute Geometric Sliding Indicator：thumb 圆角 6 = 控件 7 − 1 */}
                 <div
-                  className="absolute top-[2px] bottom-[2px] rounded-full bg-white dark:bg-neutral-700 shadow-sm transition-all duration-150 ease-[cubic-bezier(.32,.72,0,1)] pointer-events-none"
+                  className="absolute top-px bottom-px rounded-[6px] bg-white dark:bg-neutral-700 shadow-sm transition-all duration-150 ease-[cubic-bezier(.32,.72,0,1)] pointer-events-none"
                   style={{
-                    left: `calc(2px + ${segmentedIndex} * (100% - 4px) / ${segmentedTabs.length})`,
-                    width: `calc((100% - 4px) / ${segmentedTabs.length})`,
+                    left: `calc(1px + ${segmentedIndex} * (100% - 2px) / ${segmentedTabs.length})`,
+                    width: `calc((100% - 2px) / ${segmentedTabs.length})`,
                     boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.06), 0 1px 2px 0 rgba(0,0,0,0.08)"
                   }}
                 />
@@ -2497,7 +2559,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 隔离垫片 */
                   <button
                     key={tab}
                     onClick={() => setSegmentedIndex(idx)}
-                    className={`relative z-10 flex-1 h-full flex items-center justify-center text-xs font-[470] rounded-full transition-colors truncate ${
+                    className={`relative z-10 flex-1 h-full flex items-center justify-center text-xs font-[470] rounded-[5px] transition-colors truncate ${
                       segmentedIndex === idx
                         ? "text-neutral-900 dark:text-white font-semibold"
                         : "text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300"
@@ -2598,7 +2660,7 @@ export const irradiationCompensation = {
       <div>React • v1</div>
     </div>
   </div>
-  <button className="bg-clay text-white px-3 py-1 rounded-lg">Open</button>
+  <button className="bg-[var(--cds-fill-primary)] text-[var(--cds-on-primary)] px-3 py-1 rounded-lg">Open</button>
 </div>`}
             description="当模型生成网页、图表或代码时，在聊天流中呈现的可交互 Artifact 卡片（rounded-xl 12px）。"
           >
@@ -2621,7 +2683,8 @@ export const irradiationCompensation = {
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
-                  <button className="h-8 px-3 rounded-lg bg-clay text-white text-xs font-medium hover:bg-clay-hover shadow-xs flex items-center gap-1.5 transition-all">
+                  <button className="group relative isolate h-8 px-3 rounded-lg text-[var(--cds-on-primary)] text-xs font-medium flex items-center gap-1.5">
+                    <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
                     <Icon name="play" size="xs" />
                     <span>Open in Artifacts</span>
                   </button>
@@ -2690,8 +2753,9 @@ export const irradiationCompensation = {
                       </button>
                       <button
                         onClick={() => setShowModal(false)}
-                        className="h-8 px-3.5 rounded-lg bg-red-600 text-white text-xs font-medium hover:bg-red-700 cds-shadow-sm active:scale-[0.98] transition-all"
+                        className="group relative isolate h-8 px-3.5 rounded-lg text-white text-xs font-medium"
                       >
+                        <span className="cds-btn-squish bg-red-600 group-hover:bg-red-700 cds-shadow-sm" />
                         Delete Forever
                       </button>
                     </div>
@@ -2708,7 +2772,7 @@ export const irradiationCompensation = {
             code={`<div className="w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1.5">
   <div className="px-2.5 py-1.5 rounded-lg text-xs cds-hover-ghost">Duplicate</div>
 </div>`}
-            description="带有 --cds-shadow-popover 真实双环（深色内高光/浅色外轮廓）深度弥散投影的浮动弹出菜单，支持键盘快捷键勋章。"
+            description="带有 --cds-shadow-popover 真实双环（深色内高光/浅色外轮廓）深度弥散投影的浮动弹出菜单，支持键盘快捷键勋章。菜单圆角 12px = 控件圆角 8 + --cds-menu-gutter 4，与 8px 菜单项同心（claude.ai 实测）。"
           >
             <div className="w-full max-w-xs mx-auto rounded-xl bg-white dark:bg-[#222220] p-1.5 cds-shadow-popover space-y-0.5">
               {[
@@ -2743,8 +2807,9 @@ export const irradiationCompensation = {
             <div className="flex flex-col items-center justify-center py-4 space-y-3">
               <button
                 onClick={() => { setShowToast(true); setTimeout(() => setShowToast(false), 3000); }}
-                className="h-8 px-3 rounded-lg bg-clay text-white text-xs font-medium hover:bg-clay-hover shadow-xs"
+                className="group relative isolate h-8 px-3 rounded-lg text-[var(--cds-on-primary)] text-xs font-medium"
               >
+                <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
                 触发 Toast 提示
               </button>
 
@@ -2870,15 +2935,16 @@ export const irradiationCompensation = {
           <ComponentShowcase
             title="四大物理弹簧预设同屏竞速实验室 (Spring Physics)"
             tag="AST-Extracted Presets"
-            description="点击一键发射，观察 600/30 (Button 高频)、320/28 (Card 顺滑)、380/18 (Bouncy 超调) 与 1200/80 (Drag 极速咬合) 跑向 100% 靶心的差异。"
+            description="点击一键发射，观察 600/30 (Button 高频)、320/28 (Card 顺滑)、380/18 (Bouncy 超调) 与 1200/80 (Drag 极速咬合) 跑向 100% 靶心的差异。注：claude.ai 按钮按压实测不走 JS 弹簧，而是只缩放背景层——按下 60ms ease-out 到 .975，松开 450ms --cds-btn-spring（linear()，峰值 1.0915）回弹，见 04 章。"
           >
             <div className="space-y-4">
               <div className="flex justify-end">
                 <button
                   onClick={runSpringRace}
                   disabled={isRacing}
-                  className="h-8 px-4 rounded-lg bg-clay text-white text-xs font-medium hover:bg-clay-hover shadow-xs flex items-center gap-1.5 disabled:opacity-50"
+                  className="group relative isolate h-8 px-4 rounded-lg text-[var(--cds-on-primary)] text-xs font-medium flex items-center gap-1.5 disabled:opacity-50"
                 >
+                  <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
                   <Icon name="spark" size="xs" />
                   <span>▶ 一键同屏发射物理赛跑</span>
                 </button>
@@ -2932,7 +2998,7 @@ export const irradiationCompensation = {
           desc: "绝大多数展示型内容、文本流、以及嵌套在已有带边框容器内部的子操作，必须坚决去除边框。",
           items: [
             { name: "AI 助手主回复正文", rule: "直接浮于 Surface 0 主画布上，严禁外包任何带有边框的卡片。" },
-            { name: "用户提问气泡 (User Bubble)", rule: "仅靠底色微对比 (浅色: #f0f4f8 / 深色: #20201e) 与 18px 大圆角聚合，0 边框。" },
+            { name: "用户提问气泡 (User Bubble)", rule: "仅靠底色微对比 (浅色: #f0f4f8 / 深色: #20201f) 与 12px 圆角（= 控件 8 + 4）聚合，0 边框。" },
             { name: "容器内部的操作按钮", rule: "Composer、代码块、Modal 内部按钮一律降级为 Ghost (常态完全透明，悬停微背景)。" },
             { name: "侧边栏与导航列表项", rule: "依靠垂直排版节奏与 Hover 背景微差区分，绝不给每个条目画框。" },
             { name: "底部反馈工具条 (Reaction)", rule: "点赞、点踩、复制等图标按钮纯透明悬停，严禁封装在独立带边框胶囊里。" },
@@ -2946,7 +3012,7 @@ export const irradiationCompensation = {
           badgeColor: "bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400",
           desc: "自成一体、代表独立沙盒、实体化文件或跨越 Z 轴层级的浮动实体，才具备闭合边框的合法授权。",
           items: [
-            { name: "常驻聊天输入框 (Composer)", rule: "全屏视线唯一的闭合交互控制台，作为用户输入的落脚锚点 (rounded-[20px] border)。" },
+            { name: "常驻聊天输入框 (Composer)", rule: "全屏视线唯一的闭合交互控制台，作为用户输入的落脚锚点 (rounded-composer 14px，compact 12px)。" },
             { name: "语法高亮代码块 (Code Sandbox)", rule: "独立的开发语言隔离沙盒，带有语言角标与外框 (rounded-xl border)。" },
             { name: "文件附件卡片 (.cds-attachment)", rule: "代表一个被实体化上传的文件对象，具备 10px 圆角与外边框。" },
             { name: "Artifact 独立产物卡片", rule: "代表外联生成的独立文档或应用，具备独立卡片边框与版本徽章。" },
@@ -3136,7 +3202,7 @@ export const irradiationCompensation = {
                   </div>
 
                   {/* Composer: The ONLY single closed border! */}
-                  <div className="p-2.5 rounded-[16px] border border-neutral-200/90 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xs space-y-2">
+                  <div className="p-2.5 rounded-composer border border-neutral-200/90 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xs space-y-2">
                     <div className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">
                       ✨ Composer (全视线唯一的闭合边框，交互聚合锚点)
                     </div>
@@ -3151,8 +3217,9 @@ export const irradiationCompensation = {
                         <Icon name="spark" size="xs" />
                         <span>+ Add content (Ghost 0边框)</span>
                       </button>
-                      {/* Solid Fill button */}
-                      <button className="h-6 px-3 text-[11px] rounded-lg bg-clay text-white font-medium hover:bg-clay-hover shadow-xs transition-colors">
+                      {/* Solid Fill button：发送键是唯一的陶土 brand 按钮，xs 24px · 圆角 6 */}
+                      <button className="group relative isolate h-6 px-3 text-[11px] rounded-md text-white font-medium">
+                        <span className="cds-btn-squish bg-[var(--cds-fill-brand)] group-hover:bg-[var(--cds-fill-brand-hover)]" />
                         Send (Solid Fill 0边框)
                       </button>
                     </div>
@@ -3259,16 +3326,18 @@ export const irradiationCompensation = {
     // 09. SECTION: Claude Desktop 2.0 (v2.37337.1) 工业级升级实验室
     // ==========================================================================
     function Desktop20LabSection() {
-      // 1. ModelSelectorEffort & Quota
-      const [effortLevel, setEffortLevel] = useState("high");
-      const [isEffortOpen, setIsEffortOpen] = useState(false);
+      // 1. ModelSelectorEffort & Quota（claude.ai 实测：努力程度收在模型菜单的子菜单里，默认推荐「中等」）
+      const [effortLevel, setEffortLevel] = useState("medium");
+      const [model, setModel] = useState("Sonnet 3.7");
+      const [isEffortOpen, setIsEffortOpen] = useState(false); // 模型菜单
+      const [isEffortSubOpen, setIsEffortSubOpen] = useState(false); // 努力程度子菜单
       const [isEnterpriseLocked, setIsEnterpriseLocked] = useState(false);
       const [quotaRemaining, setQuotaRemaining] = useState(82);
 
       const effortMeta = {
         low: { name: "Low", desc: "极速回复日常轻量简短提问，最少耗费 Token" },
-        medium: { name: "Medium", desc: "日常常规对话与通用轻量代码辅助" },
-        high: { name: "High", desc: "日常生产基准档位，深度平衡与思考", recommended: true },
+        medium: { name: "Medium", desc: "默认档位：日常对话与常规代码，速度与深度平衡", recommended: true },
+        high: { name: "High", desc: "复杂推理与多步骤任务，更慢、用量更多" },
         xhigh: { name: "Extra", desc: "高难度重构、多文件分析与系统架构设计" },
         max: { name: "Max", desc: "超难学术算法与前沿数理难题", warning: "极度消耗 Token 与推理时延，请谨慎用于最复杂场景" },
       };
@@ -3298,7 +3367,7 @@ export const irradiationCompensation = {
       const chips = ["AST-Engine", "Electron-Fuses", "View-Transitions", "Scroll-Timeline", "Offline-Bundle", "Color-Mix-0.5px"];
 
       // 4. Sidebar 2.0 Workstation
-      const [densityMode, setDensityMode] = useState("compact"); // compact (28px) | comfortable (36px)
+      const [densityMode, setDensityMode] = useState("compact"); // compact (--df-row-h 26px · 圆角 6) | comfortable (32px · 圆角 8)
       const [activeSourceGroup, setActiveSourceGroup] = useState("all");
       const [pinnedChapters, setPinnedChapters] = useState({ s1: true });
 
@@ -3336,7 +3405,7 @@ export const irradiationCompensation = {
                   </span>
                 </div>
                 <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 max-w-2xl leading-relaxed">
-                  从 1.x 的「轻量对话外壳」全面升格为「企业级多沙箱执行工作站」。包含 5 阶推理调节器、平底下颌工具栏、触控负边距补偿、离线消息事务暂存、纯 CSS 1.32x 过冲弹簧、28px 高密工作台与多窗口弹射。
+                  从 1.x 的「轻量对话外壳」全面升格为「企业级多沙箱执行工作站」。包含 5 阶推理调节器（收在模型菜单的子菜单里）、卡片下方的 Chin 工具行、触控负边距补偿、离线消息事务暂存、纯 CSS 1.32x 过冲弹簧、26 / 32px 双密度工作台与多窗口弹射。
                 </p>
               </div>
             </div>
@@ -3353,89 +3422,25 @@ export const irradiationCompensation = {
             <ComponentShowcase
               title="5 阶推理算力调节器 (ModelSelectorEffort)"
               tag="data-cds='ModelSelectorEffort'"
-              code={`<ModelSelectorEffort
-  currentEffort="${effortLevel}"
-  onEffortChange={(lvl) => setEffortLevel(lvl)}
-  config={{
-    effortLevels: ['low', 'medium', 'high', 'xhigh', 'max'],
-    recommended: 'high',
-    disallowThinkingDisabled: ${isEnterpriseLocked}
-  }}
-/>`}
-              description="全新 5 阶思考推理档位调节器：Low/Medium/High/Extra/Max。支持企业策略锁定与 Max 超额 Token 警告防线。"
+              code={`<ModelSelector model="${model}" effort="${effortLevel}">   {/* 按钮：模型名 + 当前档位（muted）+ ▾ */}
+  <Menu.RadioItem>Sonnet 3.7</Menu.RadioItem>
+  <Menu.RadioItem>Opus 4</Menu.RadioItem>
+  <Menu.Separator />
+  <Menu.SubmenuTrigger>Effort 努力程度 ›</Menu.SubmenuTrigger>   {/* side="inline-start" */}
+  <ModelSelectorEffort
+    currentEffort="${effortLevel}"
+    onEffortChange={(lvl) => setEffortLevel(lvl)}
+    config={{
+      effortLevels: ['low', 'medium', 'high', 'xhigh', 'max'],
+      recommended: 'medium',
+      disallowThinkingDisabled: ${isEnterpriseLocked}
+    }}
+  />
+</ModelSelector>`}
+              description="5 阶思考档位 Low / Medium / High / Extra / Max，默认推荐 Medium（中等）。它不是独立控件：收在模型菜单的「努力程度」子菜单里（向 inline-start 即左侧展开），模型按钮同时显示模型名与当前档位。支持企业策略锁定与 Max 超额 Token 警告防线。"
             >
-              <div className="space-y-4">
+              <div className="space-y-2">
                 <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-[#fcfcfb] dark:bg-[#151515]">
-                  {/* Model & Effort Capsule */}
-                  <div className="relative inline-block">
-                    <button
-                      type="button"
-                      disabled={isEnterpriseLocked}
-                      onClick={() => setIsEffortOpen(!isEffortOpen)}
-                      className={"inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-all shadow-2xs " + (
-                        isEnterpriseLocked
-                          ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-400 border-neutral-300 dark:border-neutral-700 cursor-not-allowed"
-                          : "bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border-neutral-200 dark:border-neutral-700 hover:border-clay/50 hover:bg-neutral-50 dark:hover:bg-neutral-700"
-                      )}
-                    >
-                      <span className="size-2 rounded-full bg-clay animate-pulse" />
-                      <span>Thinking: <strong className="font-semibold text-neutral-900 dark:text-white">{effortMeta[effortLevel].name}</strong></span>
-                      {effortLevel === "high" && (
-                        <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-neutral-100 dark:bg-neutral-700 text-neutral-500">
-                          Default
-                        </span>
-                      )}
-                      {isEnterpriseLocked && (
-                        <Icon name="lock" size="xs" className="text-amber-500 ml-0.5" />
-                      )}
-                      <Icon name="chevronDown" size="xs" className="text-neutral-400" />
-                    </button>
-
-                    {/* Dropdown Panel */}
-                    {isEffortOpen && (
-                      <div className="absolute top-full left-0 mt-2 w-80 rounded-xl shadow-xl bg-white dark:bg-[#1c1c1b] border border-neutral-200 dark:border-neutral-700 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-                        <div className="px-3 py-2 border-b border-neutral-100 dark:border-neutral-800 mb-1">
-                          <p className="text-xs font-bold text-neutral-900 dark:text-neutral-100">Thinking Effort 思考算力</p>
-                          <p className="text-[11px] text-neutral-500 leading-tight mt-0.5">
-                            更高档位带来更严谨详尽的推导，但耗时更长且更快消耗用量配额。
-                          </p>
-                        </div>
-                        <div className="space-y-1">
-                          {Object.entries(effortMeta).map(([lvl, meta]) => (
-                            <button
-                              key={lvl}
-                              type="button"
-                              onClick={() => {
-                                setEffortLevel(lvl);
-                                setIsEffortOpen(false);
-                              }}
-                              className={"w-full text-left px-3 py-2 rounded-lg text-xs transition-all flex flex-col gap-0.5 " + (
-                                effortLevel === lvl
-                                  ? "bg-clay/10 text-clay font-medium"
-                                  : "hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300"
-                              )}
-                            >
-                              <div className="flex items-center justify-between w-full">
-                                <span className="font-semibold">{meta.name}</span>
-                                {meta.recommended && (
-                                  <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-clay/20 text-clay font-bold">
-                                    Recommended
-                                  </span>
-                                )}
-                              </div>
-                              <span className="text-[11px] text-neutral-400 font-normal">{meta.desc}</span>
-                              {meta.warning && lvl === "max" && (
-                                <span className="text-[10px] text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 p-1.5 rounded mt-1 border border-amber-200 dark:border-amber-900/60 leading-tight">
-                                  ⚠️ {meta.warning}
-                                </span>
-                              )}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
                   {/* Enterprise Lock Toggle Switch */}
                   <label className="flex items-center gap-2 cursor-pointer text-xs text-neutral-600 dark:text-neutral-400 select-none">
                     <input
@@ -3444,20 +3449,108 @@ export const irradiationCompensation = {
                       onChange={(e) => {
                         setIsEnterpriseLocked(e.target.checked);
                         if (e.target.checked) {
-                          setEffortLevel("high");
+                          setEffortLevel("medium");
                           setIsEffortOpen(false);
+                          setIsEffortSubOpen(false);
                         }
                       }}
-                      className="size-3.5 rounded text-clay focus:ring-clay/40"
+                      className="size-3.5 rounded focus-visible:shadow-focus-glow"
                     />
                     <span>模拟企业托管锁定 (Enterprise Policy)</span>
                   </label>
+
+                  {/* ModelSelector：模型名 + 努力程度（muted）+ ▾ */}
+                  <button
+                    type="button"
+                    disabled={isEnterpriseLocked}
+                    aria-haspopup="menu"
+                    aria-expanded={isEffortOpen}
+                    onClick={() => { setIsEffortOpen(!isEffortOpen); setIsEffortSubOpen(false); }}
+                    className={"inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg text-xs font-medium " + (
+                      isEnterpriseLocked ? "text-neutral-400 cursor-not-allowed" : "text-neutral-700 dark:text-neutral-300 cds-hover-ghost"
+                    )}
+                  >
+                    <span>{model}</span>
+                    <span className="font-normal text-neutral-400">{effortMeta[effortLevel].name}</span>
+                    {isEnterpriseLocked && <Icon name="lock" size="xs" className="text-amber-500" />}
+                    <Icon name="chevronDown" size="xs" className="text-neutral-400" />
+                  </button>
                 </div>
+
+                {/* 模型菜单 align end；努力程度子菜单向 inline-start（左侧）展开 */}
+                {isEffortOpen && (
+                  <div className="flex flex-wrap justify-end items-start gap-1">
+                    {isEffortSubOpen && (
+                      <div role="menu" aria-label="努力程度" className="w-80 rounded-xl bg-white dark:bg-[#1c1c1b] cds-shadow-popover p-1">
+                        <p className="px-2.5 py-1 text-[11px] text-neutral-500 leading-snug">
+                          更高档位带来更严谨详尽的推导，但耗时更长且更快消耗用量配额。
+                        </p>
+                        {Object.entries(effortMeta).map(([lvl, meta]) => (
+                          <button
+                            key={lvl}
+                            type="button"
+                            role="menuitemradio"
+                            aria-checked={effortLevel === lvl}
+                            onClick={() => {
+                              setEffortLevel(lvl);
+                              setIsEffortOpen(false);
+                              setIsEffortSubOpen(false);
+                            }}
+                            className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex flex-col gap-0.5 cds-hover-ghost text-neutral-700 dark:text-neutral-300"
+                          >
+                            <div className="flex items-center gap-1.5 w-full">
+                              <span className="font-semibold">{meta.name}</span>
+                              {meta.recommended && (
+                                <span className="h-4 px-1 inline-flex items-center rounded text-[10px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500">
+                                  推荐
+                                </span>
+                              )}
+                              {effortLevel === lvl && <Icon name="check" size="xs" className="ml-auto text-[color:var(--cds-fill-accent)]" />}
+                            </div>
+                            <span className="text-[11px] text-neutral-400 font-normal">{meta.desc}</span>
+                            {meta.warning && lvl === "max" && (
+                              <span className="text-[10px] text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 p-1.5 rounded mt-1 border border-amber-200 dark:border-amber-900/60 leading-tight">
+                                ⚠️ {meta.warning}
+                              </span>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    <div role="menu" aria-label="模型" className="w-56 rounded-xl bg-white dark:bg-[#1c1c1b] cds-shadow-popover p-1">
+                      {["Sonnet 3.7", "Opus 4"].map((m) => (
+                        <button
+                          key={m}
+                          type="button"
+                          role="menuitemradio"
+                          aria-checked={model === m}
+                          onClick={() => { setModel(m); setIsEffortOpen(false); }}
+                          className="w-full h-8 px-2.5 rounded-lg text-left text-xs flex items-center justify-between cds-hover-ghost text-neutral-700 dark:text-neutral-300"
+                        >
+                          <span>{m}</span>
+                          {model === m && <Icon name="check" size="xs" className="text-[color:var(--cds-fill-accent)]" />}
+                        </button>
+                      ))}
+                      <div className="h-px mx-2.5 my-1 bg-neutral-200 dark:bg-neutral-800" />
+                      <button
+                        type="button"
+                        aria-haspopup="menu"
+                        aria-expanded={isEffortSubOpen}
+                        onClick={() => setIsEffortSubOpen(!isEffortSubOpen)}
+                        className={"w-full h-8 px-2.5 rounded-lg text-left text-xs flex items-center gap-2 cds-hover-ghost text-neutral-700 dark:text-neutral-300 " + (isEffortSubOpen ? "bg-neutral-100 dark:bg-neutral-800" : "")}
+                      >
+                        <span className="flex-1">Effort 努力程度</span>
+                        <span className="text-neutral-400">{effortMeta[effortLevel].name}</span>
+                        <Icon name="chevronDown" size="xs" className="-rotate-90 text-neutral-400" />
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 {isEnterpriseLocked && (
                   <div className="px-3 py-2 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-800 dark:text-amber-300 flex items-center gap-2">
                     <Icon name="lock" size="xs" className="text-amber-600" />
-                    <span>策略锁定：Thinking effort 已由工作区托管配置硬锁定为 <code>high</code> 档位。</span>
+                    <span>策略锁定：努力程度已由工作区托管配置硬锁定为 <code>medium</code> 档位。</span>
                   </div>
                 )}
               </div>
@@ -3534,31 +3627,35 @@ export const irradiationCompensation = {
             </ComponentShowcase>
           </div>
 
-          {/* 9.2 平底输入终端与离线消息重试机制 */}
+          {/* 9.2 输入框、卡片外的 Chin 与离线消息重试机制 */}
           <ComponentShowcase
-            title="平底输入终端与下颌触控补偿 (ChatComposerChin)"
+            title="输入框与卡片外的 Chin 工具行 (ChatComposerChin)"
             tag="data-cds='ChatComposerChin' & 'ChatComposerQueuedMessages'"
-            code={`<div className="rounded-xl border bg-white overflow-hidden">
-  {/* 离线暂存失败横幅 (IndexedDB 状态机) */}
-  {offlineQueuedCount > 0 && (
-    <div data-cds="ChatComposerQueuedMessages" className="bg-amber-50 px-3 py-2 text-xs flex justify-between">
-      <span>{offlineQueuedCount} message(s) failed to send. Staged in local storage.</span>
-      <button onClick={retryQueue}>Retry Now</button>
-    </div>
-  )}
-
-  <textarea className="w-full resize-none p-3 text-sm" placeholder="Reply to Claude..." />
-
-  {/* 下颌操作行 (自带 --cmp-chin-touch-grow: 4px 触控补偿) */}
-  <div data-touch-size="true" className="flex items-center justify-between px-3 py-1.5 border-t">
-    <div className="flex items-center gap-2">
-      <ModelSelectorEffort ... />
+            code={`<fieldset className="flex flex-col">
+  <div data-cds="ChatComposer" className="rounded-composer border bg-white overflow-hidden">
+    {/* 离线暂存失败横幅 (IndexedDB 状态机) */}
+    {offlineQueuedCount > 0 && (
+      <div data-cds="ChatComposerQueuedMessages" className="bg-amber-50 px-3 py-2 text-xs flex justify-between">
+        <span>{offlineQueuedCount} message(s) failed to send. Staged in local storage.</span>
+        <button onClick={retryQueue}>Retry Now</button>
+      </div>
+    )}
+    <textarea className="w-full resize-none p-3 text-sm" placeholder="Reply to Claude..." />
+    <div className="flex justify-between px-2 pb-2">
       <button>+ Attach</button>
+      <button className="size-8 rounded-lg bg-[var(--cds-fill-brand)] text-white">↑</button>   {/* brand 只用于发送 */}
     </div>
-    <button className="size-7 rounded-full bg-neutral-900 text-white">↑</button>
   </div>
-</div>`}
-            description="2.0 将 1.0 的 20px 大圆角重构为 12px 扁平工业圆角，并引入独立下颌工具行 (--cmp-chin-row-h: 28px)。同时内建 IndexedDB 事务级离线消息队列横幅。"
+
+  {/* Chin：在卡片外、卡片下方；data-size=xs → 行内按钮 24px */}
+  <div data-cds="ChatComposerChin" data-size="xs" className="-mx-2 pt-2">
+    <div className="flex items-center justify-between h-6 px-2">
+      <span>⌘ + Enter 发送</span>
+      <span data-touch-size><ModelSelector /></span>   {/* 触控：长到 32px，margin-block: calc(var(--cmp-chin-touch-grow) * -1) */}
+    </div>
+  </div>
+</fieldset>`}
+            description="输入框圆角随密度：comfortable .875rem（14px）/ compact .75rem（12px）。Chin 不在卡片里，而是贴在卡片外、卡片下方另起一行（-mx-2 · pt-2 · data-size=xs，行高 24）；触控设备上 Chin 里的按钮长到 32px，再用 --cmp-chin-touch-grow 等量负 margin 抵消，行高不变。同时内建 IndexedDB 事务级离线消息队列横幅。"
           >
             <div className="space-y-3">
               {/* Controls bar above showcase */}
@@ -3582,7 +3679,7 @@ export const irradiationCompensation = {
                   </button>
                 </div>
                 <span className="font-mono text-neutral-400 text-[11px]">
-                  圆角阶梯: --radius-xl (12px) 扁平底框
+                  --cds-radius-composer：14px（compact 12px）
                 </span>
               </div>
 
@@ -3594,88 +3691,79 @@ export const irradiationCompensation = {
                 </div>
               )}
 
-              {/* The 2.0 Composer Window */}
-              <div className="rounded-xl border border-neutral-200/90 dark:border-neutral-800 bg-white dark:bg-[#1a1a19] shadow-sm overflow-hidden">
-                {/* Offline Message Queue Banner */}
-                {offlineQueuedCount > 0 && (
-                  <div
-                    data-cds="ChatComposerQueuedMessages"
-                    className="px-3 py-2 bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200/80 dark:border-amber-900/60 flex items-center justify-between gap-3 text-xs text-amber-900 dark:text-amber-200 animate-in slide-in-from-top-2"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span className="size-2 rounded-full bg-amber-500 animate-ping shrink-0" />
-                      <span>
-                        <strong>{offlineQueuedCount} 条消息离线暂存中</strong> • 已由 IndexedDB 事务落盘保护，连接恢复后自动重放
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      disabled={isRetrying}
-                      onClick={handleRetryQueue}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-amber-600 hover:bg-amber-700 text-white font-medium text-[11px] shadow-2xs transition-colors shrink-0"
+              {/* The 2.0 Composer Window（卡片）+ 卡片外的 Chin */}
+              <div>
+                <div className="rounded-composer border border-neutral-200/90 dark:border-neutral-800 bg-white dark:bg-[#1a1a19] shadow-sm overflow-hidden">
+                  {/* Offline Message Queue Banner */}
+                  {offlineQueuedCount > 0 && (
+                    <div
+                      data-cds="ChatComposerQueuedMessages"
+                      className="px-3 py-2 bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200/80 dark:border-amber-900/60 flex items-center justify-between gap-3 text-xs text-amber-900 dark:text-amber-200 animate-in slide-in-from-top-2"
                     >
-                      <Icon name="refresh" size="xs" className={isRetrying ? "animate-spin" : ""} />
-                      <span>{isRetrying ? "正在重试..." : "立即重试 (Retry Now)"}</span>
-                    </button>
+                      <div className="flex items-center gap-2">
+                        <span className="size-2 rounded-full bg-amber-500 animate-ping shrink-0" />
+                        <span>
+                          <strong>{offlineQueuedCount} 条消息离线暂存中</strong> • 已由 IndexedDB 事务落盘保护，连接恢复后自动重放
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        disabled={isRetrying}
+                        onClick={handleRetryQueue}
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-amber-600 hover:bg-amber-700 text-white font-medium text-[11px] shadow-2xs transition-colors shrink-0"
+                      >
+                        <Icon name="refresh" size="xs" className={isRetrying ? "animate-spin" : ""} />
+                        <span>{isRetrying ? "正在重试..." : "立即重试 (Retry Now)"}</span>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Input Textarea Area */}
+                  <div className="px-3 pt-3 pb-1">
+                    <textarea
+                      rows={2}
+                      value={composerInput}
+                      onChange={(e) => setComposerInput(e.target.value)}
+                      placeholder="输入消息或 ⌘K 唤起指令..."
+                      className="w-full bg-transparent resize-none border-none outline-hidden text-sm text-neutral-800 dark:text-neutral-200 placeholder-neutral-400 font-sans"
+                    />
                   </div>
-                )}
 
-                {/* Input Textarea Area */}
-                <div className="p-3">
-                  <textarea
-                    rows={2}
-                    value={composerInput}
-                    onChange={(e) => setComposerInput(e.target.value)}
-                    placeholder="输入消息或 ⌘K 唤起指令..."
-                    className="w-full bg-transparent resize-none border-none outline-hidden text-sm text-neutral-800 dark:text-neutral-200 placeholder-neutral-400 font-sans"
-                  />
-                </div>
-
-                {/* 2.0 Flat Chin Toolbar */}
-                <div
-                  className={"relative px-3 py-1.5 border-t border-neutral-100 dark:border-neutral-800/80 bg-neutral-50/60 dark:bg-[#151515] flex items-center justify-between " + (
-                    touchGrowVisible ? "ring-2 ring-cyan-400 ring-offset-2 ring-offset-neutral-100 dark:ring-offset-neutral-900" : ""
-                  )}
-                  style={{
-                    minHeight: "34px",
-                  }}
-                >
-                  {/* Visual touch expansion overlay */}
-                  {touchGrowVisible && (
-                    <div className="absolute -inset-1 border border-cyan-400 border-dashed rounded-md pointer-events-none flex items-center justify-center">
-                      <span className="bg-cyan-500 text-white text-[9px] font-mono px-1 rounded absolute -top-2 left-2">
-                        --cmp-chin-touch-grow: 4px Hitbox
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="flex items-center gap-2">
-                    {/* Model Pill */}
-                    <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-white dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300 font-medium shadow-2xs">
-                      <Icon name="spark" size="xs" className="text-clay" />
-                      <span>Sonnet 3.7</span>
-                    </div>
-
-                    {/* Thinking Effort Pill */}
-                    <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-clay/10 text-clay text-xs font-semibold">
-                      <span className="size-1.5 rounded-full bg-clay animate-pulse" />
-                      <span>Effort: {effortMeta[effortLevel].name}</span>
-                    </div>
-
-                    <button className="px-2 py-0.5 rounded text-xs text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:bg-neutral-200/50 transition-colors">
+                  {/* 卡片内操作行：左「+」，右发送（brand，32×32 · 圆角 8） */}
+                  <div className="flex items-center justify-between px-2 pb-2">
+                    <button className="h-8 px-2.5 rounded-lg text-xs text-neutral-500 cds-hover-ghost">
                       + Attach
                     </button>
+                    <button className="group relative isolate size-8 rounded-lg flex items-center justify-center text-white">
+                      <span className="cds-btn-squish bg-[var(--cds-fill-brand)] group-hover:bg-[var(--cds-fill-brand-hover)]" />
+                      <Icon name="arrowRight" size="xs" />
+                    </button>
                   </div>
+                </div>
 
-                  <div className="flex items-center gap-3">
+                {/* Chin：在卡片外、卡片下方（-mx-2 · pt-2 · data-size=xs，行高 24），不带底色与边框 */}
+                <div className="-mx-2 pt-2">
+                  <div className="flex items-center justify-between h-6 px-2">
                     <span className="text-[11px] font-mono text-neutral-400 hidden sm:inline">
                       ⌘ + Enter 发送
                     </span>
-                    <button
-                      className="size-7 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs"
-                    >
-                      <Icon name="arrowRight" size="xs" />
-                    </button>
+                    {/* ModelSelector（data-touch-size）：触控时长到 32px，再用 -4px margin 抵消，行高不变 */}
+                    <span className="relative ml-auto">
+                      <button
+                        className={"inline-flex items-center gap-1 px-2 rounded-md text-xs text-neutral-600 dark:text-neutral-300 cds-hover-ghost " + (
+                          touchGrowVisible ? "h-8 -my-1 outline-dashed outline-1 outline-cyan-400" : "h-6"
+                        )}
+                      >
+                        <span>{model}</span>
+                        <span className="text-neutral-400">{effortMeta[effortLevel].name}</span>
+                        <Icon name="chevronDown" size="xs" className="text-neutral-400" />
+                      </button>
+                      {touchGrowVisible && (
+                        <span className="absolute -top-5 right-0 whitespace-nowrap bg-cyan-500 text-white text-[9px] font-mono px-1 rounded pointer-events-none">
+                          --cmp-chin-touch-grow: 4px（24 → 32px，行高不变）
+                        </span>
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -3730,7 +3818,7 @@ export const irradiationCompensation = {
                     setTimeout(() => setPillPopped(false), 240);
                   }}
                   className={"px-4 py-2 rounded-full bg-clay text-white text-xs font-semibold shadow-md transition-transform " + (
-                    pillPopped ? "scale-125" : "scale-100 hover:scale-105 active:scale-95"
+                    pillPopped ? "scale-125" : "scale-100"
                   )}
                   style={{
                     transitionTimingFunction: "cubic-bezier(0.34, 1.32, 0.64, 1)",
@@ -3844,7 +3932,7 @@ export const irradiationCompensation = {
           {/* 9.4 侧边栏 2.0 高密工作台与拓扑分类 */}
           <ComponentShowcase
             title="侧边栏 2.0 高密工作台 (Sidebar 2.0 Workstation)"
-            tag="data-density='compact' (28px row height)"
+            tag="data-density · --df-row-h 26 / 32px"
             code={`<div data-density="${densityMode}" className="space-y-1">
   {/* 四态物理源分组折叠 */}
   <SessionGroup source="local" count={3} />
@@ -3852,7 +3940,7 @@ export const irradiationCompensation = {
   <SessionGroup source="remote" count={1} />
   <SessionGroup source="cowork" count={2} />
 </div>`}
-            description="2.0 引入紧凑/舒适双模密度开关（28px vs 36px），会话流按物理环境源分类，原生呈现 Git 分支与 PR 状态胶囊，并支持章节图钉标记。"
+            description="2.0 引入紧凑/舒适双模密度开关：行高 --df-row-h 26px vs 32px，行圆角 --df-radius-pill 6px vs 8px（claude.ai 实测；桌面舒适档 30px，Code 列表紧凑档另有 28 / 26px）。会话流按物理环境源分类，原生呈现 Git 分支与 PR 状态胶囊，并支持章节图钉标记。"
           >
             <div className="space-y-3">
               {/* Toolbar */}
@@ -3865,13 +3953,13 @@ export const irradiationCompensation = {
                       onClick={() => setDensityMode("compact")}
                       className={"px-2.5 py-1 rounded " + (densityMode === "compact" ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white font-bold shadow-xs" : "text-neutral-500")}
                     >
-                      紧凑 Compact (28px)
+                      紧凑 Compact (26px)
                     </button>
                     <button
                       onClick={() => setDensityMode("comfortable")}
                       className={"px-2.5 py-1 rounded " + (densityMode === "comfortable" ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white font-bold shadow-xs" : "text-neutral-500")}
                     >
-                      舒适 Comfortable (36px)
+                      舒适 Comfortable (32px)
                     </button>
                   </div>
                 </div>
@@ -3901,15 +3989,15 @@ export const irradiationCompensation = {
               </div>
 
               {/* Sidebar Session List View */}
-              <div className="rounded-xl border border-neutral-200/90 dark:border-neutral-800 bg-[#f5f5f3] dark:bg-[#111110] p-2 space-y-1">
+              <div className="rounded-xl border border-neutral-200/90 dark:border-neutral-800 bg-surface-0 dark:bg-[#111110] p-2 space-y-1">
                 {filteredSessions.map((session) => {
                   const isPinned = pinnedChapters[session.id];
-                  const rowHeightClass = densityMode === "compact" ? "h-7 py-0.5" : "h-9 py-1";
+                  const rowHeightClass = densityMode === "compact" ? "h-[26px] rounded-md" : "h-8 rounded-lg";
 
                   return (
                     <div
                       key={session.id}
-                      className={`flex items-center justify-between px-2.5 rounded-lg text-xs transition-colors hover:bg-neutral-200/60 dark:hover:bg-neutral-800/80 cursor-pointer ${rowHeightClass}`}
+                      className={`flex items-center justify-between px-2.5 text-xs transition-colors hover:bg-neutral-200/60 dark:hover:bg-neutral-800/80 cursor-pointer ${rowHeightClass}`}
                     >
                       {/* Left: Indicator & Title */}
                       <div className="flex items-center gap-2 min-w-0">
@@ -4158,7 +4246,7 @@ export const irradiationCompensation = {
           >
             <div className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#181817] shadow-lg overflow-hidden">
               {/* Detached Window Titlebar */}
-              <div className="h-10 px-3 flex items-center justify-between border-b border-neutral-200/80 dark:border-neutral-800 bg-[#f5f5f3] dark:bg-[#111110]">
+              <div className="h-10 px-3 flex items-center justify-between border-b border-neutral-200/80 dark:border-neutral-800 bg-surface-0 dark:bg-[#111110]">
                 {/* Traffic lights */}
                 <div className="w-16 flex items-center gap-1.5">
                   <span className="size-2.5 rounded-full bg-[#ff5f57]" />
@@ -4380,7 +4468,7 @@ export const irradiationCompensation = {
                         <span className="text-[12px] text-neutral-400">Reply to Claude…</span>
                         <div className="flex items-center justify-between">
                           <button onClick={() => setFcState("pill")} className="text-[11px] font-mono text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200">收起 → pill</button>
-                          <span className="size-7 rounded-lg bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 flex items-center justify-center"><Icon name="arrowRight" size="xs" /></span>
+                          <span className="size-8 rounded-lg bg-[var(--cds-fill-brand)] text-white flex items-center justify-center"><Icon name="arrowRight" size="xs" /></span>
                         </div>
                       </div>
                     </div>
@@ -5990,10 +6078,10 @@ span.cds-btn-squish.stacks:transform-none!`,
       useEffect(() => {
         if (isDark) {
           document.documentElement.classList.add("dark");
-          document.body.className = "h-full bg-[#151515] text-[#f5f5f5] font-sans antialiased selection:bg-[#d97757]/30 selection:text-[#d97757]";
+          document.body.className = "h-full bg-[#151515] text-[var(--cds-text-primary)] font-sans antialiased selection:bg-[#d97757]/30 selection:text-[#d97757]";
         } else {
           document.documentElement.classList.remove("dark");
-          document.body.className = "h-full bg-[#fcfcfb] text-[#151515] font-sans antialiased selection:bg-[#d97757]/20 selection:text-[#d97757]";
+          document.body.className = "h-full bg-[#fcfcfb] text-[var(--cds-text-primary)] font-sans antialiased selection:bg-[#d97757]/20 selection:text-[#d97757]";
         }
       }, [isDark]);
 
@@ -6101,7 +6189,7 @@ span.cds-btn-squish.stacks:transform-none!`,
                 number="01"
                 title="设计基石与设计令牌"
                 enTitle="Foundations & Radii Matrix"
-                description="4层表面微对比系统、陶土品牌色、全量圆角阶梯规范表 (2px~999px)、暗黑模式字重逆补偿及 Phosphor 矢量图标体系。"
+                description="4层表面微对比系统、陶土品牌色、全量圆角阶梯规范表 (2px~999px)、暗黑模式字重逆补偿及 Phosphor 矢量图标体系（claude.ai 实测用 Anthropicons 可变字体；仓库不收字体文件，故保留 Phosphor SVG 代替）。"
                 badge="Tokens"
               />
               <div className="mt-6">
@@ -6116,7 +6204,7 @@ span.cds-btn-squish.stacks:transform-none!`,
                 number="02"
                 title="应用框架与系统级导航"
                 enTitle="App Shell & Navigation"
-                description="macOS 原生窗体标题栏、Hub Rail 主导航胶囊、全局 ⌘K 搜索命令条与最近会话列表项。"
+                description="macOS 原生窗体标题栏（桌面端 46px；网页端实测 44px）、侧栏分段式应用切换（sm · 圆角 7）、全局 ⌘K 搜索命令条与最近会话列表项。"
                 badge="App Shell"
               />
               <div className="mt-6">
@@ -6146,7 +6234,7 @@ span.cds-btn-squish.stacks:transform-none!`,
                 number="04"
                 title="按钮与交互表单控件"
                 enTitle="Buttons & Form Controls"
-                description="4 级按钮尺寸与变体、纯几何数学滑动分段胶囊、文本与数字输入框、iOS 弹簧开关与分栏下拉按钮。"
+                description="4 级按钮尺寸（24 / 28 / 32 / 40px，圆角 6 / 7 / 8 / 10）与变体、只缩放背景层的按压反馈、纯几何定位的分段控件、文本与数字输入框、iOS 弹簧开关与分栏下拉按钮。"
                 badge="Controls"
               />
               <div className="mt-6">
@@ -6221,7 +6309,7 @@ span.cds-btn-squish.stacks:transform-none!`,
                 number="09"
                 title="Claude Desktop 2.0 工业级升级实验室"
                 enTitle="Desktop 2.0 Workstation Lab & CDS 2.0 Physics"
-                description="基于 Claude Desktop 2.0 (v2.37337.1) 逆向成果：5 阶推理算力调节器、平底下颌工具栏与触控负边距补偿、IndexedDB 离线消息暂存队列、纯 CSS 1.32x 过冲弹簧、28px 高密工作台、内联离线可视化图表与独立多窗口沙箱。"
+                description="基于 Claude Desktop 2.0 (v2.37337.1) 逆向成果：5 阶推理算力调节器（模型菜单子菜单）、卡片外的 Chin 工具行与触控负边距补偿、IndexedDB 离线消息暂存队列、纯 CSS 1.32x 过冲弹簧、26 / 32px 双密度工作台、内联离线可视化图表与独立多窗口沙箱。"
                 badge="v2.37337.1 Workstation"
               />
               <div className="mt-6">
