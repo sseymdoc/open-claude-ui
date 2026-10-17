@@ -86,12 +86,12 @@
       --cds-clay: #d97757;
       --cds-clay-hover: #cc5a36;
 
-      /* Claude Official Alpha & Border Hierarchy */
-      --cds-alpha-0: hsla(0, 0%, 8%, 0);
-      --cds-alpha-1: hsla(0, 0%, 8%, 0.05); /* Ghost hover, skeleton, disabled */
-      --cds-alpha-2: hsla(0, 0%, 8%, 0.10); /* Standard border, secondary fill */
-      --cds-alpha-3: hsla(0, 0%, 8%, 0.20); /* Border strong, control hover */
-      --cds-alpha-4: hsla(0, 0%, 8%, 0.35); /* Border stronger, heavy divider */
+      /* Claude Official Alpha & Border Hierarchy（claude.ai 实测：基色 #0b0b0b = rgb 11） */
+      --cds-alpha-0: rgb(11 11 11 / 0%);
+      --cds-alpha-1: rgb(11 11 11 / 5%); /* Ghost hover, skeleton, disabled */
+      --cds-alpha-2: rgb(11 11 11 / 10%); /* Standard border, secondary fill */
+      --cds-alpha-3: rgb(11 11 11 / 20%); /* Border strong, control hover */
+      --cds-alpha-4: rgb(11 11 11 / 35%); /* Heavy divider（border-stronger 实测另为 40%） */
 
       --cds-border: var(--cds-alpha-2);
       --cds-border-strong: var(--cds-alpha-3);
@@ -138,8 +138,7 @@
       --cds-text-primary: #0b0b0b;
       --cds-text-secondary: #52514e;
       --cds-text-muted: #898781;
-      --cds-bg-tint-blue: #f0f4f8;
-      --cds-segmented-track: rgba(0, 0, 0, 0.06);
+      --cds-segmented-track: var(--cds-alpha-1);
       --cds-segmented-thumb: #ffffff;
 
       /* Claude Official Radius Hierarchy (Exact Extracted Tokens) */
@@ -169,7 +168,7 @@
     }
 
     .dark {
-      --cds-surface-0: #0b0b0a;
+      --cds-surface-0: #0b0b0b;
       --cds-surface-1: #151515;
       --cds-surface-canvas: #151515;
       --cds-surface-2: #1a1a19;
@@ -178,12 +177,12 @@
       --cds-clay: #d97757;
       --cds-clay-hover: #e08264;
 
-      /* Claude Official Alpha & Border Hierarchy (Dark Mode) */
-      --cds-alpha-0: hsla(0, 0%, 100%, 0);
-      --cds-alpha-1: hsla(0, 0%, 100%, 0.05); /* Ghost hover, disabled */
-      --cds-alpha-2: hsla(0, 0%, 100%, 0.09); /* Standard border */
-      --cds-alpha-3: hsla(0, 0%, 100%, 0.18); /* Border strong */
-      --cds-alpha-4: hsla(0, 0%, 100%, 0.30); /* Heavy border */
+      /* Claude Official Alpha & Border Hierarchy (Dark Mode)（实测：#fff 同比例） */
+      --cds-alpha-0: rgb(255 255 255 / 0%);
+      --cds-alpha-1: rgb(255 255 255 / 5%); /* Ghost hover, disabled */
+      --cds-alpha-2: rgb(255 255 255 / 10%); /* Standard border */
+      --cds-alpha-3: rgb(255 255 255 / 20%); /* Border strong */
+      --cds-alpha-4: rgb(255 255 255 / 35%); /* Heavy border */
 
       --cds-border: var(--cds-alpha-2);
       --cds-border-strong: var(--cds-alpha-3);
@@ -222,9 +221,8 @@
       --cds-text-primary: #f0efec;
       --cds-text-secondary: #c3c2b7;
       --cds-text-muted: #898781;
-      --cds-bg-tint-blue: rgba(255, 255, 255, 0.06);
-      --cds-segmented-track: rgba(255, 255, 255, 0.08);
-      --cds-segmented-thumb: #2c2c2a;
+      --cds-segmented-track: #111;
+      --cds-segmented-thumb: var(--cds-alpha-2);
     }
 
     /* CDS Elevation & Hover Utility Classes */
@@ -466,7 +464,7 @@
       --cds-btn-spring: linear(0, .2459, .6526, .9468, 1.0764, 1.0915, 1.0585, 1.0219, .9993, .9914, .9921, .9957, .9988, 1.0004, 1);
       --cds-fill-brand: #c6613f; /* clay-emphasized，只用于发送键 */
       --cds-fill-brand-hover: #d97757;
-      --cds-text-accent: #2a78d6;
+      --cds-text-accent: #184f95; /* role-accent-600 = blue-600（与 claude.ai 实测一致） */
       --cds-text-disabled: rgba(21, 21, 21, .22);
       /* Cove 8-color categorical palette (light) */
       --chart-categorical-1: #2a78d6; --chart-categorical-2: #eb6834;
@@ -475,7 +473,7 @@
       --chart-categorical-7: #6250d6; --chart-categorical-8: #e34948;
     }
     .dark {
-      --cds-text-accent: #3987e5;
+      --cds-text-accent: #6da7ec; /* role-accent-300 = blue-300 */
       --cds-text-disabled: rgba(255, 255, 255, .22);
       --chart-categorical-1: #3987e5; --chart-categorical-2: #d95926;
       --chart-categorical-3: #199e70; --chart-categorical-4: #c98500;
@@ -1010,7 +1008,7 @@
       const [hairlineCompare, setHairlineCompare] = useState("hairline");
 
       const surfaces = [
-        { name: "Surface 0", role: "底基层 / 边框底色", light: "#f9f9f7", dark: "#0b0b0a", desc: "侧边栏最底色、无边框外壳" },
+        { name: "Surface 0", role: "底基层 / 边框底色", light: "#f9f9f7", dark: "#0b0b0b", desc: "侧边栏最底色、无边框外壳" },
         { name: "Surface 1 (主画布)", role: "2.0 冷雪花白 / 暗部墨黑", light: "#fcfcfb", dark: "#151515", desc: "主会话页面底色，从 1.0 暖陶土信纸升格为极致冷雪花白" },
         { name: "Surface 2", role: "独立卡片 / 面板", light: "#ffffff", dark: "#1a1a19", desc: "消息气泡外围、独立卡片底色" },
         { name: "Surface 3", role: "输入框 / 最高层", light: "#ffffff", dark: "#20201f", desc: "聊天输入框、弹出浮层顶色" },
@@ -1047,7 +1045,7 @@
         { name: "caption", token: "--cds-font-size-caption", px: "10px ~ 11px", leading: "16px (1.55)", weight: "500 / 580", role: "微型标签、快捷键徽章 (Kbd)、时间戳、模型角标", specimen: "Sonnet 3.7 • 10:24 AM • ⌘K", calcPx: "11px", calcLh: "16px" },
         { name: "footnote", token: "--cds-font-size-footnote", px: "11px ~ 12px", leading: "14px (1.25)", weight: "400 / 500", role: "辅助说明、文件大小 (4.2 KB)、Token 统计、次级元信息", specimen: "design-tokens.json • 4.2 KB • 2,410 tokens", calcPx: "12px", calcLh: "14px" },
         { name: "code", token: "--cds-font-size-code", px: "11px ~ 12px", leading: "16px (1.42)", weight: "400 (Mono)", role: "代码块、行内代码、Git Diff 差异对比", specimen: "const scale = calc(16 / 17); // 0.941", calcPx: "12px", calcLh: "16px" },
-        { name: "body (基准)", token: "--cds-font-size-body", px: "12px ~ 14px", leading: "18px (1.46)", weight: "400 (深色减薄 360)", role: "AI 助手对话正文、用户提问气泡、输入框文本、表单输入", specimen: "在深色背景下，高对比度白字因视网膜光渗效应在视觉上会比实际粗约 10%~15%。", calcPx: "14px", calcLh: "20px" },
+        { name: "body (基准)", token: "--cds-font-size-body", px: "12px ~ 14px", leading: "18px (1.46)", weight: "400 (深色减薄 360)", role: "AI 助手对话正文、输入框文本、表单输入", specimen: "在深色背景下，高对比度白字因视网膜光渗效应在视觉上会比实际粗约 10%~15%。", calcPx: "14px", calcLh: "20px" },
         { name: "prose", token: "--cds-font-size-prose", px: "14px ~ 16px", leading: "22px (1.45)", weight: "400 / 500", role: "长文排版段落、Artifacts 独立文档正文、长回复段落", specimen: "Claude Desktop 采用低对比度表面分层与无边框流式排版，打造通透呼吸感。", calcPx: "15px", calcLh: "22px" },
         { name: "heading", token: "--cds-font-size-heading", px: "13px ~ 15px", leading: "17px (1.29)", weight: "580 / 600", role: "卡片小节标题、弹窗对话框标题 (Modal Title)、代码语言", specimen: "Delete Conversation? • TypeScript • IrradiationCompensation.css", calcPx: "16px", calcLh: "20px" },
         { name: "title", token: "--cds-font-size-title", px: "19px ~ 21px", leading: "24px (1.25)", weight: "580 / 600", role: "主页面大标题、Project 项目名称、全屏视窗顶部一级标题", specimen: "Claude Design System (CDS 2.0) • v2.37337.1 Production", calcPx: "20px", calcLh: "24px" },
@@ -1059,7 +1057,7 @@
         { area: "chat", element: "模型版本角标 ('Sonnet 3.7')", size: "10px", weight: "500 (Medium)", font: "Mono", roleDesc: "等宽微徽章，4px 圆角" },
         { area: "chat", element: "消息时间戳 ('10:24 AM')", size: "11px", weight: "400 (Regular)", font: "Mono", roleDesc: "等宽数字，次级弱化灰度" },
         { area: "chat", element: "助手回复正文 (Prose Body)", size: "14px (默认)", weight: "400 (深色减薄 360)", font: "Sans", roleDesc: "1.42857 行高，0.75lh 段间距" },
-        { area: "chat", element: "用户提问气泡", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "与助手正文同字号，12px 圆角（= 控件 8 + 4）" },
+        { area: "chat", element: "用户提问气泡", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "15/20，padding 12×16，底色 alpha 5% 叠色，12px 圆角（= 控件 8 + 4）" },
         { area: "chat", element: "思考折叠触发器 ('Thought for 3.8s')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Medium 强化可点击感，text-muted" },
         { area: "chat", element: "思考链内部日志", size: "11px ~ 12px", weight: "400 (Regular)", font: "Mono", roleDesc: "代码级日志缩进排版，2px 左引导线" },
         { area: "composer", element: "主输入框文字 (Textarea)", size: "14px", weight: "400 (Regular)", font: "Sans", roleDesc: "与正文同级，field-sizing 自撑开" },
@@ -1162,17 +1160,18 @@
             <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 p-4 bg-white dark:bg-[#1a1a19]">
               <h4 className="text-xs font-mono uppercase text-neutral-400 mb-3 tracking-wider">1.4 灰阶与功能微调色 (Neutral Grays & Tints)</h4>
               <div className="grid grid-cols-5 gap-1.5 mb-3">
-                {/* 600 / 900 为 claude.ai 实测（text-secondary #52514e / text-primary #0b0b0b） */}
-                {["#f9f9f8", "#f2f2f0", "#e5e5e3", "#d4d4d1", "#a3a3a0", "#737370", "#52514e", "#40403e", "#262624", "#0b0b0b"].map((hex, i) => (
-                  <div key={i} className="flex flex-col items-center">
+                {/* 只列 claude.ai 实测页有数据的档位：50 = neutral-50（侧栏 hover）· 200 / 400 = gray-200 / gray-400（深色次要字 / 弱化字）· 600 / 900 = 次要字 / 主字。
+                    浅色下 neutral 与 gray 是同一套阶梯（两边的 50 都是 #f0efec）；100 / 300 / 500 / 700 / 800 实测页没有数据，不列 */}
+                {[["50", "#f0efec"], ["200", "#c3c2b7"], ["400", "#898781"], ["600", "#52514e"], ["900", "#0b0b0b"]].map(([step, hex]) => (
+                  <div key={step} className="flex flex-col items-center">
                     <div className="h-8 w-full rounded border border-neutral-200/40 dark:border-neutral-700/40" style={{ backgroundColor: hex }} />
-                    <span className="text-[9px] font-mono text-neutral-400 mt-1">{i * 100 || 50}</span>
+                    <span className="text-[9px] font-mono text-neutral-400 mt-1">{step}</span>
                   </div>
                 ))}
               </div>
-              <div className="p-2.5 rounded-lg bg-[#f0f4f8] dark:bg-white/5 border border-blue-100 dark:border-neutral-800 flex items-center justify-between text-xs">
-                <span className="font-medium text-neutral-700 dark:text-neutral-300">用户气泡冷灰蓝底色 <code className="text-[11px]">--cds-bg-tint-blue</code></span>
-                <code className="font-mono text-blue-600 dark:text-blue-400">#f0f4f8</code>
+              <div className="p-2.5 rounded-lg bg-[var(--cds-alpha-1)] border border-neutral-200/60 dark:border-neutral-800 flex items-center justify-between text-xs">
+                <span className="font-medium text-neutral-700 dark:text-neutral-300">用户气泡底色 <code className="text-[11px]">--cds-alpha-1</code></span>
+                <code className="font-mono text-neutral-500 dark:text-neutral-400">#0b0b0b 5%（深色 #fff 5%）</code>
               </div>
             </div>
           </div>
@@ -2030,9 +2029,9 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                         </div>
                       )}
 
-                      {/* 用户提问气泡（12px 圆角 = 控件 8 + 4；入场 message-fade-up 10px · 1.1s linear() 弹簧，复用实测页的 .wa-message-fade-up） */}
+                      {/* 用户提问气泡（claude.ai 实测：12px 圆角 = 控件 8 + 4 · padding 12×16 · 15/20 · 底色 alpha 5% 叠色 · max-w 85%；入场 message-fade-up 10px · 1.1s linear() 弹簧，复用实测页的 .wa-message-fade-up） */}
                       <div
-                        className="wa-message-fade-up rounded-bubble px-4 py-2.5 text-[14px] leading-relaxed bg-[#f0f4f8] dark:bg-white/10 text-neutral-900 dark:text-neutral-100 max-w-[85%] sm:max-w-[75%] shadow-xs"
+                        className="wa-message-fade-up rounded-bubble px-4 py-3 text-[15px] leading-5 bg-[var(--cds-alpha-1)] text-neutral-900 dark:text-neutral-100 max-w-[85%]"
                       >
                         {m.text}
                       </div>
@@ -2207,7 +2206,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
 
                         {/* 弹出菜单 (真双环 Popover 阴影) */}
                         {isAddMenuOpen && (
-                          <div className="absolute bottom-full left-0 mb-2 w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1.5 z-30 space-y-0.5 animate-fade">
+                          <div className="absolute bottom-full left-0 mb-2 w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1 z-30 animate-fade">
                             <button
                               onClick={() => {
                                 attachFileToComposer({ name: "schema.ts", size: "3.4 KB", type: "CODE", icon: "fileCode" });
@@ -2242,17 +2241,18 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                         </button>
 
                         {isModelDropdownOpen && (
-                          <div className="absolute bottom-full left-0 mb-2 w-56 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1.5 z-30 space-y-1 animate-fade">
+                          <div className="absolute bottom-full left-0 mb-2 w-56 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1 z-30 animate-fade">
                             {["Claude 3.7 Sonnet", "Claude 3.5 Haiku", "Claude 3 Opus"].map((name) => (
                               <button
                                 key={name}
                                 onClick={() => { setSelectedModel(name); setIsModelDropdownOpen(false); }}
-                                className={`w-full text-left p-2 rounded-lg text-xs flex items-center justify-between cds-hover-ghost ${
-                                  selectedModel === name ? "bg-clay/10 text-neutral-900 dark:text-white font-semibold" : "text-neutral-600 dark:text-neutral-300"
+                                className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center justify-between cds-hover-ghost ${
+                                  selectedModel === name ? "text-neutral-900 dark:text-white" : "text-neutral-600 dark:text-neutral-300"
                                 }`}
                               >
                                 <span>{name}</span>
-                                {selectedModel === name && <Icon name="check" size="xs" className="text-clay" />}
+                                {/* 选中只靠 accent 蓝对勾，不加底色（claude.ai 实测） */}
+                                {selectedModel === name && <Icon name="check" size="xs" className="text-[color:var(--cds-fill-accent)]" />}
                               </button>
                             ))}
                           </div>
@@ -2477,12 +2477,12 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
           <ComponentShowcase
             title="按钮尺寸阶梯与按压反馈"
             tag=".cds-btn-squish"
-            code={`<button className="group relative isolate h-8 px-3.5 rounded-lg text-[var(--cds-on-primary)] text-sm font-medium">
+            code={`<button className="group relative isolate h-8 px-3 rounded-lg text-[var(--cds-on-primary)] text-sm font-medium">
   {/* 背景层：只有它随按压缩放（按下 60ms ease-out → .975，松开 450ms var(--cds-btn-spring)） */}
   <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
   Primary Button
 </button>`}
-            description="24 / 28 / 32 / 40px 四档，圆角 6 / 7 / 8 / 10。主按钮是 #0b0b0b（深色 #fff），陶土 #c6613f 只给发送键。按压只缩放背景层 span.cds-btn-squish：按下 60ms ease-out 缩到 .975，松开 450ms --cds-btn-spring 回弹，文字和图标不动。"
+            description="24 / 28 / 32 / 40px 四档，圆角 6 / 7 / 8 / 10，字号 13 / 14 / 14 / 15px，左右内边距 8 / 10 / 12 / 16px。主按钮是 #0b0b0b（深色 #fff），陶土 #c6613f 只给发送键。按压只缩放背景层 span.cds-btn-squish：按下 60ms ease-out 缩到 .975，松开 450ms --cds-btn-spring 回弹，文字和图标不动。"
           >
             <div className="space-y-4">
               {/* Sizes */}
@@ -2490,10 +2490,10 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                 <div className="text-[11px] font-mono text-neutral-400 uppercase mb-2">尺寸与对应圆角阶梯</div>
                 <div className="flex flex-wrap items-center gap-2">
                   {[
-                    ["h-6 px-2 rounded-md text-xs", "XS (24px, 6px)"],
-                    ["h-7 px-2.5 rounded-[7px] text-xs", "SM (28px, 7px)"],
-                    ["h-8 px-3.5 rounded-lg text-sm", "MD (32px, 8px)"],
-                    ["h-10 px-5 rounded-[10px] text-sm", "LG (40px, 10px)"],
+                    ["h-6 px-2 rounded-md text-[13px] leading-[19px]", "XS (24px, 6px)"],
+                    ["h-7 px-2.5 rounded-[7px] text-sm", "SM (28px, 7px)"],
+                    ["h-8 px-3 rounded-lg text-sm", "MD (32px, 8px)"],
+                    ["h-10 px-4 rounded-[10px] text-[15px] leading-[22px]", "LG (40px, 10px)"],
                   ].map(([cls, label]) => (
                     <button key={label} className={`group relative isolate ${cls} text-[var(--cds-on-primary)] font-medium`}>
                       <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
@@ -2507,12 +2507,12 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
               <div>
                 <div className="text-[11px] font-mono text-neutral-400 uppercase mb-2">核心变体 (Variants) • 遵循无边框与表面微对比</div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <button className="group relative isolate h-8 px-3.5 rounded-lg text-[var(--cds-on-primary)] text-sm font-medium flex items-center gap-1.5">
+                  <button className="group relative isolate h-8 px-3 rounded-lg text-[var(--cds-on-primary)] text-sm font-medium flex items-center gap-1.5">
                     <span className="cds-btn-squish bg-[var(--cds-fill-primary)] group-hover:bg-[var(--cds-fill-primary-hover)]" />
                     <Icon name="spark" size="xs" />
                     <span>Primary #0b0b0b</span>
                   </button>
-                  <button className="group relative isolate h-8 px-3.5 rounded-lg text-neutral-800 dark:text-neutral-200 text-sm font-medium">
+                  <button className="group relative isolate h-8 px-3 rounded-lg text-neutral-800 dark:text-neutral-200 text-sm font-medium">
                     <span className="cds-btn-squish bg-[var(--cds-fill-secondary)] group-hover:bg-[var(--cds-fill-secondary-hover)] cds-shadow-sm" />
                     Secondary 柔和填充 (0边框)
                   </button>
@@ -2541,23 +2541,23 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
           <ComponentShowcase
             title="分段控件 SegmentedControl (纯几何比例绝对对齐)"
             tag=".df-pills[data-segmented]"
-            code={`<div className="relative h-7 p-px rounded-[7px] bg-neutral-200/80">   {/* sm 28 · r7；lg 40 · r10 */}
-  <div className="absolute inset-y-px rounded-[6px]" style={{ left: "calc(1px + active * (100% - 2px) / total)" }} />   {/* thumb 圆角 = 控件 − 1 */}
+            code={`<div className="relative h-7 p-px rounded-[7px] bg-[var(--cds-segmented-track)]">   {/* sm 28 · r7；lg 40 · r10；track 浅 alpha 5% · 深 #111 */}
+  <div className="absolute inset-y-px rounded-[6px] bg-[var(--cds-segmented-thumb)]" style={{ left: "calc(1px + active * (100% - 2px) / total)" }} />   {/* thumb 圆角 = 控件 − 1；浅 #fff · 深 alpha 10% */}
 </div>`}
             description="圆角跟随控件尺寸（sm 28px · 7px；lg 40px · 10px），不是 999px 胶囊；track 内边距 1px，thumb 圆角 = 控件圆角 − 1（6 / 9）。滑块用纯几何公式绝对定位，支持容器查询 @container (max-width: 254px) 折叠。"
           >
             <div className="py-2 space-y-4">
               <div
-                className="relative h-7 p-px rounded-[7px] bg-neutral-200/80 dark:bg-neutral-800/90 flex items-stretch select-none"
+                className="relative h-7 p-px rounded-[7px] bg-[var(--cds-segmented-track)] flex items-stretch select-none"
                 style={{ containerType: "inline-size" }}
               >
                 {/* Absolute Geometric Sliding Indicator：thumb 圆角 6 = 控件 7 − 1 */}
                 <div
-                  className="absolute top-px bottom-px rounded-[6px] bg-white dark:bg-neutral-700 shadow-sm transition-all duration-150 ease-[cubic-bezier(.32,.72,0,1)] pointer-events-none"
+                  className="absolute top-px bottom-px rounded-[6px] bg-[var(--cds-segmented-thumb)] shadow-sm transition-all duration-150 ease-[cubic-bezier(.32,.72,0,1)] pointer-events-none"
                   style={{
                     left: `calc(1px + ${segmentedIndex} * (100% - 2px) / ${segmentedTabs.length})`,
                     width: `calc((100% - 2px) / ${segmentedTabs.length})`,
-                    boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.06), 0 1px 2px 0 rgba(0,0,0,0.08)"
+                    boxShadow: "inset 0 0 0 1px var(--cds-border), 0 1px 2px #0000000d"
                   }}
                 />
 
@@ -2775,12 +2775,12 @@ export const irradiationCompensation = {
           <ComponentShowcase
             title="上下文快捷菜单 (双环 Popover 浮层)"
             tag='data-cds="ContextMenu"'
-            code={`<div className="w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1.5">
+            code={`<div className="w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1">
   <div className="px-2.5 py-1.5 rounded-lg text-xs cds-hover-ghost">Duplicate</div>
 </div>`}
             description="带有 --cds-shadow-popover 真实双环（深色内高光/浅色外轮廓）深度弥散投影的浮动弹出菜单，支持键盘快捷键勋章。菜单圆角 12px = 控件圆角 8 + --cds-menu-gutter 4，与 8px 菜单项同心（claude.ai 实测）。"
           >
-            <div className="w-full max-w-xs mx-auto rounded-xl bg-white dark:bg-[#222220] p-1.5 cds-shadow-popover space-y-0.5">
+            <div className="w-full max-w-xs mx-auto rounded-xl bg-white dark:bg-[#222220] p-1 cds-shadow-popover">
               {[
                 { name: "Copy Response", icon: "copy", kbd: "⌘C" },
                 { name: "Pin to Project", icon: "pin", kbd: "⌘P" },
@@ -3004,7 +3004,7 @@ export const irradiationCompensation = {
           desc: "绝大多数展示型内容、文本流、以及嵌套在已有带边框容器内部的子操作，必须坚决去除边框。",
           items: [
             { name: "AI 助手主回复正文", rule: "直接浮于 Surface 0 主画布上，严禁外包任何带有边框的卡片。" },
-            { name: "用户提问气泡 (User Bubble)", rule: "仅靠底色微对比 (浅色: #f0f4f8 / 深色: #20201f) 与 12px 圆角（= 控件 8 + 4）聚合，0 边框。" },
+            { name: "用户提问气泡 (User Bubble)", rule: "仅靠 alpha 5% 叠色 (--cds-alpha-1：浅色黑 / 深色白) 与 12px 圆角（= 控件 8 + 4）聚合，0 边框。" },
             { name: "容器内部的操作按钮", rule: "Composer、代码块、Modal 内部按钮一律降级为 Ghost (常态完全透明，悬停微背景)。" },
             { name: "侧边栏与导航列表项", rule: "依靠垂直排版节奏与 Hover 背景微差区分，绝不给每个条目画框。" },
             { name: "底部反馈工具条 (Reaction)", rule: "点赞、点踩、复制等图标按钮纯透明悬停，严禁封装在独立带边框胶囊里。" },
