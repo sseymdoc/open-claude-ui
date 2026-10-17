@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Expanded 52 `data-cds` Namespaces, 152 CSS Keyframes & Five Native Desktop Surfaces**:
   - Expanded `data-cds` catalog from 40 to **52 components** (adding `ChatComposerActions`, `Checkbox`, `Collapsible`, `OverflowTooltip`, `Switch`, `Tabs`, `TextArea`, `TextInput`, `TextLink`, `Toolbar`, `TurnStatus`, `VideoPlayer`) and 152 `@keyframes`.
   - Deconstructed **SableOtter Caret HUD** (`index.chunk-BN7PaJ_P.js`), **CuTeach Click-Through Overlay** (`computerUseTeach.js`), **CuWatchRecord Pill & Chooser** (`computerUseWatchRecord.js`), **Hardware Buddy BLE Console** (`BuddyWindow-_Jgif_qX.js`), and **ClawdQuest Torn-Parchment Offline Game** (`clawdQuestEngine-C2Z1JudX.css`).
+- **Storybook Chapter 10 — v2.42304.0 Design Aesthetics Lab (`docs/claude-components-storybook.html`)**:
+  - Re-verified via REA archive extraction (Evidence `ev_f278e91f62c65aef5754e15781774e5d9eb14a14534db136f896e9b3c3e329ef`, same `app.asar` SHA-256) and embedded verbatim `ion-dist` keyframes: `fc-reveal` / `fc-arrive` / `fc-arrive-ring` (`@property --fc-edge-turn`), all 19/38-stop `urm-beat-*` and `urm-beat-*-glow` curves, `urm-breath`, `urm-comet-*`.
+  - Corrected `.fc-scrim` evidence with its 16 gradient **positions** (`0% → 8.1% → 15.5% → … → 91.9% → 100%`) alongside the mix weights.
+  - Interactive demos: FloatingComposer `handle/pill/composer` morph + arrive ring + 16-stop scrim, Usage Ring Meter 4-tier beats, Oklab Sheet Card (`@property`-interpolated 165°→200° light), Epitaxy Document Rail ticks, serif/sans hanging punctuation, 6-layer token model, Cove 8-color palette (light/dark), SableOtter HUD strip and CuWatchRecord pill.
+  - Header badge bumped to `v2.42304.0 Production`; footer now reports 52 `data-cds` namespaces and 152 keyframes.
 
 ### 🔍 REA v6.5.0 Ground-Truth Precision Audit (Chapter-by-Chapter)
 

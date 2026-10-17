@@ -426,6 +426,167 @@
       border-color: #8b5cf6 !important;
       border-style: dashed !important;
     }
+
+    /* ==========================================================================
+       Claude Desktop v2.42304.0 Ground Truth (REA Evidence ev_f278e91f…)
+       Verbatim from MSIX resources/ion-dist/assets/v1/*.css
+       ========================================================================== */
+    :root {
+      --cds-dur-fast: 60ms;
+      --cds-dur-snap: .12s;
+      --cds-dur-base: .2s;
+      --cds-dur-sheet: .3s;
+      --cds-dur-slow: .45s;
+      --cds-ease-out: cubic-bezier(.165, .84, .44, 1);
+      --cds-ease-snap: cubic-bezier(.32, .72, 0, 1);
+      --cds-ease-overshoot: cubic-bezier(.34, 1.3, .64, 1);
+      --cds-fill-brand: #d97757;
+      --cds-text-accent: #2a78d6;
+      --cds-text-disabled: rgba(21, 21, 21, .22);
+      /* Cove 8-color categorical palette (light) */
+      --chart-categorical-1: #2a78d6; --chart-categorical-2: #eb6834;
+      --chart-categorical-3: #1baf7a; --chart-categorical-4: #eda100;
+      --chart-categorical-5: #e87ba4; --chart-categorical-6: #008300;
+      --chart-categorical-7: #6250d6; --chart-categorical-8: #e34948;
+    }
+    .dark {
+      --cds-text-accent: #3987e5;
+      --cds-text-disabled: rgba(255, 255, 255, .22);
+      --chart-categorical-1: #3987e5; --chart-categorical-2: #d95926;
+      --chart-categorical-3: #199e70; --chart-categorical-4: #c98500;
+      --chart-categorical-5: #d55181; --chart-categorical-6: #008300;
+      --chart-categorical-7: #9085e9; --chart-categorical-8: #e66767;
+    }
+
+    /* --- FloatingComposer (c0d1f1ea0-CRwfFWY4.css) --- */
+    @property --fc-edge-turn { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+    .fc-holder {
+      --fc-handle-w: 2rem; --fc-handle-h: 2rem; --fc-pill-h: 2.5rem;
+      --fc-glyph-w: 1rem; --fc-glyph-gap: .5rem; --fc-pill-pad: 2.25rem;
+      --fc-pill-w: calc(var(--fc-label-w, 4.75rem) + var(--fc-glyph-w) + var(--fc-glyph-gap) + 2 * var(--fc-pill-pad));
+      --fc-d: var(--cds-dur-snap); --fc-e: var(--cds-ease-snap);
+      --fc-arrive-ring: 1.8s; --fc-arrive-glow: 1.8s; --fc-arrive-ease: cubic-bezier(.6, 0, .1, 1);
+      --cds-radius-composer: .875rem;
+      position: relative;
+    }
+    .fc-morph {
+      left: 50%; bottom: calc(50% - var(--fc-handle-h) / 2);
+      width: var(--fc-handle-w); height: var(--fc-handle-h); border-radius: calc(var(--fc-handle-h) / 2);
+      transition: width var(--fc-d) var(--fc-e), height var(--fc-d) var(--fc-e), bottom var(--fc-d) var(--fc-e), border-radius var(--fc-d) var(--fc-e), opacity var(--cds-dur-fast) linear;
+      position: absolute; translate: -50%;
+      background: var(--cds-surface-popover); box-shadow: var(--cds-shadow-popover);
+    }
+    .fc-holder[data-fc-state=pill] > .fc-morph { bottom: calc(50% - var(--fc-pill-h) / 2); width: var(--fc-pill-w); height: var(--fc-pill-h); border-radius: calc(var(--fc-pill-h) / 2); }
+    .fc-holder[data-fc-state=composer] > .fc-morph { border-radius: var(--cds-radius-composer); width: 100%; height: 100%; opacity: 0; bottom: 0; }
+    .fc-holder[data-fc-arrive] > .fc-morph::before, .fc-holder[data-fc-arrive] > .fc-morph::after { content: ""; border-radius: inherit; pointer-events: none; position: absolute; inset: 0; }
+    .fc-holder[data-fc-arrive] > .fc-morph::after { animation: fc-arrive var(--fc-arrive-glow) var(--fc-arrive-ease) both; }
+    .fc-holder[data-fc-arrive] > .fc-morph::before {
+      filter: blur(.4px); padding: 1.5px;
+      background: conic-gradient(from var(--fc-edge-turn), transparent 0 50%, color-mix(in srgb, var(--fc-glow, var(--cds-fill-brand)) 42%, transparent) 82%, transparent 100%);
+      animation: fc-arrive-ring var(--fc-arrive-ring) var(--fc-arrive-ease) both;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    }
+    .fc-composer { opacity: 0; pointer-events: none; }
+    .fc-holder[data-fc-state=composer] > .fc-composer { opacity: 1; pointer-events: auto; animation: fc-reveal var(--cds-dur-sheet) var(--cds-ease-snap) both; }
+    @keyframes fc-reveal {
+      0% { clip-path: inset(calc(50% - var(--fc-pill-h) / 2) calc(50% - var(--fc-pill-w) / 2) calc(50% - var(--fc-pill-h) / 2) calc(50% - var(--fc-pill-w) / 2) round calc(var(--fc-pill-h) / 2)); opacity: .4; }
+      to { clip-path: inset(-2rem round var(--cds-radius-composer)); opacity: 1; }
+    }
+    @keyframes fc-arrive {
+      0%  { box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent; }
+      45% { box-shadow: 0 0 1.25rem .375rem color-mix(in srgb, var(--cds-surface-popover) 45%, transparent), 0 0 1.75rem .5rem color-mix(in srgb, var(--fc-glow, var(--cds-fill-brand)) 22%, transparent); }
+      to  { box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent; }
+    }
+    @keyframes fc-arrive-ring { 0% { --fc-edge-turn: -95deg; opacity: 0; } 12%, 88% { opacity: 1; } to { --fc-edge-turn: 265deg; opacity: 0; } }
+    .fc-scrim {
+      --fc-scrim-color: var(--cds-surface-2);
+      inset-inline: 0; pointer-events: none; opacity: 0; height: 15rem; position: absolute; bottom: 0;
+      background-image: linear-gradient(to bottom,
+        color-mix(in srgb, var(--fc-scrim-color) 0%, transparent) 0%, color-mix(in srgb, var(--fc-scrim-color) 1.3%, transparent) 8.1%,
+        color-mix(in srgb, var(--fc-scrim-color) 4.9%, transparent) 15.5%, color-mix(in srgb, var(--fc-scrim-color) 10.4%, transparent) 22.5%,
+        color-mix(in srgb, var(--fc-scrim-color) 17.5%, transparent) 29%, color-mix(in srgb, var(--fc-scrim-color) 25.9%, transparent) 35.3%,
+        color-mix(in srgb, var(--fc-scrim-color) 35.2%, transparent) 41.2%, color-mix(in srgb, var(--fc-scrim-color) 45%, transparent) 47.1%,
+        color-mix(in srgb, var(--fc-scrim-color) 55%, transparent) 52.9%, color-mix(in srgb, var(--fc-scrim-color) 64.8%, transparent) 58.8%,
+        color-mix(in srgb, var(--fc-scrim-color) 74.1%, transparent) 64.7%, color-mix(in srgb, var(--fc-scrim-color) 82.5%, transparent) 71%,
+        color-mix(in srgb, var(--fc-scrim-color) 89.6%, transparent) 77.5%, color-mix(in srgb, var(--fc-scrim-color) 95.1%, transparent) 84.5%,
+        color-mix(in srgb, var(--fc-scrim-color) 98.7%, transparent) 91.9%, var(--fc-scrim-color) 100%);
+      transition: opacity var(--cds-dur-snap) var(--cds-ease-snap);
+    }
+    .fc-scrim[data-fc-on] { opacity: 1; transition: opacity var(--cds-dur-sheet) var(--cds-ease-snap); }
+
+    /* --- Usage Ring Meter (c403c4b83-yqAXiELG.css) --- */
+    .urm { width: var(--urm-size); height: var(--urm-size); place-items: center; display: inline-grid; position: relative; }
+    .urm__hover, .urm__beat, .urm__breath { place-items: center; width: 100%; height: 100%; display: grid; position: relative; }
+    .urm__glow, .urm__beat-glow { inset: calc(var(--urm-size) * -1); pointer-events: none; border-radius: 50%; position: absolute;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--urm-color) 55%, transparent), transparent 62%); }
+    .urm__glow { opacity: .06; }
+    .urm__beat-glow { opacity: 0; }
+    .urm__hover { transition: transform var(--cds-dur-fast) var(--cds-ease-out); }
+    .urm:hover .urm__hover { transform: scale(1.08); }
+    .urm [data-ring-arc] { transition: stroke-dashoffset var(--cds-dur-sheet) var(--cds-ease-out), stroke var(--cds-dur-base) var(--cds-ease-out); }
+    .urm[data-entrance=draw] [data-ring-arc] { animation: urm-arc-sweep calc(2 * var(--cds-dur-slow)) var(--cds-ease-overshoot) backwards; }
+    .urm[data-beat="1"] .urm__beat { animation: 2.3s linear infinite urm-beat-warning; }
+    .urm[data-beat="1"] .urm__beat-glow { animation: 2.3s linear infinite urm-beat-warning-glow; }
+    .urm[data-beat="2"] .urm__beat { animation: 1.45s linear infinite urm-beat-critical; }
+    .urm[data-beat="2"] .urm__beat-glow { animation: 1.45s linear infinite urm-beat-critical-glow; }
+    .urm[data-beat="3"] .urm__beat { animation: 2.45s linear infinite urm-beat-limit; }
+    .urm[data-beat="3"] .urm__beat-glow { animation: 2.45s linear infinite urm-beat-limit-glow; }
+    .urm[data-shimmer] .urm__breath { animation: 1.5s ease-in-out urm-breath; }
+    .urm__comet { pointer-events: none; opacity: 0; position: absolute; inset: 0; transform: rotate(-90deg); }
+    .urm__comet circle { stroke: color-mix(in srgb, var(--urm-color) 28%, white); }
+    .urm[data-shimmer] .urm__comet { animation: 2s linear urm-comet-travel, 2s linear urm-comet-fade; }
+    @keyframes urm-arc-sweep { 0% { stroke-dashoffset: var(--ring-c); } }
+    @keyframes urm-breath { 50% { transform: scale(1.0384); } }
+    @keyframes urm-comet-travel { 0% { transform: rotate(-90deg); } to { transform: rotate(calc(-90deg + var(--urm-travel))); } }
+    @keyframes urm-comet-fade { 0% { opacity: 0; } 16.67% { opacity: .425; } 33.33% { opacity: .736; } 50% { opacity: .85; } 66.67% { opacity: .736; } 83.33% { opacity: .425; } to { opacity: 0; } }
+    @keyframes urm-beat-warning { 0%{transform:scale(1)}14.7%{transform:scale(1.0006)}17.83%{transform:scale(1.0037)}20.91%{transform:scale(1.0129)}24.04%{transform:scale(1.0275)}27.13%{transform:scale(1.0352)}30.26%{transform:scale(1.0273)}33.35%{transform:scale(1.0129)}36.48%{transform:scale(1.0037)}39.57%{transform:scale(1.0006)}52%{transform:scale(1.0004)}55.96%{transform:scale(1.002)}59.91%{transform:scale(1.0071)}63.87%{transform:scale(1.015)}67.83%{transform:scale(1.0192)}71.78%{transform:scale(1.015)}75.74%{transform:scale(1.0071)}79.7%{transform:scale(1.002)}83.65%{transform:scale(1.0004)}to{transform:scale(1)} }
+    @keyframes urm-beat-critical { 0%{transform:scale(1)}14.34%{transform:scale(1.0006)}17.38%{transform:scale(1.0037)}20.41%{transform:scale(1.0129)}23.45%{transform:scale(1.0274)}26.48%{transform:scale(1.0352)}29.52%{transform:scale(1.0274)}32.55%{transform:scale(1.0129)}35.59%{transform:scale(1.0037)}38.62%{transform:scale(1.0006)}50.76%{transform:scale(1.0004)}54.62%{transform:scale(1.002)}58.48%{transform:scale(1.0071)}62.34%{transform:scale(1.015)}66.21%{transform:scale(1.0192)}70.07%{transform:scale(1.015)}73.93%{transform:scale(1.0071)}77.79%{transform:scale(1.002)}81.66%{transform:scale(1.0004)}to{transform:scale(1)} }
+    @keyframes urm-beat-limit { 0%{transform:scale(1)}4.53%{transform:scale(1.0009)}5.47%{transform:scale(1.0049)}6.41%{transform:scale(1.0167)}7.39%{transform:scale(1.0359)}8.33%{transform:scale(1.0458)}9.27%{transform:scale(1.0359)}10.24%{transform:scale(1.0167)}11.18%{transform:scale(1.0049)}12.16%{transform:scale(1.0008)}15.96%{transform:scale(1.0005)}17.18%{transform:scale(1.0027)}18.41%{transform:scale(1.0093)}19.59%{transform:scale(1.0194)}20.82%{transform:scale(1.025)}22.04%{transform:scale(1.0194)}23.27%{transform:scale(1.009)}24.45%{transform:scale(1.0027)}25.67%{transform:scale(1.0005)}73.92%{transform:scale(1.0009)}74.86%{transform:scale(1.0049)}75.8%{transform:scale(1.0167)}76.78%{transform:scale(1.0359)}77.71%{transform:scale(1.0458)}78.65%{transform:scale(1.0359)}79.63%{transform:scale(1.0167)}80.57%{transform:scale(1.0049)}81.55%{transform:scale(1.0008)}85.35%{transform:scale(1.0005)}86.57%{transform:scale(1.0027)}87.8%{transform:scale(1.0093)}88.98%{transform:scale(1.0194)}90.2%{transform:scale(1.025)}91.43%{transform:scale(1.0194)}92.65%{transform:scale(1.009)}93.84%{transform:scale(1.0027)}95.06%{transform:scale(1.0005)}to{transform:scale(1)} }
+    @keyframes urm-beat-warning-glow { 0%{opacity:0}14.7%{opacity:.005}17.83%{opacity:.027}20.91%{opacity:.093}24.04%{opacity:.198}27.13%{opacity:.253}30.26%{opacity:.196}33.35%{opacity:.093}36.48%{opacity:.026}39.57%{opacity:.005}52%{opacity:.003}55.96%{opacity:.016}59.91%{opacity:.055}63.87%{opacity:.116}67.83%{opacity:.15}71.78%{opacity:.116}75.74%{opacity:.055}79.7%{opacity:.016}83.65%{opacity:.003}to{opacity:0} }
+    @keyframes urm-beat-critical-glow{0%{opacity:0}14.34%{opacity:.005}17.38%{opacity:.027}20.41%{opacity:.093}23.45%{opacity:.197}26.48%{opacity:.253}29.52%{opacity:.197}32.55%{opacity:.093}35.59%{opacity:.027}38.62%{opacity:.005}50.76%{opacity:.003}54.62%{opacity:.016}58.48%{opacity:.055}62.34%{opacity:.116}66.21%{opacity:.15}70.07%{opacity:.116}73.93%{opacity:.055}77.79%{opacity:.016}81.66%{opacity:.003}to{opacity:0}}
+    @keyframes urm-beat-limit-glow{0%{opacity:0}4.53%{opacity:.006}5.47%{opacity:.035}6.41%{opacity:.12}7.39%{opacity:.258}8.33%{opacity:.329}9.27%{opacity:.258}10.24%{opacity:.12}11.18%{opacity:.035}12.16%{opacity:.006}15.96%{opacity:.004}17.18%{opacity:.021}18.41%{opacity:.073}19.59%{opacity:.151}20.82%{opacity:.194}22.04%{opacity:.151}23.27%{opacity:.07}24.45%{opacity:.021}25.67%{opacity:.004}73.92%{opacity:.006}74.86%{opacity:.035}75.8%{opacity:.12}76.78%{opacity:.258}77.71%{opacity:.329}78.65%{opacity:.258}79.63%{opacity:.12}80.57%{opacity:.035}81.55%{opacity:.006}85.35%{opacity:.004}86.57%{opacity:.021}87.8%{opacity:.073}88.98%{opacity:.151}90.2%{opacity:.194}91.43%{opacity:.151}92.65%{opacity:.07}93.84%{opacity:.021}95.06%{opacity:.004}to{opacity:0}}
+
+    /* --- Sheet Card (c6a73f447-LaXKuzWp.css) --- */
+    .sheet-card-page, .sheet-card-under {
+      background-color: var(--cds-surface-2);
+      background-image: linear-gradient(var(--sheet-card-light-angle, 165deg) in oklab, rgb(255 255 255 / var(--sheet-card-lit, .55)) 0%, transparent var(--sheet-card-light-reach, 55%));
+    }
+    .dark .sheet-card-page, .dark .sheet-card-under { --sheet-card-lit: .06; }
+    .sheet-card-page { transition: translate var(--cds-dur-base) var(--cds-ease-out), --sheet-card-light-angle var(--cds-dur-slow) var(--cds-ease-out), --sheet-card-light-reach var(--cds-dur-slow) var(--cds-ease-out); }
+    @property --sheet-card-light-angle { syntax: "<angle>"; inherits: true; initial-value: 165deg; }
+    @property --sheet-card-light-reach { syntax: "<percentage>"; inherits: true; initial-value: 55%; }
+    .sheet-card:hover .sheet-card-page { --sheet-card-light-angle: 200deg; --sheet-card-light-reach: 70%; translate: 0 -2px; }
+    .sheet-card-under { transform-origin: 50% 0; opacity: 0; transition: transform var(--cds-dur-base) var(--cds-ease-snap), opacity var(--cds-dur-base) var(--cds-ease-out); transform: translate(0) translateY(62px) rotate(0) translateY(-62px); }
+    .sheet-card:hover .sheet-card-under { opacity: .7; transition: transform var(--cds-dur-slow) var(--cds-ease-out), opacity var(--cds-dur-snap) var(--cds-ease-out); transform: translate(-2px) translateY(62px) rotate(-4deg) translateY(-62px); }
+
+    /* --- Epitaxy Document Rail (c3fde7009-BH42YUtA.css) --- */
+    .epitaxy-document-rail-ticks { display: flex; flex-direction: column; padding-block: .375rem; padding-inline-start: 6px; width: 2rem; }
+    .epitaxy-document-rail-ticks > li { flex: 0 0 var(--document-rail-tick, 10px); align-items: center; display: flex; cursor: pointer; }
+    .epitaxy-document-rail-ticks > li > span { background: var(--cds-text-disabled); transform-origin: 0; border-radius: 2px; width: 18px; height: 2px; display: block; scale: .777778 1; transition: scale var(--cds-dur-base) var(--cds-ease-out), translate var(--cds-dur-base) var(--cds-ease-out), background var(--cds-dur-base); }
+    .epitaxy-document-rail-ticks > li[data-read] > span { background: var(--cds-text-muted); }
+    .epitaxy-document-rail-ticks > li[data-level="1"] > span { translate: 3px; scale: .5 1; }
+    .epitaxy-document-rail-ticks > li[data-level="2"] > span { translate: 6px; scale: .333333 1; }
+    .epitaxy-document-rail-ticks > li[data-current] > span { background: var(--cds-text-accent); translate: 0; scale: 1 1.5; }
+
+    /* --- Optical Hanging Punctuation (c4a9ee384-DqjuRPPC.css), serif & sans faces --- */
+    [data-hang-face] { --reply-hang-room: 12px; }
+    [data-hang-face] blockquote { --reply-hang-room: 8px; }
+    [data-hang-face=serif] { --hq-dq: .4155em; --hq-dq-b: .4855em; --hq-sq: .229em; --hq-h1: .97; --hq-h2: .986; }
+    [data-hang-face=sans]  { --hq-dq: .397em;  --hq-dq-b: .455em;  --hq-sq: .232em; --hq-h1: .97; --hq-h2: .986; }
+    [data-hang-face] h1, [data-hang-face] h2 { --hq-dq: var(--hq-dq-b); }
+    [data-hang-face] h1 { --hq-level: var(--hq-h1); }
+    [data-hang-face] h2 { --hq-level: var(--hq-h2); }
+    span[data-hang-quote] { --hq-1: 0px; --hq-hang: clamp(0px, var(--hq-1, 0px) * var(--hq-level, 1), var(--reply-hang-room, 0px)); margin-inline-start: calc(-1 * var(--hq-hang)); }
+    span[data-hang-quote=dq] { --hq-1: var(--hq-dq); }
+    span[data-hang-quote=sq] { --hq-1: var(--hq-sq); }
+
+    /* --- SableOtter HUD level meter --- */
+    @keyframes sable-level { 0%, 100% { height: 4px; } 50% { height: calc(4px + 12px * var(--lvl, .6)); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .urm__beat, .urm__beat-glow, .urm__breath, .urm__comet, .fc-composer, .fc-morph::before, .fc-morph::after { animation: none !important; }
+    }
   </style>
 </head>
 <body class="h-full bg-[#fcfcfb] text-[#151515] font-sans antialiased selection:bg-[#d97757]/20 selection:text-[#d97757]">
@@ -3870,6 +4031,388 @@ export const irradiationCompensation = {
     // ==========================================================================
     // MAIN APP COMPONENT (Single Page Storybook with Header & Section Jumps)
     // ==========================================================================
+    // ==========================================================================
+    // 10. SECTION: Claude Desktop v2.42304.0 Design Aesthetics (REA Ground Truth)
+    // ==========================================================================
+    function UsageRingMeter({ value, beat, shimmerKey, entranceKey, size = 56 }) {
+      const stroke = 4;
+      const r = (size - stroke) / 2;
+      const c = 2 * Math.PI * r;
+      const color = beat === 0 ? "var(--chart-categorical-1)" : beat === 1 ? "var(--chart-categorical-4)" : "var(--chart-categorical-8)";
+      return (
+        <div
+          key={entranceKey}
+          className="urm"
+          data-entrance="draw"
+          data-beat={beat || undefined}
+          style={{ "--urm-size": `${size}px`, "--urm-color": color, "--ring-c": c, "--urm-travel": `${value * 3.6}deg` }}
+        >
+          <div className="urm__glow" />
+          <div className="urm__hover">
+            <div className="urm__beat-glow" />
+            <div className="urm__beat">
+              <div key={shimmerKey} className="urm__breath" data-shimmer={shimmerKey ? "" : undefined} style={{ display: "grid" }}>
+                <svg width={size} height={size} style={{ transform: "rotate(-90deg)", gridArea: "1/1" }}>
+                  <circle data-ring-track cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={stroke} stroke="var(--cds-alpha-2)" />
+                  <circle data-ring-arc cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={stroke} strokeLinecap="round" stroke={color} strokeDasharray={c} strokeDashoffset={c * (1 - value / 100)} />
+                </svg>
+                <svg className="urm__comet" width={size} height={size} style={{ gridArea: "1/1" }}>
+                  <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={stroke} strokeLinecap="round" strokeDasharray={`${c * 0.08} ${c}`} />
+                </svg>
+                <span className="font-mono text-[11px] font-semibold tabular-nums text-neutral-700 dark:text-neutral-200" style={{ gridArea: "1/1" }}>{value}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function DesktopV242304Section() {
+      // 10.1 FloatingComposer
+      const [fcState, setFcState] = useState("pill"); // handle | pill | composer
+      const [fcArriveKey, setFcArriveKey] = useState(0);
+      const [scrimOn, setScrimOn] = useState(true);
+
+      // 10.2 Usage Ring Meter
+      const [urmBeat, setUrmBeat] = useState(1);
+      const [urmShimmer, setUrmShimmer] = useState(0);
+      const [urmEntrance, setUrmEntrance] = useState(0);
+      const beatMeta = [
+        { label: "Normal", value: 42, desc: "无心跳，静态 6% 光晕" },
+        { label: "Warning", value: 81, desc: "2.3s 双搏 · 主峰 1.0352 / 次峰 1.0192" },
+        { label: "Critical", value: 94, desc: "1.45s 双搏 · 同幅加速" },
+        { label: "Limit", value: 100, desc: "2.45s 四峰 · 主峰 1.0458 · 光晕 32.9%" },
+      ];
+
+      // 10.3 Document Rail
+      const railHeadings = [
+        { level: 0, title: "1. 概述" }, { level: 1, title: "1.1 版本边界" }, { level: 1, title: "1.2 设计契约" },
+        { level: 0, title: "2. 新增特性" }, { level: 1, title: "2.10 悬浮输入框" }, { level: 2, title: "fc-reveal" },
+        { level: 2, title: "fc-scrim" }, { level: 1, title: "2.11 环形仪表" }, { level: 0, title: "3. 架构重构" },
+        { level: 1, title: "3.9 Tailwind v4" }, { level: 0, title: "4. 系统底座" },
+      ];
+      const [railCurrent, setRailCurrent] = useState(4);
+
+      // 10.4 Hanging punctuation
+      const [hangOn, setHangOn] = useState(true);
+      const [hangFace, setHangFace] = useState("serif");
+
+      // 10.5 Token layers
+      const [activeLayer, setActiveLayer] = useState(3);
+      const tokenLayers = [
+        { name: "1. Base Palette", ns: "--{hue}-{stop}", rule: "9 色相 × 36 阶网格，0 = #ffffff / 900 = #0b0b0b，跨明暗不变", use: "组件禁用" },
+        { name: "2. Theme Ramps", ns: "--neutral-N / --alpha-N", rule: "深色下 neutral-N → gray-(900-N) 自动反转；alpha 为 neutral-900 的 5%~95%", use: "组件禁用" },
+        { name: "3. Elevation", ns: "--surface-{0..3}", rule: "明暗均守“0 最暗 → 3 最亮”；Light gray-20/10/0/0，Dark gray-900/850/830/800", use: "Surface 重映射" },
+        { name: "4. Purpose", ns: "--text-* / --fill-* / --bg-* / --border-*", rule: "accent 蓝 · brand 陶土 · danger · success · warning · pro 紫；fill 实心 vs bg 淡彩", use: "组件唯一可消费层" },
+        { name: "5. Density", ns: "--h-control* / --pad-* / --gap-*", rule: "CdsRoot [data-density] 单开关：compact（工作台）/ comfortable（消费级）", use: "尺寸消费层" },
+        { name: "6. Motion", ns: "--dur-* / --ease-*", rule: "fast 60ms · snap 120ms · base 200ms · sheet 300ms · slow 450ms；与主题、密度解耦", use: "动效消费层" },
+      ];
+      const cove = ["Blue", "Orange", "Aqua", "Yellow", "Magenta", "Green", "Violet", "Red"];
+      const coveBars = [62, 48, 40, 33, 27, 21, 15, 9];
+
+      // 10.6 Native surfaces
+      const [hudMode, setHudMode] = useState("dictate"); // tell | dictate
+      const [recording, setRecording] = useState(true);
+
+      const hangText = (q) => hangOn ? <span data-hang-quote={q}>{q === "dq" ? "“" : "‘"}</span> : (q === "dq" ? "“" : "‘");
+
+      return (
+        <div className="space-y-6">
+          {/* Top Banner */}
+          <div className="p-5 rounded-2xl border border-clay/20 bg-gradient-to-r from-clay/5 via-sky-500/5 to-transparent flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="size-11 rounded-xl bg-clay text-white flex items-center justify-center shadow-md shrink-0">
+                <Icon name="sparkles" size="md" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h4 className="text-base font-bold text-neutral-900 dark:text-neutral-100">
+                    Claude Desktop v2.42304.0 设计美学与 CDS 官方真值
+                  </h4>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 font-bold">
+                    REA Ground Truth
+                  </span>
+                </div>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 max-w-2xl leading-relaxed">
+                  Windows MSIX <code className="font-mono">Claude_2.42304.0.0_x64__pzs8sxrjxfjjc</code>：悬浮输入框三态变形、16 阶非线性遮罩、环形配额仪表三阶双搏心跳、Oklab 纸张光泽、文档刻度尺、5 字体光学悬挂标点、官方 6 层令牌模型与 Cove 8 色色板。以下关键帧与令牌均为 <code className="font-mono">ion-dist/assets/v1/*.css</code> 原文数值。
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col items-start md:items-end gap-1 shrink-0 font-mono text-[10px] text-neutral-400">
+              <span className="text-xs font-bold px-2 py-1 rounded bg-neutral-200/60 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">Build: 2026-10-15 · CLI 2.1.299</span>
+              <span>commit e7f60e65 · app.asar 8f4d3dec…</span>
+            </div>
+          </div>
+
+          {/* 10.1 FloatingComposer + 10.2 URM */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <ComponentShowcase
+              title="悬浮输入框三态几何变形 (FloatingComposer)"
+              tag=".fc-holder[data-fc-state]"
+              description="handle（2rem 圆点）→ pill（2.5rem 胶囊）→ composer（clip-path 从胶囊内缩框展开为 0.875rem 圆角外框）。点击“抵达光环”重放 -95° → 265° 圆锥流光边环（@property --fc-edge-turn 驱动）；底部为 15rem、16 个 color-mix() 采样点的非线性渐隐遮罩。"
+              code={`.fc-holder { --fc-d: var(--cds-dur-snap); /* 120ms */ --fc-e: var(--cds-ease-snap); /* cubic-bezier(.32,.72,0,1) */ }
+@keyframes fc-reveal {
+  0% { clip-path: inset(calc(50% - var(--fc-pill-h)/2) calc(50% - var(--fc-pill-w)/2) ... round calc(var(--fc-pill-h)/2)); opacity: .4 }
+  to { clip-path: inset(-2rem round var(--cds-radius-composer)); opacity: 1 }
+}
+@keyframes fc-arrive-ring { 0% { --fc-edge-turn: -95deg; opacity: 0 } 12%,88% { opacity: 1 } to { --fc-edge-turn: 265deg; opacity: 0 } }
+.fc-scrim { height: 15rem; background-image: linear-gradient(to bottom,
+  0% 0%, 1.3% 8.1%, 4.9% 15.5%, 10.4% 22.5%, 17.5% 29%, 25.9% 35.3%, 35.2% 41.2%, 45% 47.1%,
+  55% 52.9%, 64.8% 58.8%, 74.1% 64.7%, 82.5% 71%, 89.6% 77.5%, 95.1% 84.5%, 98.7% 91.9%, 100% 100%) }`}
+            >
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {["handle", "pill", "composer"].map((s) => (
+                    <button key={s} onClick={() => setFcState(s)} className={"h-7 px-2.5 rounded-md text-[11px] font-mono transition-colors " + (fcState === s ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700")}>{s}</button>
+                  ))}
+                  <button onClick={() => setFcArriveKey((k) => k + 1)} className="h-7 px-2.5 rounded-md text-[11px] font-mono bg-clay/10 text-clay hover:bg-clay/20">抵达光环 ↻</button>
+                  <label className="ml-auto flex items-center gap-1.5 text-[11px] text-neutral-500 cursor-pointer">
+                    <input type="checkbox" checked={scrimOn} onChange={(e) => setScrimOn(e.target.checked)} /> 16 阶 scrim
+                  </label>
+                </div>
+                <div className="relative h-56 rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-800" style={{ background: "var(--cds-surface-2)" }}>
+                  <div className="p-4 space-y-2 text-[12px] leading-relaxed text-neutral-500 dark:text-neutral-400 font-serif">
+                    {Array.from({ length: 9 }).map((_, i) => (
+                      <p key={i}>长文档滚动内容第 {i + 1} 段：悬浮输入框下方的正文通过非线性 scrim 无断层地淡出，避免生硬的分界线。</p>
+                    ))}
+                  </div>
+                  <div className="fc-scrim" data-fc-on={scrimOn ? "" : undefined} style={{ height: "9rem" }} />
+                  <div className="absolute inset-x-4 bottom-4 h-[88px]">
+                    <div key={fcArriveKey} className="fc-holder w-full h-full" data-fc-state={fcState} data-fc-arrive={fcArriveKey ? "" : undefined}>
+                      <button
+                        className="fc-morph flex items-center justify-center gap-2 text-[12px] text-neutral-600 dark:text-neutral-300 overflow-hidden"
+                        onClick={() => setFcState(fcState === "handle" ? "pill" : "composer")}
+                        style={{ pointerEvents: fcState === "composer" ? "none" : "auto" }}
+                      >
+                        <Icon name="chat" size="xs" />
+                        {fcState === "pill" && <span className="whitespace-nowrap">Reply…</span>}
+                      </button>
+                      <div className="fc-composer absolute inset-0 rounded-[0.875rem] bg-white dark:bg-[#222220] shadow-composer flex flex-col justify-between p-3">
+                        <span className="text-[12px] text-neutral-400">Reply to Claude…</span>
+                        <div className="flex items-center justify-between">
+                          <button onClick={() => setFcState("pill")} className="text-[11px] font-mono text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200">收起 → pill</button>
+                          <span className="size-7 rounded-lg bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 flex items-center justify-center"><Icon name="arrowRight" size="xs" /></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ComponentShowcase>
+
+            <ComponentShowcase
+              title="环形配额仪表与三阶生理心跳 (Usage Ring Meter)"
+              tag=".urm[data-beat]"
+              description="不是正弦缩放，而是逐帧采样的“主搏 + 次搏”心电双峰：Warning 2.3s、Critical 1.45s、Limit 2.45s（四峰，峰值 scale(1.0458)，光晕 opacity .329）。入场为 2×450ms overshoot 弧线绘制；点击“彗星”重放 2s 呼吸 + 彗星尾迹。"
+              code={`.urm[data-beat="1"] .urm__beat { animation: 2.3s linear urm-beat-warning }
+.urm[data-beat="2"] .urm__beat { animation: 1.45s linear urm-beat-critical }
+.urm[data-beat="3"] .urm__beat { animation: 2.45s linear urm-beat-limit }
+@keyframes urm-beat-warning { 0% {scale(1)} 27.13% {scale(1.0352)} 39.57% {scale(1.0006)}
+  52% {scale(1.0004)} 67.83% {scale(1.0192)} 83.65% {scale(1.0004)} to {scale(1)} } /* 19 stops */
+.urm[data-entrance=draw] [data-ring-arc] { animation: urm-arc-sweep calc(2 * var(--cds-dur-slow)) var(--cds-ease-overshoot) backwards }
+.urm[data-shimmer] .urm__breath { animation: 1.5s ease-in-out urm-breath } /* 50% scale(1.0384) */
+.urm[data-shimmer] .urm__comet  { animation: 2s linear urm-comet-travel, 2s linear urm-comet-fade }`}
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-around py-6">
+                  {beatMeta.map((m, i) => (
+                    <button key={i} onClick={() => setUrmBeat(i)} className={"flex flex-col items-center gap-3 p-2 rounded-lg transition-colors " + (urmBeat === i ? "bg-neutral-100 dark:bg-neutral-800" : "")}>
+                      <UsageRingMeter value={m.value} beat={i} shimmerKey={urmBeat === i ? urmShimmer : 0} entranceKey={urmEntrance} />
+                      <span className="text-[11px] font-mono text-neutral-500">{m.label}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-[11px] text-neutral-500 dark:text-neutral-400">{beatMeta[urmBeat].label}：{beatMeta[urmBeat].desc}</p>
+                  <div className="flex gap-1.5 shrink-0">
+                    <button onClick={() => setUrmShimmer((k) => k + 1)} className="h-7 px-2.5 rounded-md text-[11px] font-mono bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">彗星 ↻</button>
+                    <button onClick={() => setUrmEntrance((k) => k + 1)} className="h-7 px-2.5 rounded-md text-[11px] font-mono bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">入场 ↻</button>
+                  </div>
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          {/* 10.3 Sheet card + Document rail */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <ComponentShowcase
+              title="Oklab 光泽纸张卡片 (Sheet Card)"
+              tag="[data-sheet-kind]"
+              description="悬停时光源角度 165° → 200°、光束触达 55% → 70%（在 Oklab 感知均匀空间插值，450ms）；衬页以 (50%, 62px) 为轴逆时针微旋 -4° 并左移 2px，呈现纸张叠放翻开的层次。"
+              code={`.sheet-card-page { background-image: linear-gradient(var(--sheet-card-light-angle, 165deg) in oklab,
+  rgb(255 255 255 / var(--sheet-card-lit, .55)) 0%, transparent var(--sheet-card-light-reach, 55%)) }
+.sheet-card-page:hover { --sheet-card-light-angle: 200deg; --sheet-card-light-reach: 70% }
+.sheet-card-under:hover { opacity: .7; transform: translate(-2px) translateY(62px) rotate(-4deg) translateY(-62px) }`}
+            >
+              <div className="flex items-center justify-center gap-8 py-6">
+                {["Artifact.md", "Report.csv", "Plan.docx"].map((name, i) => (
+                  <div key={name} className="sheet-card relative w-[92px] h-[120px] cursor-pointer">
+                    <div className="sheet-card-under absolute inset-0 rounded-md border border-neutral-200 dark:border-neutral-700" />
+                    <div className="sheet-card-page absolute inset-0 rounded-md border border-neutral-200 dark:border-neutral-700 shadow-sm p-3 flex flex-col gap-1.5">
+                      <span className="h-[3px] w-10 rounded-[.5px] bg-neutral-900/35 dark:bg-white/35" />
+                      {[22, 26, 18, 24, 14].map((w, j) => <span key={j} className="h-px bg-neutral-900/25 dark:bg-white/25" style={{ width: w * 2.4 }} />)}
+                      <span className="mt-auto text-[10px] font-mono text-neutral-400">{name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ComponentShowcase>
+
+            <ComponentShowcase
+              title="Epitaxy 文档阅读刻度尺 (Document Rail)"
+              tag=".epitaxy-document-rail-ticks"
+              description="18px × 2px 刻度：正文级 scale(.777778)，一级子标题 scale(.5) + 3px 缩进，二级 scale(.3333) + 6px；已读变 muted，当前段落变强调蓝并纵向加粗 scale(1, 1.5)。仅在页边距大于 4.75rem 时浮现。"
+              code={`.epitaxy-document-rail-ticks > li > span { width: 18px; height: 2px; border-radius: 2px; scale: .777778 1; background: var(--cds-text-disabled) }
+.epitaxy-document-rail-ticks > li[data-level="1"] > span { translate: 3px; scale: .5 1 }
+.epitaxy-document-rail-ticks > li[data-level="2"] > span { translate: 6px; scale: .333333 1 }
+.epitaxy-document-rail-ticks > li[data-current] > span { background: var(--cds-text-accent); translate: 0; scale: 1 1.5 }
+--document-rail-room: calc((var(--document-gutter) - var(--document-rail-min-gutter /* 4.75rem */)) * 9999)`}
+            >
+              <div className="flex gap-4 items-start">
+                <ul className="epitaxy-document-rail-ticks shrink-0" style={{ "--document-rail-tick": "12px" }}>
+                  {railHeadings.map((h, i) => (
+                    <li key={i} data-level={h.level || undefined} data-read={i < railCurrent ? "" : undefined} data-current={i === railCurrent ? "" : undefined} onClick={() => setRailCurrent(i)} title={h.title}>
+                      <span />
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex-1 text-[12px] space-y-1">
+                  {railHeadings.map((h, i) => (
+                    <button key={i} onClick={() => setRailCurrent(i)} className={"block text-left w-full truncate transition-colors " + (i === railCurrent ? "text-sky-600 dark:text-sky-400 font-semibold" : i < railCurrent ? "text-neutral-400" : "text-neutral-600 dark:text-neutral-300")} style={{ paddingLeft: h.level * 12 }}>
+                      {h.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          {/* 10.4 Hanging punctuation */}
+          <ComponentShowcase
+            title="5 字体光学悬挂标点 (Optical Hanging Punctuation)"
+            tag="[data-hang-face]"
+            description="段落以引号开头时，按字体实测的引号宽度（serif 常规 .4155em / 粗体 .4855em，sans .397em / .455em）以负 margin 悬挂进最多 12px 的页边留白（blockquote 8px，列表与表格 0），标题再乘以 .97 / .986 的层级系数，实现印刷级光学左对齐。左侧竖线为文本基准边。"
+            code={`[data-hang-face] { --reply-hang-room: 12px } [data-hang-face] blockquote { --reply-hang-room: 8px }
+[data-hang-face=serif] { --hq-dq: .4155em; --hq-dq-b: .4855em; --hq-sq: .229em; --hq-kern-oJ: -.18em; --hq-h1: .97; --hq-h2: .986 }
+span[data-hang-quote] {
+  --hq-hang: clamp(0px, (var(--hq-1) + var(--hq-2) + var(--hq-next)) * var(--hq-level, 1), var(--reply-hang-room));
+  margin-inline-start: calc(-1 * var(--hq-hang));
+}`}
+          >
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center gap-1.5">
+                <button onClick={() => setHangOn(!hangOn)} className={"h-7 px-2.5 rounded-md text-[11px] font-mono " + (hangOn ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300")}>悬挂：{hangOn ? "开" : "关"}</button>
+                {["serif", "sans"].map((f) => (
+                  <button key={f} onClick={() => setHangFace(f)} className={"h-7 px-2.5 rounded-md text-[11px] font-mono " + (hangFace === f ? "bg-clay/15 text-clay" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300")}>{f}</button>
+                ))}
+                <span className="text-[10px] font-mono text-neutral-400 ml-1">另含 system · atkinson · dyslexia 三套实测矩阵</span>
+              </div>
+              <div data-hang-face={hangFace} className={"pl-6 border-l border-dashed border-sky-400/60 text-neutral-800 dark:text-neutral-200 space-y-2 " + (hangFace === "serif" ? "font-serif" : "font-sans")}>
+                <h2 className="text-2xl font-semibold tracking-tight">{hangText("dq")}Serif is Claude’s voice.”</h2>
+                <p className="text-[15px] leading-relaxed">{hangText("dq")}Clay is Claude’s color.” 陶土色只留给 Claude 主动发起的动作与火花标记；用户的主操作使用中性主色或蓝色强调。引号悬挂之后，文字的竖直边缘与上方标题严格对齐。</p>
+                <blockquote className="pl-4 border-l-2 border-neutral-200 dark:border-neutral-700 text-[14px] text-neutral-500 dark:text-neutral-400">{hangText("sq")}引用块内的悬挂空间收窄为 8px’，避免引号越过引用竖线。</blockquote>
+              </div>
+            </div>
+          </ComponentShowcase>
+
+          {/* 10.5 Token layers + Cove */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <ComponentShowcase
+              title="官方 @ant/cds 六层令牌模型"
+              tag="gen-cds-skill.mjs"
+              description="由 apps/cds-docs/scripts/gen-cds-skill.mjs 从 packages/cds/{CLAUDE.md,docs/**} 生成并内嵌于 index.chunk-BYMGAPtw.js。组件只能消费第 4 层 Purpose 及以上；1、2 层是内部接线。"
+              code={`/* 半透明芯片逆混色：叠在 surface-1 上后与不透明 bg-{role} 视觉一致 */
+--bg-tint-blue: rgb(from var(--blue-100) calc((r - 163.8) / 0.35) calc((g - 163.8) / 0.35) calc((b - 163.15) / 0.35) / 35%); /* light */
+--bg-tint-blue: rgb(from var(--blue-800) calc((r - 5.25) / 0.75) calc((g - 5.25) / 0.75) calc((b - 5.25) / 0.75) / 75%);       /* dark  */`}
+            >
+              <div className="space-y-1">
+                {tokenLayers.map((l, i) => (
+                  <button key={i} onClick={() => setActiveLayer(i)} className={"w-full text-left px-3 py-2 rounded-lg transition-colors " + (activeLayer === i ? "bg-neutral-100 dark:bg-neutral-800" : "hover:bg-neutral-50 dark:hover:bg-neutral-800/50")}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[12px] font-semibold text-neutral-800 dark:text-neutral-100">{l.name}</span>
+                      <span className={"text-[10px] font-mono px-1.5 py-0.5 rounded " + (i === 3 ? "bg-clay/15 text-clay" : "bg-neutral-200/60 dark:bg-neutral-700 text-neutral-500")}>{l.use}</span>
+                    </div>
+                    <code className="text-[10px] font-mono text-neutral-400">{l.ns}</code>
+                    {activeLayer === i && <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">{l.rule}</p>}
+                  </button>
+                ))}
+              </div>
+            </ComponentShowcase>
+
+            <ComponentShowcase
+              title="Cove 8 色分类色板与可视化铁律"
+              tag="--chart-categorical-{1..8}"
+              description="固定顺序取色，禁止循环或生成第 9 色（超出折叠为 Other 或拆分面）。文字永不染序列色，只用 10×10px、2px 圆角色块标识；禁止双 Y 轴；禁止对文本用 opacity。切换深色模式可看到每个槽位的深色值。"
+              code={`--chart-categorical-1: #2a78d6; /* dark #3987e5 */  --chart-categorical-2: #eb6834; /* #d95926 */
+--chart-categorical-3: #1baf7a; /* #199e70 */       --chart-categorical-4: #eda100; /* #c98500 */
+--chart-categorical-5: #e87ba4; /* #d55181 */       --chart-categorical-6: #008300; /* #008300 */
+--chart-categorical-7: #6250d6; /* #9085e9 */       --chart-categorical-8: #e34948; /* #e66767 */`}
+            >
+              <div className="space-y-4">
+                <div className="flex items-end gap-2 h-28">
+                  {coveBars.map((v, i) => (
+                    <div key={i} className="flex-1 rounded-t-[2px]" style={{ height: `${v * 1.6}%`, background: `var(--chart-categorical-${i + 1})` }} />
+                  ))}
+                </div>
+                <div className="grid grid-cols-4 gap-x-3 gap-y-1.5">
+                  {cove.map((name, i) => (
+                    <div key={name} className="flex items-center gap-1.5 text-[11px] text-neutral-600 dark:text-neutral-300">
+                      <span className="size-[10px] rounded-[2px] shrink-0" style={{ background: `var(--chart-categorical-${i + 1})` }} />
+                      <span>{i + 1}. {name}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-baseline gap-2 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span className="font-serif text-5xl tabular-nums text-neutral-900 dark:text-neutral-100" style={{ fontVariantNumeric: "tabular-nums lining-nums" }}>2,847</span>
+                  <span className="text-[11px] text-neutral-500">Hero Number · --font-voice ≥ 48px</span>
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          {/* 10.6 Native desktop surfaces */}
+          <ComponentShowcase
+            title="桌面全局多模态交互壳层 (SableOtter HUD · CuWatchRecord)"
+            tag=".vite/renderer/*"
+            description="SableOtter：跟随任意应用输入光标弹出的 Strip 胶囊（18px 圆角、最大 590px），5 柱对称电平表 height = 4 + 12 × level px，指令紫 #6b5ec7 / 听写陶土 #d97757。CuWatchRecord：底部暗色毛玻璃胶囊 rgba(21,21,21,.95)、12px 圆角、blur(10px)、8px 陶土脉冲点。另含 CuTeach 教学浮层、Hardware Buddy BLE 终端与 ClawdQuest 断网彩蛋（详见 v2 文档 2.14）。"
+            code={`/* SableOtter strip (index.chunk-BN7PaJ_P.js) */
+.strip { border-radius: 18px; max-width: 590px; background: rgba(255,255,255,.97) /* dark rgba(38,38,36,.97) */ }
+--tell: #6b5ec7; --dictate: #d97757; bar.height = 4 + 12 * level + 'px'
+/* CuWatchRecord pill (computerUseWatchRecord.js) */
+.pill { background: rgba(21,21,21,.95); border-radius: 12px; backdrop-filter: blur(10px) }`}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              <div className="space-y-3">
+                <div className="flex gap-1.5">
+                  {[["tell", "Tell 指令"], ["dictate", "Dictate 听写"]].map(([k, label]) => (
+                    <button key={k} onClick={() => setHudMode(k)} className={"h-7 px-2.5 rounded-md text-[11px] font-mono " + (hudMode === k ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300")}>{label}</button>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 h-11 px-4 max-w-[590px] rounded-[18px] bg-white/[.97] dark:bg-[rgba(38,38,36,.97)] shadow-popover">
+                  <span className="size-2 rounded-full" style={{ background: hudMode === "tell" ? "#6b5ec7" : "#d97757" }} />
+                  <div className="flex items-center gap-[3px] h-4">
+                    {[0.35, 0.7, 1, 0.7, 0.35].map((lvl, i) => (
+                      <span key={i} className="w-[3px] rounded-full" style={{ "--lvl": lvl, background: hudMode === "tell" ? "#6b5ec7" : "#d97757", animation: `sable-level ${0.9 + i * 0.07}s ease-in-out infinite` }} />
+                    ))}
+                  </div>
+                  <span className="text-[12px] text-neutral-500 truncate">{hudMode === "tell" ? "把这段话改写得更正式…" : "正在听写…"}</span>
+                  <span className="ml-auto text-[10px] font-mono text-neutral-400">esc</span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <div className="flex items-center gap-3 h-12 px-4 rounded-xl text-white text-[12px]" style={{ background: "rgba(21,21,21,.95)", backdropFilter: "blur(10px)" }}>
+                  <span className="size-2 rounded-full bg-clay" style={recording ? { animation: "dframe-dot-pulse 1.4s ease-in-out infinite" } : {}} />
+                  <span>{recording ? "Recording a skill · 00:42" : "Processing…"}</span>
+                  <button onClick={() => setRecording(!recording)} className="ml-2 h-7 px-2.5 rounded-md bg-white/10 hover:bg-white/20 text-[11px]">{recording ? "Stop" : "Resume"}</button>
+                </div>
+                <span className="text-[10px] font-mono text-neutral-400">CuWatchRecord · 472 × 112 窗口含阴影余量</span>
+              </div>
+            </div>
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
     function App() {
       const [isDark, setIsDark] = useState(false);
       const [isXray, setIsXray] = useState(false);
@@ -3901,7 +4444,8 @@ export const irradiationCompensation = {
         { id: "overlays", name: "06. 弹窗与浮层 (Overlays)" },
         { id: "motion", name: "07. 动效与物理 (Motion)" },
         { id: "borders", name: "08. 边界哲学 (Borders & Anti-Bloat)" },
-        { id: "v2-lab", name: "09. 2.0 工业级实验室 (Desktop 2.0 Lab) ✨" },
+        { id: "v2-lab", name: "09. 2.0 工业级实验室 (Desktop 2.0 Lab)" },
+        { id: "v242304", name: "10. v2.42304.0 设计美学 (REA Ground Truth) ✨" },
       ];
 
       return (
@@ -3920,7 +4464,7 @@ export const irradiationCompensation = {
                       Claude Design System (CDS 2.0)
                     </h1>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-clay/10 text-clay font-semibold">
-                      v2.37337.1 Production
+                      v2.42304.0 Production
                     </span>
                   </div>
                   <p className="text-[11px] text-neutral-400 hidden sm:block">
@@ -4104,13 +4648,28 @@ export const irradiationCompensation = {
                 <Desktop20LabSection />
               </div>
             </section>
+
+            {/* 10. Claude Desktop v2.42304.0 Design Aesthetics */}
+            <section>
+              <SectionHeader
+                id="v242304"
+                number="10"
+                title="Claude Desktop v2.42304.0 设计美学"
+                enTitle="v2.42304.0 Design Aesthetics & @ant/cds Ground Truth"
+                description="基于 REA 对 Windows MSIX v2.42304.0（Build 2026-10-15，commit e7f60e65）ion-dist 原文 CSS 的复核：悬浮输入框三态变形与 16 阶渐隐遮罩、环形配额仪表三阶双搏心跳、Oklab 纸张光泽与文档刻度尺、5 字体光学悬挂标点、官方 6 层令牌模型、Cove 8 色色板与桌面全局交互壳层。"
+                badge="v2.42304.0 REA"
+              />
+              <div className="mt-6">
+                <DesktopV242304Section />
+              </div>
+            </section>
           </main>
 
           {/* Footer */}
           <footer className="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#111110] py-8 text-center text-xs text-neutral-400 font-mono">
             <div>Claude Design System (CDS 2.0) • All-in-One Component Showcase</div>
             <div className="mt-1 text-[11px] text-neutral-500">
-              Extracted directly from production Claude.app v2.37337.1 • 33 Production Components & Full Physics Engines • Zero external bundle dependency
+              Extracted directly from production Claude Desktop v2.42304.0 (baseline v2.37337.1) • 52 data-cds Namespaces • 152 Keyframes & Full Physics Engines • Zero external bundle dependency
             </div>
           </footer>
         </div>
