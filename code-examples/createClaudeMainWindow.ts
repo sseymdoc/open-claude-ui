@@ -1,6 +1,6 @@
 /**
  * 维度四：macOS 桌面深度融合与窗口材质物理学
- * 逆向还原自 Claude Desktop: app.asar / index.chunk-CiiI592G.js
+ * 逆向还原自 Claude Desktop 2.42304.0.0: app.asar / .vite/build/index.chunk-lzaSYO3Q.js
  * 
  * 核心特性：
  * 1. BaseWindow / BrowserWindow + WebContentsView 双层解耦架构
@@ -12,8 +12,8 @@
 import { BrowserWindow, WebContentsView, nativeTheme } from 'electron';
 import path from 'path';
 
-const TRAFFIC_LIGHT_DIAMETER = 12; // fBn: 12px 标准按钮直径
-const TRAFFIC_LIGHT_BASELINE = 16.5; // gBn: 33 / 2, 标准 45px 顶栏下的物理中心基准线
+const TRAFFIC_LIGHT_DIAMETER = 12; // FIi: 12px 标准按钮直径
+const TRAFFIC_LIGHT_BASELINE = 16.5; // LIi: 33 / 2, 红绿灯中心基准线
 
 // 核心红绿灯缩放几何补偿算法
 function getCompensatedTrafficLightPosition(zoomFactor: number) {

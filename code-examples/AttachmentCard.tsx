@@ -1,7 +1,7 @@
 /**
  * Claude Design System (CDS) - File Attachment Tile & Chip
  * 
- * 逆向溯源：依据 REA v6.5.0 对 Claude Desktop 生产环境 (shared-2-Cb74JByF.js / c6a992d55-sXiDGMFQ.css)
+ * 逆向溯源：依据 Claude Desktop 2.42304.0.0 安装包 (shared-2-Cb74JByF.js / c6a992d55-sXiDGMFQ.css)
  * 提取的 data-cds="MessageAttachmentsFile" 与附件预览磁贴规范。
  * 
  * 核心规范：

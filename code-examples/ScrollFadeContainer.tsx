@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
  * ==============================================================================
  * Claude Design System (CDS) - ScrollFadeContainer.tsx
  * 
- * 逆向还原自官方 Claude Desktop / Web 边缘平滑渐变遮罩系统 (REA v6.5.0 取证):
+ * 逆向还原自官方 Claude Desktop / Web 边缘平滑渐变遮罩系统 (Claude Desktop 2.42304.0.0 取证):
  * - `frame-shell-chrome-CAw-tYzh.js`: --cds-scroll-fade-size (28px) / --cds-scroll-fade-top-raw / active flags
  * - `c6a992d55-sXiDGMFQ.css`: 7 档非线性 Alpha 渐变遮罩 (7-Stop Non-Linear Alpha Mask)
  * 

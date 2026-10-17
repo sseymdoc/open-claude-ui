@@ -1,7 +1,7 @@
 /**
  * Claude Design System (CDS) - Chat Composer Terminal
  * 
- * 逆向溯源：提取自 /Applications/Claude.app ion-dist 生产环境输入终端实现。
+ * 逆向溯源：Claude Desktop 2.42304.0.0 安装包 CSS (c6a992d55-sXiDGMFQ.css) 与 claude.ai 实测的输入框实现。
  * 核心规范：
  *   - .875rem 圆角 (--cds-radius-composer：comfortable 14px，compact .75rem = 12px；claude.ai 实测)
  *   - 三态双环动态弥散投影 (--cds-shadow-composer, :hover, :focus-within)
@@ -27,15 +27,16 @@ export interface ChatComposerProps {
 }
 
 export const CLAUDE_MODELS = [
-  { id: "claude-3-7-sonnet", name: "Claude 3.7 Sonnet", badge: "Smartest" },
-  { id: "claude-3-5-haiku", name: "Claude 3.5 Haiku", badge: "Fastest" },
-  { id: "claude-3-opus", name: "Claude 3 Opus", badge: "Legacy" },
+  { id: "claude-fable-5-1", name: "Fable 5.1", badge: "应对您最艰巨的挑战" },
+  { id: "claude-opus-5-5", name: "Opus 5.5", badge: "适用于复杂工作与日常任务" },
+  { id: "claude-sonnet-5-5", name: "Sonnet 5.5", badge: "处理简单任务效率最高" },
+  { id: "claude-haiku-5-5", name: "Haiku 5.5", badge: "快速解答的最佳选择" },
 ];
 
 export function ChatComposer({
   onSendMessage,
   placeholder = "Reply to Claude... (Shift + Enter to insert line break)",
-  initialModel = "Claude 3.7 Sonnet",
+  initialModel = "Opus 5.5",
   className = "",
 }: ChatComposerProps) {
   const [inputText, setInputText] = useState("");

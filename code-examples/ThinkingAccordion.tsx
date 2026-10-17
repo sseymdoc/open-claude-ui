@@ -1,12 +1,12 @@
 /**
  * Claude Design System (CDS) - ThinkingAccordion.tsx
  * 
- * 逆向溯源：基于 REA v6.5.0 对 /Applications/Claude.app (@ant/desktop v2.37337.1) 取证：
+ * 逆向溯源：基于 Claude Desktop 2.42304.0.0 安装包取证：
  * - `cc1aae219-DtZTxCKj.css`: .timeline-quiet-dots / .timeline-expand / .timeline-status-*
  * - `shared-2-Cb74JByF.js`: 思考流状态互斥锁与时间轴动画
  * 
  * 核心真实生产规范：
- * 1. 3点静默跳跃指示波浪 (REA 取证自 cc1aae219-DtZTxCKj.css):
+ * 1. 3点静默跳跃指示波浪 (取证自 cc1aae219-DtZTxCKj.css):
  *    - 间距 3.5px，尺寸 3px 圆点，背景 var(--cds-clay, #d97757)
  *    - 延迟：0s / 0.15s / 0.3s
  *    - 曲线：1.9s cubic-bezier(.4, 0, .2, 1) infinite timeline-quiet-dot

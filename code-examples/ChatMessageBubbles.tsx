@@ -1,7 +1,7 @@
 /**
  * Claude Design System (CDS) - Message Bubbles (User & Assistant)
  * 
- * 逆向溯源：基于 REA v6.5.0 对 /Applications/Claude.app (@ant/desktop v2.37337.1) 取证：
+ * 逆向溯源：基于 Claude Desktop 2.42304.0.0 安装包取证：
  * - `frame-shell-chrome-CAw-tYzh.js`: [data-cds=UserMessage] / [data-cds=AssistantMessage] 结构规范与 CSS 自定义属性
  * - `shared-2-Cb74JByF.js`: UX (UserMessage) 消息折叠、双向对齐与操作栏浮动
  * - `shared-styles-Bl9zqrv-.css`: --chat-turn-gap, --chat-item-gap, --chat-leading 排版律动
@@ -234,7 +234,7 @@ export function UserMessageBubble({
 export function AssistantMessageBubble({
   text,
   time = "Just now",
-  modelName = "Sonnet 3.7",
+  modelName = "Opus 5.5",
   textSize = "md",
   thinkingTime,
   thinkingSteps,

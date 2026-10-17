@@ -44,7 +44,7 @@ export * from '../code-examples/ContainerResponsiveBar';
 export * from '../code-examples/useClaudeRovingFocus';
 export * from '../code-examples/useRateLimitBackoff';
 
-// 6. CDS 2.0 Architectural Modules & Reasoning Controls
+// 6. CDS Architectural Modules & Reasoning Controls
 export * from '../code-examples/ModelSelectorEffort';
 export * from '../code-examples/ChatComposerChin';
 export * from '../code-examples/CdsMotionEngine';

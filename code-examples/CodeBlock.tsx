@@ -1,11 +1,10 @@
 /**
  * Claude Design System (CDS) - Code Block & Copy Decay
  * 
- * 逆向溯源：提取自 /Applications/Claude.app ion-dist 代码块容器实现。
  * 核心规范：
  *   - 外壳：严格 12px 圆角 (rounded-xl)，#0d0d0c 纯黑底色，1px 发丝边框
  *   - 头部工具栏：高度 36px，左侧语言标识行内居中 (.align-[-0.125em])
- *   - 复制状态机：点击后变为绿色勾选，静默展示 2.5 秒后平滑淡退 (saved-check-decay)
+ *   - 复制状态机：点击后变为绿色勾选，静默展示 2.5 秒后平滑淡退
  *   - 排版：等宽字体 JetBrains Mono / SF Mono，严格等宽对齐
  */
 

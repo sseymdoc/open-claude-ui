@@ -1,6 +1,6 @@
 /**
  * 维度三：工件预览沙箱与隔离通信架构 (Epitaxy)
- * 逆向还原自 Claude Desktop: c58115fda-BKnbLmi3.js / cd5a31703-B4nKQMBN.js
+ * 逆向还原自 Claude Desktop 2.42304.0.0: c58115fda-ngsZGdlI.js / shared-104-Cqo2-vQh.js
  * 
  * 核心特性：
  * 1. 严格权限沙箱隔离 (严格移除 allow-same-origin，切断 parent DOM 逃逸路径与 Cookie 共享，确保 null-origin 隔离)

@@ -1,7 +1,7 @@
 /**
  * Claude Design System (CDS) - Segmented Control & Pills
  * 
- * 逆向溯源：依据 REA v6.5.0 对 Claude Desktop 生产环境 (shared-styles-Bl9zqrv-.css / shared-frame-CegduNQ2.css)
+ * 逆向溯源：依据 Claude Desktop 2.42304.0.0 安装包 (shared-styles-Bl9zqrv-.css / shared-frame-CegduNQ2.css)
  * 提取的 .df-pills[data-segmented] 完整轨道与滑动指示器规范。
  * 
  * 核心规范：

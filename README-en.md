@@ -27,14 +27,14 @@
 
 ## 📖 Introduction
 
-`open-claude-ui` is a high-fidelity open-source UI component library and motion physics engine, built through in-depth clean-room reverse engineering of the modern desktop AI client.
+`open-claude-ui` is a high-fidelity open-source UI component library and motion physics engine, built from an in-depth clean-room teardown of the **Claude Desktop 2.42304.0.0** package (Windows MSIX `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc`) and runtime measurements of the **claude.ai** web app.
 
-All reverse derivation, de-obfuscation static analysis, and ASAR package deconstruction were conducted using the advanced multi-platform reverse engineering framework **[REA (Reverse Engineer Anything)](https://github.com/morluto/rea)**. Leveraging REA's static AST deconstruction, closure de-obfuscation, and runtime tracing capabilities, we penetrated production bundles to faithfully extract the underlying physical constants, interaction constraints, and mathematical models.
+All reverse derivation, de-obfuscation static analysis, and ASAR package deconstruction were conducted using the multi-platform reverse engineering framework **[REA (Reverse Engineer Anything)](https://github.com/morluto/rea)**. Leveraging REA's static AST deconstruction, closure de-obfuscation, and runtime tracing capabilities, we penetrated production bundles to extract the underlying physical constants, interaction constraints, and mathematical models.
 
-Unlike superficial visual approximations or guesswork replicas, every component specification, damping constant, shader keyframe, and audio pipeline in this project has been **rigorously verified against decompiled production front-end architecture**:
-* **Editorial Warmth**: Signature Clay orange (`#d97757`), a 4-tier micro-contrast surface ladder (Surfaces 0 to 3), and Retina subpixel hairline compensation rings;
-* **Rigorous Interaction Physics**: 4 production-tuned spring physics presets, 4px pointer movement deadzones, CJK IME composition guards, and 7-stop non-linear alpha fade masks;
-* **Audiovisual & Desktop Architecture**: Zero-latency procedural audio synthesis via Web Audio API oscillators, cursor-anchored gallery pan/zoom affine transformations, macOS vibrancy glass fusion, and Cowork multi-agent orchestration topologies.
+Every component specification, damping constant, shader keyframe, and audio pipeline in this project is derived from the 2.42304.0.0 package sources and claude.ai measurements:
+* **Restrained Editorial Warmth**: Neutral black / white primary buttons, Clay (`--cds-fill-brand` `#c6613f`) reserved for the send key and Spark, a cool surface ladder (surface-0 `#f9f9f7` / surface-1 `#fcfcfb`, dark `#0b0b0b` / `#151515`), and Retina hairline compensation;
+* **Rigorous Interaction Physics**: 4 spring physics presets, 4px pointer movement deadzones, CJK IME composition guards, and 7-stop non-linear alpha fade masks;
+* **Audiovisual & Desktop Architecture**: Zero-latency procedural audio synthesis via Web Audio API oscillators, cursor-anchored gallery pan/zoom, macOS traffic-light zoom compensation, and Cowork multi-agent orchestration topologies.
 
 > ⚖️ **Copyright & Asset Compliance (DMCA & Assets Policy)**:  
 > This open-source repository **does not distribute any proprietary binary assets** (including commercial `.ttf` fonts and recorded `.mp3` audio). We provide native system font fallback stacks and procedural Web Audio synthesis algorithms, ensuring a completely self-contained, legal, and clean-room compliant codebase. For details, see [assets/README.md](assets/README.md).
@@ -47,93 +47,45 @@ Unlike superficial visual approximations or guesswork replicas, every component 
 graph TD
     OCUI["open-claude-ui"]
     
-    OCUI --> Tokens["1. Design Philosophy & Token System<br/>(Surfaces 0-3, Clay, Hairlines, System Fonts)"]
+    OCUI --> Tokens["1. Design Philosophy & Token System<br/>(Surfaces, Clay, Hairlines, System Fonts)"]
     OCUI --> Atoms["2. Atomic Interactive Controls<br/>(CdsButton, SegmentedControl, StatusIndicators, Dialog)"]
-    OCUI --> Stream["3. Conversation Stream & Command Engine<br/>(Composer, IME Guard, Model Switcher, MCP Cards)"]
+    OCUI --> Stream["3. Conversation Stream & Command Engine<br/>(Composer, IME Guard, Model & Effort, MCP Cards)"]
     OCUI --> Motion["4. Motion Physics & Shaders<br/>(Spring Physics, Ambient Shimmer, Scroll Fade Masks)"]
     OCUI --> Media["5. Audiovisual & Artifact Interaction<br/>(Synthetic Audio, Lightbox Pan/Zoom, Split Resizer, Epitaxy)"]
-    OCUI --> Desktop["6. Desktop Architecture & Topology<br/>(macOS Vibrancy, Sidebar DnD, Cowork Canvas, A11y Roving)"]
+    OCUI --> Desktop["6. Desktop Architecture & Topology<br/>(Traffic Lights, Sidebar DnD, Cowork Canvas, A11y Roving)"]
     OCUI --> Setup["7. Production Setup & Zero-Binary Delivery<br/>(Tailwind, CSS Themes, Zero-Binary Dependency)"]
 ```
 
-1. **30 Production-Grade Independent Modules**: 11 atomic UI components + 19 deep architecture physics modules and React Hooks. Copy-paste ready with zero black-box dependencies.
+1. **33 Independent Code Modules**: React components, Hooks, and an Electron main-window factory, plus the global theme stylesheet and Tailwind config. Copy-paste ready with zero black-box dependencies.
 2. **Native System Typography & Procedural Audio**: Engineered system font fallback stacks and zero-latency Web Audio oscillator synthesis engines.
-3. **Interactive Offline Storybook Preview**: Single-file offline storybook previewable directly in any browser without spinning up local dev servers.
-4. **Complete 7-Part Technical Engineering Manual**: Accompanied by a 3,000+ line reverse engineering manual: [`docs/Claude Design System (CDS).md`](docs/Claude%20Design%20System%20(CDS).md).
+3. **Interactive Storybook Preview**: A single-file offline storybook with component chapters 01–09 and the claude.ai web measurement page (W0–W15).
+4. **Reverse Engineering Report**: Six chapters in [`docs/v2/`](docs/v2/README.md) (Simplified Chinese), plus a [merged full text](docs/v2/Claude-Desktop-2.42304.0.0-全量分析.full.md).
 
 ---
 
-## 📚 Complete Technical Manual (Seven Volumes)
+## 📚 Technical Report
 
-The crown jewel of this repository is the exhaustive 3,000+ line, 31-chapter reverse engineering manual: [`docs/Claude Design System (CDS).md`](docs/Claude%20Design%20System%20(CDS).md).
+Everything is based on the Claude Desktop 2.42304.0.0 package and claude.ai runtime measurements. See [`docs/README.md`](docs/README.md) for the index:
 
-It documents exact decompilation evidence locations alongside Anthropic's architectural solutions for modern LLM client engineering hurdles:
-
-### 📖 Part 1: Design Philosophy & Design Token System
-* **[1.1 Design Philosophy & Visual Tone](docs/v1/01-设计哲学与设计令牌体系.md#11-设计哲学与视觉调性)**: Editorial Warmth, 4-tier micro-contrast surfaces, and lightweight, high-frame-rate motion.
-* **[1.2 Surface System & Color Ladder](docs/v1/01-设计哲学与设计令牌体系.md#12-表面体系与色彩阶梯)**: Surface 0 to 3 lightness ladder (Light `#f5f5f3` to `#ffffff`, Dark `#0b0b0a` to `#20201e`) and brand Clay (`#d97757`).
-* **[1.3 Control Sizing & Precision Corner Radius Matrix](docs/v1/01-设计哲学与设计令牌体系.md#13-控件尺寸与精密圆角矩阵)**: Precision corner radius hierarchy: Composer 20px, Bubbles 18px, Panels 10px, Buttons 6/8/10px.
-* **[1.4 Hairline Rings, Diffused Glow & Anti-Bloat Borders](docs/v1/01-设计哲学与设计令牌体系.md#14-发丝细边微光阴影与边框防臃肿体系)**: Retina 0.5px hairline ring compensation, single-stroke border discipline, and dual-ring diffused popover shadows.
-* **[1.5 Typography & Optical Icon Alignment Constraints](docs/v1/01-设计哲学与设计令牌体系.md#15-字体排版与图标对齐系统约束)**: Dark mode Retina font-weight de-dilation (counteracting glyph bloom on black backgrounds) and inline icon `-.125em` optical vertical centering.
-* **[1.6 Core Motion Token System](docs/v1/01-设计哲学与设计令牌体系.md#16-基础动效令牌体系)**: Physical time constant matrix (70ms haptic snap, 120ms geometric bite, 300ms panel slide) and asymmetric cubic beziers.
-
-### 🧩 Part 2: Atomic Interactive Controls
-* **[2.1 Universal Button Ladder](docs/v1/02-基础原子组件与交互控件.md#21-全能按钮控件阶梯)**: 4-tier size ladder (XS/SM/MD/LG), 5 variants (Primary/Secondary/Ghost/Outline/Danger), and `active:scale-[0.98]` tactile snap.
-* **[2.2 Segmented Sliding Pill Control](docs/v1/02-基础原子组件与交互控件.md#22-分段滑动选择胶囊)**: 999px fully rounded track, 2px geometric padding, dual mode supporting pure CSS geometric positioning and Framer Motion `layoutId`.
-* **[2.3 Status Indicators & Micro-Motion Suite](docs/v1/02-基础原子组件与交互控件.md#23-状态指示灯与微动效套件)**: Clay breathing indicator (2.4s), live activity pulse (1.2s), 3-dot thinking wave, and 105° slanted skeleton sweep bar.
-* **[2.4 Modal Confirmation Dialog](docs/v1/02-基础原子组件与交互控件.md#24-模态确认对话框)**: 16px corner radius, dual-ring popover shadow, Gaussian blur backdrop, focus trap, and Danger/Default dual variants.
-* **[2.5 Attachment Cards & Context Pills](docs/v1/02-基础原子组件与交互控件.md#25-附件磁贴与上下文胶囊)**: Desktop card grid (128×96px) and composer inline pill dual-mode with `file-thumbnail-grow-in` entrance physics.
-
-### 💬 Part 3: Conversation Stream & Command Interaction Engine
-* **[3.1 Chat Message Bubbles & Typography Specs](docs/v1/03-会话核心流与指令交互引擎.md#31-会话气泡套件与排版规范)**: User bubble with strict 18px radius and subtle tint vs Assistant zero-border transparent layout with synchronized code blocks.
-* **[3.2 Thinking Process Accordion & Temporal State Machine](docs/v1/03-会话核心流与指令交互引擎.md#32-思考过程折叠与时间状态机)**: CSS Grid `0fr -> 1fr` jitter-free spring expansion, enforcing an expansion mutex during active generation (`onOpenChange = undefined`).
-* **[3.3 Next-Gen Rich Text Input Terminal & Command Engine](docs/v1/03-会话核心流与指令交互引擎.md#33-新一代富文本输入框终端与指令交互引擎)**: CJK IME dual-interlock guard, `/` command & `@` context dual triggers, auto-expanding viewport, and token budget estimation.
-* **[3.4 Model Matrix Switcher & Token Gauge Dashboard](docs/v1/03-会话核心流与指令交互引擎.md#34-模型矩阵切换器与-token-计量仪表盘)**: 3-tier model hierarchy, Extended Thinking toggle, 4-color Prompt Caching cost breakdown, and circular SVG gauge.
-* **[3.5 Interactive Tool Calls & MCP Decision Cards](docs/v1/03-会话核心流与指令交互引擎.md#35-交互式工具调用与-mcp-决策卡片)**: Strict 3-state authorization lifecycle (`pending_approval` → `running` → `success` / `error`), 3-tier action button array, and structured payload inspector.
-
-### ⚡ Part 4: Motion Physics, Shaders & Ambient Atmosphere
-* **[4.1 Complete Motion Engine & Keyframe Specifications](docs/v1/04-动效物理学、着色器与环境光影.md#41-全量动效引擎与关键帧规范)**: Exact mathematical analytical solutions for second-order damped harmonic oscillators, 4 production spring presets, and core `@keyframes`.
-* **[4.2 Dynamic Light Effects, Shaders & Reasoning Atmosphere](docs/v1/04-动效物理学、着色器与环境光影.md#42-动态光效着色器与推理氛围感)**: `wl-glow` warm Clay diffuse light field, `cds-shimmer-text-shine` asymmetric bezier sweep, and caustic light field.
-* **[4.3 Smooth Scroll Edge Alpha Mask System](docs/v1/04-动效物理学、着色器与环境光影.md#43-滚动边缘平滑渐变遮罩系统)**: Official 7-stop quintic ease non-linear alpha gradient mask with dynamic scroll sensors (zeroing at edges).
-
-### 🎨 Part 5: Audiovisual Multimedia & Artifact Interaction Physics
-* **[5.1 Voice Mode & Web Audio Physical Acoustics System](docs/v1/05-视听多媒体与产物交互物理学.md#51-语音模式与-web-audio-物理声学系统)**: Procedural Web Audio API oscillator synthesis, 30% soothing gain standard, and 6-band non-linear gamma spectrum bars (with decompiled AudioWorklet architecture analysis).
-* **[5.2 Multimodal Media Viewer & Gallery Runway Physics](docs/v1/05-视听多媒体与产物交互物理学.md#52-多模态媒体查看器与画廊转场物理学)**: View Transitions shared-element morphing, cursor-anchored infinite pan/zoom affine equations, and 75vw runway viewport.
-* **[5.3 Split Pane Resizing & Collapsing Physics](docs/v1/05-视听多媒体与产物交互物理学.md#53-双栏弹性分割与折叠物理学)**: Iframe pointer shield, 4px deadzone, double-click 50/50 spring snap, collapse thresholds, and geometric clamping.
-* **[5.4 Artifact Preview Sandbox & Isolated IPC Architecture](docs/v1/05-视听多媒体与产物交互物理学.md#54-工件预览沙箱与隔离通信架构)**: Epitaxy isolated container, 7 proprietary MIME dispatchers, user-gesture gating, and virtual package redirection.
-* **[5.5 Streaming Code Diff Viewer & Syntax Highlighting Engine](docs/v1/05-视听多媒体与产物交互物理学.md#55-代码差异对比与多线程语法高亮系统)**: Shadow DOM boundary isolation, CSS Grid line-height lock, incremental streaming pipeline, and unified/split dual viewing modes.
-
-### 🖥️ Part 6: System-Level Desktop Architecture & Collaboration Topology
-* **[6.1 macOS Desktop Host Fusion & Window Materials](docs/v1/06-系统级桌面架构与协作拓扑.md#61-macos-桌面宿主深度融合与窗口材质)**: `hiddenInset` titlebar, traffic light counter-scaling geometric compensation, `-webkit-app-region: drag` safe zones, and macOS Vibrancy glass integration.
-* **[6.2 Sidebar Session Drag-and-Drop Reordering & Topology Grid](docs/v1/06-系统级桌面架构与协作拓扑.md#62-侧边栏会话拖放重排与拓扑网格)**: `pinnedOrder` optimistic topological reordering, 4px movement deadzone, tilted ghost drop shadow, and insertion collision indicators.
-* **[6.3 Multi-Agent Collaboration Board & Cowork Topology](docs/v1/06-系统级桌面架构与协作拓扑.md#63-多代理协作看板与-cowork-空间拓扑)**: Multi-agent task delegation state machine, team-shared artifact asset pool, and cross-window `BroadcastChannel` synchronization.
-* **[6.4 Streaming Large-Text Output & Scroll Viewport Physics](docs/v1/06-系统级桌面架构与协作拓扑.md#64-流式大文本输出与滚动视口物理学)**: 150ms cooldown latch against scroll hijacking, 40px bottom-tolerance scroll pin, and GPU subpixel blur elimination.
-* **[6.5 Container Query Responsive Layout & Anti-Squeeze Protection](docs/v1/06-系统级桌面架构与协作拓扑.md#65-容器查询自适应排版与极端防挤压)**: `@container`-driven 4-tier fluid compression matrix (>=576px / <480px / <384px / <320px), preventing single-glyph line wrapping.
-* **[6.6 Full-Keyboard Roving TabIndex & Accessibility](docs/v1/06-系统级桌面架构与协作拓扑.md#66-全键盘盲操网格与无障碍访问)**: W3C WAI-ARIA compliance, roving tabindex focus loop, 2D arrow key grid navigation, and RTL mirroring.
-* **[6.7 Resiliency, Rate Limiting & Circuit Breaker State Machine](docs/v1/06-系统级桌面架构与协作拓扑.md#67-异常容灾模型限流与业务状态机)**: Truncated exponential backoff for 429/503 errors, full jitter injection, and automatic 3-retry circuit breaker recovery.
-
-### 🛠️ Part 7: Engineering Setup & Codebase Overview
-* **[7.1 Out-of-the-Box Tailwind Configuration & Base CSS](docs/v1/07-工程配置与资产代码库总览.md#71-开箱即用的-tailwind-配置与基础-css-代码)**: Complete global theme stylesheet and Tailwind engineering configuration extensions.
-* **[7.2 Production Source Code Inventory](docs/v1/07-工程配置与资产代码库总览.md#72-生产级工程源码清单)**: Full inventory of all 30 standalone production source files (11 atomic controls + 19 architecture modules).
-* **[7.3 Asset Specifications & System-Level Font/Audio Alternatives](docs/v1/07-工程配置与资产代码库总览.md#73-资产规范与系统级字体音频替代方案)**: High-fidelity system font fallback stacks and procedural Web Audio synthesis specifications.
-
-### 🤖 Part 8: AI Agent Frontend UI & Motion Guidelines
-* **[8.1~8.7 Agent Roles, Design Token Contracts & Spring Decision Tree](docs/v1/08-AI-Agent-前端-UI-与动效开发指南.md)**: Standardized guidelines for AI Coding Agents to implement pixel-perfect CDS components.
-
-### 🚀 Claude Desktop 2.0 (v2.37337.1) Comprehensive Reverse Engineering Analysis
-* **[1~6 Overview, Additions, Refactorings, Baseline Secrets, Reference Implementations & Summary](docs/v2/README.md)**: Standalone decompilation report for Claude Desktop 2.0.
+* **[Chapter 1: Overview & Version Boundary](docs/v2/01-综述与版本边界.md)**: Bundled CLI 2.1.299 and MSIX multi-process boundaries, how the desktop app loads the web app, the Clay restraint rule, and the human-voice serif boundary.
+* **[Chapter 2: Core Features](docs/v2/02-核心特性逆向.md)**: Popout windows and window-level find-in-page, the Cowork artifact library allowlist, queued messages, 5 effort levels, FloatingComposer tri-state morphing, `.urm` quota-ring heartbeat, Oklab gloss sheet cards, 5-font optical hanging punctuation, and SableOtter HUD / CuTeach / CuWatchRecord / Hardware Buddy / ClawdQuest.
+* **[Chapter 3: UI Architecture & Style System](docs/v2/03-界面架构与样式系统.md)**: Canvas colors, compact / comfortable radius and density, pill and skeleton micro-interactions, chapter pins, and the Tailwind v4 `@layer cds-card` architecture.
+* **[Chapter 4: System Foundations](docs/v2/04-系统底座全景解密.md)**: 152 pure-CSS keyframes, 52 `data-cds` component namespaces, 5 duration tokens, the official 6-layer token model, and the Cove 8-color data-visualization palette.
+* **[Chapter 5: Reference Implementations](docs/v2/05-生产级参考实现代码.md)**: `ModelSelectorEffort.tsx`, `ChatComposerChin.tsx`, `CdsMotionEngine.tsx`.
+* **[Chapter 6: Summary](docs/v2/06-总结.md)**: Structural standardization, physics-driven motion, and desktop-native integration.
+* **[claude.ai Web Measurements](docs/claude-components-storybook.html#claude-ai-web)**: Shell coordinates, sidebar, composer, menus, message stream, button anatomy, icon font, motion durations, tokens, login page, hidden mechanisms, plus the desktop comparison, Code session lineage, and thinking state machine (W0–W15).
 
 ---
 
 ## 🔬 Decompiled Algorithms & Engineering Physics
 
-UI components are merely the presentation layer. **What truly sets Claude's interaction quality apart are the mathematical models and physics equations buried beneath minified production code**. This repository decompiled and faithfully recreated 8 core algorithms:
+UI components are just the surface. **What makes the Claude interaction feel unique are the physical equations and mathematical models buried inside the obfuscated code.** Each of the 8 algorithms below was traced to its source in the 2.42304.0.0 package:
 
 ### 1. 7-Stop Non-Linear Alpha Gradient Fade Mask
-* **The Problem**: Conventional two-stop linear scroll masks cause harsh color banding and jarring geometric cutoffs on high-DPI Retina displays.
-* **Claude's Algorithm**: Discards blunt linear cuts in favor of 7 non-linear gradient stops across the fade distance (15% position with 5.1% alpha `#0d`, 30% with 14.9% `#26`, 45% with 30.2% `#4d`, 60% with 50.2% `#80`, 75% with 70.2% `#b3`, 87% with 85.1% `#d9`, closely tracking a $y \approx x^{1.5}$ power curve), dynamically zeroed out by scroll boundary sensors at the top and bottom:
+* **Pain Point**: Standard two-color linear scroll masks cause color banding and harsh cut-offs on high-DPI displays.
+* **Claude's Algorithm**: Within the feather distance (`--cds-scroll-fade-size`, 28px), Claude samples a 7-stop non-linear ladder (Alpha 5.1% `#0d` at 15%, 14.9% `#26` at 30%, 30.2% `#4d` at 45%, 50.2% `#80` at 60%, 70.2% `#b3` at 75%, 85.1% `#d9` at 87%, closely following $y \approx x^{1.5}$). The feather on a side collapses to zero when scrolled to that edge:
 ```css
-/* Extracted from production bundle c6a992d55-C0zTICcS.css */
+/* Extracted from c6a992d55-sXiDGMFQ.css */
 mask-image: linear-gradient(to bottom,
   transparent,
   #0000000d calc(var(--cds-scroll-fade-top) * .15),
@@ -154,37 +106,37 @@ mask-image: linear-gradient(to bottom,
 );
 ```
 
-### 2. Microphone 8% Noise Floor Gating & Procedural Web Audio Engine (Noise Floor Gating & Synthetic SFX)
-* **The Problem**: Ambient room noise (e.g. AC rumble) causes voice visualizers to jitter during silence; additionally, external MP3 audio assets introduce download latency and audio popping on abrupt interruption.
-* **Claude's Algorithm**: First, introduces an 8% noise floor gate (`NOISE_FLOOR = 0.08`) to cut out ambient hum before rendering voice bars; second, synthesizes pleasant interaction chimes using native Web Audio `OscillatorNode` with frequency ramps (e.g. 440Hz → 880Hz) and anti-pop exponential gain ramp smoothing, requiring zero external audio assets.
+### 2. Microphone 8% Noise Floor Gating & Gamma 0.7 Compression
+* **Pain Point**: Mapping raw energy to bar height makes ambient noise jitter constantly and loud input clip.
+* **Claude's Algorithm** (`LiveMicActivityBars`, `c4a1e6da6-OklNVuRg.js`): average energy per frequency band, subtract the noise floor (default `.08`), renormalize, then apply a 0.7 power curve, 1.5× gain, and a per-band weight $W_b$:
+$$\text{Compressed} = \min\left(1, \left(\frac{\max(0, E - 0.08)}{0.92}\right)^{0.7} \times 1.5 \times W_b\right)$$
+Soft speech is gently amplified while loud peaks are naturally tamed.
 
 ### 3. CJK IME Composition Double-Interlock Guard
-* **The Problem**: When Chinese, Japanese, or Korean users press Enter on an IME candidate floating list to confirm phonetic characters, the unfinished message is erroneously sent.
-* **Claude's Algorithm**: Establishes a double-interlock guard checking `!(e.nativeEvent.isComposing || e.keyCode === 229)`, while intercepting `Escape` events inside an event state machine to prevent accidental dialog dismissals when closing candidate palettes.
+* **Pain Point**: CJK users pressing Enter / Escape to confirm or dismiss IME candidates accidentally send messages or close UI.
+* **Claude's Algorithm**: Key handlers first check `e.isComposing || e.keyCode === 229`; the stray Enter that WebKit dispatches right after `compositionend` is caught by `Math.abs(e.timeStamp - compositionEndAt) < 500` (both in `shared-frame-BfjMqbuN.js`). The Escape-to-cancel handler of pane dragging carries the same guard (`shared-22-HztmyUTM.js`).
 
-### 4. 150ms Scroll Pinning Cooldown Latch & 40px Tolerance
-* **The Problem**: While streaming large volumes of tokens, users who scroll up to review previous messages are aggressively dragged back to the bottom.
-* **Claude's Algorithm**: Couples a 40px bottom-tolerance scroll pin with a 150ms manual scroll cooldown latch. Once an intentional upward scroll is detected, auto-scrolling is locked out for 150ms, permanently eliminating "scroll viewport hijacking".
+### 4. 150ms Scroll Pinning Cooldown
+* **Pain Point**: While tokens stream in, users scrolling up to read history get yanked back to the bottom.
+* **Claude's Algorithm** (`ca2ef848d-CWUk7Rll.js`): follow-to-bottom only runs when `performance.now() - getLastUserInputAt() > 150`; programmatic scrolls call `markProgrammaticScroll()` first and then align instantly with `behavior: "auto"`, so they are never mistaken for user input.
 
 ### 5. Cursor-Anchored Affine Pan/Zoom Equation
-* **The Problem**: Standard gallery viewers zoom relative to viewport center, pushing the specific detail under the user's cursor off-screen.
-* **Claude's Algorithm**: Treats the pointer $(O_x, O_y)$ as an invariant physical anchor in screen space, solving the affine transformation matrix:
-$$\text{idealTx} = O_x - (O_x - \text{prevTx}) \cdot \frac{S_{\text{target}}}{S_{\text{current}}}$$
-Integrated with a 4px hand-tremor deadzone and viewport boundary overflow damping ($y = 0.7$).
+* **Pain Point**: Standard galleries zoom around the viewport center, pushing the detail under the cursor off-screen.
+* **Claude's Algorithm** (`c4b054ed5-C43deEXI.js`): treat the cursor $(O_x, O_y)$ (relative to the fit center) as the fixed point:
+$$\text{idealTx}' = O_x - (O_x - \text{idealTx}) \cdot \frac{S_{\text{target}}}{S_{\text{current}}}$$
+The result is clamped to `maxTx`; wheel zoom uses `Math.exp(-deltaY * 0.01)`, and dragging has a `Math.hypot(dx, dy) < 4` deadzone.
 
-### 6. Microphone 6-Band Non-Linear Gamma 0.7 Power Compression
-* **The Problem**: Linearly mapping decibels to bar height causes bass clipping, while ambient room noise (e.g., air conditioning) causes jitter during speech pauses.
-* **Claude's Algorithm**: Introduces an 8% noise floor gate, followed by a 0.7-power non-linear Gamma curve:
-$$\text{Compressed} = \min\left(1, (\max(0, E - 0.08) / 0.92)^{0.7} \times 1.5 \times W_b\right)$$
-Gently boosting quiet vocal nuances while curbing peak saturation for a silky, balanced audio visualizer.
+### 6. macOS Traffic Light Zoom Compensation
+* **Pain Point**: When web content scales with `zoomFactor`, the native traffic lights drift off the title bar's center line.
+* **Claude's Algorithm**: The main process (`.vite/build/index.chunk-lzaSYO3Q.js`) uses a 12px button diameter and a `33 / 2` baseline to compute `Math.max(0, Math.round((16.5 + 6) * zoom - 6))` for `setWindowButtonPosition`; the renderer (`shared-10-THQui8pC.js`) reserves `Math.round(74 / Math.min(zoom, 1))` px, dropping to zero in fullscreen; windowed corners use `setBorderRadius(isMaximized || isFullScreen ? 0 : 8)`.
 
 ### 7. Shadow DOM Isolation + CSS Grid Line-Height Geometric Hard-Lock
-* **The Problem**: In code diff viewers with long line wrapping, line numbers on the left frequently fall out of vertical alignment with code lines on the right.
-* **Claude's Algorithm**: Employs Shadow DOM encapsulation to shield token styles, while enforcing identical CSS Grid row spans on both sides (`gridRow = span ${lines}`). Sends incremental deltas to Web Workers via `feed: e.slice(m.length)`, avoiding $O(N^2)$ full-tree syntax reflows.
+* **Pain Point**: With word wrap on, line numbers and code drift out of alignment in diff viewers.
+* **Claude's Algorithm** (`c19e90103-muBq-gyt.js`): the diff view lives in `attachShadow({ mode: "open" })` for style isolation; gutter and code columns both receive `gridRow = span ${lines}`, so one grid locks both row heights.
 
-### 8. Iframe Pointer Event Shield & Double-Click 50/50 Spring Snap
-* **The Problem**: When resizing split panes over an embedded Artifact iframe, the iframe captures pointer events, causing resize dragging to lock up.
-* **Claude's Algorithm**: Injects `data-pane-dragging="true"` onto the root upon drag initiation, overlaying an invisible `pointer-events: none` shield above the iframe; double-clicking the splitter handle triggers a second-order spring transition that snaps the panes to a precise 50/50 split.
+### 8. Iframe Pointer Event Shield (Pane Drag Shield)
+* **Pain Point**: Dragging a split divider over an embedded iframe lets the iframe swallow pointer events and freeze the drag.
+* **Claude's Algorithm**: Dragging writes `data-pane-dragging` on the host (`shared-22-HztmyUTM.js`, Escape cancels and rolls back), and the stylesheet applies `pointer-events: none` to `.dframe-pane-host[data-pane-dragging] iframe` (`shared-styles-Bl9zqrv-.css`).
 
 ---
 
@@ -192,51 +144,54 @@ Gently boosting quiet vocal nuances while curbing peak saturation for a silky, b
 
 ```
 open-claude-ui/
-├── assets/                           # Compliance guidelines & asset notices
-│   ├── images/logo.svg               # Open-source vector mark
-│   └── README.md                     # Asset compliance & fallback stack guide
-├── code-examples/                    # 30 standalone production source files (ready-to-use)
-│   ├── ArtifactsSplitPaneResizer.tsx # Split pane elastic resizer & collapse engine
-│   ├── AttachmentCard.tsx            # Attachment cards & inline context pills
-│   ├── cds-theme.css                 # Global theme stylesheet (CSS variables & Keyframes)
-│   ├── CdsButton.tsx                 # 4 sizes, 5 variants universal button suite
-│   ├── ChatComposer.tsx              # Core composer input terminal
-│   ├── ChatMessageBubbles.tsx        # Conversation bubbles (User & Assistant)
-│   ├── ClaudeAudioPlayer.ts          # Low-latency audio engine (procedural Web Audio oscillators)
-│   ├── ClaudeDesktopHeader.tsx       # macOS immersive titlebar component
-│   ├── ClaudeMotionPresets.ts        # Motion presets & damped harmonic oscillator math solver
-│   ├── CodeBlock.tsx                 # Code container with 2.5s copy cooldown state machine
+├── assets/                           # Asset guidelines & compliance
+│   ├── images/logo.svg               # Open source vector logo
+│   └── README.md                     # Asset compliance & system fallback stacks
+├── code-examples/                    # 33 independent code modules + theme stylesheet & Tailwind config
+│   ├── ArtifactsSplitPaneResizer.tsx # Elastic split pane & collapse engine
+│   ├── AttachmentCard.tsx            # Attachment tiles & context pills
+│   ├── cds-theme.css                 # Global theme stylesheet (CSS variables & keyframes)
+│   ├── CdsButton.tsx                 # Button size ladder & variants
+│   ├── CdsMotionEngine.tsx           # sibling-index / View Transitions / scroll-driven motion demo
+│   ├── ChatComposer.tsx              # Core composer terminal
+│   ├── ChatComposerChin.tsx          # Composer chin & effort entry point
+│   ├── ChatMessageBubbles.tsx        # Message bubbles (User & Assistant)
+│   ├── ClaudeAudioPlayer.ts          # Low-latency audio engine (Web Audio synthesis)
+│   ├── ClaudeDesktopHeader.tsx       # Immersive macOS title bar
+│   ├── ClaudeMotionPresets.ts        # Motion engine & damped harmonic oscillator solver
+│   ├── CodeBlock.tsx                 # Code block & 2.5s copy decay state machine
 │   ├── ConfirmationDialog.tsx        # Modal confirmation dialog
-│   ├── ContainerResponsiveBar.tsx    # Responsive container query bar
-│   ├── CoworkAgentCanvas.tsx         # Multi-agent collaboration canvas & topology
-│   ├── createClaudeMainWindow.ts     # Electron main window host factory
-│   ├── DraggableSessionList.tsx      # Sidebar drag-and-drop session reordering physics
+│   ├── ContainerResponsiveBar.tsx    # Container query responsive bar
+│   ├── CoworkAgentCanvas.tsx         # Multi-agent orchestration board
+│   ├── createClaudeMainWindow.ts     # Electron host main window factory
+│   ├── DraggableSessionList.tsx      # Sidebar session drag-and-drop & pinning
 │   ├── EpitaxyIframeBridge.tsx       # Artifacts preview sandbox bridge
-│   ├── LiveMicActivityBars.tsx       # 6-band non-linear microphone visualizer bars
-│   ├── McpToolDecisionCard.tsx       # MCP interactive tool decision card
-│   ├── MediaLightboxViewer.tsx       # Multimodal media viewer & runway lightbox
+│   ├── LiveMicActivityBars.tsx       # 6-bar mic waveform (noise floor + gamma)
+│   ├── McpToolDecisionCard.tsx       # MCP tool call decision card
+│   ├── MediaLightboxViewer.tsx       # Multimodal media lightbox & gallery runway
+│   ├── ModelSelectorEffort.tsx       # Model selector with 5 effort levels
 │   ├── ModelSwitcherWithTokenGauge.tsx # Model matrix switcher with token gauge
-│   ├── ReasoningAmbientGlow.tsx      # Dynamic glow & reasoning atmosphere component
-│   ├── RichComposerWithMentions.tsx  # CJK guard, / and @ dual trigger input terminal
-│   ├── ScrollFadeContainer.tsx       # 7-stop quintic ease non-linear alpha scroll fade mask
-│   ├── SegmentedControl.tsx          # 999px fully rounded sliding segmented pill
-│   ├── StatusIndicators.tsx          # Clay breathing indicator, activity pulse & skeleton sweeps
-│   ├── StreamingDiffViewer.tsx       # Code diff viewer with streaming highlight engine
-│   ├── tailwind.config.js            # Tailwind theme extension config
+│   ├── ReasoningAmbientGlow.tsx      # Ambient reasoning glow effects
+│   ├── RichComposerWithMentions.tsx  # Composer with IME guard and / & @ triggers
+│   ├── ScrollFadeContainer.tsx       # 7-stop non-linear alpha fade mask
+│   ├── SegmentedControl.tsx          # Segmented control (control-radius track + sliding indicator)
+│   ├── StatusIndicators.tsx          # Clay breathing dots, pulses & skeleton shimmer
+│   ├── StreamingDiffViewer.tsx       # Streaming diff viewer & highlighter
+│   ├── tailwind.config.js            # Tailwind config extension
 │   ├── ThinkingAccordion.tsx         # Thinking process state machine accordion
-│   ├── useClaudeRovingFocus.ts       # Full keyboard accessibility roving focus hook
-│   ├── useClaudeScrollPinning.ts     # Streaming scroll viewport pinning hook
-│   ├── useClaudeSharedElementTransition.ts # View Transitions shared-element morphing hook
-│   └── useRateLimitBackoff.ts        # 429/503 exponential backoff & circuit breaker hook
+│   ├── useClaudeRovingFocus.ts       # Keyboard roving focus Hook
+│   ├── useClaudeScrollPinning.ts     # Streaming scroll pinning Hook
+│   ├── useClaudeSharedElementTransition.ts # View Transitions shared element Hook
+│   └── useRateLimitBackoff.ts        # 429/503 exponential backoff Hook
 ├── docs/
-│   ├── Claude Design System (CDS).md # 7-part / 31-chapter deep technical guide
-│   └── claude-components-storybook.html # Interactive offline visual storybook
+│   ├── README.md                     # Documentation index
+│   ├── v2/                           # Claude Desktop 2.42304.0.0 report (6 chapters + merged text)
+│   └── claude-components-storybook.html # Interactive storybook (double-click to open offline)
 ├── src/
 │   └── index.ts                      # Unified TypeScript library entry point
 ├── package.json
 ├── tsconfig.json
-├── README.md                         # Chinese documentation (Default)
-└── README-en.md                      # English documentation
+└── README.md
 ```
 
 ---
@@ -245,7 +200,7 @@ open-claude-ui/
 
 ### 1. Import Stylesheet & Tailwind Extension
 
-Import the CDS core theme stylesheet into your application:
+Import the CDS core theme stylesheet into your project:
 ```css
 /* Import global theme variables and keyframes */
 @import "open-claude-ui/code-examples/cds-theme.css";
@@ -271,36 +226,30 @@ module.exports = {
 ### 2. Using Core Components
 
 ```tsx
-import React, { useState } from 'react';
-import { 
-  ChatComposer, 
-  CdsButton, 
-  ModelSwitcherWithTokenGauge, 
-  ScrollFadeContainer 
+import React from 'react';
+import {
+  ChatComposer,
+  ModelSwitcherWithTokenGauge,
+  ScrollFadeContainer
 } from 'open-claude-ui';
 
 export function App() {
-  const [model, setModel] = useState<'sonnet-3.5' | 'haiku-3.5' | 'opus-3'>('sonnet-3.5');
-  const [thinking, setThinking] = useState(true);
-
   return (
     <div className="flex h-screen w-full bg-[var(--cds-surface-1)]">
-      <ScrollFadeContainer axis="vertical" fadeSize={32} className="flex-1 p-6">
+      <ScrollFadeContainer orientation="vertical" fadeSize={28} className="flex-1 p-6">
         <div className="mx-auto max-w-3xl space-y-4">
           <ModelSwitcherWithTokenGauge
-            currentModel={model}
-            onModelChange={setModel}
-            extendedThinking={thinking}
-            onThinkingChange={setThinking}
-            tokenBudget={{
+            currentModelId="claude-opus-5-5"
+            onSelectModel={(model) => console.log('Model:', model.name)}
+            tokenMetrics={{
               inputTokens: 12400,
               outputTokens: 3200,
               cacheReadTokens: 48000,
               cacheWriteTokens: 16000,
-              maxContextWindow: 200000
+              cacheTtl: '5m'
             }}
           />
-          <ChatComposer onSend={(text) => console.log('Send message:', text)} />
+          <ChatComposer onSendMessage={(text) => console.log('Send message:', text)} />
         </div>
       </ScrollFadeContainer>
     </div>
@@ -318,11 +267,9 @@ open docs/claude-components-storybook.html
 ```
 
 The storybook includes:
-* Clay color system with real-time Dark Mode switching
-* All button sizes and tactile hover/active feedback
-* 999px fully rounded sliding segmented pill controls
-* Second-order spring motion demos in real time
-* Attachment cards and code copy decay cooldown state machines
+* Component chapters 01–09: foundations, app shell, chat & composer, controls, code & artifacts, overlays, motion, border philosophy, and v2.42304.0 design aesthetics
+* The claude.ai web measurement page (W0–W15): coordinates, tokens, menus, motion durations, and the desktop comparison
+* Real-time Dark Mode switching and second-order spring motion demos
 
 ---
 

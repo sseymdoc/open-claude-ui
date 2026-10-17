@@ -1,12 +1,12 @@
 /**
  * 维度四：macOS 桌面深度融合与 Web 自适应顶栏
- * 逆向还原自 Claude Desktop: shared-19-DmuztgN-.js / shared-21-CGGmSsMS.js
+ * 逆向还原自 Claude Desktop 2.42304.0.0: shared-10-THQui8pC.js (trafficLightSpacerWidth / needsTrafficLightPadding)
  * 
  * 核心特性：
- * 1. 74px 红绿灯物理避让占位槽 (ew = 74)
+ * 1. 74px 红绿灯物理避让占位槽 (En = 74)
  * 2. 逆缩放补偿宽度 Math.round(74 / Math.min(zoomFactor, 1))
- * 3. macOS 全屏感知与动态 safe-area 回缩
- * 4. 45px 全局独立拖拽带与 .draggable-none 交互隔离
+ * 3. macOS 全屏感知：全屏时撤掉红绿灯占位
+ * 4. 45px 拖拽带（本实现取值）与 .draggable-none 交互隔离
  */
 
 import React, { useEffect, useState } from 'react';

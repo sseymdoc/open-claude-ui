@@ -1,7 +1,7 @@
 /**
  * Claude Design System (CDS) - Status Indicators & Shimmer
  * 
- * 逆向溯源：依据 REA v6.5.0 对 Claude Desktop 生产环境 (shared-styles-Bl9zqrv-.css / cc1aae219-DtZTxCKj.css / c6a992d55-sXiDGMFQ.css)
+ * 逆向溯源：依据 Claude Desktop 2.42304.0.0 安装包 (shared-styles-Bl9zqrv-.css / cc1aae219-DtZTxCKj.css / c6a992d55-sXiDGMFQ.css)
  * AST 逆向提取的完整指示灯与骨架屏规范。
  * 
  * 核心动效：

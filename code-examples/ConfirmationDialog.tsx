@@ -1,7 +1,7 @@
 /**
  * Claude Design System (CDS) - Confirmation Modal Dialog
  * 
- * 逆向溯源：依据 REA v6.5.0 对 Claude Desktop 生产环境 (shared-frame-BfjMqbuN.js)
+ * 逆向溯源：依据 Claude Desktop 2.42304.0.0 安装包 (shared-frame-BfjMqbuN.js)
  * 提取的 data-cds="Dialog" 架构与 6 阶弹窗标尺规范。
  * 
  * 核心规范：

@@ -27,14 +27,14 @@
 
 ## 📖 简介 (Introduction)
 
-`open-claude-ui` 是基于对现代桌面端 AI 客户端进行深度拆解与逆向分析构建的高保真开源 UI 组件库与动效引擎。
+`open-claude-ui` 是基于对 **Claude Desktop 2.42304.0.0**（Windows MSIX `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc`）安装包与 **claude.ai 网页版**运行时的深度拆解构建的高保真开源 UI 组件库与动效引擎。
 
-整个逆向推导、反混淆静态分析与 ASAR 资源解构，均依托于先进的多平台逆向工程框架 **[REA (Reverse Engineer Anything)](https://github.com/morluto/rea)** 完成——通过 REA 的静态 AST 解析、闭包代码反混淆与运行时跟踪能力，穿透生产级压缩包，精准还原了底层工程物理常数与数学模型。
+整个逆向推导、反混淆静态分析与 ASAR 资源解构，均依托于多平台逆向工程框架 **[REA (Reverse Engineer Anything)](https://github.com/morluto/rea)** 完成——通过 REA 的静态 AST 解析、闭包代码反混淆与运行时跟踪能力，穿透生产级压缩包，精准还原了底层工程物理常数与数学模型。
 
-不同于市面上常见的盲猜或近似复刻，本项目所有组件规范、物理阻尼常数、着色器关键帧及音频管道均**严格依据真实前端架构反编译验证**提炼而成：
-* **温润的人文质感 (Editorial Warmth)**：纯正陶土橙（Clay `#d97757`）、4 层微对比表面阶梯（Surface 0-3）与视网膜高分屏发丝细边补偿（Hairline Ring）；
-* **严苛的交互物理学 (Interaction Physics)**：4 套生产级物理弹簧参数调校、4px 指针移动死区、CJK 输入法合成守卫、7 档渐隐非线性 Alpha 遮罩；
-* **高阶视听与系统架构 (Audiovisual & Architecture)**：基于原生 Web Audio API 的零延迟合成提示音、以光标为锚点的画廊跑道平移缩放、macOS 桌面毛玻璃透明融合与 Cowork 多代理协同拓扑。
+本项目的组件规范、物理常数、着色器关键帧与音频管道均依据 2.42304.0.0 安装包源码与 claude.ai 实测提炼：
+* **克制的人文质感 (Editorial Warmth)**：中性黑白主按钮、陶土色（`--cds-fill-brand` `#c6613f`）只留给发送键与 Spark、冷调表面阶梯（surface-0 `#f9f9f7` / surface-1 `#fcfcfb`，深色 `#0b0b0b` / `#151515`）与高分屏发丝细边补偿；
+* **严苛的交互物理学 (Interaction Physics)**：4 套物理弹簧预设、4px 指针移动死区、CJK 输入法合成守卫、7 档非线性 Alpha 渐隐遮罩；
+* **高阶视听与系统架构 (Audiovisual & Architecture)**：基于原生 Web Audio API 的零延迟合成提示音、以光标为锚点的画廊平移缩放、macOS 红绿灯逆缩放补偿与 Cowork 多代理协同拓扑。
 
 > ⚖️ **版权与合规声明 (DMCA & Assets Policy)**：
 > 本开源项目**不公开分发任何专有二进制资产**（包括商业字体 `.ttf` 与录音 `.mp3`）。本项目提供原生系统级字体回退栈与 Web Audio API 纯代码合成音效，完全自包含、合规安全。详情参见 [assets/README.md](assets/README.md)。
@@ -47,93 +47,45 @@
 graph TD
     OCUI["open-claude-ui"]
 
-    OCUI --> Tokens["1. 设计哲学与令牌体系<br/>(Surfaces 0-3, Clay, Hairlines, System Fonts)"]
+    OCUI --> Tokens["1. 设计哲学与令牌体系<br/>(Surfaces, Clay, Hairlines, System Fonts)"]
     OCUI --> Atoms["2. 基础原子交互控件<br/>(CdsButton, SegmentedControl, StatusIndicators, Dialog)"]
-    OCUI --> Stream["3. 会话流与指令引擎<br/>(Composer, IME Guard, Model Switcher, MCP Cards)"]
+    OCUI --> Stream["3. 会话流与指令引擎<br/>(Composer, IME Guard, Model & Effort, MCP Cards)"]
     OCUI --> Motion["4. 动效物理学与着色器<br/>(Spring Physics, Ambient Shimmer, Scroll Fade Masks)"]
     OCUI --> Media["5. 视听多媒体与产物交互<br/>(Synthetic Audio, Lightbox Pan/Zoom, Split Resizer, Epitaxy)"]
-    OCUI --> Desktop["6. 桌面架构与协作拓扑<br/>(macOS Vibrancy, Sidebar DnD, Cowork Canvas, A11y Roving)"]
+    OCUI --> Desktop["6. 桌面架构与协作拓扑<br/>(Traffic Lights, Sidebar DnD, Cowork Canvas, A11y Roving)"]
     OCUI --> Setup["7. 完整工程规范与开箱即用<br/>(Tailwind, CSS Themes, Zero-Binary Dependency)"]
 ```
 
-1. **30 个生产级独立代码模块**：包含 11 个基础原子控件 + 19 个深度架构物理学模块与 React Hooks，即拷即用，零黑盒依赖。
+1. **33 个独立代码模块**：React 组件、Hooks 与 Electron 主窗口工厂，另附全局主题样式表与 Tailwind 配置，即拷即用，零黑盒依赖。
 2. **纯原生系统级排版与音效**：支持系统高保真字体回退栈，内置基于 Web Audio 振荡器的零延迟提示音合成引擎。
-3. **交互式组件故事书 (Storybook Preview)**：内置单文件开箱即用的离线 Storybook，支持浏览器直接打开预览全部组件动效。
-4. **七大领域分卷完整技术手册**：附带深度逆向分析开发手册 [`docs/Claude Design System (CDS).md`](docs/Claude%20Design%20System%20(CDS).md)。
+3. **交互式组件故事书 (Storybook Preview)**：单文件离线 Storybook，含 01–09 组件库章节与 claude.ai 网页版实测页（W0–W15）。
+4. **逆向分析报告**：[`docs/v2/`](docs/v2/README.md) 6 章，另有[合并全文](docs/v2/Claude-Desktop-2.42304.0.0-全量分析.full.md)。
 
 ---
 
-## 📚 七大篇章逆向分析手册 (Complete Technical Manual)
+## 📚 逆向分析报告 (Technical Report)
 
-整个仓库最具工业价值的核心是这本长达 3,000+ 行、31 个核心子节的深度逆向工程手册：[`docs/Claude Design System (CDS).md`](docs/Claude%20Design%20System%20(CDS).md)。
+全部内容基于 Claude Desktop 2.42304.0.0 安装包与 claude.ai 网页版运行时实测，目录见 [`docs/README.md`](docs/README.md)：
 
-它不仅记录了所有反编译源码取证位置，还详尽解构了 Anthropic 解决当代大模型产品前端痛点的系统架构方案：
-
-### 📖 第一篇：设计哲学与设计令牌体系
-* **[1.1 设计哲学与视觉调性](docs/v1/01-设计哲学与设计令牌体系.md#11-设计哲学与视觉调性)**：温润的人文质感（Editorial Warmth）、四层低对比表面微阶梯、高帧率轻负担动效。
-* **[1.2 表面体系与色彩阶梯](docs/v1/01-设计哲学与设计令牌体系.md#12-表面体系与色彩阶梯)**：Surface 0 至 3 表面明度阶梯（浅色 `#f5f5f3` 至 `#ffffff`，深色 `#0b0b0a` 至 `#20201e`）与品牌陶土橙（`#d97757`）。
-* **[1.3 控件尺寸与精密圆角矩阵](docs/v1/01-设计哲学与设计令牌体系.md#13-控件尺寸与精密圆角矩阵)**：外框 Composer 20px、气泡 18px、面板 10px、按钮 6/8/10px 的精密圆角拓扑。
-* **[1.4 发丝细边、微光阴影与边框防臃肿体系](docs/v1/01-设计哲学与设计令牌体系.md#14-发丝细边微光阴影与边框防臃肿体系)**：高分屏 0.5px 发丝补偿（Hairline Ring）、单闭合边框原则、双环 Popover 弥散微光投影。
-* **[1.5 字体排版与图标对齐系统约束](docs/v1/01-设计哲学与设计令牌体系.md#15-字体排版与图标对齐系统约束)**：深色模式视网膜字重逆补偿算法（暗色下反向减细以防文字发胀）、行内图标 `-.125em` 光学垂直居中。
-* **[1.6 基础动效令牌体系](docs/v1/01-设计哲学与设计令牌体系.md#16-基础动效令牌体系)**：物理时间常数矩阵（70ms 触觉微震、120ms 几何咬合、300ms 面板滑入）与非对称贝塞尔曲线。
-
-### 🧩 第二篇：基础原子组件与交互控件
-* **[2.1 全能按钮控件阶梯](docs/v1/02-基础原子组件与交互控件.md#21-全能按钮控件阶梯)**：4 级尺寸阶梯（XS/SM/MD/LG）、5 大变体（Primary/Secondary/Ghost/Outline/Danger）、`active:scale-[0.98]` 物理触觉。
-* **[2.2 分段滑动选择胶囊](docs/v1/02-基础原子组件与交互控件.md#22-分段滑动选择胶囊)**：999px 全圆角轨道、2px 几何内边距、纯几何绝对定位与 Framer Motion `layoutId` 双模式。
-* **[2.3 状态指示灯与微动效套件](docs/v1/02-基础原子组件与交互控件.md#23-状态指示灯与微动效套件)**：陶土明度呼吸指示灯（2.4s）、实时活动脉冲（1.2s）、思考三点波浪跳跃、105° 骨架屏高级倾斜扫光条。
-* **[2.4 模态确认对话框](docs/v1/02-基础原子组件与交互控件.md#24-模态确认对话框)**：16px 圆角、双环 Popover 投影、高斯模糊遮罩、按键陷阱与危险/默认双变体。
-* **[2.5 附件磁贴与上下文胶囊](docs/v1/02-基础原子组件与交互控件.md#25-附件磁贴与上下文胶囊)**：桌面端磁贴（128×96px）与输入框行内胶囊双模式，集成 `file-thumbnail-grow-in` 入场动画。
-
-### 💬 第三篇：会话核心流与指令交互引擎
-* **[3.1 会话气泡套件与排版规范](docs/v1/03-会话核心流与指令交互引擎.md#31-会话气泡套件与排版规范)**：User 气泡严格 18px 圆角与浅蓝微调底色，Assistant 零边框透明排版与代码块联动。
-* **[3.2 思考过程折叠与时间状态机](docs/v1/03-会话核心流与指令交互引擎.md#32-思考过程折叠与时间状态机)**：CSS Grid `0fr -> 1fr` 弹性伸缩动画，生成期间传递 `onOpenChange = undefined` 强制展开互斥锁。
-* **[3.3 新一代富文本输入框终端与指令交互引擎](docs/v1/03-会话核心流与指令交互引擎.md#33-新一代富文本输入框终端与指令交互引擎)**：CJK 输入法双重互锁守卫、`/` 指令与 `@` 上下文双触发符、自适应高度伸缩与 Token 预测。
-* **[3.4 模型矩阵切换器与 Token 计量仪表盘](docs/v1/03-会话核心流与指令交互引擎.md#34-模型矩阵切换器与-token-计量仪表盘)**：三大模型梯队架构、Thinking 开关、Prompt Caching 四色显存成本解构与环形 SVG 仪表盘。
-* **[3.5 交互式工具调用与 MCP 决策卡片](docs/v1/03-会话核心流与指令交互引擎.md#35-交互式工具调用与-mcp-决策卡片)**：严格三态授权状态机（`pending_approval` → `running` → `success` / `error`）、三阶决议动作阵列与 Payload 审查。
-
-### ⚡ 第四篇：动效物理学、着色器与环境光影
-* **[4.1 全量动效引擎与关键帧规范](docs/v1/04-动效物理学、着色器与环境光影.md#41-全量动效引擎与关键帧规范)**：4 套生产级物理弹簧参数矩阵调校及触感响应、核心 `@keyframes`。
-* **[4.2 动态光效、着色器与推理氛围感](docs/v1/04-动效物理学、着色器与环境光影.md#42-动态光效着色器与推理氛围感)**：`wl-glow` 陶土暖光漫反射光场、`cds-shimmer-text-shine` 非对称贝塞尔曲线与焦散光场。
-* **[4.3 滚动边缘平滑渐变遮罩系统](docs/v1/04-动效物理学、着色器与环境光影.md#43-滚动边缘平滑渐变遮罩系统)**：官方 7 档非线性 Alpha 渐变遮罩、动态滚动位置传感器（触顶/触底动态归零）。
-
-### 🎨 第五篇：视听多媒体与产物交互物理学
-* **[5.1 语音模式与 Web Audio 物理声学系统](docs/v1/05-视听多媒体与产物交互物理学.md#51-语音模式与-web-audio-物理声学系统)**：原生 Web Audio 振荡器无损合成音效、30% 舒缓音量标准、6 频段非线性 Gamma 波形柱（附官方 AudioWorklet 架构逆向解密）。
-* **[5.2 多模态媒体查看器与画廊转场物理学](docs/v1/05-视听多媒体与产物交互物理学.md#52-多模态媒体查看器与画廊转场物理学)**：View Transitions 共享元素变形、以光标为锚点的无级 Pan/Zoom 仿射方程、75vw 跑道视口。
-* **[5.3 双栏弹性分割与折叠物理学](docs/v1/05-视听多媒体与产物交互物理学.md#53-双栏弹性分割与折叠物理学)**：Iframe 事件防吞噬护盾、4px 移动死区、双击 50/50 吸附、边缘折叠门限与约束钳制。
-* **[5.4 工件预览沙箱与隔离通信架构](docs/v1/05-视听多媒体与产物交互物理学.md#54-工件预览沙箱与隔离通信架构)**：Epitaxy 隔离容器、7 大专有 MIME 分发、用户手势门禁与虚拟包重定向。
-* **[5.5 代码差异对比与多线程语法高亮系统](docs/v1/05-视听多媒体与产物交互物理学.md#55-代码差异对比与多线程语法高亮系统)**：Shadow DOM 隔离、CSS Grid 行高对齐锁定、增量流式追加管道、统一/分屏双模式。
-
-### 🖥️ 第六篇：系统级桌面架构与协作拓扑
-* **[6.1 macOS 桌面宿主深度融合与窗口材质](docs/v1/06-系统级桌面架构与协作拓扑.md#61-macos-桌面宿主深度融合与窗口材质)**：`hiddenInset` 标题栏、交通灯逆缩放几何补偿、`-webkit-app-region: drag` 安全区、macOS Vibrancy 毛玻璃。
-* **[6.2 侧边栏会话拖放重排与拓扑网格](docs/v1/06-系统级桌面架构与协作拓扑.md#62-侧边栏会话拖放重排与拓扑网格)**：`pinnedOrder` 乐观拓扑重排、4px 移动死区、微倾斜幽灵投影与落点对撞占位线。
-* **[6.3 多代理协作看板与 Cowork 空间拓扑](docs/v1/06-系统级桌面架构与协作拓扑.md#63-多代理协作看板与-cowork-空间拓扑)**：多 Agent 任务委派状态机、团队共享工件网格资产池、`BroadcastChannel` 跨窗口同步。
-* **[6.4 流式大文本输出与滚动视口物理学](docs/v1/06-系统级桌面架构与协作拓扑.md#64-流式大文本输出与滚动视口物理学)**：150ms 冷却时间戳防抢夺、40px 底部容差图钉锁定、GPU 字符模糊消解。
-* **[6.5 容器查询自适应排版与极端防挤压](docs/v1/06-系统级桌面架构与协作拓扑.md#65-容器查询自适应排版与极端防挤压)**：基于 `@container` 的 4 阶流体压缩梯队 (>=576px / <480px / <384px / <320px)，彻底杜绝单字折行。
-* **[6.6 全键盘盲操网格与无障碍访问](docs/v1/06-系统级桌面架构与协作拓扑.md#66-全键盘盲操网格与无障碍访问)**：W3C WAI-ARIA 规范、Roving TabIndex 焦点漫游、方向键二维导航、RTL 镜像翻转。
-* **[6.7 异常容灾、模型限流与业务状态机](docs/v1/06-系统级桌面架构与协作拓扑.md#67-异常容灾模型限流与业务状态机)**：429/503 截断指数退避重试机、全抖动注入、3 次自动熔断恢复。
-
-### 🛠️ 第七篇：工程配置与资产代码库总览
-* **[7.1 开箱即用的 Tailwind 配置与基础 CSS 代码](docs/v1/07-工程配置与资产代码库总览.md#71-开箱即用的-tailwind-配置与基础-css-代码)**：完整的全局主题样式表与 Tailwind 工程扩展。
-* **[7.2 生产级工程源码清单](docs/v1/07-工程配置与资产代码库总览.md#72-生产级工程源码清单)**：全量 30 个生产级独立代码文件（11 个基础原子 + 19 个深度架构模块）。
-* **[7.3 资产规范与系统级字体/音频替代方案](docs/v1/07-工程配置与资产代码库总览.md#73-资产规范与系统级字体音频替代方案)**：系统级字体回退栈与 Web Audio API 纯代码合成提示音规范。
-
-### 🤖 第八篇：AI Agent 前端 UI 与动效开发指南
-* **[8.1~8.7 Agent 角色定位、设计令牌契约与弹簧决策树](docs/v1/08-AI-Agent-前端-UI-与动效开发指南.md)**：专为 AI Agent 定制的前端 UI 与动效装配自检指南。
-
-### 🚀 第二版：Claude Desktop 2.0 (v2.42304.0 / v2.37337.1) 全量版本更新深度逆向分析
-* **[v2/README.md 综述、新增特性、架构重构、底座解密与参考实现](docs/v2/README.md)**：全量划分为 6 大独立章节，深度解析 v2.42304.0 官方 6 层设计令牌、Cove 8 色图表色板、FloatingComposer 三态变形、`.urm` 环形心跳仪、Oklab 纸张卡片、5 字体光学悬挂标点及 SableOtter HUD / CuTeach / CuWatchRecord / Hardware Buddy / ClawdQuest 桌面交互美学。
+* **[第 1 章：综述与版本边界](docs/v2/01-综述与版本边界.md)**：捆绑 CLI 2.1.299 与 MSIX 多进程边界、桌面版与网页版的加载关系、陶土品牌色克制守则与人声衬线分界。
+* **[第 2 章：核心特性逆向](docs/v2/02-核心特性逆向.md)**：弹出窗口与窗口级页面搜索、Cowork 产物库白名单、排队消息、5 档努力程度、FloatingComposer 三态变形、`.urm` 环形配额心跳、Oklab 光泽折页卡片、5 字体光学悬挂标点及 SableOtter HUD / CuTeach / CuWatchRecord / Hardware Buddy / ClawdQuest。
+* **[第 3 章：界面架构与样式系统](docs/v2/03-界面架构与样式系统.md)**：画布底色、compact / comfortable 圆角与密度系统、胶囊与骨架屏微交互、章节标记与 Tailwind v4 `@layer cds-card` 架构。
+* **[第 4 章：系统底座全景解密](docs/v2/04-系统底座全景解密.md)**：152 项纯 CSS 动效关键帧、52 个 `data-cds` 组件命名空间、5 阶时间 Token、官方 6 层令牌架构与 Cove 8 色数据可视化色板。
+* **[第 5 章：生产级参考实现代码](docs/v2/05-生产级参考实现代码.md)**：`ModelSelectorEffort.tsx`、`ChatComposerChin.tsx`、`CdsMotionEngine.tsx`。
+* **[第 6 章：总结](docs/v2/06-总结.md)**：结构规范化、动效物理化与桌面原生化。
+* **[claude.ai 网页版实测页](docs/claude-components-storybook.html#claude-ai-web)**：外壳坐标、侧栏、输入框、菜单、消息流、按钮解剖、图标字体、动效时长、令牌、登录页、隐藏机制，以及桌面版对照、Code 会话族谱与思考状态机（W0–W15）。
 
 ---
 
 ## 🔬 逆向解密的 8 大硬核算法与工程物理学 (Decompiled Algorithms & Physics)
 
-UI 组件只是外壳，**真正让 Claude 交互质感脱颖而出的是隐藏在混淆代码底部的物理学方程与数学模型**。本项目从生产环境反编译还原了以下 8 项关键算法：
+UI 组件只是外壳，**真正让 Claude 交互质感脱颖而出的是隐藏在混淆代码底部的物理学方程与数学模型**。以下 8 项均在 2.42304.0.0 安装包中逐条核对过出处：
 
 ### 1. 7 档渐隐非线性透明度遮罩 (7-Stop Non-Linear Fade Mask)
-* **痛点**：常规双色线性滚动遮罩在视网膜高分屏上存在严重的色阶断层（Color Banding）与生硬切断感。
-* **Claude 算法**：没有采用粗暴的线性双色切线，而是在羽化距离内采用 7 档非线性采样阶梯（采样位置 15% 处对应 Alpha 5.1% `#0d`、30% 处 14.9% `#26`、45% 处 30.2% `#4d`、60% 处 50.2% `#80`、75% 处 70.2% `#b3`、87% 处 85.1% `#d9`，曲线紧密贴合 $y \approx x^{1.5}$ 幂律感知感知模型），搭配触顶/触底动态归零传感器，呈现温润如沉入水雾的边缘渐隐：
+* **痛点**：常规双色线性滚动遮罩在高分屏上存在色阶断层（Color Banding）与生硬切断感。
+* **Claude 算法**：在羽化距离（`--cds-scroll-fade-size`，28px）内采用 7 档非线性采样阶梯（15% 处 Alpha 5.1% `#0d`、30% 处 14.9% `#26`、45% 处 30.2% `#4d`、60% 处 50.2% `#80`、75% 处 70.2% `#b3`、87% 处 85.1% `#d9`，曲线贴合 $y \approx x^{1.5}$），触顶 / 触底时对应一侧的羽化距离归零：
 ```css
-/* 提取自 c6a992d55-C0zTICcS.css */
+/* 提取自 c6a992d55-sXiDGMFQ.css */
 mask-image: linear-gradient(to bottom,
   transparent,
   #0000000d calc(var(--cds-scroll-fade-top) * .15),
@@ -154,37 +106,37 @@ mask-image: linear-gradient(to bottom,
 );
 ```
 
-### 2. 麦克风 8% 底噪门限截断与原生 Web Audio 振荡器无损合成 (Noise Floor Gating & Synthetic SFX)
-* **痛点**：语音会话模式中空调等环境底噪容易导致波形持续微震抽搐；同时传统 Web 音效加载外部 MP3 有网络延迟并伴随切断爆音。
-* **Claude 算法**：一是引入 8% 噪声门限过滤（`NOISE_FLOOR = 0.08`）物理截断底噪；二是基于原生 Web Audio `OscillatorNode` 进行纯代码频率调制（如 440Hz → 880Hz 上扬）与平滑指数淡入淡出（`exponentialRampToValueAtTime`），零外部音频依赖且彻底消除爆音。
+### 2. 麦克风 8% 底噪门限与 0.7 次幂 Gamma 压缩 (Noise Floor Gating & Gamma Compression)
+* **痛点**：直接把能量映射为波形高度，会让环境底噪引起持续微抖、高分贝时爆格。
+* **Claude 算法**（`LiveMicActivityBars`，`c4a1e6da6-OklNVuRg.js`）：按频带求平均能量，先减去底噪门限（默认 `.08`）再归一，叠加 0.7 次幂压缩、1.5 倍增益与频带权重 $W_b$：
+$$\text{Compressed} = \min\left(1, \left(\frac{\max(0, E - 0.08)}{0.92}\right)^{0.7} \times 1.5 \times W_b\right)$$
+微弱人声被温和放大，高分贝被自然平抑。
 
 ### 3. CJK 输入法合成双重互锁守卫 (IME Composition Guard)
-* **痛点**：中日韩用户在拼音/假名输入法候选词浮层敲击 Enter 键确认汉字时，消息被粗暴误发送。
-* **Claude 算法**：构建 `!(e.nativeEvent.isComposing || e.keyCode === 229)` 双重互锁守卫，并在按键拦截状态机中接管 `Escape` 键，防止候选词关闭时意外冒泡退避整个对话窗口。
+* **痛点**：中日韩用户在候选词浮层敲 Enter / Escape 确认或关闭候选时，消息被误发送或界面被误关闭。
+* **Claude 算法**：按键处理先判 `e.isComposing || e.keyCode === 229`；WebKit 在 `compositionend` 之后补发的 Enter 再由 `Math.abs(e.timeStamp - compositionEndAt) < 500` 拦截（均见 `shared-frame-BfjMqbuN.js`）。拖拽面板的 Escape 取消逻辑同样带这道守卫（`shared-22-HztmyUTM.js`）。
 
 ### 4. 150ms 冷却时间戳防抢夺视口图钉 (Scroll Pinning Cooldown)
-* **痛点**：流式 Token 生成时，用户向上滚动查阅历史消息，会被源源不断的生成内容强制拉回底部。
-* **Claude 算法**：建立 40px 底部容差图钉锁定 + 150ms 人工滚动冷却时间戳机制。用户一旦主动向上微移视口，系统立即锁定滚动权限 150ms，彻底杜绝“自动滚动抢夺屏幕”。
+* **痛点**：流式 Token 生成时，用户向上滚动查阅历史消息，会被新内容强制拉回底部。
+* **Claude 算法**（`ca2ef848d-CWUk7Rll.js`）：只有 `performance.now() - getLastUserInputAt() > 150` 时才执行跟随；程序滚动先 `markProgrammaticScroll()` 再以 `behavior: "auto"` 瞬时对齐，避免被误判为用户输入。
 
 ### 5. 以鼠标光标为物理不动点的仿射 Pan/Zoom 方程
-* **痛点**：普通画廊放大图片时以视口中心为原点，导致鼠标想查看的细节区域被推离屏幕。
-* **Claude 算法**：将光标指针 $(O_x, O_y)$ 视为物理世界不变不动点，解算仿射变换矩阵：
-$$\text{idealTx} = O_x - (O_x - \text{prevTx}) \cdot \frac{S_{\text{target}}}{S_{\text{current}}}$$
-配合 4px 手部微抖死区与视口边界溢出阻尼系数 ($y = 0.7$)。
+* **痛点**：普通画廊放大图片时以视口中心为原点，鼠标想查看的细节区域被推离屏幕。
+* **Claude 算法**（`c4b054ed5-C43deEXI.js`）：把光标 $(O_x, O_y)$（相对适配中心）视为不动点：
+$$\text{idealTx}' = O_x - (O_x - \text{idealTx}) \cdot \frac{S_{\text{target}}}{S_{\text{current}}}$$
+结果再按 `maxTx` 钳制；滚轮缩放系数为 `Math.exp(-deltaY * 0.01)`，拖拽以 `Math.hypot(dx, dy) < 4` 作为死区。
 
-### 6. 麦克风 6 频段非线性 Gamma 幂律能量压缩
-* **痛点**：直接将分贝映射为波形高度会导致低音爆格、说话停顿时空调噪音引起持续微抖。
-* **Claude 算法**：引入 8% 噪声门限过滤底噪，叠加 0.7 次幂非线性 Gamma 压缩：
-$$\text{Compressed} = \min\left(1, (\max(0, E - 0.08) / 0.92)^{0.7} \times 1.5 \times W_b\right)$$
-使微弱的人声细语被温和放大，高分贝爆音被自然平抑，波形动态范围极其均匀。
+### 6. macOS 红绿灯逆缩放补偿 (Traffic Light Zoom Compensation)
+* **痛点**：网页内容随 `zoomFactor` 缩放后，原生红绿灯与标题栏内容的中心线会错位。
+* **Claude 算法**：主进程（`.vite/build/index.chunk-lzaSYO3Q.js`）以按钮直径 12、基准线 `33 / 2` 计算 `Math.max(0, Math.round((16.5 + 6) * zoom - 6))` 并调用 `setWindowButtonPosition`；渲染端（`shared-10-THQui8pC.js`）的占位宽度为 `Math.round(74 / Math.min(zoom, 1))`，全屏时归零；窗口化圆角为 `setBorderRadius(isMaximized || isFullScreen ? 0 : 8)`。
 
 ### 7. Shadow DOM 隔离 + CSS Grid 行高几何硬锁
-* **痛点**：代码差异对比引擎在遇到长行换行（Word Wrap）时，左侧行号与右侧代码经常严重错位。
-* **Claude 算法**：采用 Shadow DOM 隔离语法选择器，左右两栏在 CSS Grid 中被强制同步硬锁为相同网格行跨度：`gridRow = span ${lines}`，并使用 `feed: e.slice(m.length)` 增量向 Worker 发送 Delta，避免 $O(N^2)$ 重复语法树重排。
+* **痛点**：代码差异对比在长行换行（Word Wrap）时，行号与代码经常错位。
+* **Claude 算法**（`c19e90103-muBq-gyt.js`）：差异视图挂在 `attachShadow({ mode: "open" })` 里隔离样式；行号栏与代码栏在 CSS Grid 中同步写入 `gridRow = span ${lines}`，两栏行高被同一网格锁定。
 
-### 8. Iframe 事件防吞噬护盾与双击 50/50 吸附
-* **痛点**：拖拽 Artifacts 双栏分割条划过内部展示 iframe 时，iframe 截获指针事件导致拖拽状态死锁卡住。
-* **Claude 算法**：拖拽激活瞬间向全局注入 `data-pane-dragging="true"`，在预览容器上方强制覆盖一层透明的 `pointer-events: none` 阻断层；双击手柄瞬时触发二阶弹簧 50/50 平分居中吸附。
+### 8. Iframe 事件防吞噬护盾 (Pane Drag Shield)
+* **痛点**：拖拽分栏时指针划过内嵌 iframe，iframe 截获事件导致拖拽卡死。
+* **Claude 算法**：拖拽开始时在宿主节点写入 `data-pane-dragging`（`shared-22-HztmyUTM.js`，Escape 可取消并回滚），样式表随即对 `.dframe-pane-host[data-pane-dragging] iframe` 施加 `pointer-events: none`（`shared-styles-Bl9zqrv-.css`）。
 
 ---
 
@@ -195,12 +147,14 @@ open-claude-ui/
 ├── assets/                           # 资产说明与合规指引
 │   ├── images/logo.svg               # 开源矢量标识
 │   └── README.md                     # 资产合规与系统级回退栈说明
-├── code-examples/                    # 30 个生产级独立代码文件 (开箱即用)
+├── code-examples/                    # 33 个独立代码模块 + 主题样式表与 Tailwind 配置
 │   ├── ArtifactsSplitPaneResizer.tsx # 双栏弹性分割与折叠引擎
 │   ├── AttachmentCard.tsx            # 附件磁贴与上下文胶囊
 │   ├── cds-theme.css                 # 全局主题样式表 (CSS 自定义属性与 Keyframes)
-│   ├── CdsButton.tsx                 # 4 级尺寸、5 大变体全能按钮
+│   ├── CdsButton.tsx                 # 按钮尺寸阶梯与变体
+│   ├── CdsMotionEngine.tsx           # sibling-index / View Transitions / Scroll-Driven 动效演示
 │   ├── ChatComposer.tsx              # 核心输入框终端
+│   ├── ChatComposerChin.tsx          # 输入框底部 Chin 与努力程度入口
 │   ├── ChatMessageBubbles.tsx        # 会话气泡套件 (User & Assistant)
 │   ├── ClaudeAudioPlayer.ts          # 低延迟音频引擎 (内置 Web Audio 原生合成振荡器)
 │   ├── ClaudeDesktopHeader.tsx       # macOS 沉浸式标题栏组件
@@ -212,14 +166,15 @@ open-claude-ui/
 │   ├── createClaudeMainWindow.ts     # Electron 宿主主窗口创建工厂
 │   ├── DraggableSessionList.tsx      # 侧边栏会话拖放与固定物理
 │   ├── EpitaxyIframeBridge.tsx       # Artifacts 预览沙箱桥接器
-│   ├── LiveMicActivityBars.tsx       # 6 频段非线性麦克风波形柱
+│   ├── LiveMicActivityBars.tsx       # 6 柱麦克风波形（底噪门限 + Gamma 压缩）
 │   ├── McpToolDecisionCard.tsx       # MCP 交互式工具调用决策卡片
 │   ├── MediaLightboxViewer.tsx       # 多模态媒体查看器与画廊跑道
+│   ├── ModelSelectorEffort.tsx       # 模型选择器与 5 档努力程度
 │   ├── ModelSwitcherWithTokenGauge.tsx # 模型矩阵选择器与 Token 仪表盘
 │   ├── ReasoningAmbientGlow.tsx      # 动态光效与推理氛围感组件
 │   ├── RichComposerWithMentions.tsx  # CJK 守卫、/ 与 @ 双触发符输入终端
 │   ├── ScrollFadeContainer.tsx       # 7 档非线性 Alpha 渐变遮罩
-│   ├── SegmentedControl.tsx          # 999px 全圆角分段选择胶囊
+│   ├── SegmentedControl.tsx          # 分段选择器（控件圆角轨道 + 滑动指示器）
 │   ├── StatusIndicators.tsx          # 陶土呼吸灯、运行脉冲与骨架屏扫光
 │   ├── StreamingDiffViewer.tsx       # 代码差异对比与流式高亮引擎
 │   ├── tailwind.config.js            # Tailwind 配置工程扩展
@@ -229,7 +184,8 @@ open-claude-ui/
 │   ├── useClaudeSharedElementTransition.ts # View Transitions 共享元素变形 Hook
 │   └── useRateLimitBackoff.ts        # 429/503 指数退避与熔断状态机 Hook
 ├── docs/
-│   ├── Claude Design System (CDS).md # 七大篇章 / 31 小节深度技术指导手册
+│   ├── README.md                     # 文档目录
+│   ├── v2/                           # Claude Desktop 2.42304.0.0 逆向分析报告（6 章 + 合并全文）
 │   └── claude-components-storybook.html # 交互式可视化故事书 (双击即可离线体验)
 ├── src/
 │   └── index.ts                      # 统一对外导出的 TypeScript 库入口
@@ -270,36 +226,30 @@ module.exports = {
 ### 2. 使用核心组件
 
 ```tsx
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ChatComposer,
-  CdsButton,
   ModelSwitcherWithTokenGauge,
   ScrollFadeContainer
 } from 'open-claude-ui';
 
 export function App() {
-  const [model, setModel] = useState<'sonnet-3.5' | 'haiku-3.5' | 'opus-3'>('sonnet-3.5');
-  const [thinking, setThinking] = useState(true);
-
   return (
     <div className="flex h-screen w-full bg-[var(--cds-surface-1)]">
-      <ScrollFadeContainer axis="vertical" fadeSize={32} className="flex-1 p-6">
+      <ScrollFadeContainer orientation="vertical" fadeSize={28} className="flex-1 p-6">
         <div className="mx-auto max-w-3xl space-y-4">
           <ModelSwitcherWithTokenGauge
-            currentModel={model}
-            onModelChange={setModel}
-            extendedThinking={thinking}
-            onThinkingChange={setThinking}
-            tokenBudget={{
+            currentModelId="claude-opus-5-5"
+            onSelectModel={(model) => console.log('Model:', model.name)}
+            tokenMetrics={{
               inputTokens: 12400,
               outputTokens: 3200,
               cacheReadTokens: 48000,
               cacheWriteTokens: 16000,
-              maxContextWindow: 200000
+              cacheTtl: '5m'
             }}
           />
-          <ChatComposer onSend={(text) => console.log('Send message:', text)} />
+          <ChatComposer onSendMessage={(text) => console.log('Send message:', text)} />
         </div>
       </ScrollFadeContainer>
     </div>
@@ -316,11 +266,9 @@ export function App() {
 open docs/claude-components-storybook.html
 ```
 故事书包含：
-* 陶土色彩体系与暗黑模式即时切换
-* 全量按钮尺寸与悬浮反馈
-* 999px 全圆角滑动分段胶囊
-* 二阶弹簧动效实时演示
-* 附件磁贴与代码复制衰减状态机
+* 01–09 组件库章节：设计基石、应用框架、对话与输入、交互表单、代码与产物、弹窗与浮层、动效与物理、边界哲学、v2.42304.0 设计美学
+* claude.ai 网页版实测页（W0–W15）：坐标、令牌、菜单、动效时长与桌面版对照
+* 深色模式即时切换与二阶弹簧动效实时演示
 
 ---
 

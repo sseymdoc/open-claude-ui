@@ -4,19 +4,20 @@ import React, { useState } from 'react';
  * ==============================================================================
  * Claude Design System (CDS) - ModelSwitcherWithTokenGauge.tsx
  * 
- * 逆向还原自官方 Claude 模型矩阵选择器与 Token 上下文仪表盘 (REA v6.5.0 取证):
+ * 逆向还原自官方 Claude 模型矩阵选择器与 Token 上下文仪表盘 (Claude Desktop 2.42304.0.0 取证):
  * - `c30db9bec-DjF3pT_h.js` (adaptive thinking deprecation & official models)
  * - `c058e28e3-DXZbxFF9.js` (5m/1h ephemeral prompt cache tokens breakdown)
- * - `shared-3-DnHYUZdJ.js` (effort levels: low, medium, high, max & setDraftEffort)
+ * - `shared-3-DnHYUZdJ.js` (setDraftEffort)
  * - `frame-shell-chrome-CAw-tYzh.js` (SVG gauge & strokeDashoffset calculation)
  * 
  * 核心生产级工程机制:
- * 1. 官方三大模型梯队架构 (Model Tier Matrix):
- *    - Claude 3.7 Sonnet: 旗舰智能，原生支持自适应深度思考 (adaptive thinking)
- *    - Claude 3.5 Haiku: 极速响应，超高吞吐
- *    - Claude 3 Opus: 终极长程推理与巨构分析
+ * 1. 模型梯队（claude.ai 模型菜单实测）:
+ *    - Fable 5.1: 应对您最艰巨的挑战
+ *    - Opus 5.5: 适用于复杂工作与日常任务
+ *    - Sonnet 5.5: 处理简单任务效率最高
+ *    - Haiku 5.5: 快速解答的最佳选择
  * 2. 深度思考 (Adaptive Thinking & Effort Level):
- *    支持配置思考配额与 effort 档位 (low / medium / high / max)。
+ *    支持配置思考配额与 effort 档位 (low / medium / high / xhigh / max，默认 medium)。
  * 3. Prompt Caching 显存成本解构表:
  *    - cache_read_input_tokens: 命中 5m / 1h 缓存，享受 90% 阶梯折扣
  *    - cache_creation_input_tokens (5m / 1h): 写入热缓存 (1.25x 成本)
@@ -38,25 +39,30 @@ export interface ModelTier {
 
 export const AVAILABLE_MODELS: ModelTier[] = [
   {
-    id: 'claude-3-7-sonnet-latest',
-    name: 'Claude 3.7 Sonnet',
-    tagline: '最强智能，支持自适应思考链与全栈系统级编程',
-    badge: '旗舰',
+    id: 'claude-fable-5-1',
+    name: 'Fable 5.1',
+    tagline: '应对您最艰巨的挑战',
     supportsThinking: true,
     maxContext: 200000,
   },
   {
-    id: 'claude-3-5-haiku-latest',
-    name: 'Claude 3.5 Haiku',
-    tagline: '极速响应，专为即时问答与高频流式自动化优化',
-    badge: '极速',
-    supportsThinking: false,
+    id: 'claude-opus-5-5',
+    name: 'Opus 5.5',
+    tagline: '适用于复杂工作与日常任务',
+    supportsThinking: true,
     maxContext: 200000,
   },
   {
-    id: 'claude-3-opus-latest',
-    name: 'Claude 3 Opus',
-    tagline: '终极深度，专为复杂科学推演与巨型上下文分析设计',
+    id: 'claude-sonnet-5-5',
+    name: 'Sonnet 5.5',
+    tagline: '处理简单任务效率最高',
+    supportsThinking: true,
+    maxContext: 200000,
+  },
+  {
+    id: 'claude-haiku-5-5',
+    name: 'Haiku 5.5',
+    tagline: '快速解答的最佳选择',
     supportsThinking: true,
     maxContext: 200000,
   },
@@ -70,7 +76,7 @@ export interface TokenMetrics {
   cacheTtl?: '5m' | '1h';
 }
 
-export type ThinkingEffort = 'low' | 'medium' | 'high' | 'max';
+export type ThinkingEffort = 'low' | 'medium' | 'high' | 'xhigh' | 'max';
 
 export interface ModelSwitcherProps {
   currentModelId?: string;
@@ -80,7 +86,7 @@ export interface ModelSwitcherProps {
 }
 
 export const ModelSwitcherWithTokenGauge: React.FC<ModelSwitcherProps> = ({
-  currentModelId = 'claude-3-7-sonnet-latest',
+  currentModelId = 'claude-opus-5-5',
   onSelectModel,
   tokenMetrics = {
     inputTokens: 14200,
@@ -94,7 +100,7 @@ export const ModelSwitcherWithTokenGauge: React.FC<ModelSwitcherProps> = ({
   const [selectedModelId, setSelectedModelId] = useState(currentModelId);
   const [isOpen, setIsOpen] = useState(false);
   const [thinkingMode, setThinkingMode] = useState<'adaptive' | 'off'>('adaptive');
-  const [effortLevel, setEffortLevel] = useState<ThinkingEffort>('high');
+  const [effortLevel, setEffortLevel] = useState<ThinkingEffort>('medium');
 
   const activeModel = AVAILABLE_MODELS.find((m) => m.id === selectedModelId) || AVAILABLE_MODELS[0];
 
@@ -246,7 +252,7 @@ export const ModelSwitcherWithTokenGauge: React.FC<ModelSwitcherProps> = ({
 
               {thinkingMode === 'adaptive' && (
                 <div className="flex items-center gap-1 bg-neutral-100 dark:bg-neutral-800/80 p-1 rounded-lg">
-                  {(['low', 'medium', 'high', 'max'] as ThinkingEffort[]).map((level) => (
+                  {(['low', 'medium', 'high', 'xhigh', 'max'] as ThinkingEffort[]).map((level) => (
                     <button
                       key={level}
                       type="button"
