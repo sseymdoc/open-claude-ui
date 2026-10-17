@@ -195,8 +195,8 @@
 
       /* Claude Official Elevation Shadow Hierarchy (Dark Mode)（claude.ai 实测：只换远层颜色，sm / md / lg 沿用 :root 公式；.dark 挂在 <html> 上） */
       --cds-shadow-color: #0000003d;
-      --cds-shadow-popover: inset 0 0 0 1px rgba(255, 255, 255, 0.10), 
-                            0 8px 24px #00000052, 0 2px 6px #0003; /* claude.ai 实测 */
+      --cds-shadow-popover: 0 0 0 1px var(--cds-border),
+                            0 8px 24px #00000052, 0 2px 6px #0003; /* claude.ai 实测：.wa-menu 两种主题都是 1px 外环 */
 
       --cds-panel-shadow: 0 0 0 1px var(--cds-border), var(--cds-shadow-sm);
       --cds-panel-shadow-hover: 0 0 0 1px var(--cds-border-strong), 0 6px 20px rgba(0, 0, 0, 0.6);
@@ -1078,13 +1078,13 @@
 
       // 官方 CDS 7 阶排版音阶体系
       const typographyTiers = [
-        { name: "caption", token: "--cds-font-size-caption", px: "10px ~ 11px", leading: "16px (1.55)", weight: "500 / 580", role: "微型标签、快捷键徽章 (Kbd)、时间戳、模型角标", specimen: "Sonnet 3.7 • 10:24 AM • ⌘K", calcPx: "11px", calcLh: "16px" },
-        { name: "footnote", token: "--cds-font-size-footnote", px: "11px ~ 12px", leading: "14px (1.25)", weight: "400 / 500", role: "辅助说明、文件大小 (4.2 KB)、Token 统计、次级元信息", specimen: "design-tokens.json • 4.2 KB • 2,410 tokens", calcPx: "12px", calcLh: "14px" },
+        { name: "caption", token: "--cds-font-size-caption", px: "12px", leading: "17px (1.42)", weight: "500 / 580", role: "微型标签、快捷键徽章 (Kbd)、时间戳、模型角标", specimen: "Sonnet 3.7 • 10:24 AM • ⌘K", calcPx: "12px", calcLh: "17px" },
+        { name: "footnote", token: "--cds-font-size-footnote", px: "13px", leading: "17px (1.31)", weight: "400 / 500", role: "辅助说明、文件大小 (4.2 KB)、Token 统计、次级元信息", specimen: "design-tokens.json • 4.2 KB • 2,410 tokens", calcPx: "13px", calcLh: "17px" },
         { name: "code", token: "--cds-font-size-code", px: "11px ~ 12px", leading: "16px (1.42)", weight: "400 (Mono)", role: "代码块、行内代码、Git Diff 差异对比", specimen: "const scale = calc(16 / 17); // 0.941", calcPx: "12px", calcLh: "16px" },
-        { name: "body (基准)", token: "--cds-font-size-body", px: "12px ~ 14px", leading: "18px (1.46)", weight: "400 (深色减薄 360)", role: "菜单项、SM / MD 按钮、思考摘要（实测均 14/20）", specimen: "在深色背景下，高对比度白字因视网膜光渗效应在视觉上会比实际粗约 10%~15%。", calcPx: "14px", calcLh: "20px" },
-        { name: "prose", token: "--cds-font-size-prose", px: "14px ~ 16px", leading: "22px (1.45)", weight: "400 / 500", role: "助手回复正文（data-size=sm：15/22 衬线）、长文排版段落、Artifacts 独立文档正文", specimen: "Claude Desktop 采用低对比度表面分层与无边框流式排版，打造通透呼吸感。", calcPx: "15px", calcLh: "22px" },
-        { name: "heading", token: "--cds-font-size-heading", px: "13px ~ 15px", leading: "17px (1.29)", weight: "580 / 600", role: "卡片小节标题、弹窗对话框标题 (Modal Title)、代码语言", specimen: "Delete Conversation? • TypeScript • IrradiationCompensation.css", calcPx: "16px", calcLh: "20px" },
-        { name: "title", token: "--cds-font-size-title", px: "19px ~ 21px", leading: "24px (1.25)", weight: "580 / 600", role: "主页面大标题、Project 项目名称、全屏视窗顶部一级标题", specimen: "Claude Design System (CDS 2.0) • v2.37337.1 Production", calcPx: "20px", calcLh: "24px" },
+        { name: "body (基准)", token: "--cds-font-size-body", px: "14px", leading: "20px (1.43)", weight: "400 (深色减薄 360)", role: "菜单项、SM / MD 按钮、思考摘要（实测均 14/20）", specimen: "在深色背景下，高对比度白字因视网膜光渗效应在视觉上会比实际粗约 10%~15%。", calcPx: "14px", calcLh: "20px" },
+        { name: "prose", token: "--cds-font-size-prose", px: "16px（sm 15 · lg 18）", leading: "24px (1.5)（sm 22 · lg 27）", weight: "400 / 500", role: "助手回复正文（data-size=sm：15/22 衬线）、长文排版段落、Artifacts 独立文档正文", specimen: "Claude Desktop 采用低对比度表面分层与无边框流式排版，打造通透呼吸感。", calcPx: "16px", calcLh: "24px" },
+        { name: "heading", token: "--cds-font-size-heading", px: "15px", leading: "20px (1.33)", weight: "580 / 600", role: "卡片小节标题、弹窗对话框标题 (Modal Title)、代码语言", specimen: "Delete Conversation? • TypeScript • IrradiationCompensation.css", calcPx: "15px", calcLh: "20px" },
+        { name: "title", token: "--cds-font-size-title", px: "22px", leading: "28px (1.27)", weight: "580 / 600", role: "主页面大标题、Project 项目名称、全屏视窗顶部一级标题", specimen: "Claude Design System (CDS 2.0) • v2.37337.1 Production", calcPx: "22px", calcLh: "28px" },
       ];
 
       // 核心内容场景排版规则映射表
@@ -1097,7 +1097,7 @@
         { area: "chat", element: "思考折叠触发器 ('Thought for 3.8s')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Medium 强化可点击感，text-muted" },
         { area: "chat", element: "思考链内部日志", size: "11px ~ 12px", weight: "400 (Regular)", font: "Mono", roleDesc: "代码级日志缩进排版，2px 左引导线" },
         { area: "composer", element: "主输入框文字 (Textarea)", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "15/21（claude.ai 实测），field-sizing 自撑开" },
-        { area: "composer", element: "输入框占位符 (Placeholder)", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "text-neutral-400 弱化提示" },
+        { area: "composer", element: "输入框占位符 (Placeholder)", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "--cds-text-muted 弱化提示（claude.ai 实测 .wa-editor::placeholder）" },
         { area: "composer", element: "操作按钮 ('+ Add content')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Ghost 变体，图标 -0.125em 负偏置" },
         { area: "composer", element: "发送按钮 (Send)", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "陶土 #c6613f（hover #d97757）32×32 · 圆角 8，按压只缩放背景层" },
         { area: "artifacts", element: "代码块语法高亮", size: "12px ~ 13px", weight: "400 (Regular)", font: "Mono", roleDesc: "Fira Code/Menlo，1.46 行高，tabular-nums" },
@@ -1106,7 +1106,7 @@
         { area: "controls", element: "标准按钮 (SM 28px / MD 32px)", size: "14px / 14px", weight: "500 (Medium)", font: "Sans", roleDesc: "中粗视觉抓手；按压只缩放背景层 .975（60ms 按下 / 450ms 弹簧回弹）" },
         { area: "controls", element: "分段控件 Tab", size: "14px（lg 15px）", weight: "400", font: "Sans", roleDesc: "激活只变色（secondary → primary），不加粗；绝对几何滑动" },
         { area: "controls", element: "弹窗标题 (Modal Title)", size: "15px ~ 16px", weight: "580 (Semibold)", font: "Sans", roleDesc: "强边界阻断，Semibold 强调" },
-        { area: "controls", element: "快捷键徽章 (Kbd)", size: "10px ~ 11px", weight: "580 (Semibold)", font: "Mono", roleDesc: "按键微型轮廓，内凹投影" },
+        { area: "controls", element: "快捷键徽章 (Kbd)", size: "12px", weight: "400（继承）", font: "Sans（font: inherit）", roleDesc: "text-muted，无轮廓、无投影（claude.ai 实测 .wa-kbd）" },
       ];
 
       const filteredMap = selectedTypoFilter === "all" ? contentTypographyMap : contentTypographyMap.filter((m) => m.area === selectedTypoFilter);
@@ -1220,7 +1220,7 @@
                   1.5 官方排版字号阶梯标尺 (7-Tier Typography Scale & Line-Heights)
                 </h4>
                 <p className="text-xs text-neutral-400 mt-0.5">
-                  Claude 桌面端基于 <code>--cds-rem-scale: calc(16/17)</code> 紧凑缩放系数，定义了从 Caption (10px) 到 Title (20px) 的完整 7 级排版音阶与自适应行高：
+                  Claude 桌面端基于 <code>--cds-rem-scale: calc(16/17)</code> 紧凑缩放系数，定义了从 Caption (12px) 到 Title (22px) 的完整 7 级排版音阶与自适应行高：
                 </p>
               </div>
               <span className="text-xs font-mono text-clay shrink-0">Scale: 16/17 (~0.941)</span>
@@ -1545,7 +1545,7 @@
                   {activeShadowTab === "sm" && "近层 rgb(11 11 11 / 6%) + 远层 8% 双层漫射；深色只把远层换成 #0000003d（claude.ai 实测）。"}
                   {activeShadowTab === "md" && "鼠标悬浮升高或右键展开菜单时的轻量悬空层级，自然脱离背景。"}
                   {activeShadowTab === "lg" && "对话框与抽屉独享的大弥散度阴影，向下深潜 28px。"}
-                  {activeShadowTab === "popover" && "暗黑模式外环 0px + 内环 1px 倒角反光，浅色模式 1px 外轮廓，绝不糊边。"}
+                  {activeShadowTab === "popover" && "两种主题都是 1px 外环 0 0 0 1px var(--cds-border)（深色为白 10%），再叠两层弥散投影（claude.ai 实测 .wa-menu）。"}
                   {activeShadowTab === "composer" && "14px 圆角输入框（comfortable .875rem；compact 12px），悬浮与聚焦时向外扩散 24px 双环微投影。"}
                   {activeShadowTab === "focus" && "内嵌 1px 页面底色垫片 + 1px accent 蓝环 (#2a78d6) + 6px 淡蓝光晕 (#cde2fb；深色 rgb(24 79 149 / 60%))。"}
                 </p>
@@ -1595,9 +1595,8 @@ box-shadow: inset 0 0 0 0px var(--cds-border),
             0 8px 24px rgba(0, 0, 0, 0.12), 
             0 2px 6px rgba(0, 0, 0, 0.08);
 
-/* 深色模式: 0px 外框 + 1px 内部边缘倒角高光! */
-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10),
-            0 0 0 0px transparent,
+/* 深色模式: 同样是 1px 外环（--cds-border = 白 10%），投影加深 */
+box-shadow: 0 0 0 1px var(--cds-border),
             0 8px 24px #00000052,
             0 2px 6px #0003;`}
                   </pre>
@@ -1703,10 +1702,10 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                 <div className="p-1 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover space-y-0.5">
                   <div className="min-h-8 px-2.5 py-1.5 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Icon name="copy" size="xs" className="text-neutral-400" />
+                      <Icon name="copy" size="lg" className="text-neutral-400" />
                       <span>Copy Code</span>
                     </div>
-                    <kbd className="text-[10px] font-mono text-neutral-400">⌘C</kbd>
+                    <kbd className="font-sans text-[12px] text-[color:var(--cds-text-muted)]">⌘C</kbd>
                   </div>
                 </div>
               </div>
@@ -2117,8 +2116,8 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                       </div>
                     )}
 
-                    {/* 回答正文 (完全无框，自然排版) */}
-                    <div className="text-[15px] leading-relaxed text-neutral-800 dark:text-neutral-200">
+                    {/* 回答正文 (完全无框，自然排版；Prose data-size=sm：衬线 15/22，claude.ai 实测) */}
+                    <div className="font-serif text-[15px] leading-[22px] text-neutral-800 dark:text-neutral-200">
                       {m.text}
                     </div>
 
@@ -2224,7 +2223,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                     }}
                     placeholder="Reply to Claude... (按 Enter 发送多轮消息)"
                     rows={2}
-                    className="w-full bg-transparent border-none outline-none resize-none text-[15px] leading-[1.4] text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 pl-1 focus:ring-0"
+                    className="w-full bg-transparent border-none outline-none resize-none text-[15px] leading-[1.4] text-neutral-900 dark:text-neutral-100 placeholder:text-[color:var(--cds-text-muted)] pl-1 focus:ring-0"
                   />
 
                   {/* 底部工具条 */}
@@ -2249,7 +2248,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                               }}
                               className="w-full min-h-8 text-left px-2.5 py-1.5 rounded-lg cds-hover-ghost text-sm flex items-center gap-2 text-neutral-800 dark:text-neutral-200"
                             >
-                              <Icon name="fileCode" size="xs" className="text-clay" />
+                              <Icon name="fileCode" size="lg" className="text-clay" />
                               <span>Attach Code (schema.ts)</span>
                             </button>
                             <button
@@ -2258,7 +2257,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                               }}
                               className="w-full min-h-8 text-left px-2.5 py-1.5 rounded-lg cds-hover-ghost text-sm flex items-center gap-2 text-neutral-800 dark:text-neutral-200"
                             >
-                              <Icon name="fileText" size="xs" className="text-blue-500" />
+                              <Icon name="fileText" size="lg" className="text-blue-500" />
                               <span>Attach PDF (doc.pdf)</span>
                             </button>
                           </div>
@@ -2288,7 +2287,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                               >
                                 <span>{name}</span>
                                 {/* 选中只靠 accent 蓝对勾，不加底色（claude.ai 实测） */}
-                                {selectedModel === name && <Icon name="check" size="xs" className="text-[color:var(--cds-fill-accent)]" />}
+                                {selectedModel === name && <Icon name="check" size="lg" className="text-[color:var(--cds-fill-accent)]" />}
                               </button>
                             ))}
                           </div>
@@ -2814,7 +2813,7 @@ export const irradiationCompensation = {
             code={`<div className="w-48 rounded-xl bg-white dark:bg-[#222220] cds-shadow-popover p-1">
   <div className="min-h-8 px-2.5 py-1.5 rounded-lg text-sm cds-hover-ghost">Duplicate</div>
 </div>`}
-            description="带有 --cds-shadow-popover 真实双环（深色内高光/浅色外轮廓）深度弥散投影的浮动弹出菜单，支持键盘快捷键勋章。菜单圆角 12px = 控件圆角 8 + --cds-menu-gutter 4，与 8px 菜单项同心（claude.ai 实测）。"
+            description="带有 --cds-shadow-popover 1px 外环（深浅色相同，claude.ai 实测 .wa-menu）与深度弥散投影的浮动弹出菜单，支持键盘快捷键勋章。菜单圆角 12px = 控件圆角 8 + --cds-menu-gutter 4，与 8px 菜单项同心（claude.ai 实测）。"
           >
             <div className="w-full max-w-xs mx-auto rounded-xl bg-white dark:bg-[#222220] p-1 cds-shadow-popover">
               {[
@@ -2827,10 +2826,10 @@ export const irradiationCompensation = {
                   className="min-h-8 px-2.5 py-1.5 rounded-lg flex items-center justify-between text-sm text-neutral-700 dark:text-neutral-300 cds-hover-ghost cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
-                    <Icon name={m.icon} size="xs" className="text-neutral-400" />
+                    <Icon name={m.icon} size="lg" className="text-neutral-400" />
                     <span>{m.name}</span>
                   </div>
-                  <kbd className="text-[10px] font-mono text-neutral-400">{m.kbd}</kbd>
+                  <kbd className="font-sans text-[12px] text-[color:var(--cds-text-muted)]">{m.kbd}</kbd>
                 </div>
               ))}
             </div>
@@ -3377,11 +3376,11 @@ export const irradiationCompensation = {
       const [quotaRemaining, setQuotaRemaining] = useState(82);
 
       const effortMeta = {
-        low: { name: "Low", desc: "极速回复日常轻量简短提问，最少耗费 Token" },
-        medium: { name: "Medium", desc: "默认档位：日常对话与常规代码，速度与深度平衡", recommended: true },
-        high: { name: "High", desc: "复杂推理与多步骤任务，更慢、用量更多" },
-        xhigh: { name: "Extra", desc: "高难度重构、多文件分析与系统架构设计" },
-        max: { name: "Max", desc: "超难学术算法与前沿数理难题", warning: "极度消耗 Token 与推理时延，请谨慎用于最复杂场景" },
+        low: { name: "Low" },
+        medium: { name: "Medium", recommended: true },
+        high: { name: "High" },
+        xhigh: { name: "Extra" },
+        max: { name: "Max", warning: "极度消耗 Token 与推理时延，请谨慎用于最复杂场景" },
       };
 
       // 2. ChatComposerChin & Offline Queued Messages
@@ -3524,7 +3523,7 @@ export const irradiationCompensation = {
                   <div className="flex flex-wrap justify-end items-start gap-1">
                     {isEffortSubOpen && (
                       <div role="menu" aria-label="努力程度" className="w-80 rounded-xl bg-white dark:bg-[#1c1c1b] cds-shadow-popover p-1">
-                        <p className="px-2.5 py-1 text-[11px] text-neutral-500 leading-snug">
+                        <p className="px-2.5 py-1 text-[13px] leading-[17px] text-[color:var(--cds-text-muted)]">
                           更高档位带来更严谨详尽的推导，但耗时更长且更快消耗用量配额。
                         </p>
                         {Object.entries(effortMeta).map(([lvl, meta]) => (
@@ -3541,15 +3540,14 @@ export const irradiationCompensation = {
                             className="w-full min-h-8 text-left px-2.5 py-1.5 rounded-lg text-sm flex flex-col gap-0.5 cds-hover-ghost text-neutral-700 dark:text-neutral-300"
                           >
                             <div className="flex items-center gap-1.5 w-full">
-                              <span className="font-semibold">{meta.name}</span>
+                              <span>{meta.name}</span>
                               {meta.recommended && (
                                 <span className="h-4 px-1 inline-flex items-center rounded text-[10px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500">
                                   推荐
                                 </span>
                               )}
-                              {effortLevel === lvl && <Icon name="check" size="xs" className="ml-auto text-[color:var(--cds-fill-accent)]" />}
+                              {effortLevel === lvl && <Icon name="check" size="lg" className="ml-auto text-[color:var(--cds-fill-accent)]" />}
                             </div>
-                            <span className="text-[11px] text-neutral-400 font-normal">{meta.desc}</span>
                             {meta.warning && lvl === "max" && (
                               <span className="text-[10px] text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 p-1.5 rounded mt-1 border border-amber-200 dark:border-amber-900/60 leading-tight">
                                 ⚠️ {meta.warning}
@@ -3570,7 +3568,7 @@ export const irradiationCompensation = {
                           className="w-full h-8 px-2.5 rounded-lg text-left text-sm flex items-center justify-between cds-hover-ghost text-neutral-700 dark:text-neutral-300"
                         >
                           <span>{m}</span>
-                          {model === m && <Icon name="check" size="xs" className="text-[color:var(--cds-fill-accent)]" />}
+                          {model === m && <Icon name="check" size="lg" className="text-[color:var(--cds-fill-accent)]" />}
                         </button>
                       ))}
                       <div className="h-px mx-2.5 my-1 bg-neutral-200 dark:bg-neutral-800" />
@@ -3583,7 +3581,7 @@ export const irradiationCompensation = {
                       >
                         <span className="flex-1">Effort 努力程度</span>
                         <span className="text-neutral-400">{effortMeta[effortLevel].name}</span>
-                        <Icon name="chevronDown" size="xs" className="-rotate-90 text-neutral-400" />
+                        <Icon name="chevronDown" size="md" className="-rotate-90 text-neutral-400" />
                       </button>
                     </div>
                   </div>
