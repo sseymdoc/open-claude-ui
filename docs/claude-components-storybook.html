@@ -587,6 +587,195 @@
     @media (prefers-reduced-motion: reduce) {
       .urm__beat, .urm__beat-glow, .urm__breath, .urm__comet, .fc-composer, .fc-morph::before, .fc-morph::after { animation: none !important; }
     }
+
+    /* ==========================================================================
+       claude.ai Web 实测页 (#claude-ai-web) — build 541957a01b · 2026-10-17T17:10:41Z
+       getBoundingClientRect / getComputedStyle / CSSOM 实测，comfortable 密度
+       作用域 .wa-root：本页内用实测值覆盖上文旧令牌，不影响 01–10 章
+       ========================================================================== */
+    .wa-root {
+      --cds-surface-0: #f9f9f7; --cds-surface-1: #fcfcfb; --cds-surface-2: #fff; --cds-surface-3: #fff;
+      --cds-page-bg: var(--cds-surface-1);
+      --cds-text-primary: #0b0b0b; --cds-text-secondary: #52514e; --cds-text-muted: #898781;
+      --cds-alpha-1: rgb(11 11 11 / 5%); --cds-alpha-2: rgb(11 11 11 / 10%); --cds-alpha-3: rgb(11 11 11 / 20%);
+      --cds-alpha-4: rgb(11 11 11 / 35%); --cds-alpha-5: rgb(11 11 11 / 50%);
+      --cds-border: var(--cds-alpha-2); --cds-border-strong: var(--cds-alpha-3); --cds-border-stronger: rgb(11 11 11 / 40%);
+      --cds-ring-inner: 0px; --cds-ring-outer: 1px; --cds-ring-color: var(--cds-border);
+      --cds-fill-primary: #0b0b0b; --cds-fill-primary-hover: #2c2c2a; --cds-on-primary: #fff;
+      --cds-fill-secondary: #ffffff1a; --cds-fill-secondary-hover: var(--cds-alpha-1); --cds-fill-secondary-ring: var(--cds-alpha-2);
+      --cds-fill-ghost-hover: var(--cds-alpha-1);
+      --cds-fill-brand: #c6613f; --cds-fill-brand-hover: #d97757; --cds-clay: #d97757;
+      --cds-fill-accent: #2a78d6; --cds-text-accent: #184f95; --cds-bg-accent: #cde2fb;
+      --cds-fill-field: #ffffff80; --cds-fill-field-ring: var(--cds-alpha-2);
+      --cds-text-warning: #734500; --cds-bg-warning: #f9dca4;
+      --cds-shadow-color: rgb(11 11 11 / 8%);
+      --cds-shadow-sm: 0 1px 2px 0 rgb(11 11 11 / 6%), 0 2px 8px 0 var(--cds-shadow-color);
+      --cds-shadow-md: 0 2px 4px 0 rgb(11 11 11 / 7%), 0 6px 16px 0 var(--cds-shadow-color);
+      --cds-shadow-lg: 0 4px 8px 0 rgb(11 11 11 / 8%), 0 12px 28px -2px var(--cds-shadow-color);
+      --cds-shadow-popover: 0 8px 24px #0000001f, 0 2px 6px #00000014;
+      --cds-focus-shadow: inset 0 0 0 1px var(--cds-page-bg), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px var(--cds-bg-accent);
+      --cds-tooltip-bg: #0b0b0b; --cds-tooltip-fg: #fff;
+      --cds-segmented-control-track: var(--cds-alpha-1); --cds-segmented-control-thumb: #fff;
+      --cds-btn-spring: linear(0, .2459, .6526, .9468, 1.0764, 1.0915, 1.0585, 1.0219, .9993, .9914, .9921, .9957, .9988, 1.0004, 1);
+      /* .dframe-root[data-variant="web"] .dframe-sidebar：--df-hover = neutral-50，--df-selected = neutral-60 */
+      --df-hover: #f0efec; --df-selected: #edece8; --df-new-circle-bg: #eae9e4;
+      --df-web-sidebar-bg: color-mix(in srgb, var(--cds-surface-0) 50%, var(--cds-surface-1));
+      --wa-serif: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--cds-text-primary);
+    }
+    .dark .wa-root {
+      --cds-surface-0: #0b0b0b; --cds-surface-1: #151515; --cds-surface-2: #1a1a19; --cds-surface-3: #20201f;
+      --cds-text-primary: #f0efec; --cds-text-secondary: #c3c2b7; --cds-text-muted: #898781;
+      --cds-alpha-1: rgb(255 255 255 / 5%); --cds-alpha-2: rgb(255 255 255 / 10%); --cds-alpha-3: rgb(255 255 255 / 20%);
+      --cds-alpha-4: rgb(255 255 255 / 35%); --cds-alpha-5: rgb(255 255 255 / 50%); --cds-border-stronger: rgb(255 255 255 / 40%);
+      --cds-ring-inner: 1px; --cds-ring-outer: 0px;
+      --cds-fill-primary: #fff; --cds-fill-primary-hover: #e1e0d9; --cds-on-primary: #0b0b0b;
+      --cds-fill-secondary: var(--cds-alpha-2); --cds-fill-secondary-hover: rgb(255 255 255 / 14%); --cds-fill-secondary-ring: transparent;
+      --cds-fill-ghost-hover: rgb(255 255 255 / 7.5%);
+      --cds-text-accent: #6da7ec;
+      --cds-fill-field: var(--cds-alpha-1); --cds-fill-field-ring: var(--cds-border);
+      --cds-shadow-color: #0000003d;
+      --cds-shadow-popover: 0 8px 24px #00000052, 0 2px 6px #0003;
+      --cds-focus-shadow: inset 0 0 0 1px var(--cds-page-bg), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px rgb(24 79 149 / 60%);
+      --cds-tooltip-bg: var(--cds-surface-3); --cds-tooltip-fg: var(--cds-text-primary);
+      --cds-segmented-control-track: #111; --cds-segmented-control-thumb: var(--cds-alpha-2);
+      --df-hover: #151515; --df-selected: #181817; --df-new-circle-bg: #1a1a19;
+      --df-web-sidebar-bg: color-mix(in srgb, var(--cds-page-bg) 80%, black);
+    }
+
+    /* Button 解剖：button.group/btn（尺寸、圆角、内容）> span.cds-btn-squish（absolute · -z-1 · 只有它随按压缩放）> span（paint：背景 / hover / focus）；
+       图标与文字是 button 的直接子元素，不随按压缩放 */
+    .wa-btn { position: relative; isolation: isolate; display: inline-flex; flex: none; align-items: center; justify-content: center; gap: 6px; height: var(--wa-h); min-width: var(--wa-h); padding: 0 var(--wa-px); border: 0; border-radius: var(--wa-r); background: none; color: var(--cds-text-primary); font: inherit; font-size: var(--wa-fs); line-height: var(--wa-lh); white-space: nowrap; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; transition: box-shadow var(--cds-dur-fast); }
+    .wa-btn { --wa-press: .975; }
+    .wa-btn, .wa-btn[data-size="md"] { --wa-h: 32px; --wa-r: 8px; --wa-fs: 14px; --wa-lh: 20px; --wa-px: 12px; }
+    .wa-btn[data-size="xs"] { --wa-h: 24px; --wa-r: 6px; --wa-fs: 13px; --wa-lh: 19px; --wa-px: 8px; }
+    .wa-btn[data-size="sm"] { --wa-h: 28px; --wa-r: 7px; --wa-fs: 14px; --wa-lh: 20px; --wa-px: 10px; }
+    .wa-btn[data-size="lg"] { --wa-h: 40px; --wa-r: 10px; --wa-fs: 15px; --wa-lh: 22px; --wa-px: 16px; }
+    .wa-btn[data-icon] { width: var(--wa-h); padding: 0; }
+    .wa-squish { position: absolute; inset: 0; z-index: -1; border-radius: inherit; transform-origin: 50% center; transition: transform var(--cds-dur-slow) var(--cds-btn-spring); }
+    .wa-btn:not(:disabled):active .wa-squish { transform: scale(var(--wa-press)); transition: transform var(--cds-dur-fast) ease-out; }
+    .wa-paint { position: absolute; inset: 0; border-radius: inherit; background: var(--wa-bg, transparent); box-shadow: var(--wa-shadow, none); transition: background-color var(--cds-dur-fast) ease-out, box-shadow var(--cds-dur-fast) ease-out, color var(--cds-dur-fast) ease-out; }
+    .wa-btn:hover .wa-paint { background: var(--wa-bg-hover, var(--wa-bg, transparent)); }
+    .wa-btn:focus-visible .wa-paint { box-shadow: var(--cds-focus-shadow); }
+    .wa-btn[data-variant="primary"] { --wa-bg: var(--cds-fill-primary); --wa-bg-hover: var(--cds-fill-primary-hover); color: var(--cds-on-primary); font-weight: 500; }
+    .wa-btn[data-variant="secondary"] { --wa-bg: var(--cds-fill-secondary); --wa-bg-hover: var(--cds-fill-secondary-hover); --wa-shadow: inset 0 0 0 1px var(--cds-fill-secondary-ring), 0 1px 2px #0000000d; }
+    .wa-btn[data-variant="ghost"] { --wa-bg-hover: var(--cds-fill-ghost-hover); }
+    .wa-btn[data-variant="brand"] { --wa-bg: var(--cds-fill-brand); --wa-bg-hover: var(--cds-fill-brand-hover); color: #fff; }
+    .wa-btn[data-muted] { color: var(--cds-text-muted); }
+    .wa-btn[data-muted]:hover { color: var(--cds-text-primary); }
+    .wa-btn[data-secondary-ink] { color: var(--cds-text-secondary); }
+
+    /* SegmentedControl：track p 1px，thumb = 控件圆角 − 1px，内 1px 环 + 0 1px 2px */
+    .wa-seg { position: relative; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; padding: 1px; border-radius: var(--wa-seg-r, 7px); background: var(--cds-segmented-control-track); }
+    .wa-seg-thumb { position: absolute; top: 1px; bottom: 1px; left: 1px; border-radius: calc(var(--wa-seg-r, 7px) - 1px); background: var(--cds-segmented-control-thumb); box-shadow: inset 0 0 0 1px var(--cds-border), 0 1px 2px #0000000d; transition: translate var(--cds-dur-base) var(--cds-ease-snap); }
+    .wa-seg-opt { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; background: none; color: var(--cds-text-secondary); font: inherit; cursor: pointer; border-radius: calc(var(--wa-seg-r, 7px) - 2px); }
+    .wa-seg-opt[aria-checked="true"] { color: var(--cds-text-primary); }
+
+    /* Composer：0 .25rem 1.25rem black 3.5% / 7.5% + 双环（浅色外环 1px · 深色内环 1px） */
+    .wa-composer {
+      position: relative; padding: 8px; border-radius: .875rem; background: var(--cds-surface-3);
+      box-shadow: 0 .25rem 1.25rem color-mix(in srgb, #000 3.5%, transparent), inset 0 0 0 var(--cds-ring-inner) var(--cds-ring-color), 0 0 0 var(--cds-ring-outer) var(--cds-ring-color);
+    }
+    .wa-composer:hover, .wa-composer[data-force="hover"] { box-shadow: 0 .25rem 1.25rem color-mix(in srgb, #000 3.5%, transparent), inset 0 0 0 var(--cds-ring-inner) var(--cds-border-strong), 0 0 0 var(--cds-ring-outer) var(--cds-border-strong); }
+    .wa-composer:focus-within, .wa-composer[data-force="focus"] { box-shadow: 0 .25rem 1.25rem color-mix(in srgb, #000 7.5%, transparent), inset 0 0 0 var(--cds-ring-inner) var(--cds-border-strong), 0 0 0 var(--cds-ring-outer) var(--cds-border-strong); }
+    .wa-composer[data-density="compact"] { border-radius: .75rem; }
+    .wa-editor { display: block; width: 100%; resize: none; border: 0; outline: none; background: transparent; color: var(--cds-text-primary); font: inherit; font-size: 15px; line-height: 21px; padding: 5.5px 0 5.5px 8px; }
+    .wa-editor::placeholder { color: var(--cds-text-muted); opacity: 1; }
+    .wa-stack { display: grid; }
+    .wa-stack > * { grid-area: 1 / 1; opacity: 0; pointer-events: none; transition: opacity var(--cds-dur-fast) ease-out; }
+    .wa-stack > [data-on] { opacity: 1; pointer-events: auto; }
+    .wa-chin { display: grid; grid-template-rows: 0fr; opacity: 0; margin-inline: -8px; transition: grid-template-rows 280ms cubic-bezier(.4, 0, .2, 1), opacity 280ms cubic-bezier(.4, 0, .2, 1); }
+    .wa-chin[data-open] { grid-template-rows: 1fr; opacity: 1; }
+    .wa-chin > div { min-height: 0; overflow: hidden; }
+
+    /* Menu：radius = --cds-radius 8 + --cds-menu-gutter 4 = 12，padding 4，ring + shadow-popover */
+    .wa-menu { width: max-content; padding: 4px; border-radius: 12px; background: var(--cds-surface-3); box-shadow: 0 0 0 1px var(--cds-border), var(--cds-shadow-popover); color: var(--cds-text-primary); }
+    .wa-mi { display: flex; align-items: center; gap: 8px; min-height: 32px; padding: 6px 10px; border-radius: 8px; font-size: 14px; line-height: 20px; cursor: default; user-select: none; }
+    .wa-mi:hover, .wa-mi[data-highlighted] { background: var(--cds-alpha-1); }
+    .wa-mi-desc { display: block; font-size: 13px; line-height: 17px; color: var(--cds-text-muted); }
+    .wa-sep { height: 1px; margin: 4px 10px; background: var(--cds-border); }
+    .wa-badge { display: inline-flex; align-items: center; gap: 4px; flex: none; height: 18px; padding: 0 6px; border-radius: 4.5px; background: var(--cds-alpha-1); color: var(--cds-text-secondary); font-size: 11px; line-height: 1; font-weight: 500; }
+    .wa-badge[data-size="2xs"] { height: 16px; padding: 0 4px; border-radius: 4px; font-size: 10px; }
+    .wa-badge[data-tone="warning"] { background: color-mix(in srgb, var(--cds-bg-warning) 35%, transparent); color: var(--cds-text-warning); }
+    .wa-kbd { font: inherit; font-size: 12px; color: var(--cds-text-muted); }
+
+    /* Tooltip：#0b0b0b，13/18，r 6，p 3px 8px，min-h 24，opacity + scale(.98) 120ms ease-snap，距触发器约 5.5px */
+    .wa-tip-host { position: relative; display: inline-flex; }
+    .wa-tip { position: absolute; top: calc(100% + 5.5px); left: 50%; translate: -50% 0; z-index: 50; display: flex; align-items: center; gap: 8px; min-height: 24px; padding: 3px 8px; border-radius: 6px; background: var(--cds-tooltip-bg); color: var(--cds-tooltip-fg); font-size: 13px; line-height: 18px; white-space: nowrap; box-shadow: var(--cds-shadow-sm); opacity: 0; scale: .98; pointer-events: none; transition: opacity var(--cds-dur-snap) var(--cds-ease-snap), scale var(--cds-dur-snap) var(--cds-ease-snap); }
+    .wa-tip-host:hover > .wa-tip, .wa-tip-host:focus-within > .wa-tip { opacity: 1; scale: 1; }
+
+    /* Sidebar（web · comfortable） */
+    .wa-sidebar { position: relative; display: flex; flex-direction: column; width: 288px; flex: none; background: var(--df-web-sidebar-bg); border-right: .5px solid var(--cds-border); color: var(--cds-text-primary); font-size: 14px; line-height: 21px; }
+    .wa-reveal { opacity: .7; transition: opacity .12s cubic-bezier(.32, .72, 0, 1); }
+    .wa-sidebar:hover .wa-reveal { opacity: 1; }
+    .wa-row { position: relative; display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 2px; border-radius: 8px; color: var(--cds-text-secondary); cursor: pointer; user-select: none; }
+    .wa-row:hover { background: var(--df-hover); }
+    .wa-row[data-selected] { background: var(--df-selected); }
+    .wa-row-lead { display: grid; place-items: center; width: 28px; height: 28px; flex: none; }
+    .wa-row-label { min-width: 0; flex: 1; white-space: nowrap; overflow: hidden; }
+    .wa-row[data-iconless] .wa-row-label { padding-inline-start: 4px; }
+    .wa-row-label[data-fade] { -webkit-mask-image: linear-gradient(to left, transparent, #000 24px); mask-image: linear-gradient(to left, transparent, #000 24px); }
+    .wa-row-act, .wa-row-hint { opacity: 0; transition: opacity var(--cds-dur-fast) ease-out; }
+    .wa-row:hover .wa-row-act, .wa-row:hover .wa-row-hint, .wa-row:focus-within .wa-row-act { opacity: 1; }
+    .wa-row-act { position: absolute; inset-inline-end: 4px; top: 4px; }
+    .wa-new-circle { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 999px; background: var(--df-new-circle-bg); }
+    .wa-search { display: flex; align-items: center; gap: 8px; width: 100%; height: 32px; padding: 0 8px; border: 0; border-radius: 8px; background: var(--cds-fill-field); box-shadow: inset 0 0 0 .5px var(--cds-alpha-2), 0 1px 2px #0000000d; color: var(--cds-text-muted); font: inherit; font-size: 14px; cursor: pointer; }
+    .wa-search:hover { background: var(--cds-alpha-1); box-shadow: inset 0 0 0 1px var(--cds-alpha-2); }
+    .wa-search .wa-kbd { margin-inline-start: auto; opacity: 0; transition: opacity var(--cds-dur-fast) ease-out; }
+    .wa-search:hover .wa-kbd { opacity: 1; }
+    .wa-resize { position: absolute; top: 0; bottom: 0; right: -6px; width: 12px; display: grid; place-items: center; cursor: col-resize; }
+    .wa-resize > i { width: 3px; height: 48px; border-radius: 999px; background: var(--cds-text-muted); opacity: 0; transition: opacity .2s; }
+    .wa-resize:hover > i { opacity: 1; }
+    .wa-pulse-mask { -webkit-mask: radial-gradient(circle at calc(100% - 1px) 1px, transparent 4.5px, #000 5px); mask: radial-gradient(circle at calc(100% - 1px) 1px, transparent 4.5px, #000 5px); }
+    .wa-pulse-dot { position: absolute; top: -2px; right: -2px; width: 6px; height: 6px; border-radius: 999px; background: var(--cds-fill-accent); animation: wa-dot-blink 1.2s ease-in-out infinite; }
+
+    /* Jump-to-latest：size-9 · p-1 · !rounded-full · border-.5 · bg-000/80 + backdrop-blur · shadow-md → hover lg · 只过渡 opacity / border-color 200ms */
+    .wa-jump { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; z-index: 1; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 4px; overflow: hidden; border: .5px solid var(--cds-border); border-radius: 999px; background: color-mix(in srgb, var(--cds-surface-3) 80%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: var(--cds-shadow-md); color: var(--cds-text-primary); cursor: pointer; transition: opacity .2s, border-color .2s; }
+    .wa-jump::before { content: ""; position: absolute; inset: 0; transition: background-color .2s; }
+    .wa-jump:hover { box-shadow: var(--cds-shadow-lg); }
+    .wa-jump:hover::before { background: var(--cds-fill-ghost-hover); }
+    .wa-jump > svg { position: relative; mix-blend-mode: luminosity; }
+
+    /* 登录页字段与链接 */
+    .wa-input { width: 100%; height: 40px; padding: 0 12px; border: 0; border-radius: 10px; background: var(--cds-fill-field); box-shadow: inset 0 0 0 1px var(--cds-fill-field-ring); color: var(--cds-text-primary); font: inherit; font-size: 15px; outline: none; transition: box-shadow var(--cds-dur-fast) ease-out; }
+    .wa-input::placeholder { color: var(--cds-text-muted); }
+    .wa-input:focus { box-shadow: var(--cds-focus-shadow); }
+    .wa-link { color: var(--cds-text-accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); text-underline-offset: 3px; }
+    .wa-acc { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 40px; padding: 9px 12px; border: 0; border-radius: 8px; background: none; color: var(--cds-text-primary); font: inherit; font-size: 15px; font-weight: 500; text-align: start; cursor: pointer; }
+    .wa-acc:hover { background: var(--cds-fill-ghost-hover); }
+    .wa-acc > svg { transition: rotate var(--cds-dur-base) var(--cds-ease-snap); }
+    .wa-acc[aria-expanded="true"] > svg { rotate: 90deg; }
+
+    /* Variable icon axis（--cds-anim 0 → 100，.3s overshoot）：用宽度条替代字体 "ANIM" 轴 */
+    @property --wa-anim { syntax: "<number>"; inherits: false; initial-value: 0; }
+    .wa-anim-bar { --wa-anim: 0; width: calc(var(--wa-anim) * 1%); transition: --wa-anim .3s cubic-bezier(.34, 1.3, .64, 1); }
+    .wa-anim-host:hover .wa-anim-bar { --wa-anim: 100; }
+
+    /* 关键帧（claude.ai 原文；加 wa- 前缀以免与上文同名旧帧冲突） */
+    @keyframes wa-ghost-look { 0%, 16.6%, 100% { transform: translate(-1.5px) translateY(0px); } 25%, 41.6% { transform: translate(1.5px) translateY(0px); } 50%, 66.6% { transform: translate(0px) translateY(-1.5px); } 75%, 91.6% { transform: translate(0px) translateY(0px); } }
+    @keyframes wa-ghost-blink { 0%, 8% { opacity: 0; } 10%, 12% { opacity: 1; } 14%, 30% { opacity: 0; } 32%, 34% { opacity: 1; } 36%, 100% { opacity: 0; } }
+    @keyframes wa-dot-blink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+    @keyframes wa-dot-pulse { 0%, 5% { opacity: .2857; animation-timing-function: cubic-bezier(.165, .84, .44, 1); } 15%, 25% { opacity: 1; animation-timing-function: cubic-bezier(.165, .84, .44, 1); } 65%, 100% { opacity: .2857; } }
+    @keyframes wa-chip-in { 0% { opacity: 0; filter: blur(2px); transform: scale(.8); } }
+    @keyframes wa-pill-in { 0% { transform: scale(.8); } }
+    @keyframes wa-pill-pop-up { 100% { transform: scale(1.32); } }
+    @keyframes wa-pill-pop-down { 0% { transform: scale(1.32); } }
+    @keyframes wa-fade-in { 0% { opacity: 0; } }
+    @keyframes wa-um-enter { 0% { opacity: 0; transform: scale(.92) translateY(6px); } 100% { opacity: 1; transform: none; } }
+    @keyframes wa-click-ring { 0% { opacity: .95; transform: scale(.22); } 100% { opacity: 0; } }
+    @keyframes wa-reveal-in { 0% { opacity: 0; transform: translateY(4px); } 100% { opacity: 1; transform: none; } }
+    @keyframes wa-morph-in { 0% { opacity: 0; transform: translateY(3px); } }
+    @keyframes wa-message-fade-up { 0% { opacity: 0; transform: translateY(10px); } }
+    @keyframes wa-login-hero-in { 0% { opacity: 0; transform: translateY(20px); } }
+    @keyframes wa-skeleton-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+    @keyframes wa-actions-fade-in { 0% { opacity: .01; } }
+    .wa-ghost-icon:hover .wa-ghost-eyes { animation: wa-ghost-look 2.4s ease-in-out infinite; }
+    .wa-ghost-icon:hover .wa-ghost-lid { animation: wa-ghost-blink 4s ease-in-out infinite; }
+    .wa-message-fade-up { animation: 1.1s linear(0 0%, 0.0049 0.917431%, 0.019 1.83486%, 0.0412 2.75229%, 0.0706 3.66972%, 0.1061 4.58716%, 0.1469 5.50459%, 0.1921 6.42202%, 0.2407 7.33945%, 0.292 8.25688%, 0.3452 9.17431%, 0.3997 10.0917%, 0.4547 11.0092%, 0.5097 11.9266%, 0.5642 12.844%, 0.6177 13.7615%, 0.6698 14.6789%, 0.72 15.5963%, 0.7681 16.5138%, 0.8139 17.4312%, 0.8571 18.3486%, 0.8975 19.2661%, 0.935 20.1835%, 0.9696 21.1009%, 1.0011 22.0183%, 1.0296 22.9358%, 1.055 23.8532%, 1.0775 24.7706%, 1.0971 25.6881%, 1.1139 26.6055%, 1.1279 27.5229%, 1.1394 28.4404%, 1.1484 29.3578%, 1.1551 30.2752%, 1.1597 31.1927%, 1.1623 32.1101%, 1.163 33.0275%, 1.1621 33.945%, 1.1598 34.8624%, 1.1561 35.7798%, 1.1512 36.6972%, 1.1454 37.6147%, 1.1387 38.5321%, 1.1313 39.4495%, 1.1234 40.367%, 1.115 41.2844%, 1.1063 42.2018%, 1.0974 43.1193%, 1.0884 44.0367%, 1.0794 44.9541%, 1.0706 45.8716%, 1.0619 46.789%, 1.0534 47.7064%, 1.0452 48.6239%, 1.0374 49.5413%, 1.03 50.4587%, 1.0229 51.3761%, 1.0164 52.2936%, 1.0103 53.211%, 1.0047 54.1284%, 0.9996 55.0459%, 0.9949 55.9633%, 0.9908 56.8807%, 0.9872 57.7982%, 0.984 58.7156%, 0.9813 59.633%, 0.979 60.5505%, 0.9772 61.4679%, 0.9757 62.3853%, 0.9747 63.3028%, 0.9739 64.2202%, 0.9735 65.1376%, 0.9734 66.055%, 0.9736 66.9725%, 0.974 67.8899%, 0.9746 68.8073%, 0.9754 69.7248%, 0.9764 70.6422%, 0.9774 71.5596%, 0.9787 72.4771%, 0.98 73.3945%, 0.9813 74.3119%, 0.9827 75.2294%, 0.9842 76.1468%, 0.9857 77.0642%, 0.9871 77.9817%, 0.9886 78.8991%, 0.99 79.8165%, 0.9914 80.7339%, 0.9927 81.6514%, 0.994 82.5688%, 0.9952 83.4862%, 0.9963 84.4037%, 0.9974 85.3211%, 0.9984 86.2385%, 0.9993 87.156%, 1.0001 88.0734%, 1.0009 88.9908%, 1.0015 89.9083%, 1.0021 90.8257%, 1.0026 91.7431%, 1.0031 92.6606%, 1.0034 93.578%, 1.0037 94.4954%, 1.004 95.4128%, 1.0041 96.3303%, 1.0043 97.2477%, 1 98.1651%, 1 99.0826%, 1 100%) wa-message-fade-up; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wa-root *, .wa-root *::before, .wa-root *::after { animation: none !important; transition-duration: 0s !important; }
+    }
   </style>
 </head>
 <body class="h-full bg-[#fcfcfb] text-[#151515] font-sans antialiased selection:bg-[#d97757]/20 selection:text-[#d97757]">
@@ -4413,9 +4602,1390 @@ span[data-hang-quote] {
       );
     }
 
+    // ==========================================================================
+    // claude.ai 网页端实测页（独立页面 · #claude-ai-web）
+    // 来源：https://claude.ai build 541957a01b（2026-10-17T17:10:41Z），1440×900 与 375×812 视口下
+    // getBoundingClientRect / getComputedStyle / CSSOM 实测。个人内容（姓名、套餐、会话标题、项目名）以占位符替换；
+    // 专有字体 anthropic-sans / serif 与 Anthropicons 不随仓库分发，以 Inter / Newsreader 与 Phosphor SVG 代替。
+    // ==========================================================================
+    const WA_SECTIONS = [
+      { id: "wa-method", name: "W0 方法与指纹" },
+      { id: "wa-shell", name: "W1 外壳坐标" },
+      { id: "wa-sidebar", name: "W2 侧栏" },
+      { id: "wa-composer", name: "W3 首页输入框" },
+      { id: "wa-reply", name: "W4 回复输入框与会话头" },
+      { id: "wa-menus", name: "W5 菜单与提示" },
+      { id: "wa-messages", name: "W6 消息流" },
+      { id: "wa-buttons", name: "W7 按钮解剖" },
+      { id: "wa-icons", name: "W8 图标字体" },
+      { id: "wa-motion", name: "W9 动效时长" },
+      { id: "wa-tokens", name: "W10 令牌与勘误" },
+      { id: "wa-login", name: "W11 登录页" },
+      { id: "wa-hidden", name: "W12 隐藏机制" },
+    ];
+
+    function WaPart({ children, ...header }) {
+      return (
+        <section>
+          <SectionHeader {...header} />
+          <div className="mt-6">{children}</div>
+        </section>
+      );
+    }
+
+    const waIsColor = (v) => typeof v === "string" && /^#[0-9a-f]{3,8}$/i.test(v);
+
+    function WaTable({ head, rows }) {
+      return (
+        <div className="overflow-x-auto">
+          <table className="w-full text-[11px] font-mono border-collapse">
+            <thead>
+              <tr>{head.map((h) => <th key={h} className="text-left font-semibold text-neutral-500 dark:text-neutral-400 px-2 py-1.5 border-b border-neutral-200 dark:border-neutral-800 whitespace-nowrap">{h}</th>)}</tr>
+            </thead>
+            <tbody>
+              {rows.map((r, i) => (
+                <tr key={i} className="border-b border-neutral-100 dark:border-neutral-800/60 last:border-0">
+                  {r.map((c, j) => (
+                    <td key={j} className={"px-2 py-1.5 align-top leading-relaxed " + (j === 0 ? "text-neutral-800 dark:text-neutral-200 whitespace-nowrap" : "text-neutral-600 dark:text-neutral-400")}>
+                      {waIsColor(c) ? (
+                        <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                          <span className="inline-block size-3 rounded-sm" style={{ background: c, boxShadow: "inset 0 0 0 1px rgb(127 127 127 / 35%)" }} />{c}
+                        </span>
+                      ) : c}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    function WaCode({ children }) {
+      return <pre className="text-[11px] font-mono leading-relaxed p-3 rounded-lg bg-neutral-950 text-neutral-300 overflow-x-auto whitespace-pre">{children}</pre>;
+    }
+
+    // CDS Button：button.group/btn > span.cds-btn-squish > span(paint)；图标与文字是 button 的直接子元素
+    function WaBtn({ size = "md", variant = "ghost", icon, label, children, muted, secondaryInk, w, className = "", style, ...rest }) {
+      return (
+        <button
+          type="button"
+          className={"wa-btn " + className}
+          data-size={size}
+          data-variant={variant}
+          data-icon={icon && !children ? "" : undefined}
+          data-muted={muted ? "" : undefined}
+          data-secondary-ink={secondaryInk ? "" : undefined}
+          aria-label={label}
+          style={w ? { ...style, width: w, minWidth: 0, paddingInline: 4 } : style}
+          {...rest}
+        >
+          <span className="wa-squish" aria-hidden="true"><span className="wa-paint" data-cds-part="paint" /></span>
+          {icon}
+          {children}
+        </button>
+      );
+    }
+
+    function WaTip({ tip, above, children }) {
+      return (
+        <span className="wa-tip-host">
+          {children}
+          <span className="wa-tip" role="tooltip" style={above ? { top: "auto", bottom: "calc(100% + 5.5px)" } : undefined}>{tip}</span>
+        </span>
+      );
+    }
+
+    function WaSeg({ options, value, onChange, size = "sm", optW, iconOnly }) {
+      const h = size === "lg" ? 40 : 28;
+      const r = size === "lg" ? 10 : 7;
+      return (
+        <div className="wa-seg" role="radiogroup" style={{ "--wa-seg-r": `${r}px`, height: h }}>
+          <span className="wa-seg-thumb" style={{ width: optW, translate: `${value * optW}px 0` }} aria-hidden="true" />
+          {options.map((o, i) => (
+            <button key={o.label} type="button" role="radio" aria-checked={value === i} aria-label={iconOnly ? o.label : undefined} className="wa-seg-opt" style={{ width: optW, height: h - 2, fontSize: size === "lg" ? 15 : 14 }} onClick={() => onChange(i)}>
+              {o.icon && (
+                <span className="relative inline-flex">
+                  <span className={"inline-flex" + (o.pulse ? " wa-pulse-mask" : "")}><Icon name={o.icon} size={16} /></span>
+                  {o.pulse && <span className="wa-pulse-dot" />}
+                </span>
+              )}
+              {!iconOnly && o.label}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    // 语音模式波形：六条竖线，高 3 / 7 / 13 / 7 / 11 / 3
+    function WaWave({ size = 20 }) {
+      const hs = [3, 7, 13, 7, 11, 3];
+      return (
+        <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+          {hs.map((h, i) => <line key={i} x1={3 + i * 2.8} x2={3 + i * 2.8} y1={10 - h / 2} y2={10 + h / 2} />)}
+        </svg>
+      );
+    }
+
+    function WaMic({ size = 20 }) {
+      return (
+        <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+          <rect x="7.25" y="2.75" width="5.5" height="9.5" rx="2.75" />
+          <path d="M4.5 9.5a5.5 5.5 0 0 0 11 0M10 15v2.25" />
+        </svg>
+      );
+    }
+
+    // 无痕对话 ghost：hover 时眼睛 2.4s 环视、眼睑 4s 眨眼
+    function WaGhost({ size = 20 }) {
+      return (
+        <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true">
+          <path d="M4.25 16.75V9a5.75 5.75 0 0 1 11.5 0v7.75l-1.9-1.4-1.95 1.4-1.9-1.4-1.95 1.4-1.9-1.4-1.9 1.4Z" />
+          <g className="wa-ghost-eyes" fill="currentColor" stroke="none"><circle cx="8" cy="9.25" r="1.1" /><circle cx="12" cy="9.25" r="1.1" /></g>
+          <g className="wa-ghost-lid" opacity="0" strokeLinecap="round"><path d="M6.6 9.25h2.8M10.6 9.25h2.8" /></g>
+        </svg>
+      );
+    }
+
+    const waChevronRight = (size = 16) => <Icon name="chevronDown" size={size} style={{ transform: "rotate(-90deg)", color: "var(--cds-text-muted)" }} />;
+    const waCheck = <Icon name="check" size={20} style={{ color: "var(--cds-fill-accent)" }} />;
+
+    // --------------------------------------------------------------------------
+    // W0 方法与构建指纹
+    // --------------------------------------------------------------------------
+    function WaMethodSection() {
+      const fp = [
+        ["data-build-id", "541957a01b"],
+        ["git", "541957a01be20fcf87bee91b771498997b8fc640"],
+        ["构建时间", "1792257041 → 2026-10-17T17:10:41Z"],
+        ["data-color-version · data-theme", "v2 · claude"],
+        ["data-density", "comfortable（网页端默认；compact 为工作台密度）"],
+        ["data-cjk-order", "zh-hans"],
+        ["data-browser-floor", "chrome:131 · edge:131 · firefox:132 · opera:115 · safari:17 · ios:17 · samsung:28"],
+        ["内联字体变量", "--font-user-message: var(--font-sans-serif); --font-claude-response: var(--font-serif)"],
+        ["静态资源", "assets-proxy.anthropic.com/claude-ai/v2/assets/v1/"],
+        ["主样式表", "c6a992d55-EXuEGCIT.css（桌面版同模块为 c6a992d55-sXiDGMFQ.css）"],
+        ["与桌面同哈希", "c3fde7009-BH42YUtA.css"],
+        ["CSSOM", "30 张样式表（29 张可读，共 2,328,919 字符）· 16,933 条规则 · 203 个 @keyframes"],
+      ];
+      const steps = [
+        "视口模拟 1440×900（桌面）与 375×812（移动），测完已恢复。",
+        "getBoundingClientRect() 记录位置与尺寸，getComputedStyle() 记录字体、颜色、圆角、阴影与内边距。",
+        "遍历 CSSOM 取规则原文与关键帧；本页数值都是原文或计算值，没直接测到、按相邻控件推算的标 ≈。",
+        "菜单只做点击打开、Esc 关闭；没有发送消息，也没有改动任何设置。",
+        "姓名、套餐、会话标题、项目名等个人内容一律换成占位符。",
+        "专有字体（anthropic-sans / serif、Anthropicons）不随仓库分发：本页用 Inter / Newsreader 与 Phosphor SVG 代替，尺寸保持实测值。",
+      ];
+      return (
+        <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-r from-sky-500/5 via-transparent to-clay/5 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h4 className="text-base font-bold text-neutral-900 dark:text-neutral-100">claude.ai 网页端控件实测</h4>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 font-bold">DOM Ground Truth</span>
+            </div>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              01–10 章依据桌面安装包里的 CSS 原文；这一页补上只有运行时才看得到的部分：每个控件的实际坐标、尺寸、层级和组件结构。网页端与桌面端共用 dframe 外壳和 CDS 令牌，c3fde7009 样式表两端哈希一致。
+            </p>
+            <ol className="text-[11px] text-neutral-600 dark:text-neutral-400 space-y-1.5 list-decimal ps-4 leading-relaxed">
+              {steps.map((s) => <li key={s}>{s}</li>)}
+            </ol>
+          </div>
+          <WaTable head={["指纹", "实测值"]} rows={fp} />
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W1 外壳与控件坐标
+    // --------------------------------------------------------------------------
+    const WA_FRAMES = {
+      new: {
+        W: 1440, H: 900, label: "/new · 1440×900",
+        root: "data-web · data-variant=web · data-platform=desktop · data-density=comfortable · data-page-bg=surface-1 · data-frame-mode=cowork",
+        boxes: [
+          { n: "aside.dframe-sidebar（absolute · z 20）", r: [0, 0, 288, 900], k: "side" },
+          { n: "titlebar h-11", r: [0, 0, 288, 44], k: "soft" },
+          { n: "sidebar（data-testid）", r: [0, 44, 287.5, 856], k: "soft" },
+          { n: "nav-pin-rows", r: [8, 124.5, 269.5, 174.5], k: "soft" },
+          { n: "sidebar-pinned", r: [8, 299, 269.5, 77.5], k: "soft" },
+          { n: "sidebar-recents", r: [8, 386.5, 269.5, 465.5], k: "soft", note: "实测高 714，下段被 footer 遮住" },
+          { n: "user-menu-button", r: [8, 860, 152.2, 32], k: "ctl" },
+          { n: "header.dframe-header", r: [296, 0, 1136, 48], k: "line" },
+          { n: "无痕对话 ghost 32", r: [1392, 8, 32, 32], k: "ctl", approx: true },
+          { n: "问候语 serif 32/38.4", r: [544, 297, 640, 38.4], k: "soft", approx: true },
+          { n: "fieldset（Composer + Chin）", r: [544, 419.5, 640, 135], k: "soft" },
+          { n: "ChatComposer r14", r: [544, 419.5, 640, 103], k: "card" },
+          { n: "chat-input", r: [560, 433, 616, 42], k: "soft" },
+          { n: "chat-input-attach", r: [552, 482.5, 32, 32], k: "ctl" },
+          { n: "composer-dictate", r: [1089, 482.5, 47, 32], k: "ctl" },
+          { n: "chat-input-send（空闲时为语音模式）", r: [1144, 482.5, 32, 32], k: "brand" },
+          { n: "model-selector-dropdown", r: [1029.8, 530.5, 102.2, 24], k: "ctl" },
+        ],
+      },
+      chat: {
+        W: 1440, H: 900, label: "/chat · 1440×900",
+        root: "同 /new；会话头为 data-testid=chat-header：absolute · z 11 · 1144×48 · px 8 · gap 8 · pointer-events-none（子元素 auto）",
+        boxes: [
+          { n: "aside.dframe-sidebar", r: [0, 0, 288, 900], k: "side" },
+          { n: "user-menu-button", r: [8, 860, 152.2, 32], k: "ctl" },
+          { n: "chat-header", r: [296, 0, 1144, 48], k: "line" },
+          { n: "session-title-split", r: [304, 10, 210, 28], k: "ctl" },
+          { n: "computer-link-indicator", r: [486, 10, 28, 28], k: "ctl" },
+          { n: "活动面板（icon 18）", r: [1352, 10, 28, 28], k: "ctl" },
+          { n: "分享 sm", r: [1384, 10, 48, 28], k: "ctl" },
+          { n: "transcript-list 768", r: [479, 48, 768, 764], k: "soft", note: "实测 y −498、高 1286（已滚动），只画可视段" },
+          { n: "action-bar-read-aloud", r: [517, 645.5, 24, 24], k: "ctl" },
+          { n: "transcript-trailing 736", r: [495, 669.5, 736, 69.5], k: "soft" },
+          { n: "last-message-sentinel", r: [495, 739, 736, 1], k: "line" },
+          { n: "transcript-bottom-fade", r: [479, 764, 768, 48], k: "fade" },
+          { n: "jump-to-latest", r: [845, 756, 36, 36], k: "ctl", round: true },
+          { n: "ChatComposerDock", r: [479, 812, 768, 88], k: "soft" },
+          { n: "ChatComposer（reply）", r: [479, 812, 768, 48], k: "card" },
+          { n: "chin-mic", r: [514, 868, 69, 24], k: "ctl" },
+          { n: "model-selector-dropdown", r: [1089.8, 868, 102.2, 24], k: "ctl" },
+        ],
+      },
+      m: {
+        W: 375, H: 812, label: "/new · 375×812",
+        root: "data-collapsed · data-phone-sheet=left · data-platform=web · data-sidebar-density=comfortable · data-font=anthropic",
+        boxes: [
+          { n: "sidebar-compact-trigger", r: [8, 8, 32, 32], k: "ctl" },
+          { n: "右上角 ghost 32", r: [335, 8, 32, 32], k: "ctl" },
+          { n: "问候语 24px", r: [143.5, 156.2, 96, 30], k: "soft" },
+          { n: "ChatComposer r14", r: [16, 684, 343, 88], k: "card" },
+          { n: "static-composer-input", r: [24, 692, 327, 32], k: "soft" },
+          { n: "chat-input", r: [32, 697, 319, 22], k: "soft" },
+          { n: "chat-input-attach", r: [24, 732, 32, 32], k: "ctl" },
+          { n: "composer-dictate", r: [264, 732, 47, 32], k: "ctl" },
+          { n: "chat-input-send", r: [319, 732, 32, 32], k: "brand" },
+          { n: "项目 ▾（触控 32）", r: [20, 776, 62, 32], k: "ctl" },
+          { n: "ModelSelector（触控 32）", r: [208.8, 776, 110.2, 32], k: "ctl" },
+          { n: "权限（触控 32）", r: [321, 776, 32, 32], k: "ctl" },
+        ],
+      },
+    };
+
+    const WA_TONE = {
+      side: { background: "var(--df-web-sidebar-bg)", boxShadow: "inset -0.5px 0 0 var(--cds-border)" },
+      line: { boxShadow: "inset 0 -1px 0 var(--cds-alpha-3)" },
+      soft: { outline: "1px dashed var(--cds-alpha-3)", outlineOffset: -1 },
+      card: { background: "var(--cds-surface-3)", borderRadius: 6, boxShadow: "0 0 0 1px var(--cds-border), 0 4px 20px rgb(0 0 0 / 3.5%)" },
+      ctl: { background: "var(--cds-alpha-1)", borderRadius: 3, boxShadow: "inset 0 0 0 1px var(--cds-alpha-3)" },
+      brand: { background: "color-mix(in srgb, var(--cds-fill-brand) 22%, transparent)", borderRadius: 3, boxShadow: "inset 0 0 0 1px var(--cds-fill-brand)" },
+      fade: { background: "linear-gradient(to top, var(--cds-page-bg), transparent)", boxShadow: "inset 0 0 0 1px var(--cds-alpha-2)" },
+    };
+
+    function WaShellSection() {
+      const [mode, setMode] = useState("new");
+      const [hi, setHi] = useState(null);
+      const f = WA_FRAMES[mode];
+      const p = (v, t) => `${(v / t) * 100}%`;
+      const box = f.boxes[hi];
+      return (
+        <ComponentShowcase
+          title="dframe 外壳与控件坐标（实测 rect）"
+          tag=".dframe-root[data-variant=web]"
+          description="三个视口快照按比例缩放绘制：实线是卡片和控件，灰色虚线是布局容器，蓝色虚线是没有直接测到、按相邻控件推算的位置。悬停矩形或表格行可以互相定位。"
+          code={`.dframe-root { --df-sidebar-width: 288px; --df-sidebar-left: 8px; --df-header-h: 48px; }
+/* web：侧栏 position:absolute · z-20，可拖宽 232–420；内容区 padding: 0 8px 0 296px → 296…1432（1136） */
+.dframe-root[data-variant="web"] .dframe-sidebar {
+  --df-web-sidebar-bg: color-mix(in srgb, var(--cds-surface-0) 50%, var(--cds-surface-1));
+  --df-hover: var(--cds-neutral-50); --df-selected: var(--cds-neutral-60);
+}
+[data-mode="dark"] .dframe-root[data-variant="web"] .dframe-sidebar { --df-web-sidebar-bg: color-mix(in srgb, var(--df-bg-page) 80%, black); }
+/* 首页列：padding-top ≈ 28% 视口（900 高时约 297px）· px 56 · gap 24 · Composer max-w 40rem */
+/* 会话列：chat-column 808 · transcript-list 768 · 行内容 736 · scroller padding-top = 48 + 8 */
+/* 375 宽：data-collapsed + data-phone-sheet=left，侧栏变为全屏 sheet（行高 44 · 行内控件 36 · 搜索为 lg 40） */`}
+        >
+          <div className="space-y-4">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {Object.keys(WA_FRAMES).map((m) => (
+                <button key={m} onClick={() => { setMode(m); setHi(null); }} className={"h-7 px-2.5 rounded-md text-[11px] font-mono transition-colors " + (mode === m ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700")}>{WA_FRAMES[m].label}</button>
+              ))}
+              <span className="text-[10px] font-mono text-neutral-400 ms-auto">{f.root}</span>
+            </div>
+            <div className={mode === "m" ? "flex flex-col md:flex-row gap-4 items-start" : "space-y-4"}>
+              <div className="shrink-0 space-y-2" style={{ width: mode === "m" ? 300 : "100%", maxWidth: "100%" }}>
+                <div className="relative w-full overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800" style={{ aspectRatio: `${f.W} / ${f.H}`, background: "var(--cds-page-bg)" }}>
+                  {f.boxes.map((b, i) => (
+                    <div
+                      key={b.n}
+                      onMouseEnter={() => setHi(i)}
+                      onMouseLeave={() => setHi(null)}
+                      className="absolute"
+                      style={{
+                        left: p(b.r[0], f.W), top: p(b.r[1], f.H), width: p(b.r[2], f.W), height: p(b.r[3], f.H),
+                        ...WA_TONE[b.k],
+                        ...(b.round ? { borderRadius: 999 } : null),
+                        ...(b.approx ? { outline: "1px dashed var(--cds-fill-accent)", outlineOffset: -1 } : null),
+                        ...(hi === i ? { outline: "2px solid var(--cds-fill-accent)", outlineOffset: -1, zIndex: 5 } : null),
+                      }}
+                    />
+                  ))}
+                </div>
+                <div className="min-h-5 font-mono text-[11px] text-neutral-500">
+                  {box ? `${box.n} → x ${box.r[0]} · y ${box.r[1]} · ${box.r[2]} × ${box.r[3]}${box.approx ? "（≈ 推算）" : ""}` : "悬停任一矩形查看实测 rect（CSS px）"}
+                </div>
+              </div>
+              <div className="overflow-x-auto min-w-0 flex-1 w-full">
+                <table className="w-full text-[11px] font-mono border-collapse">
+                  <thead>
+                    <tr>{["元素", "x", "y", "w", "h", "备注"].map((h) => <th key={h} className="text-left font-semibold text-neutral-500 px-2 py-1.5 border-b border-neutral-200 dark:border-neutral-800">{h}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {f.boxes.map((b, i) => (
+                      <tr key={b.n} onMouseEnter={() => setHi(i)} onMouseLeave={() => setHi(null)} className={"border-b border-neutral-100 dark:border-neutral-800/60 " + (hi === i ? "bg-sky-500/10" : "")}>
+                        <td className="px-2 py-1 text-neutral-800 dark:text-neutral-200 whitespace-nowrap">{b.n}</td>
+                        {b.r.map((v, j) => <td key={j} className="px-2 py-1 tabular-nums text-neutral-600 dark:text-neutral-400">{v}</td>)}
+                        <td className="px-2 py-1 text-neutral-500">{b.approx ? "≈ 推算" : b.note || ""}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </ComponentShowcase>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W2 侧栏
+    // --------------------------------------------------------------------------
+    function WaSidebarDemo() {
+      const [app, setApp] = useState(0);
+      const nav = [
+        { icon: "layers", label: "项目", badge: "新功能" },
+        { icon: "fileCode", label: "Artifacts" },
+        { icon: "refresh", label: "定时任务" },
+        { icon: "settings", label: "自定义" },
+        { icon: "dotsVertical", label: "更多", rot: true },
+      ];
+      const recents = ["会话标题占位 · 1", "会话标题占位 · 2", "一条很长的会话标题占位，用来展示溢出时的 24px 渐隐遮罩", "会话标题占位 · 4", "会话标题占位 · 5"];
+      return (
+        <div className="flex rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-800" style={{ background: "var(--cds-page-bg)", height: 640 }}>
+          <aside className="wa-sidebar">
+            <div className="flex items-center" style={{ height: 44, padding: "4px 8px 0", gap: 8 }}>
+              <span className="wa-reveal inline-flex"><WaTip tip="收起侧栏"><WaBtn size="xs" label="收起侧栏" icon={<Icon name="window" size={16} />} /></WaTip></span>
+              <span style={{ fontFamily: "var(--wa-serif)", fontSize: 20, lineHeight: "20px", fontWeight: 500 }}>Claude</span>
+              <span className="ms-auto inline-flex"><WaSeg size="sm" optW={34} value={app} onChange={setApp} iconOnly options={[{ icon: "chat", label: "Claude" }, { icon: "code", label: "Code", pulse: true }]} /></span>
+            </div>
+            <div className="flex flex-col flex-1 min-h-0" style={{ padding: "4px 8px 0", gap: 8 }}>
+              <button type="button" className="wa-search"><Icon name="search" size={16} /><span>搜索</span><kbd className="wa-kbd">Ctrl K</kbd></button>
+              <div className="flex flex-col" style={{ gap: 0.5 }}>
+                <div className="wa-row" data-selected="" tabIndex={0}>
+                  <span className="wa-row-lead"><span className="wa-new-circle"><Icon name="plus" size={16} weight="bold" /></span></span>
+                  <span className="wa-row-label" style={{ color: "var(--cds-text-primary)" }}>新建</span>
+                  <span className="wa-row-hint wa-kbd" style={{ paddingInlineEnd: 8 }}>Ctrl + Shift + O</span>
+                </div>
+                {nav.map((n) => (
+                  <div key={n.label} className="wa-row" tabIndex={0}>
+                    <span className="wa-row-lead"><Icon name={n.icon} size={20} style={n.rot ? { transform: "rotate(90deg)" } : undefined} /></span>
+                    <span className="wa-row-label">{n.label}</span>
+                    {n.badge && <span className="wa-badge" style={{ marginInlineEnd: 6 }}>{n.badge}</span>}
+                  </div>
+                ))}
+              </div>
+              <div className="min-h-0 overflow-hidden">
+                <div className="group flex items-end gap-1" style={{ height: 44, padding: "16px 4px 4px 6px", fontSize: 13, lineHeight: "16px", color: "var(--cds-text-muted)" }}>
+                  最近 <span className="opacity-0 group-hover:opacity-100 transition-opacity inline-flex"><Icon name="chevronDown" size={12} /></span>
+                </div>
+                <div className="flex flex-col" style={{ gap: 1 }}>
+                  {recents.map((t) => (
+                    <div key={t} className="wa-row" data-iconless="" tabIndex={0}>
+                      <span className="wa-row-label" data-fade={t.length > 20 ? "" : undefined}>{t}</span>
+                      <span className="wa-row-act"><WaBtn size="xs" label="更多操作" icon={<Icon name="dotsVertical" size={16} style={{ transform: "rotate(90deg)" }} />} /></span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center" style={{ height: 48, padding: 8, gap: 6 }}>
+              <button type="button" className="wa-btn" data-variant="ghost" style={{ "--wa-px": "4px", gap: 8 }}>
+                <span className="wa-squish" aria-hidden="true"><span className="wa-paint" /></span>
+                <span className="grid place-items-center rounded-full text-[11px] font-semibold" style={{ width: 24, height: 24, background: "var(--cds-alpha-2)" }}>U</span>
+                <span style={{ fontSize: 14, color: "var(--cds-text-secondary)" }}>用户名</span>
+                <span style={{ fontSize: 12, color: "var(--cds-text-muted)" }}>· 套餐</span>
+                <Icon name="chevronDown" size={12} style={{ color: "var(--cds-text-muted)" }} />
+              </button>
+              <span className="ms-auto inline-flex"><WaTip tip="下载桌面应用" above><WaBtn label="下载桌面应用" icon={<Icon name="upload" size={20} style={{ transform: "rotate(180deg)" }} />} /></WaTip></span>
+            </div>
+            <div className="wa-resize" aria-hidden="true"><i /></div>
+          </aside>
+          <div className="flex-1 min-w-[96px] grid place-items-center text-[11px] font-mono text-center px-2" style={{ color: "var(--cds-text-muted)" }}>内容区<br />surface-1</div>
+        </div>
+      );
+    }
+
+    function WaSidebarSection() {
+      const geo = [
+        ["Titlebar", "h-11 = 44 · padding 4px 8px 0", "收起按钮 xs 24×24 r6（icon 16）包在 .df-sidebar-hover-reveal 里：opacity .7，悬停侧栏时 1（.12s ease-out）"],
+        ["字标", "font-voice 20px/20 · 500", "ProductLogo"],
+        ["应用切换", "SegmentedControl sm 70×28 · r7 · p 1px · track alpha 5%", "thumb 34×26 r6（内 1px 环 + 0 1px 2px .05）；radio 34×26 r5 · icon 16；Code 项带 Pulse 6px（dframe-dot-blink 1.2s），图标被 radial-gradient 遮罩挖出缺口"],
+        ["Body", "px 8 · pt 4 · gap 8", ""],
+        ["搜索", "32 高 · r8 · bg #ffffff80", "inset 0 0 0 .5px alpha-10 + 0 1px 2px .05；悬停显示 Ctrl K，背景 alpha 5% + 1px 环"],
+        ["新建", "32 高 · 选中 #edece8", "df-new-circle 22px（web 底色 #eae9e4）· 字形 16 / wght 700；悬停显示 Ctrl + Shift + O"],
+        ["导航行", "32 高 · r8 · padding 0 2px · gap 8", "leading slot 28 · icon 20（wght 433.3 · data-cds-anim）· 14px #52514e；hover #f0efec（neutral-50）· 选中 #edece8（neutral-60）"],
+        ["徽章「新功能」", "xs 18 高 · 11px/500 · alpha 5% · r 4.5 · px 6", "rounded-chip = h-control-nested / 4"],
+        ["行内操作", "xs ghost 24 · inset-end 4", "opacity 0 → 1"],
+        ["分组标签", "44 高 · 13px/16 muted · padding 16px 4px 4px 6px", "caret 12 悬停才出现"],
+        ["最近会话", "32 高 · 行距 1px", "无图标行 label 左缩 4px；溢出时 24px 渐隐遮罩；悬停出现 … 24px"],
+        ["命中区", "hit-row + [--cds-hit-gap-y:7px]", "::before 按 --cds-hit-row-reach-* 向外扩，行间缝隙也能点中"],
+        ["Footer", "48 高 · padding 8", "用户按钮 32 r8 = 头像 24 + 名称 14 secondary + 「·」+ 套餐 12 muted + caret 12；下载 ghost 32×32"],
+        ["ResizeHandle", "命中 12px · 胶囊 3×48 muted", "opacity 0 → 1（.2s）；宽度 232–420"],
+      ];
+      const ys = [
+        ["nav-pin-rows", "8, 124.5 · 269.5 × 174.5"],
+        ["项目 · Artifacts · 定时任务 · 自定义 · 更多", "y 124.5 · 157 · 189.5 · 222 · 254.5（步长 32.5）"],
+        ["导航行宽 269.5", "滚动区 -me-2 + pe-[max(0px,calc(8px − 滚动条宽))]，行宽随平台滚动条宽度变化（本页复刻无滚动条，为 271.5）"],
+        ["sidebar-pinned", "8, 299 · 269.5 × 77.5"],
+        ["sidebar-projects", "8, 344 · 269.5 × 32.5"],
+        ["sidebar-recents", "8, 386.5 · 269.5 × 714"],
+        ["user-menu-button", "8, 860 · 152.2 × 32"],
+      ];
+      const density = [
+        ["--df-row-h", "26px", "32px", "30px", "44px"],
+        ["--df-row-ctl", "20px", "24px", "—", "36px"],
+        ["--df-row-gap", "4px", "8px", "—", "—"],
+        ["--df-row-font / --df-group-font", "13 / 12px", "14 / 13px", "—", "—"],
+        ["--df-icon-size / --df-leading-slot", "16 / 24px", "20 / 28px", "—", "—"],
+        ["--df-new-circle-size / glyph", "18 / 13px", "22 / 16px", "—", "—"],
+        ["--df-group-pt", "12px", "16px", "14px", "—"],
+        ["--df-radius-pill", "6px", "8px", "—", "—"],
+        ["--df-footer-btn-size / gap", "24 / 3px", "32 / 6px", "—", "—"],
+      ];
+      return (
+        <div className="grid grid-cols-1 xl:grid-cols-[500px_minmax(0,1fr)] gap-4 items-start">
+          <ComponentShowcase
+            title="侧栏 1:1 复刻（web · comfortable）"
+            tag=".dframe-sidebar"
+            description="宽 288，按实测尺寸重建。悬停查看：收起按钮由 .7 变 1、Ctrl K 与 Ctrl + Shift + O 提示、行内 … 按钮、分组 caret、右缘拖拽胶囊。点击应用切换看 thumb 位移。"
+            code={`<aside class="dframe-sidebar df-hub-rail" data-density="comfortable">
+  <div class="df-titlebar h-11 px-2 pt-1">[xs 收起] [ProductLogo] [SegmentedControl sm: Claude | Code•Pulse]</div>
+  <div class="px-2 pt-1 gap-2">
+    <button 搜索 h-8 rounded-lg bg-fill-field>…<Shortcut>Ctrl K</Shortcut></button>
+    <div data-row class="group hit-row [--cds-hit-gap-y:7px] rounded-[var(--df-radius-pill)] hover:bg-[var(--df-hover)]">
+      <a data-row-main-button data-nav-item="projects" class="h-[var(--df-row-h)] px-[var(--df-row-px)] gap-[var(--df-row-gap)] text-secondary">
+        <span class="df-leading-slot">…Icon 20…</span> 项目 <Badge size="xs">新功能</Badge>
+      </a>
+    </div>
+  </div>
+  <footer class="h-12 p-2">[user-menu-button h-8] [download-desktop-app ghost 32]</footer>
+  <ResizeHandle />
+</aside>`}
+          >
+            <WaSidebarDemo />
+          </ComponentShowcase>
+          <div className="space-y-4 min-w-0">
+            <ComponentShowcase title="几何与实现" tag="--df-* · comfortable">
+              <WaTable head={["部位", "尺寸", "实现"]} rows={geo} />
+            </ComponentShowcase>
+            <ComponentShowcase title="实测 rect（/new，1440×900）" tag="data-testid">
+              <WaTable head={["元素", "x, y · w × h"]} rows={ys} />
+            </ComponentShowcase>
+            <ComponentShowcase title="密度变量对照（CSSOM 原文）" tag="data-density" description="「—」表示沿用左侧 comfortable 的值。web 侧栏走 comfortable；Code 列表的 compact 还有 28 / 26px 两档行高。">
+              <WaTable head={["变量", "compact（默认）", "comfortable", "desktop + comfortable", "phone sheet"]} rows={density} />
+            </ComponentShowcase>
+          </div>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W3 首页输入框
+    // --------------------------------------------------------------------------
+    function WaChinRow({ touch }) {
+      const [perm, setPerm] = useState(0);
+      const size = touch ? "md" : "xs";
+      return (
+        <div className="flex items-center" style={{ height: touch ? 32 : 24, marginTop: 8, padding: "0 8px", fontSize: 13, lineHeight: "17px" }}>
+          <WaBtn size={size} secondaryInk>项目<Icon name="chevronDown" size={12} /></WaBtn>
+          <span className="flex-1" />
+          <WaBtn size={size} secondaryInk>Opus 5.5<span style={{ color: "var(--cds-text-muted)" }}>中等</span><Icon name="chevronDown" size={12} /></WaBtn>
+          <WaBtn size={size} secondaryInk onClick={() => setPerm(1 - perm)}>
+            <span className="wa-stack">
+              <span data-on={perm === 0 ? "" : undefined}>自动</span>
+              <span data-on={perm === 1 ? "" : undefined}>手动</span>
+            </span>
+          </WaBtn>
+        </div>
+      );
+    }
+
+    function WaHomeComposer({ compact }) {
+      const [text, setText] = useState("");
+      const [chin, setChin] = useState(true);
+      const has = text.trim().length > 0;
+      const onKeyDown = (e) => {
+        if (e.key !== "Enter" || e.shiftKey) return;
+        if (e.nativeEvent.isComposing || e.keyCode === 229) return; // CJK 输入法组字中不提交
+        e.preventDefault();
+        if (has) setText("");
+      };
+      return (
+        <div className="w-full mx-auto space-y-3" style={{ maxWidth: 640 }}>
+          <div>
+            <div className="wa-composer" data-density={compact ? "compact" : undefined}>
+              <div style={{ paddingBottom: 34 }}>
+                <textarea className="wa-editor" rows={2} value={text} onChange={(e) => setText(e.target.value)} onKeyDown={onKeyDown} placeholder="今天我能为您做些什么？" aria-label="输入框演示" />
+              </div>
+              <div className="absolute flex items-center" style={{ left: 8, right: 8, bottom: 8 }}>
+                <WaTip tip="添加文件等"><WaBtn label="添加文件等" icon={<Icon name="plus" size={20} />} /></WaTip>
+                <div className="ms-auto flex items-center" style={{ gap: 8 }}>
+                  <span className="inline-flex">
+                    <WaTip tip="听写"><WaBtn label="听写" icon={<WaMic />} /></WaTip>
+                    <WaBtn w={20} label="语音选项" icon={<Icon name="chevronDown" size={12} />} style={{ marginInlineStart: -5 }} />
+                  </span>
+                  <span className="wa-stack">
+                    <span data-on={has ? undefined : ""}><WaTip tip="使用语音模式"><WaBtn label="使用语音模式" icon={<WaWave />} /></WaTip></span>
+                    <span data-on={has ? "" : undefined}><WaBtn variant="brand" label="发送" icon={<Icon name="arrowRight" size={20} style={{ transform: "rotate(-90deg)" }} />} onClick={() => setText("")} /></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="wa-chin" data-open={chin ? "" : undefined}>
+              <div><WaChinRow /></div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-[11px] font-mono text-neutral-500">
+            <button onClick={() => setChin(!chin)} className="h-7 px-2.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">{chin ? "收起 Chin" : "展开 Chin"}（grid-rows 280ms）</button>
+            <span>输入文字后发送位在 60ms 内由「语音模式」交叉淡入为发送键；Enter 提交（输入法组字中不提交），Shift + Enter 换行。</span>
+          </div>
+        </div>
+      );
+    }
+
+    function WaComposerSection() {
+      const [compact, setCompact] = useState(false);
+      const spec = [
+        ["卡片", "640×103 @ 544, 419.5 · r 14（comfortable .875rem；compact .75rem）· p 8 · bg #fff"],
+        ["阴影 · 静止", "0 .25rem 1.25rem black 3.5%，加外环 1px alpha 10%"],
+        ["阴影 · hover", "同样 3.5%，外环换成 border-strong（20%）"],
+        ["阴影 · focus-within", "0 .25rem 1.25rem black 7.5%，外环 border-strong"],
+        ["编辑器", "Tiptap / ProseMirror（marlin）· 15px/21px（--cmp-font-size: heading）· chat-input 616×42 @ 560, 433"],
+        ["占位符", "padding 5.5px 0 5.5px 8px · cds-fade-in .5s linear；两个 ghost 占位 span 撑出尺寸（「今天我能为您做些什么？」「输入 / 使用 Skills」）"],
+        ["底部预留", "padding-bottom: calc(var(--cds-h-control) + .125rem) = 34px，留给绝对定位的操作行"],
+        ["左侧操作", "「+」添加：ghost 32×32 r8 · icon 20 @ 552, 482.5"],
+        ["右侧操作", "SplitDropdownButton：mic 32×32 + caret 20×32（padding-inline 4，互相压住约 5px）= 47 @ 1089"],
+        ["发送位", "grid 叠放、60ms 交叉淡入：空闲是「使用语音模式」波形 ghost 32；有字是发送 32×32 r8 #c6613f（hover #d97757）+ 白色箭头 20 @ 1144, 482.5"],
+        ["Chin", "在卡片外、卡片下：656×48（-mx-2 · pt-2），grid-template-rows 0fr → 1fr，280ms 揭开"],
+        ["Chin 行", "data-size=xs · 24 高 · 13px/17px #52514e · mt 8 · px 8 · 行顶 y 530.5"],
+        ["Chin 内容", "项目 ▾ ghost xs 54×24 r6 px 8 ｜ 弹性空白 ｜ ModelSelector「Opus 5.5 中等」102.2×24 @ 1029.8 ｜ 权限「自动 / 手动」42×24（两个标签交叉淡入）"],
+      ];
+      return (
+        <div className="space-y-4">
+          <ComponentShowcase
+            title="首页 ChatComposer + Chin（可输入）"
+            tag='[data-cds="ChatComposer"]'
+            description="尺寸、阴影与布局都按 /new 实测重建。Chin 不在卡片里，而是贴在卡片下方另起一行。"
+            code={`<fieldset class="flex w-full min-w-0 flex-col">              <!-- 544, 419.5 · 640 × 135 -->
+  <div data-cds="ChatComposer" class="rounded-composer p-2 bg-surface-3 shadow-composer hover:shadow-composer-hover focus-within:shadow-composer-focus">
+    <div data-cds="ChatComposerEditor" class="pb-[calc(var(--cds-h-control)+.125rem)]">…ProseMirror 15/21…</div>
+    <div data-cds="ChatComposerActions" class="absolute inset-x-2 bottom-2 flex">[+ 32] … [SplitDropdownButton 47] [grid: 语音模式 | 发送]</div>
+  </div>
+  <div data-cds="ChatComposerChin" class="-mx-2 pt-2 grid transition-[grid-template-rows,opacity]">…data-size=xs…</div>
+</fieldset>
+.shadow-composer { --tw-shadow: 0 .25rem 1.25rem color-mix(in srgb, var(--cds-black) 3.5%, transparent),
+  inset 0 0 0 var(--cds-ring-inner) var(--cds-ring-color), 0 0 0 var(--cds-ring-outer) var(--cds-ring-color); }
+.focus-within\\:shadow-composer-focus:focus-within { --tw-shadow: 0 .25rem 1.25rem color-mix(in srgb, var(--cds-black) 7.5%, transparent),
+  inset 0 0 0 var(--cds-ring-inner) var(--cds-border-strong), 0 0 0 var(--cds-ring-outer) var(--cds-border-strong); }`}
+          >
+            <div className="space-y-6 py-4 px-2 rounded-lg" style={{ background: "var(--cds-page-bg)" }}>
+              <div className="text-center" style={{ fontFamily: "var(--wa-serif)", fontSize: 32, lineHeight: "38.4px", fontWeight: 360 }}>
+                <span className="inline-block align-middle" style={{ width: ".72em", height: "1cap", marginInlineEnd: ".45em", transform: "scale(1.4)", color: "var(--cds-clay)" }}><Icon name="spark" size={23} /></span>
+                问候语占位
+              </div>
+              <WaHomeComposer compact={compact} />
+            </div>
+          </ComponentShowcase>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+            <ComponentShowcase title="三态阴影与密度" tag=".shadow-composer*">
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-lg" style={{ background: "var(--cds-page-bg)" }}>
+                  {[["rest", "静止 · 3.5% + 外环 border"], ["hover", "hover · 3.5% + border-strong"], ["focus", "focus · 7.5% + border-strong"]].map(([k, t]) => (
+                    <div key={k} className="space-y-2">
+                      <div className="wa-composer" data-force={k === "rest" ? undefined : k} data-density={compact ? "compact" : undefined} style={{ height: 64, pointerEvents: "none" }} />
+                      <div className="text-[10px] font-mono text-neutral-500">{t}</div>
+                    </div>
+                  ))}
+                </div>
+                <label className="flex items-center gap-2 text-[11px] font-mono text-neutral-500 cursor-pointer">
+                  <input type="checkbox" checked={compact} onChange={(e) => setCompact(e.target.checked)} /> compact 密度（--cds-radius-composer .75rem = 12px；comfortable .875rem = 14px）
+                </label>
+                <p className="text-[11px] text-neutral-500 leading-relaxed">问候语：serif 32px/38.4 · wght 360（深色 320）。Spark 是 0.72em × 1cap 的内联 SVG，me-[.45em]、scale 1.4，填色 #d97757。</p>
+              </div>
+            </ComponentShowcase>
+            <ComponentShowcase title="尺寸与实现" tag="/new · 1440×900">
+              <WaTable head={["部位", "实测"]} rows={spec} />
+            </ComponentShowcase>
+          </div>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W4 回复输入框与会话头
+    // --------------------------------------------------------------------------
+    function WaReplyComposer() {
+      const [text, setText] = useState("");
+      const onKeyDown = (e) => {
+        if (e.key !== "Enter" || e.shiftKey) return;
+        if (e.nativeEvent.isComposing || e.keyCode === 229) return; // CJK 输入法组字中不提交
+        e.preventDefault();
+        setText("");
+      };
+      return (
+        <div className="w-full mx-auto" style={{ maxWidth: 768 }}>
+          <div className="wa-composer flex items-center" style={{ gap: 8 }}>
+            <textarea className="wa-editor flex-1 min-w-0" rows={1} value={text} onChange={(e) => setText(e.target.value)} onKeyDown={onKeyDown} placeholder="回复 Claude" aria-label="回复输入框演示" style={{ height: 32, overflow: "hidden" }} />
+            <WaBtn variant="brand" label="发送" icon={<Icon name="arrowRight" size={20} style={{ transform: "rotate(-90deg)" }} />} onClick={() => setText("")} />
+          </div>
+          <div className="flex items-center" style={{ height: 24, margin: "8px -8px 0", padding: "0 8px", gap: 4, fontSize: 13, lineHeight: "17px" }}>
+            <WaTip tip="添加文件等"><WaBtn size="xs" label="添加文件等" icon={<Icon name="plus" size={16} />} /></WaTip>
+            <span className="inline-flex">
+              <WaTip tip="听写"><WaBtn size="xs" label="听写" icon={<WaMic size={16} />} /></WaTip>
+              <WaTip tip="使用语音模式"><WaBtn size="xs" label="使用语音模式" icon={<WaWave size={16} />} /></WaTip>
+              <WaBtn size="xs" w={20} label="语音选项" icon={<Icon name="chevronDown" size={12} />} />
+            </span>
+            <span className="flex-1" />
+            <WaBtn size="xs" secondaryInk>Opus 5.5<span style={{ color: "var(--cds-text-muted)" }}>中等</span><Icon name="chevronDown" size={12} /></WaBtn>
+            <WaBtn size="xs" secondaryInk>自动</WaBtn>
+          </div>
+        </div>
+      );
+    }
+
+    function WaReplySection() {
+      const spec = [
+        ["ChatComposerDock", "768×88 @ 479, 812 · data-form=reply（底边贴视口）"],
+        ["卡片", "768×48 · r 14 · p 8：编辑器 712×32 与发送 32 同排"],
+        ["Chin 行", "784×48（-mx-2）· 行顶 y 868 · xs 24 高"],
+        ["Chin 内容", "「+」xs 24（从卡片移到这里）· chin-mic 组 69×24 @ 514（听写 24 + 语音模式 24 + caret 20）· ModelSelector 102.2×24 @ 1089.8 · 权限 42×24"],
+        ["会话头", "chat-header：absolute · z 11 · 296, 0 · 1144×48 · px 8 · gap 8 · pointer-events-none（子元素 auto）"],
+        ["标题分裂按钮", "session-title-split 210×28 @ 304, 10：标题 sm 156×28 r7 + caret 28×28 + 电脑连接指示 28×28 @ 486"],
+        ["右侧", "wiggle-controls-actions 80×28 @ 1352：活动面板 ghost 28×28（icon 18 · wght 577.75）+ 分享 ghost sm 48×28 px 10（14/20 · 400）@ 1384"],
+        ["按钮过渡", "button：transition-shadow duration-fast（60ms）；paint：transition-[background-color,box-shadow,color] duration-fast ease-out"],
+      ];
+      return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+          <ComponentShowcase
+            title="回复输入框（/chat）与会话头"
+            tag='[data-form="reply"]'
+            description="进入会话后输入框收成单行卡片；「+」和语音入口搬进 Chin，卡片里只剩编辑器和发送键。占位文案为示意。"
+            code={`<div data-cds="ChatComposerDock" data-form="reply">     <!-- 479, 812 · 768 × 88 -->
+  <div data-cds="ChatComposer" class="rounded-composer p-2">[Editor 712×32][发送 32]</div>
+  <div data-cds="ChatComposerChin" class="-mx-2" data-size="xs">
+    [+ 24] [chin-mic: 听写 24 | 语音模式 24 | ▾ 20] … [ModelSelector 102.2] [权限 42]
+  </div>
+</div>
+<div data-testid="chat-header" class="absolute z-[11] h-12 px-2 gap-2 pointer-events-none *:pointer-events-auto">
+  [session-title-split: 标题 sm 156 | ▾ 28 | computer-link 28] … [活动面板 28] [分享 48]
+</div>`}
+          >
+            <div className="space-y-5 rounded-lg p-3" style={{ background: "var(--cds-page-bg)" }}>
+              <div className="overflow-x-auto">
+                <div className="flex items-center min-w-[520px]" style={{ height: 48, padding: "0 8px", gap: 8, boxShadow: "inset 0 -1px 0 var(--cds-alpha-2)" }}>
+                  <span className="inline-flex items-center">
+                    <WaBtn size="sm" style={{ width: 156, justifyContent: "flex-start" }}><span className="truncate">会话标题占位</span></WaBtn>
+                    <WaBtn size="sm" label="会话菜单" icon={<Icon name="chevronDown" size={16} />} />
+                    <WaTip tip="电脑连接状态"><WaBtn size="sm" label="电脑连接状态" icon={<Icon name="terminal" size={16} />} /></WaTip>
+                  </span>
+                  <span className="flex-1" />
+                  <WaTip tip="活动面板"><WaBtn size="sm" label="活动面板" icon={<Icon name="chartBar" size={18} />} /></WaTip>
+                  <WaBtn size="sm">分享</WaBtn>
+                </div>
+              </div>
+              <WaReplyComposer />
+            </div>
+          </ComponentShowcase>
+          <ComponentShowcase title="尺寸与实现" tag="/chat · 1440×900">
+            <WaTable head={["部位", "实测"]} rows={spec} />
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W5 菜单、子菜单与提示
+    // --------------------------------------------------------------------------
+    function WaModelMenu() {
+      const [model, setModel] = useState(1);
+      const [effort, setEffort] = useState(1);
+      const [sub, setSub] = useState(true);
+      const models = [
+        { name: "Fable 5.1", desc: "应对您最艰巨的挑战" },
+        { name: "Opus 5.5", desc: "适用于复杂工作与日常任务" },
+        { name: "Sonnet 5.5", desc: "处理简单任务效率最高" },
+        { name: "Haiku 5.5", desc: "快速解答的最佳选择" },
+      ];
+      const efforts = [{ label: "低" }, { label: "中等", badge: "推荐" }, { label: "高" }, { label: "超高" }, { label: "最高", warn: "4× 或以上用量" }];
+      return (
+        <div className="flex flex-wrap-reverse sm:flex-nowrap items-start justify-center gap-1">
+          {sub && (
+            <div className="wa-menu sm:mt-[209px]" role="menu" aria-label="努力程度" style={{ width: 320 }}>
+              <div style={{ padding: "4px 10px", minHeight: 42, fontSize: 13, lineHeight: "17px", color: "var(--cds-text-muted)" }}>努力程度越高，回答前想得越充分，用量也越大。（释义）</div>
+              {efforts.map((e, i) => (
+                <div key={e.label} role="menuitemradio" aria-checked={effort === i} className="wa-mi" onClick={() => setEffort(i)}>
+                  <span>{e.label}</span>
+                  {e.badge && <span className="wa-badge" data-size="2xs">{e.badge}</span>}
+                  {e.warn && <span className="wa-badge" data-tone="warning"><Icon name="chartBar" size={12} />{e.warn}</span>}
+                  <span className="ms-auto inline-flex" style={{ width: 20, height: 20 }}>{effort === i && waCheck}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="wa-menu" role="menu" aria-label="模型" style={{ width: 224 }}>
+            {models.map((m, i) => (
+              <div key={m.name} role="menuitemradio" aria-checked={model === i} className="wa-mi" style={{ padding: "6px 10px 7px" }} onClick={() => setModel(i)}>
+                <span className="flex-1 min-w-0"><span className="block">{m.name}</span><span className="wa-mi-desc">{m.desc}</span></span>
+                <span className="inline-flex" style={{ width: 20, height: 20 }}>{model === i && waCheck}</span>
+              </div>
+            ))}
+            <div className="wa-sep" />
+            <div role="menuitem" aria-haspopup="menu" aria-expanded={sub} className="wa-mi" data-highlighted={sub ? "" : undefined} onClick={() => setSub(!sub)}>
+              <span className="flex-1">努力程度</span><span style={{ color: "var(--cds-text-muted)" }}>{efforts[effort].label}</span>{waChevronRight()}
+            </div>
+            <div className="wa-sep" />
+            <div role="menuitem" aria-haspopup="menu" className="wa-mi"><span className="flex-1">更多模型</span>{waChevronRight()}</div>
+          </div>
+        </div>
+      );
+    }
+
+    function WaPlusMenu() {
+      const [research, setResearch] = useState(false);
+      const [memory, setMemory] = useState(true);
+      const subs = [["sparkles", "Skills"], ["branch", "连接器"], ["layers", "设计系统"], ["code", "插件"], ["window", "设备"]];
+      return (
+        <div className="wa-menu" role="menu" aria-label="添加" style={{ width: 219.4 }}>
+          <div role="menuitem" className="wa-mi"><Icon name="paperclip" size={20} /><span className="flex-1">添加文件或照片</span><kbd className="wa-kbd">Ctrl+U</kbd></div>
+          <div className="wa-sep" />
+          {subs.map(([ic, t]) => (
+            <div key={t} role="menuitem" aria-haspopup="menu" className="wa-mi"><Icon name={ic} size={20} /><span className="flex-1">{t}</span>{waChevronRight()}</div>
+          ))}
+          <div className="wa-sep" />
+          <div role="menuitemcheckbox" aria-checked={research} className="wa-mi" onClick={() => setResearch(!research)}><Icon name="search" size={20} /><span className="flex-1">研究</span>{research && waCheck}</div>
+          <div role="menuitemcheckbox" aria-checked={memory} className="wa-mi" onClick={() => setMemory(!memory)}><Icon name="bulb" size={20} /><span className="flex-1">记忆</span>{memory && waCheck}</div>
+        </div>
+      );
+    }
+
+    function WaMenusSection() {
+      const spec = [
+        ["弹层", "Base UI Menu，渲染在 [data-cds-portal] 内 · z 120 · bg-surface-3 · padding 4 · scroll-fade-y"],
+        ["圆角", "calc(var(--cds-radius) + var(--cds-menu-gutter)) = 8 + 4 = 12（同心圆角）"],
+        ["阴影", "0 0 0 1px alpha-10, 0 8px 24px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.08)"],
+        ["菜单项", "32 高 · padding 6px 10px · r 8 · 14/20 · gap 8 · 高亮 alpha 5%"],
+        ["分隔线", "1px · 左右内缩 10px · 上下 margin 4px"],
+        ["模型菜单", "224×290 · side bottom · align end · offset 4；四个双行 radio 216×50（名称 14/20 + 说明 13/17 muted，padding 6px 10px 7px）；对勾 20px · wght 566.5 · #2a78d6"],
+        ["努力程度子菜单", "320×210 · side inline-start（向左展开）；顶部说明 312×42 · padding 4px 10px；五个 radio：低 / 中等（推荐）/ 高 / 超高 / 最高"],
+        ["徽章「推荐」", "16 高 · 10px/500 · alpha 5% · r 4 · px 4"],
+        ["徽章「4× 或以上用量」", "warning：文字 #734500 · 底色 bg-warning 35% · 图标 12"],
+        ["「+」菜单", "219.4×282 · side bottom · align start：添加文件或照片（Ctrl+U）｜Skills · 连接器 · 设计系统 · 插件 · 设备（均带 ›）｜研究 · 记忆（checkbox）"],
+        ["Tooltip", "#0b0b0b · 白字 13/18 · r 6 · padding 3px 8px · min-h 24 · gap 8 · 快捷键 12px muted · shadow-sm；opacity + scale(.98) 120ms ease-snap；距触发器约 5.5px"],
+      ];
+      return (
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] gap-4 items-start">
+            <ComponentShowcase
+              title="模型菜单 + 努力程度子菜单（展开态）"
+              tag='[data-cds="ModelSelector"]'
+              description="静态展开、可点选。子菜单向 inline-start 方向（左侧）弹出，顶边对齐「努力程度」一行。说明文字为释义，模型名与选项标签照录。"
+              code={`<Menu.Positioner side="bottom" align="end" sideOffset={4}>   <!-- [data-cds-portal] · z-[120] -->
+  <Menu.Popup class="bg-surface-3 shadow-panel rounded-[calc(var(--cds-radius)+var(--cds-menu-gutter))] p-1 scroll-fade-y">
+    <Menu.RadioItem class="h-auto py-1.5 pb-[7px] px-2.5">名称 14/20 · 说明 13/17 muted · ✓ 20</Menu.RadioItem> × 4
+    <Menu.Separator class="mx-2.5 my-1 h-px" />
+    <Menu.SubmenuTrigger>努力程度 <span muted>中等</span> ›</Menu.SubmenuTrigger>   <!-- side="inline-start" -->
+    <Menu.Separator />
+    <Menu.SubmenuTrigger>更多模型 ›</Menu.SubmenuTrigger>
+  </Menu.Popup>
+</Menu.Positioner>`}
+            >
+              <div className="rounded-lg p-4 overflow-x-auto" style={{ background: "var(--cds-page-bg)" }}><WaModelMenu /></div>
+            </ComponentShowcase>
+            <ComponentShowcase title="「+」菜单" tag="chat-input-attach" description="side bottom · align start。checkbox 项点击可切换。">
+              <div className="rounded-lg p-4 grid place-items-center" style={{ background: "var(--cds-page-bg)" }}><WaPlusMenu /></div>
+            </ComponentShowcase>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+            <ComponentShowcase title="Tooltip（悬停按钮）" tag='[data-cds="Tooltip"]'>
+              <div className="flex items-center justify-center gap-8 pt-6 pb-12 rounded-lg" style={{ background: "var(--cds-page-bg)" }}>
+                <WaTip tip={<>搜索<kbd className="wa-kbd">Ctrl K</kbd></>}><WaBtn label="搜索" icon={<Icon name="search" size={20} />} /></WaTip>
+                <WaTip tip={<>新建对话<kbd className="wa-kbd">Ctrl + Shift + O</kbd></>}><WaBtn label="新建对话" icon={<Icon name="plus" size={20} />} /></WaTip>
+                <WaTip tip="使用语音模式"><WaBtn label="使用语音模式" icon={<WaWave />} /></WaTip>
+              </div>
+            </ComponentShowcase>
+            <ComponentShowcase title="尺寸与实现" tag="Base UI">
+              <WaTable head={["部位", "实测"]} rows={spec} />
+            </ComponentShowcase>
+          </div>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W6 消息流
+    // --------------------------------------------------------------------------
+    function WaMessagesSection() {
+      const [k, setK] = useState(0);
+      const actions = [["copy", "复制"], ["play", "朗读"], ["thumbsUp", "回复很好"], ["thumbsDown", "回复不佳"], ["refresh", "重试"]];
+      const spec = [
+        ["列宽", "chat-column 808 · transcript-list 768 @ x 479 · 行内容 736 @ x 495"],
+        ["滚动区", "padding-top = frame-row 48 + 8 = 56"],
+        ["用户行", "mt-6（24）；气泡靠右 · r 12（= 控件 8 + 4）· padding 12px 16px · 15/20 sans · max-w 85% · bg alpha 5%"],
+        ["助手行", "mt-xs（8）；TurnStatus 32 高 · padding 6 · 摘要 14/20 muted"],
+        ["正文 Prose", "data-size=sm · serif 15/22 · 段距 .75em · h1 1.75em / h2 1.375em / h3 1.125em · ul padding-left 30"],
+        ["行尾余白", "--cds-assistant-message-text-inset 4px；text stop = clamp(0px, (100% − 384px) × .175, 56px)，736 宽时为 56 → padding 0 56 0 4"],
+        ["MessageActions", "xs：复制 · 朗读 · 回复很好 · 回复不佳 · 重试，各 24×24 r6 · icon 16 · muted → hover primary；RelativeTime 11px"],
+        ["入场", "message-fade-up：translateY(10px) → 0，1.1s linear() 弹簧（110 个采样点，33% 处峰值 1.163）"],
+        ["回到底部", "jump-to-latest 36 圆 @ 845, 756：p-1 · border .5px alpha-10 · bg-000/80 + backdrop-blur · shadow-md → hover lg · icon 20 mix-blend-luminosity · bottom-5（距 Dock 20）"],
+        ["底部渐隐", "transcript-bottom-fade 768×48 @ 479, 764：linear-gradient(to top, var(--cds-page-bg), transparent)"],
+        ["页脚 Spark", "chat-footer-spark：p-1 · svg 32×32 · data-state=hidden 时 invisible"],
+      ];
+      return (
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-4 items-start">
+          <ComponentShowcase
+            title="对话行、正文与操作条"
+            tag='[data-cds="Prose"]'
+            description="内容均为占位。点「重放入场」看 message-fade-up 的 1.1s 弹簧；悬停操作按钮看 muted → primary 与 tooltip。"
+            code={`.message-fade-up { animation: 1.1s linear(0 0%, 0.0049 0.917431%, 0.019 1.83486%, … 1.163 33.0275%, … 0.9734 66.055%, … 1 100%) message-fade-up; }
+@keyframes message-fade-up { 0% { opacity: 0; transform: translateY(10px); } }
+[data-cds="AssistantMessage"] { --cds-assistant-message-text-inset: 4px; }
+/* text stop：clamp(0px, (100% - 384px) * .175, 56px) */
+[data-testid="jump-to-latest"] { @apply size-9 p-1 !rounded-full border-0.5 bg-bg-000/80 backdrop-blur shadow-md hover:shadow-lg bottom-5 left-1/2 -translate-x-1/2; }`}
+          >
+            <div className="relative rounded-lg overflow-hidden" style={{ background: "var(--cds-page-bg)" }}>
+              <div className="mx-auto" style={{ maxWidth: 768, padding: "8px 16px 80px" }}>
+                <div key={"u" + k} className="wa-message-fade-up flex justify-end" style={{ marginTop: 24 }}>
+                  <div style={{ maxWidth: "85%", padding: "12px 16px", borderRadius: 12, background: "var(--cds-alpha-1)", fontSize: 15, lineHeight: "20px" }}>（用户消息占位）帮我把这段说明改写得简洁一些。</div>
+                </div>
+                <div key={"a" + k} className="wa-message-fade-up" style={{ marginTop: 8 }}>
+                  <div className="flex items-center gap-1" style={{ height: 32, padding: 6, fontSize: 14, lineHeight: "20px", color: "var(--cds-text-muted)" }}>
+                    <Icon name="chevronDown" size={16} style={{ transform: "rotate(-90deg)" }} /> 思考摘要（占位）
+                  </div>
+                  <div style={{ fontFamily: "var(--wa-serif)", fontSize: 15, lineHeight: "22px", paddingInline: "4px clamp(0px, (100% - 384px) * .175, 56px)" }}>
+                    <p style={{ margin: "0 0 .75em" }}>正文占位：助手回复用衬线体 15/22，段落之间隔 .75em。行尾按 clamp 公式留出右侧余白，736 宽的行里正好是 56px。</p>
+                    <h3 style={{ fontSize: "1.125em", fontWeight: 600, margin: "0 0 .75em" }}>小标题占位（h3 = 1.125em）</h3>
+                    <ul style={{ paddingLeft: 30, listStyle: "disc", margin: "0 0 .75em" }}>
+                      <li>列表项占位一</li>
+                      <li>列表项占位二</li>
+                    </ul>
+                  </div>
+                  <div className="flex items-center" style={{ marginTop: 4 }}>
+                    {actions.map(([ic, l]) => <WaTip key={l} tip={l}><WaBtn size="xs" muted label={l} icon={<Icon name={ic} size={16} />} /></WaTip>)}
+                    <span style={{ fontSize: 11, color: "var(--cds-text-muted)", marginInlineStart: 8 }}>3 分钟前</span>
+                  </div>
+                  <div style={{ padding: 4, marginTop: 12, color: "var(--cds-clay)" }}><Icon name="spark" size={32} /></div>
+                </div>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 pointer-events-none" style={{ height: 48, background: "linear-gradient(to top, var(--cds-page-bg), transparent)" }} />
+              <button type="button" className="wa-jump" aria-label="回到底部" onClick={() => setK(k + 1)}><Icon name="arrowRight" size={20} style={{ transform: "rotate(90deg)" }} /></button>
+              <button onClick={() => setK(k + 1)} className="absolute top-2 right-2 h-7 px-2.5 rounded-md text-[11px] font-mono bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">重放入场 ↻</button>
+            </div>
+          </ComponentShowcase>
+          <ComponentShowcase title="尺寸与实现" tag="/chat · 1440×900">
+            <WaTable head={["部位", "实测"]} rows={spec} />
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W7 按钮解剖与尺寸
+    // --------------------------------------------------------------------------
+    const WA_SPRING = [0, .2459, .6526, .9468, 1.0764, 1.0915, 1.0585, 1.0219, .9993, .9914, .9921, .9957, .9988, 1.0004, 1];
+
+    function WaSpringPlot() {
+      const W = 300, H = 130, px = 12, py = 14, top = 1.15;
+      const x = (i) => px + (i / (WA_SPRING.length - 1)) * (W - 2 * px);
+      const y = (v) => H - py - (v / top) * (H - 2 * py);
+      return (
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ maxWidth: W }} role="img" aria-label="--cds-btn-spring 曲线">
+          <line x1={px} x2={W - px} y1={y(1)} y2={y(1)} stroke="var(--cds-alpha-3)" strokeDasharray="3 3" />
+          <line x1={px} x2={W - px} y1={y(0)} y2={y(0)} stroke="var(--cds-alpha-2)" />
+          <polyline points={WA_SPRING.map((v, i) => `${x(i)},${y(v)}`).join(" ")} fill="none" stroke="var(--cds-fill-accent)" strokeWidth="2" strokeLinejoin="round" />
+          {WA_SPRING.map((v, i) => <circle key={i} cx={x(i)} cy={y(v)} r="2.25" fill="var(--cds-fill-accent)" />)}
+          <text x={x(5)} y={y(1.0915) - 6} textAnchor="middle" fontSize="10" fill="var(--cds-text-muted)" fontFamily="monospace">1.0915</text>
+          <text x={W - px} y={y(1) - 4} textAnchor="end" fontSize="10" fill="var(--cds-text-muted)" fontFamily="monospace">1</text>
+        </svg>
+      );
+    }
+
+    function WaButtonsSection() {
+      const [slow, setSlow] = useState(false);
+      const [deep, setDeep] = useState(false);
+      const [plan, setPlan] = useState(0);
+      const sizes = [["xs", 24, 6, "13/19", 8], ["sm", 28, 7, "14/20", 10], ["md", 32, 8, "14/20", 12], ["lg", 40, 10, "15/22", 16]];
+      const variants = [
+        ["primary", "#0b0b0b → hover #2c2c2a", "白字 · 500", "深色 #fff → #e1e0d9"],
+        ["secondary", "#ffffff1a + inset 1px alpha-10 + 0 1px 2px #0000000d", "→ hover alpha 5%", "深色 alpha-10 → 14%，无环"],
+        ["ghost", "透明", "→ hover alpha 5%", "深色 hover 7.5%"],
+        ["brand（仅发送）", "#c6613f", "→ hover #d97757", "--cds-fill-brand = clay-emphasized"],
+      ];
+      const tree = `button.group/btn[data-cds=Button][data-size][data-variant]   ← 高度 · 圆角 · 内边距 · 字号；isolation: isolate
+├─ span.cds-btn-squish.absolute.-z-[1].inset-0.rounded-[inherit]   ← 只有这一层随按压缩放
+│  └─ span.absolute.inset-0.rounded-[inherit]（paint）               ← 背景 · hover · focus 环（60ms ease-out）
+└─ span.inline-flex.min-w-0.items-center.gap-1（内容）              ← 图标与文字不缩放，保持清晰
+
+.cds-root .cds-btn-squish { --cds-btn-press-sx: .975; --cds-btn-press-sy: .975; transform-origin: 50% center;
+  transition: transform var(--cds-dur-slow) var(--cds-btn-spring); }                       /* 松开：450ms 弹簧 */
+.cds-root .group\\/btn:not([disabled]):active .cds-btn-squish,
+.cds-root .group\\/btn:not([disabled]):has(:active) .cds-btn-squish {
+  transform: scale(var(--cds-btn-press-sx), var(--cds-btn-press-sy)); transition: transform var(--cds-dur-fast) ease-out; }  /* 按下：60ms */
+--cds-btn-spring: linear(0, .2459, .6526, .9468, 1.0764, 1.0915, 1.0585, 1.0219, .9993, .9914, .9921, .9957, .9988, 1.0004, 1);`;
+      const pressStyle = slow ? { "--cds-dur-slow": "2.7s", "--cds-dur-fast": ".36s" } : undefined;
+      return (
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+            <ComponentShowcase title="按钮结构与按压弹簧" tag=".cds-btn-squish" description="按住按钮再松开：按下 60ms ease-out 缩到 .975，松开用 450ms linear() 弹簧回弹（峰值 1.0915）。缩放的只是背景层，文字不动。可以慢放 6 倍，或把按压加深到 .9 看得更清楚。">
+              <div className="space-y-4">
+                <WaCode>{tree}</WaCode>
+                <div className="flex flex-wrap items-center gap-3 p-4 rounded-lg" style={{ background: "var(--cds-page-bg)", ...pressStyle }}>
+                  {["primary", "secondary", "ghost", "brand"].map((v) => (
+                    <WaBtn key={v} variant={v} style={deep ? { "--wa-press": .9 } : undefined}>{v}</WaBtn>
+                  ))}
+                  <span className="ms-auto flex gap-3 text-[11px] font-mono text-neutral-500">
+                    <label className="flex items-center gap-1 cursor-pointer"><input type="checkbox" checked={slow} onChange={(e) => setSlow(e.target.checked)} />慢放 ×6</label>
+                    <label className="flex items-center gap-1 cursor-pointer"><input type="checkbox" checked={deep} onChange={(e) => setDeep(e.target.checked)} />按压 .9</label>
+                  </span>
+                </div>
+                <WaSpringPlot />
+              </div>
+            </ComponentShowcase>
+            <div className="space-y-4">
+              <ComponentShowcase title="四档尺寸" tag="[data-size]">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-[11px] font-mono border-collapse">
+                    <thead><tr>{["size", "高", "圆角", "字号/行高", "padding", "实物"].map((h) => <th key={h} className="text-left font-semibold text-neutral-500 px-2 py-1.5 border-b border-neutral-200 dark:border-neutral-800">{h}</th>)}</tr></thead>
+                    <tbody>
+                      {sizes.map(([s, h, r, f, p]) => (
+                        <tr key={s} className="border-b border-neutral-100 dark:border-neutral-800/60">
+                          <td className="px-2 py-2 text-neutral-800 dark:text-neutral-200">{s}</td>
+                          <td className="px-2 py-2 text-neutral-600 dark:text-neutral-400">{h}</td>
+                          <td className="px-2 py-2 text-neutral-600 dark:text-neutral-400">{r}</td>
+                          <td className="px-2 py-2 text-neutral-600 dark:text-neutral-400">{f}</td>
+                          <td className="px-2 py-2 text-neutral-600 dark:text-neutral-400">{p}</td>
+                          <td className="px-2 py-2"><span className="inline-flex items-center gap-2"><WaBtn size={s} variant="secondary">按钮</WaBtn><WaBtn size={s} variant="secondary" label="图标按钮" icon={<Icon name="plus" size={s === "xs" ? 16 : 20} />} /></span></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </ComponentShowcase>
+              <ComponentShowcase title="四种变体（浅色实测）" tag="[data-variant]">
+                <WaTable head={["variant", "静止", "hover / 字", "备注"]} rows={variants} />
+              </ComponentShowcase>
+            </div>
+          </div>
+          <ComponentShowcase title="分段控件、徽章与快捷键" tag="SegmentedControl · Badge · Shortcut" description="分段控件的 track 内边距只有 1px，thumb 圆角 = 控件圆角 − 1，带内 1px 环；thumb 位移的过渡时长没测到，这里按 --cds-dur-base / ease-snap 演示。">
+            <div className="flex flex-wrap items-center gap-8 p-4 rounded-lg" style={{ background: "var(--cds-page-bg)" }}>
+              <div className="space-y-1.5">
+                <WaSeg size="lg" optW={120} value={plan} onChange={setPlan} options={[{ label: "选项一" }, { label: "选项二" }]} />
+                <div className="text-[10px] font-mono text-neutral-500">lg 40 · r10 · p 1px · thumb r9（登录页套餐切换）</div>
+              </div>
+              <div className="space-y-1.5">
+                <span className="flex items-center gap-2">
+                  <span className="wa-badge">新功能</span>
+                  <span className="wa-badge" data-size="2xs">推荐</span>
+                  <span className="wa-badge" data-tone="warning"><Icon name="chartBar" size={12} />4× 或以上用量</span>
+                </span>
+                <div className="text-[10px] font-mono text-neutral-500">xs 18 · 2xs 16 · warning</div>
+              </div>
+              <div className="space-y-1.5">
+                <span className="flex items-center gap-3"><kbd className="wa-kbd">Ctrl K</kbd><kbd className="wa-kbd">Ctrl + Shift + O</kbd><kbd className="wa-kbd">Ctrl+U</kbd></span>
+                <div className="text-[10px] font-mono text-neutral-500">Shortcut：12px muted，纯文本，无键帽底色</div>
+              </div>
+            </div>
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W8 图标字体
+    // --------------------------------------------------------------------------
+    function WaIconsSection() {
+      const weights = [["12px", "577.75"], ["16px", "533.25"], ["18px", "577.75"], ["20px", "433.25"], ["选中对勾 20px", "566.5"], ["df-new-circle 字形", "700"]];
+      const cps = [
+        ["侧栏与导航", "E0DD 侧栏 · E039 Claude · E048 Code · E0D3 搜索 · E001 加号 · E0C9 项目 · E017 Artifacts · E043 定时 · E100 自定义 · E02A › · E018 文件夹 · E062 更多 · E015 查看全部 · E070 筛选 · E027 ▾ · E18A 下载"],
+        ["输入框", "E0AB 麦克风 · E013 发送"],
+        ["「+」菜单", "E019 文件 · E0D2 Skills · E055 连接器 · E0B8 设计系统 · E0C5 插件 · E053 设备 · E0D0 研究 · E0A8 记忆 · E03B 对勾"],
+        ["消息操作", "E056 复制 · E0E4 朗读 · E0FB 回复很好 · E0F9 回复不佳 · E11D 重试"],
+        ["只用 SVG 的", "Spark、无痕对话 ghost（icon-ghost-look-around / -blink）、语音模式波形、各类 logo 与插画"],
+      ];
+      return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+          <ComponentShowcase
+            title="Anthropicons 可变图标字体"
+            tag='[data-cds="Icon"]'
+            description="图标不是 SVG，而是字体：Anthropicons-Variable（c0f671921-cvFTkbeX.woff2，wght 400–700，font-display: block），另有 FizzyLake 备用字形。每个图标是一个 PUA 码位；字重随尺寸反向补偿，小图标更粗。"
+            code={`@property --cds-anim { syntax: "<number>"; inherits: false; initial-value: 0; }
+@property --cds-anim2 { syntax: "<number>"; inherits: false; initial-value: 0; }
+[data-cds="Icon"]:not(svg):not([data-cds-anim]) { font-variation-settings: normal; }
+[data-cds-anim] { --cds-anim: 0; --cds-anim2: 0;
+  font-variation-settings: "opsz" var(--cds-opsz,20), "wght" var(--cds-wght,400), "ANIM" var(--cds-anim), "ANM2" var(--cds-anim2);
+  transition: --cds-anim var(--cds-anim-dur-out,var(--cds-anim-dur,.3s)) var(--cds-anim-ease,cubic-bezier(.34, 1.3, .64, 1)); }
+.group:focus-visible [data-cds-anim], [data-cds-anim]:focus-visible { --cds-anim: 100; transition-duration: var(--cds-anim-dur,.3s); }
+@keyframes cds-anim-loop { 0%, 49.99% { --cds-anim2: 0; } 50%, 100% { --cds-anim2: 100; } }
+.group:hover [data-cds-anim-loop], [data-cds-anim-loop]:hover { animation: 1s linear .1s infinite cds-anim-loop; }`}
+          >
+            <div className="space-y-4">
+              <WaTable head={["尺寸", "wght"]} rows={weights} />
+              <div className="wa-anim-host p-4 rounded-lg space-y-2 cursor-default" style={{ background: "var(--cds-page-bg)" }}>
+                <div className="text-[11px] font-mono text-neutral-500">悬停这里：--cds-anim 0 → 100，.3s cubic-bezier(.34, 1.3, .64, 1)。蓝条宽度 = ANIM 轴取值，会冲过 100 再回落。</div>
+                <div className="relative h-2 rounded-full" style={{ background: "var(--cds-alpha-1)", width: "80%" }}>
+                  <div className="wa-anim-bar absolute inset-y-0 left-0 rounded-full" style={{ background: "var(--cds-fill-accent)" }} />
+                </div>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-lg" style={{ background: "var(--cds-page-bg)" }}>
+                <span className="wa-ghost-icon inline-flex"><WaTip tip="无痕对话"><WaBtn label="无痕对话" icon={<WaGhost />} /></WaTip></span>
+                <span className="text-[11px] font-mono text-neutral-500 leading-relaxed">悬停：icon-ghost-look-around 2.4s ease-in-out infinite（±1.5px 环视）+ icon-ghost-blink 4s ease-in-out infinite（10–12%、32–34% 两次眨眼）</span>
+              </div>
+            </div>
+          </ComponentShowcase>
+          <ComponentShowcase title="PUA 码位（实测）" tag="U+E0xx">
+            <WaTable head={["区域", "码位"]} rows={cps} />
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W9 动效时长（CSSOM 原文 animation 声明）
+    // --------------------------------------------------------------------------
+    const WA_MOTION = [
+      { n: "message-fade-up", t: "1.1s linear(…110 段弹簧，峰值 1.163)", cls: "wa-message-fade-up" },
+      { n: "cds-pill-in-own", t: "cds-pill-in base overshoot + cds-fade-in base ease-out", a: "wa-pill-in var(--cds-dur-base) var(--cds-ease-overshoot), wa-fade-in var(--cds-dur-base) var(--cds-ease-out)" },
+      { n: "cds-pill-pop", t: "up .4×base ease-out → down .6×base overshoot（延迟 .4×base）", a: "wa-pill-pop-up calc(var(--cds-dur-base) * .4) var(--cds-ease-out), wa-pill-pop-down calc(var(--cds-dur-base) * .6) var(--cds-ease-overshoot) calc(var(--cds-dur-base) * .4)" },
+      { n: "cds-um-enter", t: ".45s cubic-bezier(.34, 1.3, .64, 1)", a: "wa-um-enter .45s cubic-bezier(.34, 1.3, .64, 1)" },
+      { n: "click-ring", t: ".65s ease-out both · scale .22 → 1、opacity .95 → 0", a: "wa-click-ring .65s ease-out both", ring: true },
+      { n: "cds-reveal-in", t: "snap / base · ease-out（4px 上移）", a: "wa-reveal-in var(--cds-dur-base) var(--cds-ease-out) both" },
+      { n: "cds-morph-in", t: ".18s cubic-bezier(.2, 0, 0, 1)（3px）", a: "wa-morph-in .18s cubic-bezier(.2, 0, 0, 1)" },
+      { n: "login-hero-in", t: "800ms ease-out（20px）", a: "wa-login-hero-in .8s ease-out" },
+      { n: "static-composer-actions-fade-in", t: ".24s ease-out both（opacity 从 .01）", a: "wa-actions-fade-in .24s ease-out both" },
+      { n: "cds-chip-in", t: "delay = 50ms + min(sibling-index() − 1, 8) × 30ms；时长由组件另设，这里取 .2s", chips: true },
+      { n: "cds-dot-pulse", t: ".cds-dot · 1.8s linear infinite", a: "wa-dot-pulse 1.8s linear infinite", dot: true },
+      { n: "dframe-dot-blink", t: "1.2s ease-in-out infinite（运行中状态点）", a: "wa-dot-blink 1.2s ease-in-out infinite", dot: true },
+      { n: "cds-skeleton-breathe", t: "2s ease-in-out infinite · wave 模式每项 +90ms", skel: true },
+    ];
+
+    function WaMotionSection() {
+      const [keys, setKeys] = useState(() => WA_MOTION.map(() => 0));
+      const replay = (i) => setKeys((ks) => ks.map((v, j) => (j === i ? v + 1 : v)));
+      const tile = (m, i) => {
+        if (m.chips) return (
+          <span key={keys[i]} className="flex gap-1">
+            {[0, 1, 2, 3, 4].map((c) => <span key={c} className="wa-badge" style={{ animation: `wa-chip-in .2s var(--cds-ease-out) ${50 + Math.min(c, 8) * 30}ms backwards` }}>chip {c + 1}</span>)}
+          </span>
+        );
+        if (m.skel) return (
+          <span className="flex flex-col gap-1.5 w-28">
+            {[0, 1, 2].map((s) => <span key={s} className="h-2 rounded-full" style={{ background: "var(--cds-alpha-2)", animation: `wa-skeleton-breathe 2s ease-in-out ${s * 90}ms infinite` }} />)}
+          </span>
+        );
+        if (m.dot) return <span className="size-2 rounded-full" style={{ background: "var(--cds-fill-accent)", animation: m.a }} />;
+        if (m.ring) return (
+          <span className="relative grid place-items-center size-10">
+            <span key={keys[i]} className="absolute inset-0 rounded-full" style={{ boxShadow: "inset 0 0 0 2px var(--cds-fill-accent)", animation: m.a }} />
+            <span className="size-1.5 rounded-full" style={{ background: "var(--cds-fill-accent)" }} />
+          </span>
+        );
+        return <span key={keys[i]} className={"wa-badge " + (m.cls || "")} style={m.a ? { animation: m.a } : undefined}>{m.n}</span>;
+      };
+      return (
+        <ComponentShowcase
+          title="动效时长与缓动（CSSOM 原文）"
+          tag="@keyframes × 203"
+          description="下表的时长、缓动、延迟都取自 claude.ai 规则里的 animation 声明，不是推测。点任意一格重放。"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+            {WA_MOTION.map((m, i) => (
+              <button key={m.n} onClick={() => replay(i)} className="text-left p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors space-y-3" style={{ background: "var(--cds-page-bg)" }}>
+                <div className="h-12 grid place-items-center">{tile(m, i)}</div>
+                <div>
+                  <div className="text-[11px] font-mono font-semibold text-neutral-800 dark:text-neutral-200">{m.n}</div>
+                  <div className="text-[10px] font-mono text-neutral-500 leading-relaxed">{m.t}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </ComponentShowcase>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W10 令牌与勘误
+    // --------------------------------------------------------------------------
+    function WaTokensSection() {
+      const tok = [
+        ["--cds-surface-0", "#f9f9f7", "#0b0b0b", "侧栏混色的底"],
+        ["--cds-surface-1", "#fcfcfb", "#151515", "页面底色 = --cds-page-bg"],
+        ["--cds-surface-2", "#ffffff", "#1a1a19", ""],
+        ["--cds-surface-3", "#ffffff", "#20201f", "菜单、输入框卡片；深色 tooltip"],
+        ["--cds-text-primary", "#0b0b0b", "#f0efec", "neutral-900 / gray-50"],
+        ["--cds-text-secondary", "#52514e", "#c3c2b7", "neutral-600 / gray-200"],
+        ["--cds-text-muted", "#898781", "#898781", "gray-400，两种模式相同"],
+        ["--cds-alpha-1…5", "#0b0b0b 5 / 10 / 20 / 35 / 50%", "#fff 同比例", "border = alpha-2 · strong = alpha-3 · stronger = 40%"],
+        ["--cds-fill-primary", "#0b0b0b → #2c2c2a", "#fff → #e1e0d9", "on-primary #fff / #0b0b0b"],
+        ["--cds-fill-secondary", "#ffffff1a + 内环 alpha-2 + 0 1px 2px #0000000d", "alpha-2 → 14%，无环", ""],
+        ["--cds-fill-ghost-hover", "alpha 5%", "alpha 7.5%", ""],
+        ["--cds-fill-brand", "#c6613f → #d97757", "同", "clay-emphasized；只用于发送键"],
+        ["--cds-fill-accent", "#2a78d6", "#2a78d6", "焦点环、选中对勾"],
+        ["--cds-text-accent", "#184f95", "#6da7ec", "TextLink（role-accent-600 / 300）"],
+        ["--cds-fill-field", "#ffffff80 + 内环 alpha-2", "alpha-1 + 内环 border", "搜索框、邮箱输入框"],
+        ["--cds-focus-shadow", "inset 0 0 0 1px page-bg, 0 0 0 1px accent, 0 0 6px 1px #cde2fb", "末段改为 accent-600 / 60%", ""],
+        ["--cds-ring-inner / outer", "0 / 1px（外环）", "1px / 0（内环）", "双环结构"],
+        ["--cds-shadow-popover", "0 8px 24px #0000001f, 0 2px 6px #00000014", "0 8px 24px #00000052, 0 2px 6px #0003", "菜单另加 0 0 0 1px border"],
+        ["--cds-shadow-color", "#0b0b0b 8%", "#0000003d", ""],
+        ["--cds-tooltip-bg / fg", "#0b0b0b / #fff", "surface-3 / text-primary", ""],
+        ["--cds-segmented-control-track / thumb", "alpha 5% / #fff", "#111 / alpha-2", ""],
+      ];
+      const scale = [
+        ["字号", "caption 12/17 · footnote 13/17 · body 14/20 · heading 15/20 · title 22/28 · prose 16/24（sm 15/22 · lg 18/27）"],
+        ["字重", "400 · 500 · 580 · 600"],
+        ["密度 compact", "--cds-radius .375rem · composer .75rem · h-control 1.5rem · h-control-nested 1.125rem · icon 1rem · pad xs/sm/md/lg .25/.375/.5/.75rem（均 × --cds-rem-scale）"],
+        ["密度 comfortable", "控件 32 · 圆角 8 · composer .875rem"],
+        ["z-index", "portal 120 · toast 60 · tooltip / popover 50 · modal 40 · coachmark 35 · sidebar 20 · header 10 / 11"],
+        ["时长", "fast 60ms · snap .12s · base .2s · sheet .3s · slow .45s"],
+        ["缓动", "out (.165, .84, .44, 1) · snap (.32, .72, 0, 1) · overshoot (.34, 1.3, .64, 1)"],
+        ["按钮弹簧", "--cds-btn-spring: linear(0, .2459, .6526, .9468, 1.0764, 1.0915, 1.0585, 1.0219, .9993, .9914, .9921, .9957, .9988, 1.0004, 1)"],
+      ];
+      const fixes = [
+        ["主按钮", "陶土色 clay", "#0b0b0b（深色 #fff）；陶土只给发送键和 Spark"],
+        ["--cds-fill-brand", "#d97757（第 10 章）", "#c6613f（clay-emphasized），hover 才是 #d97757"],
+        ["按钮圆角 xs / sm / md / lg", "6 / 8 / 8 / 12", "6 / 7 / 8 / 10"],
+        ["按压反馈", "active:scale-95 / .98（整颗按钮）", "只缩放背景层 cds-btn-squish：60ms ease-out 到 .975，松开 450ms linear() 弹簧"],
+        ["分段控件", "999px 胶囊 · p 2px", "控件圆角（sm 7 / lg 10）· p 1px · thumb 圆角 −1"],
+        ["焦点环", "clay 1.5px", "accent 蓝 1px + 6px 光晕"],
+        ["浅色文字", "#151515 / #525252 / #8a8a8a", "#0b0b0b / #52514e / #898781"],
+        ["surface-0", "#f5f5f3", "#f9f9f7"],
+        ["深色文字", "#f5f5f5 / #a3a3a3 / #666", "#f0efec / #c3c2b7 / #898781"],
+        ["深色 surface-3", "#20201e", "#20201f"],
+        ["输入框圆角", "20 / 12", "14（comfortable）/ 12（compact）"],
+        ["用户气泡圆角", "18", "12（= 控件 8 + 4）"],
+        ["侧栏行", "28px · 999px Hub Rail 胶囊", "32px · 圆角 8；顶部是分段式应用切换"],
+        ["标题栏", "46px + 74px 红绿灯（仅桌面）", "web 44px"],
+        ["图标", "Phosphor SVG", "Anthropicons 可变字体（PUA 码位 · ANIM 轴）"],
+        ["努力程度", "默认推荐「高」，独立控件", "默认推荐「中等」，收在模型菜单的子菜单里"],
+        ["Chin", "在卡片内部", "在卡片外、卡片下方"],
+        ["面板圆角", "10px", ".75rem"],
+        ["message-fade-up", "12px · 普通缓动", "10px · 1.1s linear() 弹簧（峰值 1.163）"],
+        ["菜单圆角", "未记录", "12 = 控件 8 + menu-gutter 4（同心圆角）"],
+      ];
+      return (
+        <div className="space-y-4">
+          <ComponentShowcase title="网页端令牌（浅色 / 深色）" tag=".cds-root" description="本页的 .wa-root 作用域就是用这张表的值覆盖前文旧令牌。切换右上角主题可看深色。">
+            <WaTable head={["令牌", "浅色", "深色", "说明"]} rows={tok} />
+          </ComponentShowcase>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+            <ComponentShowcase title="字号、密度、层级与动效" tag="--cds-*">
+              <WaTable head={["类别", "实测"]} rows={scale} />
+            </ComponentShowcase>
+            <ComponentShowcase title="勘误：本库旧值 vs claude.ai 实测" tag="01–10 章" description="左列是本 storybook 前文的写法，右列是这次实测；以右列为准。">
+              <WaTable head={["项目", "旧值", "实测"]} rows={fixes} />
+            </ComponentShowcase>
+          </div>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W11 登录页
+    // --------------------------------------------------------------------------
+    function WaLoginSection() {
+      const [plan, setPlan] = useState(0);
+      const [open, setOpen] = useState(0);
+      const spec = [
+        ["导航栏", "72 高；≥ 69rem 时 84"],
+        ["主标题", "serif 56px/64.4 · wght 330"],
+        ["登录卡片", "r 32 · padding 28 · .5px 边框 · 四层阴影：0 4 24 / 0 4 32 / 0 2 64 / 0 16 32，黑色 1.57 / 1.57 / 1.18 / 1.18%"],
+        ["按钮", "lg：40 高 · r 10 · px 16 · 15px"],
+        ["邮箱输入框", "40 高 · r 10 · bg #ffffff80 · 内环 1px alpha-10；focus 换成蓝色 focus-shadow"],
+        ["分隔「或」", "12px #52514e · uppercase"],
+        ["TextLink", "#184f95 · 下划线 40% 色 · offset 3px"],
+        ["主视觉视频", "604.8×756 · r 16 · 0 4px 20px 4% · login-hero-in 800ms ease-out（20px 上移）"],
+        ["套餐切换", "SegmentedControl lg 40 · r 10 · p 1px · thumb r 9 + 内环"],
+        ["折叠面板", "触发器 lg 40 · r 8 · padding 9px 12px · 15px/500 · 展开时 chevron 转 90°"],
+        ["社交链接", "24px 方框 · icon 16"],
+      ];
+      return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+          <ComponentShowcase title="登录页控件（公开页面）" tag="/login" description="未登录也能访问的页面。按钮与输入框文案为示意。">
+            <div className="space-y-5 p-4 rounded-lg" style={{ background: "var(--cds-page-bg)" }}>
+              <div style={{ fontFamily: "var(--wa-serif)", fontSize: 56, lineHeight: "64.4px", fontWeight: 330, animation: "wa-login-hero-in .8s ease-out" }}>主标题占位</div>
+              <div className="space-y-3 max-w-md" style={{ borderRadius: 32, padding: 28, border: ".5px solid var(--cds-border)", background: "var(--cds-surface-3)", boxShadow: "0 4px 24px rgb(0 0 0 / 1.57%), 0 4px 32px rgb(0 0 0 / 1.57%), 0 2px 64px rgb(0 0 0 / 1.18%), 0 16px 32px rgb(0 0 0 / 1.18%)" }}>
+                <WaBtn size="lg" variant="secondary" className="w-full">使用 Google 账号继续（示意）</WaBtn>
+                <div className="flex items-center gap-3" style={{ fontSize: 12, color: "var(--cds-text-secondary)", textTransform: "uppercase" }}>
+                  <span className="flex-1 h-px" style={{ background: "var(--cds-border)" }} />或<span className="flex-1 h-px" style={{ background: "var(--cds-border)" }} />
+                </div>
+                <input className="wa-input" type="email" placeholder="邮箱（示意）" aria-label="邮箱输入框演示" />
+                <WaBtn size="lg" variant="primary" className="w-full">继续（示意）</WaBtn>
+                <p style={{ fontSize: 12, color: "var(--cds-text-muted)" }}>继续即表示同意 <a className="wa-link" href="#wa-login">条款（示意）</a></p>
+              </div>
+              <WaSeg size="lg" optW={120} value={plan} onChange={setPlan} options={[{ label: "选项一" }, { label: "选项二" }]} />
+              <div className="max-w-md">
+                {["常见问题占位 1", "常见问题占位 2"].map((q, i) => (
+                  <div key={q}>
+                    <button type="button" className="wa-acc" aria-expanded={open === i} onClick={() => setOpen(open === i ? -1 : i)}>{q}<Icon name="chevronDown" size={16} style={{ transform: "rotate(-90deg)" }} /></button>
+                    {open === i && <div style={{ padding: "4px 12px 12px", fontSize: 14, color: "var(--cds-text-secondary)" }}>答案占位。</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ComponentShowcase>
+          <ComponentShowcase title="尺寸与实现" tag="claude.ai/login">
+            <WaTable head={["部位", "实测"]} rows={spec} />
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // W12 隐藏机制
+    // --------------------------------------------------------------------------
+    function WaHiddenSection() {
+      const cards = [
+        {
+          t: "Fizzy Lake 功能开关与 stacks: 变体",
+          d: "html[data-cds-fizzy-lake] 可含 color / panels / icons / type 四个词。本次会话没有开启。color 打开后整套文字与强调色换成半透明黑白，panels 打开后面板圆角、阴影归零，按钮的按压缩放也被 stacks:transform-none! 关掉。",
+          c: `/* Tailwind 自定义变体 stacks: */
+:where([data-cds-fizzy-lake~="color"], [data-cds-fizzy-lake~="color"] *):not(:where([data-cds-theme], [data-cds-theme] *))
+/* color 开关下的令牌（浅色 / 深色） */
+--cds-text-primary:   #000000e6 / #ffffffed      --cds-text-secondary: #0009 / #ffffff91
+--cds-fill-accent:    #257de0                    --cds-text-accent:    #1757ac / #6aabf1
+--cds-surface-3:      #fff / #1f1f1f             #static-composer-box: #ffffff / #303030
+/* panels 开关 */
+.cds-root:is([data-cds-fizzy-lake~="panels"], …) { --cds-menu-gutter: initial; --cds-panel-radius: 0rem; --cds-panel-shadow: none; --cds-panel-line: 1px; }
+/* 按钮 */
+span.cds-btn-squish.stacks:transform-none!`,
+        },
+        {
+          t: "[data-size] 令牌重映射",
+          d: "组件不直接写死尺寸，而是在 data-size 上把整套令牌换成该档的版本；子孙元素读同名变量就自动缩放。Chin 的 data-size=xs 就是这样把里面的按钮变成 24px。",
+          c: `.cds-root [data-size="xs"] {
+  --cds-radius: var(--cds-radius--xs); --cds-h-control: var(--cds-h-control--xs); --cds-h-control-nested: var(--cds-h-control-nested--xs);
+  --cds-icon: var(--cds-icon--xs); --cds-pad-xs: var(--cds-pad-xs--xs); --cds-pad-sm: var(--cds-pad-sm--xs); --cds-pad-md: var(--cds-pad-md--xs);
+  --cds-font-size-caption: var(--cds-font-size-caption--xs); --cds-font-size-body: var(--cds-font-size-body--xs); --cds-leading-body: var(--cds-leading-body--xs);
+  --cds-checkbox: var(--cds-checkbox--xs); --cds-checkbox-radius: var(--cds-checkbox-radius--xs); --cds-switch-h: var(--cds-switch-h--xs); }`,
+        },
+        {
+          t: "触控设备上 Chin 按钮长高、布局不动",
+          d: "粗指针或无 hover 的设备上，Chin 里带 data-touch-size 的控件改为继承外层尺寸（长到 32px），再用等量负 margin 抵消，Chin 行高不变。375 宽实测：项目 62×32、模型 110.2×32、权限 32×32。",
+          c: `@media (pointer: coarse), (hover: none) {
+  .cds-root [data-cds="ChatComposerChin"] [data-touch-size] { --cds-radius: inherit; --cds-h-control: inherit; --cds-icon: inherit; … }
+}
+.cds-root [data-cds="ChatComposerChin"] [data-touch-size] :is([data-cds="Button"], [data-cds="ModelSelector"], [data-cds="ModelSelectorEffort"]):not([data-size]) {
+  margin-block: calc(var(--cmp-chin-touch-grow,0px) * -1); }`,
+        },
+        {
+          t: "scroll-fade-y：滚动驱动的边缘渐隐",
+          d: "菜单与列表的上下渐隐不靠 JS：支持 animation-timeline: scroll() 时，mask-image 用 7 段 alpha 阶梯，阶梯长度随滚动位置开合；同时 scroll-padding 预留渐隐区，键盘聚焦的项不会被遮住。",
+          c: `.scroll-fade-y { scroll-padding-block: calc(var(--cds-scroll-fade-size) * var(--cds-scroll-fade-top-on)) calc(var(--cds-scroll-fade-size) * var(--cds-scroll-fade-bottom-on)); }
+@supports (animation-timeline: scroll()) {
+  .scroll-fade-y { mask-image: linear-gradient(to bottom, transparent, #0000000d calc(var(--cds-scroll-fade-top) * .15),
+    #00000026 calc(… * .3), #0000004d calc(… * .45), #00000080 calc(… * .6), #000000b3 calc(… * .75), #000000d9 calc(… * .87), #000 …); }
+}`,
+        },
+        {
+          t: "hit-row：把行间缝隙并进命中区",
+          d: "侧栏行之间有空隙，但鼠标落在缝里也算点中。做法是在行主按钮上挂一个 ::before，向上下左右外扩 reach 变量，z-index -1 垫在底下。",
+          c: `.hit-row { --cds-hit-row-reach-top: var(--cds-hit-grid-y,0px); --cds-hit-row-reach-x: var(--cds-hit-grid-x,0px);
+  --cds-hit-row-reach-bottom: calc(var(--cds-hit-gap-y,0px) + var(--cds-hit-grid-y,0px)); isolation: isolate; position: relative; }
+.hit-row-main::before { content: ""; z-index: -1; position: absolute;
+  inset: calc(var(--cds-hit-row-reach-top) * -1) calc(var(--cds-hit-row-reach-x) * -1) calc(var(--cds-hit-row-reach-bottom) * -1); }`,
+        },
+        {
+          t: "桌面变体侧栏、静态输入框与天气动画",
+          d: "同一份 dframe 在桌面变体下侧栏变成浮动卡片（上下各留 8、圆角 8、shadow-card）。首屏先渲染一个静态输入框，水合后换成真组件，操作行从 .01 透明度 .24s 淡入，避免闪烁。另有 9 个 weather-* 关键帧，用于问候区的天气氛围。",
+          c: `.dframe-root { --df-shadow-card: inset 0 0 0 0 transparent, 0 0 0 1px color-mix(in oklab, var(--cds-gray-900) 6%, transparent),
+  0 4px 24px color-mix(in oklab, var(--cds-gray-900) 4%, transparent);
+  --df-shadow-float: 0 0 0 .5px #0000000d, 0 2px 8px #0000000a, 0 12px 32px #00000008;
+  --df-shadow-pop: 0 0 0 .5px #0000000f, 0 4px 12px #0000000f, 0 16px 40px #00000014; --df-radius-card: 8px; }
+[data-static-composer-boot] .static-composer-boot-fade { animation: .24s ease-out both static-composer-actions-fade-in; }   /* 0% { opacity: .01 } */
+@keyframes weather-aurora-twinkle / -aurora-wash-1 / -aurora-wash-2 / -aurora-wash-3 / -band-move / -cloud-drift / -snow-glow / -star-twinkle / -streak`,
+        },
+      ];
+      return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+          {cards.map((c) => (
+            <ComponentShowcase key={c.t} title={c.t} description={c.d}>
+              <WaCode>{c.c}</WaCode>
+            </ComponentShowcase>
+          ))}
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
+    // 页面
+    // --------------------------------------------------------------------------
+    function ClaudeAiWebAuditPage() {
+      return (
+        <main id="claude-ai-web" className="wa-root flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 pb-24 space-y-12">
+          <WaPart id="wa-method" number="W0" title="方法与构建指纹" enTitle="Method & Build Fingerprint" badge="build 541957a01b" description="测量方式、构建指纹与隐私约定。以下各节的数值都来自 claude.ai 运行时，不是从安装包推断。">
+            <WaMethodSection />
+          </WaPart>
+          <WaPart id="wa-shell" number="W1" title="外壳与控件坐标" enTitle="dframe Shell Geometry" badge="/new · /chat · 375" description="桌面 1440×900 下的首页与会话页，以及 375×812 移动端：每个可测控件的 x、y、宽、高。">
+            <WaShellSection />
+          </WaPart>
+          <WaPart id="wa-sidebar" number="W2" title="侧栏" enTitle="Sidebar (web · comfortable)" badge="288px" description="标题栏、应用切换、搜索、导航行、分组、最近会话、底栏与拖拽手柄，含 compact / comfortable / 桌面 / 手机四档密度变量。">
+            <WaSidebarSection />
+          </WaPart>
+          <WaPart id="wa-composer" number="W3" title="首页输入框" enTitle="Home Composer & Chin" badge="640 × 103" description="卡片、编辑器、操作行、发送位交叉淡入，以及挂在卡片外面的 Chin。">
+            <WaComposerSection />
+          </WaPart>
+          <WaPart id="wa-reply" number="W4" title="回复输入框与会话头" enTitle="Reply Composer & Chat Header" badge="768 × 88" description="进入会话后输入框的形态变化，以及会话头的标题分裂按钮、活动面板与分享。">
+            <WaReplySection />
+          </WaPart>
+          <WaPart id="wa-menus" number="W5" title="菜单、子菜单与提示" enTitle="Menus, Submenus & Tooltip" badge="Base UI" description="模型菜单、努力程度子菜单、「+」菜单与 Tooltip 的尺寸、对齐和阴影。">
+            <WaMenusSection />
+          </WaPart>
+          <WaPart id="wa-messages" number="W6" title="消息流" enTitle="Transcript & Prose" badge="768 / 736" description="用户气泡、助手正文排版、行尾余白公式、操作条、回到底部按钮与底部渐隐。">
+            <WaMessagesSection />
+          </WaPart>
+          <WaPart id="wa-buttons" number="W7" title="按钮解剖与尺寸" enTitle="Button Anatomy, Sizes & Variants" badge="cds-btn-squish" description="三层结构、只缩放背景的按压弹簧、四档尺寸、四种变体、分段控件、徽章与快捷键。">
+            <WaButtonsSection />
+          </WaPart>
+          <WaPart id="wa-icons" number="W8" title="图标字体" enTitle="Anthropicons Variable Icon Font" badge="PUA · ANIM" description="图标走可变字体：按尺寸补偿字重、用 @property 驱动 ANIM 轴做悬停动效；附实测码位。">
+            <WaIconsSection />
+          </WaPart>
+          <WaPart id="wa-motion" number="W9" title="动效时长" enTitle="Motion Durations (verbatim)" badge="animation 原文" description="关键帧被实际引用时的时长、缓动与延迟，可逐个重放。">
+            <WaMotionSection />
+          </WaPart>
+          <WaPart id="wa-tokens" number="W10" title="令牌与勘误" enTitle="Tokens & Corrections" badge="light / dark" description="网页端浅色 / 深色令牌、字号与密度阶梯，以及对本库 01–10 章旧值的逐项勘误。">
+            <WaTokensSection />
+          </WaPart>
+          <WaPart id="wa-login" number="W11" title="登录页" enTitle="Login Page" badge="public" description="未登录状态下的公开页面：主标题、登录卡片、按钮、输入框、分隔线、链接、套餐切换与折叠面板。">
+            <WaLoginSection />
+          </WaPart>
+          <WaPart id="wa-hidden" number="W12" title="隐藏机制" enTitle="Hidden Mechanisms" badge="CSSOM" description="界面上看不出来、但决定了观感的实现：功能开关、尺寸令牌重映射、触控增高、滚动渐隐、命中区外扩与首屏静态输入框。">
+            <WaHiddenSection />
+          </WaPart>
+        </main>
+      );
+    }
+
     function App() {
       const [isDark, setIsDark] = useState(false);
       const [isXray, setIsXray] = useState(false);
+      // 页面切换：#claude-ai-web 或 #wa-* 进入 claude.ai 实测页，其余锚点留在组件库
+      const pageFromHash = () => (/^#(claude-ai-web|wa-)/.test(window.location.hash) ? "web" : "main");
+      const [page, setPage] = useState(pageFromHash);
+
+      useEffect(() => {
+        const onHash = () => setPage(pageFromHash());
+        window.addEventListener("hashchange", onHash);
+        return () => window.removeEventListener("hashchange", onHash);
+      }, []);
+
+      useEffect(() => {
+        // 切页后滚到目标锚点；没有对应元素（或是页首锚点）时回到顶部
+        const id = window.location.hash.slice(1);
+        const el = id && id !== "claude-ai-web" ? document.getElementById(id) : null;
+        if (el) el.scrollIntoView();
+        else window.scrollTo(0, 0);
+      }, [page]);
 
       useEffect(() => {
         if (isDark) {
@@ -4499,7 +6069,13 @@ span[data-hang-quote] {
             {/* Sub-bar: Category Quick Jump Nav */}
             <div className="border-t border-neutral-100 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-900/30 overflow-x-auto scrollbar-none">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-2">
-                {navSections.map((sec) => (
+                <div className="flex items-center gap-0.5 p-0.5 rounded-full bg-neutral-200/60 dark:bg-neutral-800 shrink-0">
+                  {[["main", "#foundations", "组件库"], ["web", "#claude-ai-web", "claude.ai 实测 ✨"]].map(([p, href, label]) => (
+                    <a key={p} href={href} className={"px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors " + (page === p ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-sm" : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white")}>{label}</a>
+                  ))}
+                </div>
+                <span className="h-4 w-px bg-neutral-200 dark:bg-neutral-700 shrink-0" />
+                {(page === "web" ? WA_SECTIONS : navSections).map((sec) => (
                   <a
                     key={sec.id}
                     href={`#${sec.id}`}
@@ -4512,7 +6088,11 @@ span[data-hang-quote] {
             </div>
           </header>
 
+          {/* claude.ai 网页端实测页（独立页面） */}
+          {page === "web" && <ClaudeAiWebAuditPage />}
+
           {/* Main Content: Single Page Flow */}
+          {page === "main" && (
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 pb-24 space-y-12">
             {/* 01. Foundations */}
             <section>
@@ -4664,12 +6244,13 @@ span[data-hang-quote] {
               </div>
             </section>
           </main>
+          )}
 
           {/* Footer */}
           <footer className="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#111110] py-8 text-center text-xs text-neutral-400 font-mono">
             <div>Claude Design System (CDS 2.0) • All-in-One Component Showcase</div>
             <div className="mt-1 text-[11px] text-neutral-500">
-              Extracted directly from production Claude Desktop v2.42304.0 (baseline v2.37337.1) • 52 data-cds Namespaces • 152 Keyframes & Full Physics Engines • Zero external bundle dependency
+              Extracted directly from production Claude Desktop v2.42304.0 (baseline v2.37337.1) • 52 data-cds Namespaces • 152 Keyframes & Full Physics Engines • claude.ai web build 541957a01b audited • Zero external bundle dependency
             </div>
           </footer>
         </div>
