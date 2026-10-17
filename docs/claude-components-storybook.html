@@ -816,6 +816,31 @@
     .wa-switch[aria-checked="true"] { background: var(--cds-fill-accent); }
     .wa-switch[aria-checked="true"]::after { translate: 10px 0; }
 
+    /* W15 Code 对话与输入：旧版状态行（c96d752d0 code-working-line：h-5 · gap 16 · footnote 紧凑档 12/15）与 epitaxy-thinking-shimmer（内联 CSS cd4c7d572 原文），
+       Step 版 TurnStatus（c734f318c：body 紧凑档 13/19 · gap-xs 6 · 控件高 24）与 ShimmerText（shared-frame pj / dj），排队条（cf74bc599） */
+    @keyframes wa-epitaxy-thinking-shimmer { 0%, 100% { opacity: 1; } 50% { opacity: .75; } }
+    .wa-think-pulse { will-change: opacity; animation: 2s ease-in-out 3s infinite wa-epitaxy-thinking-shimmer; }
+    @keyframes wa-shimmer-text-shine { 0%, 15% { background-position: 83.333% 0; animation-timing-function: cubic-bezier(.714, .121, .211, .888); } 85%, 100% { background-position: 16.667% 0; } }
+    .wa-shimmer-text { --wa-shine: var(--cds-text-secondary); background-image: linear-gradient(120deg, var(--wa-shine) 37.5%, color-mix(in srgb, var(--wa-shine) 30%, white) 50%, var(--wa-shine) 62.5%); background-size: 400% 100%; background-position: 83.333% 0; background-repeat: no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: 3s linear infinite wa-shimmer-text-shine; }
+    .dark .wa-shimmer-text { --wa-shine: var(--cds-text-muted); }
+    .wa-work-line { display: flex; align-items: center; gap: 16px; height: 20px; }
+    .wa-work-text { display: flex; align-items: center; min-width: 0; white-space: nowrap; font-size: 12px; line-height: 15px; color: var(--cds-text-secondary); font-variant-numeric: tabular-nums; }
+    .wa-work-text .wa-dot { padding-inline: 4px; }
+    .wa-work-text .wa-label { min-width: 3ch; overflow: hidden; text-overflow: ellipsis; }
+    .wa-turn { display: flex; align-items: center; gap: 6px; min-width: 0; min-height: 24px; white-space: nowrap; font-size: 13px; line-height: 19px; color: var(--cds-text-secondary); font-variant-numeric: tabular-nums; }
+    .wa-clay { position: relative; display: flex; flex: none; align-items: center; justify-content: center; width: 20px; height: 20px; color: var(--cds-clay); }
+    .wa-step-head { display: flex; align-items: center; gap: 4px; min-height: 24px; font-size: 13px; line-height: 19px; color: var(--cds-text-secondary); }
+    .wa-step-head > button:hover:not(:disabled) { color: var(--cds-text-primary); }
+    .wa-think-legacy { position: relative; padding-inline-end: 30px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 19px; font-style: italic; color: var(--cds-text-muted); }
+    .wa-think-legacy > .wa-think-copy { position: absolute; top: 0; inset-inline-end: 0; opacity: 0; pointer-events: none; transition: opacity var(--cds-dur-snap) var(--cds-ease-snap); }
+    .wa-think-legacy:hover > .wa-think-copy, .wa-think-legacy:focus-within > .wa-think-copy { opacity: 1; pointer-events: auto; }
+    .wa-queue { overflow: hidden; border-radius: 10px; background: var(--cds-surface-2); box-shadow: inset 0 0 0 var(--cds-ring-inner) var(--cds-ring-color), 0 0 0 var(--cds-ring-outer) var(--cds-ring-color); }
+    .wa-queue-row { display: flex; align-items: flex-start; gap: 5px; min-width: 0; padding: 5px; border-radius: 6px; }
+    .wa-queue-row:hover { background: var(--df-hover); }
+    .wa-icon-btn { display: grid; flex: none; place-items: center; width: 24px; height: 24px; border: 0; border-radius: 6px; background: none; color: var(--cds-text-muted); cursor: pointer; }
+    .wa-icon-btn:hover { background: var(--cds-alpha-1); color: var(--cds-text-primary); }
+    @media (prefers-reduced-motion: reduce) { .wa-shimmer-text { background: none; -webkit-text-fill-color: currentColor; } }
+
     /* 关键帧（claude.ai 原文；加 wa- 前缀以免与上文同名旧帧冲突） */
     @keyframes wa-ghost-look { 0%, 16.6%, 100% { transform: translate(-1.5px) translateY(0px); } 25%, 41.6% { transform: translate(1.5px) translateY(0px); } 50%, 66.6% { transform: translate(0px) translateY(-1.5px); } 75%, 91.6% { transform: translate(0px) translateY(0px); } }
     @keyframes wa-ghost-blink { 0%, 8% { opacity: 0; } 10%, 12% { opacity: 1; } 14%, 30% { opacity: 0; } 32%, 34% { opacity: 1; } 36%, 100% { opacity: 0; } }
@@ -4752,6 +4777,7 @@ span[data-hang-quote] {
       { id: "wa-hidden", name: "W12 隐藏机制" },
       { id: "wa-desktop", name: "W13 桌面版对照" },
       { id: "wa-code", name: "W14 Code 会话族谱" },
+      { id: "wa-think", name: "W15 Code 思考与输入" },
     ];
 
     function WaPart({ children, ...header }) {
@@ -6341,6 +6367,9 @@ isClaudeAppWco = isClaudeApp({ platform: "windows" }) || isClaudeApp({ platform:
           {k === "remote" && <path d="M4 3l8.5 4.2-3.6 1.3L7.4 12z" />}
           {k === "diff" && <><rect x="2.5" y="2.5" width="11" height="11" rx="2" /><path d="M8 5v4M6 7h4M6 11h4" /></>}
           {k === "grip" && [5, 8, 11].flatMap((y) => [6, 10].map((x) => <circle key={`${x}-${y}`} cx={x} cy={y} r=".8" fill="currentColor" stroke="none" />))}
+          {k === "x" && <path d="M4.5 4.5l7 7M11.5 4.5l-7 7" />}
+          {k === "edit" && <path d="M10.5 3l2.5 2.5L6 12.5H3.5V10z" />}
+          {k === "return" && <path d="M12.5 3.5V7a2 2 0 0 1-2 2H4m2.5-2.5L4 9l2.5 2.5" />}
         </svg>
       );
     }
@@ -6680,6 +6709,547 @@ placeBy  = { recency: "best-member", alpha: "parent", created: "parent" }[sort]
     }
 
     // --------------------------------------------------------------------------
+    // W15 Code 对话与输入：思考状态机。REA 静态分析 ion-dist（c96d752d0、c734f318c、c05970c42、cc39db724、c8677db5f、c03935b01、c227f4d5e、cd19fedd2、cf74bc599、shared-19、shared-frame）
+    // --------------------------------------------------------------------------
+    // 界面文字是 en-US defaultMessage 原文（安装包没有 zh-CN 语言包）；对话内容和数值为占位
+    const WA_THINK_STEPS = [[60, "Almost done thinking…"], [45, "Thinking some more…"], [30, "Thinking more…"], [15, "Still thinking…"], [0, "Thinking…"]];
+    const WA_PHASE = { connecting: "Connecting…", sending: "Sending…", starting: "Starting session…", preparing: "Preparing…", model: "Waiting for Claude…", tools: "Running tools…" };
+    const waThinkLabel = (s) => WA_THINK_STEPS.find(([t]) => s >= t)[1]; // c96d752d0 Net()
+    const waBucket = (s) => [60, 45, 30, 15, 2].find((t) => s >= t) ?? 0; // p8()：状态行只在跨档时重绘
+    const waClock = (s) => { const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60; return h ? `${h}h ${m}m ${x}s` : m ? `${m}m ${x}s` : `${x}s`; }; // shared-frame Ij()，en-US narrow
+    const waTokenText = (n) => (n === 1 ? "1 token" : `${n >= 1000 ? `${(n / 1000).toFixed(1)}k` : n} tokens`); // y8() + shared-8 AV()：千位保留 .0
+
+    // c96d752d0 ITe()：思考结束后先补足 2s 最短显示（PTe），再显示 2s「Thought for Ns」（FTe），然后消失
+    function waThinking(now, start, end) {
+      if (now < start) return null;
+      if (now < end) return { kind: "active", open: true };
+      const dur = end - start, hold = end + Math.max(0, 2 - dur);
+      if (now < hold) return { kind: "active", open: false };
+      return now < hold + 2 ? { kind: "done", seconds: Math.max(1, Math.round(dur)) } : null;
+    }
+
+    // 一轮示意：0–1s 发送，随后等模型，第 3s 起思考 dur 秒，思考结束后跑 8s 工具，再输出正文；token 增速为占位
+    function waTurnAt(t, start, dur) {
+      const end = start + dur;
+      const thinking = waThinking(t, start, end);
+      const waiting = t < 1 ? "sending" : t < start ? "model" : t >= end && t < end + 8 ? "tools" : null;
+      const tokens = t < start ? 0 : Math.round((Math.min(t, end) - start) * 42 + Math.max(0, t - end - 8) * 31);
+      const sec = Math.floor(t), bucket = waBucket(sec);
+      const think = thinking === null ? null : thinking.kind === "active" ? waThinkLabel(bucket) : `Thought for ${thinking.seconds}s`;
+      const label = think ?? (waiting === null ? null : WA_PHASE[waiting]);
+      return {
+        thinking, waiting, tokens, sec, bucket, label,
+        source: think !== null ? (thinking.kind === "active" ? "Net()，按本轮已用时间" : "ITe() done") : label !== null ? "h8()，等待阶段" : null,
+        pulse: label !== null && thinking?.kind !== "done",
+        clock: bucket >= 2,
+        showTokens: bucket >= 2 && tokens > 0,
+        activity: waiting === "tools" ? "read" : "think",
+      };
+    }
+
+    // c8677db5f 帧表：48px 一帧，33.3333ms/帧（30fps）；ALIASES 里 sphere 用 default 的图，compose 用 quill 的图
+    const WA_CLAY = {
+      think: { in: 16, loop: 110, out: 15, seams: [54], rest: 95 },
+      read: { in: 21, loop: 60, out: 19, rest: 44 },
+      search: { in: 16, loop: 20, out: 14, rest: 4 },
+      write: { in: 31, loop: 60, out: 14, rest: 36 },
+      compose: { in: 16, loop: 62, out: 12, rest: 49 },
+      code: { in: 16, loop: 75, out: 9, seams: [18, 37, 56], rest: 74 },
+      default: { in: 16, loop: 40, out: 14, rest: 38 },
+      blocked: { in: 16, loop: 30, out: 16, rest: 0 },
+    };
+    const waClayLen = (st) => (st.kind === "grow" ? 10 : st.kind === "tail" ? Math.min(20, WA_CLAY[st.body].loop) : WA_CLAY[st.body][st.kind]);
+
+    // cc39db724 fe()：grow → in → loop →（目标变了）out → in(新目标)；tail 是循环的最后 20 帧
+    function waClayNext(st, target) {
+      if (st.kind === "grow" || st.kind === "out") return { kind: "in", body: target };
+      if (st.kind === "in") return { kind: "loop", body: st.body };
+      return st.body === target ? { kind: "loop", body: st.body } : { kind: "out", body: st.body };
+    }
+
+    // 每帧推进一次。循环中途换目标：有接缝就在下一个接缝切出；涉及 blocked / default 时先满 2s，剩余超过 1.5s（45 帧）就跳到 tail
+    function waClayTick(m, target) {
+      const len = waClayLen(m.st);
+      const frame = m.frame + 1, ms = m.ms + 1000 / 30;
+      let next = null;
+      if (m.st.kind === "loop" && m.st.body !== target) {
+        const slow = [target, m.st.body].some((b) => b === "blocked" || b === "default");
+        if (!slow && WA_CLAY[m.st.body].seams?.includes(frame)) next = { kind: "out", body: m.st.body };
+        else if (slow && ms >= 2000 && len - frame > 45) next = { kind: "tail", body: m.st.body };
+      }
+      if (next === null && frame < len) return { ...m, frame, ms };
+      next ??= waClayNext(m.st, target);
+      const again = next.kind === "loop" && m.st.kind === "loop";
+      return { st: next, frame: 0, ms: next.kind === "loop" || next.kind === "out" ? ms : 0, log: again ? m.log : [...m.log.slice(-5), `${next.body}.${next.kind}`] };
+    }
+
+    // 自绘示意：形体是简化图形，不是原雪碧图；帧数、帧率、接缝和切换规则按原值运行。still 时直接停在目标形体的 rest 帧
+    function WaClayMark({ activity = "think", blocked = false, size = 20, still = false, info = false }) {
+      const target = blocked ? "blocked" : activity;
+      const [m, setM] = useState({ st: { kind: "grow" }, frame: 0, ms: 0, log: ["grow"] });
+      const [reduce, setReduce] = useState(false);
+      const want = useRef(target);
+      want.current = target;
+      useEffect(() => {
+        if (still) return undefined;
+        if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) { setReduce(true); return undefined; }
+        const id = setInterval(() => setM((x) => waClayTick(x, want.current)), 1000 / 30);
+        return () => clearInterval(id);
+      }, [still]);
+      const rest = still || reduce;
+      const st = rest ? { kind: "loop", body: target } : m.st;
+      const frame = rest ? WA_CLAY[target].rest : m.frame;
+      const len = waClayLen(st), p = frame / len;
+      const scale = st.kind === "grow" ? .2 + .3 * p : st.kind === "in" ? .5 + .5 * p : st.kind === "out" ? 1 - .5 * p : 1 + .06 * Math.sin((2 * Math.PI * frame) / 20);
+      const body = st.kind === "grow" ? "grow" : st.body;
+      const glyph = {
+        grow: <circle cx="8" cy="8" r="3" fill="currentColor" stroke="none" />,
+        think: <g transform={`rotate(${frame * 4} 8 8)`} fill="currentColor" stroke="none"><circle cx="8" cy="3.5" r="1.7" /><circle cx="11.9" cy="10.25" r="1.7" /><circle cx="4.1" cy="10.25" r="1.7" /></g>,
+        read: <path d={`M3 4.5h10M3 8h10M3 11.5h${4 + (frame % 20) / 4}`} />,
+        search: <><circle cx="7" cy="7" r="3.5" /><path d="M9.6 9.6L13 13" /></>,
+        write: <path d="M10.5 3l2.5 2.5L6 12.5H3.5V10z" />,
+        compose: <path d="M13 3c-5 0-8 3.5-9 9.5M4.5 9.5H8" />,
+        code: <path d="M6 4.5L2.5 8 6 11.5M10 4.5L13.5 8 10 11.5" />,
+        default: <circle cx="8" cy="8" r="4.5" fill="currentColor" stroke="none" />,
+        blocked: <><circle cx="8" cy="8" r="5.5" /><path d="M8 5v3.5M8 11h.01" /></>,
+      }[body];
+      const mark = (
+        <span className="wa-clay" style={size === 20 ? undefined : { width: size, height: size }} aria-hidden="true">
+          <svg width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: `scale(${scale})`, opacity: st.kind === "out" ? 1 - .6 * p : 1 }}>{glyph}</svg>
+        </span>
+      );
+      if (!info) return mark;
+      return (
+        <div className="flex flex-col items-center gap-2">
+          {mark}
+          <div className="text-center text-[11px] font-mono leading-relaxed" style={{ color: "var(--cds-text-secondary)" }}>
+            <div><b>{body === "grow" ? "grow" : `${st.body}.${st.kind}`}</b> · 帧 {frame + 1}/{len} · {rest ? "停在 rest 帧" : "30fps"}</div>
+            {!rest && <div style={{ color: "var(--cds-text-muted)" }}>{m.log.join(" → ")}</div>}
+          </div>
+        </div>
+      );
+    }
+
+    // c96d752d0 w8() 旧版分支：火花（尺寸随「对话文字大小」S / M / L）+ 以 · 分隔的计时、token、文案；文案换了就重新挂载，3s 后才开始闪烁
+    function WaLegacyWorkLine({ size = "m", items }) {
+      const px = { s: 16, m: 18, l: 20 }[size];
+      return (
+        <div className="wa-work-line font-sans" data-turn-working="true">
+          <span className="flex shrink-0" style={{ color: "var(--cds-clay)" }}><Icon name="spark" size={px} /></span>
+          <div className="wa-work-text">
+            {items.filter(Boolean).map((it, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <span className="wa-dot">·</span>}
+                <span key={it.text} className={`wa-label${it.pulse ? " wa-think-pulse" : ""}`}>{it.text}</span>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // c96d752d0 w8() Step 分支 → Vet() → TurnStatus：clay 标记（实际悬挂在正文左侧 calc(20px + 12px)）、文字标签（ShimmerText secondary）、计时（text-muted）、尾部项；
+    // 普通工作时没有可见文字，只给读屏播报 Working…；等你输入时标签用警示色
+    function WaStepWorkLine({ activity = "think", blocked = false, still = false, label, clock, tokens, tasks }) {
+      return (
+        <div className="wa-turn font-sans" data-cds="TurnStatus" data-state={blocked ? "blocked" : "busy"}>
+          <WaClayMark activity={activity} blocked={blocked} still={still} />
+          {label && (blocked ? <span style={{ color: "var(--wa-warn-ink)" }}>{label}</span> : <span className="wa-shimmer-text">{label}</span>)}
+          {clock && <span style={{ color: "var(--cds-text-muted)" }}>{clock}</span>}
+          {tokens && <span>{tokens}</span>}
+          {tasks && <button type="button" className="hover:text-[var(--cds-fill-accent)]">{tasks}</button>}
+          {!label && <span className="sr-only" role="status">Working…</span>}
+        </div>
+      );
+    }
+
+    const WA_THINK_PRESETS = [["long", "长思考 65s", 65], ["mid", "中等 20s", 20], ["short", "短思考 0.5s", .5]];
+    const WA_TURN_SPAN = 90;
+
+    function WaThinkTimelineDemo() {
+      const [preset, setPreset] = useState("long");
+      const [t, setT] = useState(18);
+      const [play, setPlay] = useState(false);
+      const [size, setSize] = useState("m");
+      const dur = WA_THINK_PRESETS.find((p) => p[0] === preset)[2];
+      const start = 3, end = start + dur, hold = end + Math.max(0, 2 - dur);
+      useEffect(() => {
+        if (!play) return undefined;
+        const id = setInterval(() => setT((x) => (x >= WA_TURN_SPAN ? 0 : x + 1)), 250);
+        return () => clearInterval(id);
+      }, [play]);
+      const s = waTurnAt(t, start, dur);
+      const pct = (x) => (Math.min(WA_TURN_SPAN, Math.max(0, x)) / WA_TURN_SPAN) * 100;
+      const seg = (a, b, bg, label) => b > a && (
+        <div key={label} title={label} className="absolute inset-y-0 overflow-hidden whitespace-nowrap rounded-[3px] px-1 text-[10px] font-mono leading-[18px]" style={{ left: `${pct(a)}%`, width: `${pct(b) - pct(a)}%`, background: bg, color: "var(--cds-text-secondary)" }}>{label}</div>
+      );
+      const node = s.thinking === null ? (t < start ? "none" : "after") : s.thinking.kind === "done" ? "done" : s.thinking.open ? "open" : "closed";
+      const nodes = [["none", "未开始"], ["open", "思考中"], ["closed", "补足 2s"], ["done", "Thought for Ns"], ["after", "消失"]];
+      const chip = (on) => (on ? { background: "color-mix(in srgb, var(--cds-fill-accent) 18%, transparent)", color: "var(--cds-text-primary)" } : { color: "var(--cds-text-muted)" });
+      const rows = [
+        ["本轮已用", `${s.sec}s · p8() 档位 ${s.bucket}`],
+        ["thinking", s.thinking === null ? "null" : s.thinking.kind === "done" ? `{ kind: "done", seconds: ${s.thinking.seconds} }` : `{ kind: "active", open: ${s.thinking.open} }`],
+        ["waiting", s.waiting === null ? "null" : `"${s.waiting}"`],
+        ["状态行文案", s.label === null ? "无（只剩计时和 token）" : `${s.label} ← ${s.source}`],
+        ["闪烁", s.pulse ? "epitaxy-thinking-shimmer：换文案 3s 后开始 1 → .75 往复" : "无"],
+        ["计时 / token", `${s.clock ? "显示" : "不足 2s，不显示"} · ${s.showTokens ? "显示" : "还没有 token"}`],
+      ];
+      const other = [
+        ["停止中", <WaLegacyWorkLine items={[{ text: "Stopping…", pulse: true }]} />, <WaStepWorkLine still label="Stopping…" />],
+        ["重试", <WaLegacyWorkLine items={[{ text: "Model overloaded" }, { text: "Retrying (2/10)" }, { text: "12s" }]} />, <WaStepWorkLine still label="Model overloaded · Retrying (2/10)" clock="12s" />],
+        ["压缩上下文", <WaLegacyWorkLine items={[{ text: "Compacting session…" }, { text: "12s" }]} />, <WaStepWorkLine still label="Compacting session…" clock="12s" />],
+        ["等你输入", "文字隐藏（opacity 0），由对话里的确认卡片提示", <WaStepWorkLine still blocked label="Needs your input" />],
+        ["后台任务", <WaLegacyWorkLine items={[{ text: "1m 4s" }, { text: "2.4k tokens" }, { text: "2 running tasks" }]} />, <WaStepWorkLine still clock="1m 4s" tokens="2.4k tokens" tasks="2 running tasks" />],
+      ];
+      return (
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {WA_THINK_PRESETS.map(([k, l]) => <button key={k} type="button" onClick={() => setPreset(k)} className={waPill(preset === k)}>{l}</button>)}
+            <span className="mx-1 h-4 w-px bg-neutral-200 dark:bg-neutral-800" />
+            <button type="button" onClick={() => setPlay(!play)} className={waPill(play)}>{play ? "暂停" : "播放 ×4"}</button>
+            <span className="mx-1 h-4 w-px bg-neutral-200 dark:bg-neutral-800" />
+            {[["s", "S"], ["m", "M"], ["l", "L"]].map(([k, l]) => <button key={k} type="button" onClick={() => setSize(k)} className={waPill(size === k)}>文字 {l}</button>)}
+          </div>
+          <div className="space-y-1">
+            <input type="range" min="0" max={WA_TURN_SPAN} step=".5" value={t} aria-label="本轮已用时间" onChange={(e) => { setPlay(false); setT(Number(e.target.value)); }} className="w-full" />
+            <div className="relative h-4 text-[10px] font-mono text-neutral-500">
+              {[0, 15, 30, 45, 60, 75, 90].map((x) => <span key={x} className="absolute" style={{ left: `${pct(x)}%`, transform: `translateX(-${pct(x)}%)` }}>{x}s</span>)}
+            </div>
+            <div className="relative space-y-1">
+              <div className="relative h-[18px]">{seg(0, 1, "var(--cds-alpha-2)", "sending")}{seg(1, start, "var(--cds-alpha-3)", "model")}{seg(end, end + 8, "color-mix(in srgb, var(--chart-categorical-2) 35%, transparent)", "tools")}</div>
+              <div className="relative h-[18px]">{seg(start, end, "color-mix(in srgb, var(--cds-clay) 40%, transparent)", "active · open")}{seg(end, hold, "color-mix(in srgb, var(--cds-clay) 18%, transparent)", "active · closed")}{seg(hold, hold + 2, "color-mix(in srgb, var(--cds-fill-accent) 28%, transparent)", "done")}</div>
+              <div className="absolute inset-y-0 w-px pointer-events-none" style={{ left: `${pct(t)}%`, background: "var(--cds-text-primary)" }} />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+            <div className="space-y-3 min-w-0">
+              <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 p-3 space-y-2" style={{ background: "var(--cds-page-bg)" }}>
+                <div className="text-[10px] font-mono text-neutral-500">旧版 · [data-testid="code-working-line"]</div>
+                <WaLegacyWorkLine size={size} items={[s.clock && { text: waClock(s.sec) }, s.showTokens && { text: waTokenText(s.tokens) }, s.label !== null && { text: s.label, pulse: s.pulse }]} />
+                <div className="pt-1 text-[10px] font-mono text-neutral-500">Step 版 · [data-cds="TurnStatus"]（功能开关）</div>
+                <WaStepWorkLine activity={s.activity} clock={s.clock ? waClock(s.sec) : null} tokens={s.showTokens ? waTokenText(s.tokens) : null} />
+              </div>
+              <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
+                {nodes.map(([k, l], i) => <React.Fragment key={k}>{i > 0 && <span className="text-neutral-400">→</span>}<span className="rounded-md px-1.5 py-0.5" style={chip(k === node)}>{l}</span></React.Fragment>)}
+              </div>
+              <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
+                {[...WA_THINK_STEPS].reverse().map(([x, l]) => <span key={x} className="rounded-md px-1.5 py-0.5" style={chip(s.thinking?.kind === "active" && s.label === l)}>{x}s {l}</span>)}
+              </div>
+            </div>
+            <WaTable head={["此刻", "值"]} rows={rows} />
+          </div>
+          <WaTable head={["状态", "旧版", "Step 版"]} rows={other} />
+          <p className="text-[11px] font-mono text-neutral-500 leading-relaxed">按代码结构画的示意。旧版的火花原本是 9 帧 × 90ms 的雪碧图循环，这里用静态火花代替；Step 版的标记是自绘简化图形，下一节单独演示。文案切换在原版里还有 150ms 去抖和每条至少 650ms 的停留，时间轴按整秒取样，没有画出来。</p>
+        </div>
+      );
+    }
+
+    function WaClayDemo() {
+      const [act, setAct] = useState("think");
+      const [held, setHeld] = useState(false);
+      const acts = [
+        ["think", "还没有内容，或最后一块是思考（含 redacted_thinking）", "16 · 110（接缝 54）· 15"],
+        ["read", "运行中的读取类工具；读记忆", "21 · 60 · 19"],
+        ["search", "运行中的搜索类工具", "16 · 20 · 14"],
+        ["write", "运行中的写入类工具；写记忆", "31 · 60 · 14"],
+        ["compose", "写入类工具的内容还在流式生成（quill 图）", "16 · 62 · 12"],
+        ["code", "代码类工具", "16 · 75（接缝 18 / 37 / 56）· 9"],
+        ["default", "其他工具（终端命令先按命令内容归类）", "16 · 40 · 14（sphere 同图）"],
+        ["blocked", "等你输入：权限确认或提问", "16 · 30 · 16"],
+      ];
+      return (
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {Object.keys(WA_CLAY).filter((k) => k !== "blocked").map((k) => <button key={k} type="button" onClick={() => setAct(k)} className={waPill(act === k)}>{k}</button>)}
+            <label className="ms-2 flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 cursor-pointer"><input type="checkbox" checked={held} onChange={(e) => setHeld(e.target.checked)} />等你输入（blocked）</label>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)] gap-4 items-start">
+            <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex flex-col items-center gap-4" style={{ background: "var(--cds-page-bg)" }}>
+              <WaClayMark activity={act} blocked={held} size={48} info />
+              <WaStepWorkLine activity={act} blocked={held} label={held ? "Needs your input" : null} clock={held ? null : "12s"} tokens={held ? null : "1.0k tokens"} />
+            </div>
+            <WaTable head={["形体", "什么时候出现（c77e464d3 活动推断）", "in · loop · out 帧数"]} rows={acts} />
+          </div>
+          <p className="text-[11px] font-mono text-neutral-500 leading-relaxed">自绘示意：形状是简化图形，不是原雪碧图（原图是 48px 一帧的 webp 和内嵌图片）；帧数、30fps、接缝和切换规则按 c8677db5f / cc39db724 原值运行。系统开了「减少动态效果」时停在 rest 帧。旧版（非 Step）在同一位置用 Spark：思考中 thinking 9 帧 × 90ms，另有 writing、waiting、entrance、exit 等状态。</p>
+        </div>
+      );
+    }
+
+    const WA_THOUGHT = "先看设置页现在用的是哪套表单组件。\n校验逻辑散在三个文件里，合并前先对齐错误提示的文案。\n改完再跑一遍类型检查。";
+    // c96d752d0 BZ()：「Copy as quote」把思考复制成引用块，token 数按字符数 ÷ 4 估算
+    const waQuote = (text) => `> **Thinking** (~${Math.round(text.length / 4)} tok)\n>\n${text.split("\n").map((l) => (l ? `> ${l}` : ">")).join("\n")}`;
+    const WA_VIEWS = [["normal", "Normal"], ["thinking", "Thinking"], ["verbose", "Verbose"]];
+
+    // c03935b01 Ui() / Hi()、c227f4d5e bY()、cc43287c9 pW()、c96d752d0 UZ() / HZ() / s$e() / Ott()
+    function WaThinkViewDemo() {
+      const [side, setSide] = useState("desktop");
+      const [has, setHas] = useState(true);
+      const [view, setView] = useState("thinking");
+      const [def, setDef] = useState("normal");
+      const [design, setDesign] = useState("step");
+      const [open, setOpen] = useState(true);
+      const [menu, setMenu] = useState(false);
+      const [copied, setCopied] = useState(false);
+      const can = side === "desktop" || has;
+      const shown = view === "thinking" && !can ? "normal" : view;
+      const shows = shown !== "normal";
+      const forced = shown === "verbose";
+      const isOpen = forced || open;
+      const notice = side === "desktop" && shows && !has;
+      const views = WA_VIEWS.filter(([k]) => k !== "thinking" || can);
+      const name = (k) => WA_VIEWS.find((v) => v[0] === k)[1];
+      const copyLabel = copied ? "Copied" : "Copy as quote";
+      const pop = { background: "var(--cds-surface-2)", boxShadow: "var(--cds-shadow-popover)" };
+      const item = "flex w-full items-center gap-2 h-7 px-2 rounded-md text-start hover:bg-[var(--cds-alpha-1)]";
+      const rows = [
+        ["Thinking 选项", !can ? "不出现：菜单只有 Normal / Verbose，存下来的 thinking 退回 normal（Ui()）" : side === "desktop" ? "总是可选：会话 id 以 local_ 开头（shared-52 yi()）" : "可选：对话里已有非空思考内容（c227f4d5e mY()）"],
+        ["当前视图", shown === view ? name(shown) : `${name(shown)}（选的是 ${name(view)}，这里不可用）`],
+        ["思考块", !shows ? "不渲染，思考只体现在状态行" : !has ? "对话里还没有思考内容" : design === "step" ? (forced ? "Verbose：强制展开，不能折叠" : "可折叠，默认展开，按块记住开合") : "斜体、muted，全文直接显示；悬停时右上角出现复制按钮"],
+        ["提示", notice ? "Thinking summaries will appear from the next response.（开关 ccd_thinking_summary_on_demand）" : "—"],
+        ["Ctrl + O", `${views.map(([, l]) => l).join(" → ")} → …`],
+        ["默认视图", `${name(def)}：设置里的 Default transcript view 是账号级，菜单里改的只影响这个会话`],
+      ];
+      return (
+        <div className="wa-code space-y-3">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {[["desktop", "桌面 · 本地会话"], ["web", "网页 · 远程会话"]].map(([k, l]) => <button key={k} type="button" onClick={() => setSide(k)} className={waPill(side === k)}>{l}</button>)}
+            <span className="mx-1 h-4 w-px bg-neutral-200 dark:bg-neutral-800" />
+            {[["step", "Step 版"], ["legacy", "旧版"]].map(([k, l]) => <button key={k} type="button" onClick={() => setDesign(k)} className={waPill(design === k)}>{l}</button>)}
+            <label className="ms-2 flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 cursor-pointer"><input type="checkbox" checked={has} onChange={(e) => setHas(e.target.checked)} />对话里已有思考内容</label>
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-[200px_minmax(0,1fr)_minmax(0,1fr)] gap-4 items-start">
+            <div role="menu" aria-label="Transcript view" className="rounded-lg p-1 text-[13px] font-sans" style={pop}>
+              <div className="px-2 pt-1 pb-0.5 text-[11px]" style={{ color: "var(--cds-text-muted)" }}>Transcript view</div>
+              {views.map(([k, l]) => (
+                <button key={k} type="button" role="menuitemradio" aria-checked={shown === k} onClick={() => setView(k)} className={item}>
+                  <span className="flex w-3.5">{shown === k && <Icon name="check" size={14} />}</span>{l}
+                </button>
+              ))}
+              {shown === view && shown !== def && (
+                <>
+                  <div className="my-1 h-px" style={{ background: "var(--cds-border)" }} />
+                  <button type="button" role="menuitem" onClick={() => setDef(shown)} className={`${item} ps-[30px]`}>Make {name(shown)} the default</button>
+                </>
+              )}
+            </div>
+            <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 p-3 space-y-2 font-sans min-w-0" style={{ background: "var(--cds-page-bg)" }}>
+              <div className="flex justify-end"><div className="rounded-xl px-3 py-2 text-[13px] leading-[19px]" style={{ background: "var(--cds-alpha-1)", maxWidth: "85%" }}>（用户消息占位）把设置页的表单校验补齐。</div></div>
+              {shows && has && (design === "step" ? (
+                <div data-cds="TurnStatusStep" data-state="done">
+                  <div className="wa-step-head">
+                    <button type="button" aria-expanded={isOpen} disabled={forced} onClick={() => setOpen(!open)} className="flex items-center gap-1 disabled:cursor-default">
+                      <span className="wa-rail-caret" data-open={isOpen || undefined}><WaGlyph k="caret" size={12} /></span>Thought process
+                    </button>
+                    <span className="relative ms-auto">
+                      <button type="button" className="wa-icon-btn" aria-label="Thinking actions" aria-expanded={menu} onClick={() => setMenu(!menu)}><Icon name="dotsVertical" size={14} /></button>
+                      {menu && (
+                        <div role="menu" className="absolute end-0 top-7 z-10 w-[168px] rounded-lg p-1 text-[13px]" style={pop}>
+                          <button type="button" role="menuitem" onClick={() => setCopied(true)} className={item}><Icon name={copied ? "check" : "copy"} size={14} />{copyLabel}</button>
+                        </div>
+                      )}
+                    </span>
+                  </div>
+                  {isOpen && <div className="whitespace-pre-wrap break-words ps-4 text-[13px] leading-[19px]" style={{ color: "var(--cds-text-secondary)" }}>{WA_THOUGHT}</div>}
+                </div>
+              ) : (
+                <div className="wa-think-legacy">
+                  {WA_THOUGHT}
+                  <span className="wa-think-copy"><button type="button" className="wa-icon-btn" aria-label={copyLabel} onClick={() => setCopied(true)}><Icon name={copied ? "check" : "copy"} size={14} /></button></span>
+                </div>
+              ))}
+              {notice && <div className="pt-3 text-[13px] leading-[19px] italic" style={{ color: "var(--cds-text-muted)" }}>Thinking summaries will appear from the next response.</div>}
+              <p className="text-[13px] leading-[19px]">（回复正文占位）表单校验已补齐，改动集中在两个文件里。</p>
+            </div>
+            <WaTable head={["规则", side === "web" ? "网页 · 远程会话" : "桌面 · 本地会话"]} rows={rows} />
+          </div>
+          <div className="space-y-1">
+            <div className="text-[10px] font-mono text-neutral-500">Copy as quote 复制出的内容（BZ()）</div>
+            <pre className="rounded-lg p-3 text-[11px] font-mono leading-relaxed whitespace-pre-wrap break-words" style={{ background: "var(--cds-alpha-1)", color: "var(--cds-text-secondary)" }}>{waQuote(WA_THOUGHT)}</pre>
+          </div>
+        </div>
+      );
+    }
+
+    const WA_QUEUE = ["顺便把按钮的悬停色也统一一下。", "改完跑一遍类型检查，有报错先别提交。", "登录页先不要动。"];
+
+    // cf74bc599 TS() / OS() / kS() / DS()：排队条贴在输入框上沿。一条时单行；多条时可折叠、可拖动排序
+    function WaQueueDemo() {
+      const [queued, setQueued] = useState(1);
+      const [stops, setStops] = useState(false);
+      const [open, setOpen] = useState(true);
+      const hint = stops ? "Stops Claude’s current response." : "Claude reads this message at its next step.";
+      const keys = [
+        ["切换对话视图", "Ctrl + O", "Ctrl + O", "Normal → Thinking → Verbose 循环，跳过不可用的视图"],
+        ["模式菜单", "⌘/Ctrl + Shift + M 或 ⌘/Ctrl + Alt + M", "⌘/Ctrl + Alt + M", "Shift 版带 when: isClaudeApp，只在桌面"],
+        ["模型菜单", "⌘/Ctrl + Shift + I", "同左", "—"],
+        ["努力程度菜单", "⌘/Ctrl + Shift + E", "同左", "—"],
+        ["Fast 模式", "⌘/Ctrl + Alt + F", "同左", "—"],
+        ["后台任务", "Ctrl + B", "同左", "—"],
+        ["侧聊", "⌘/Ctrl + ;", "同左", "—"],
+        ["停止回复", "Esc", "同左", "Stop Claude’s response"],
+        ["回退到更早的消息", "Esc Esc", "同左", "Rewind the session to an earlier message"],
+      ];
+      const btn = (k, label, title = label) => <button type="button" className="wa-icon-btn" aria-label={label} title={title}><WaGlyph k={k} /></button>;
+      return (
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {[1, 3].map((n) => <button key={n} type="button" onClick={() => setQueued(n)} className={waPill(queued === n)}>{n} 条排队</button>)}
+            <label className="ms-2 flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 cursor-pointer"><input type="checkbox" checked={stops} onChange={(e) => setStops(e.target.checked)} />Send now 直接打断当前回复</label>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 items-start">
+            <div className="space-y-2 min-w-0">
+              <div className="wa-queue font-sans text-[13px] leading-[19px]">
+                {queued === 1 ? (
+                  <div className="flex items-center gap-2 min-h-[36px] ps-3 pe-1 select-none">
+                    <span className="shrink-0 font-medium" style={{ color: "var(--cds-text-primary)" }}>1 message queued</span>
+                    <span className="min-w-0 flex-1 truncate" style={{ color: "var(--cds-text-muted)" }}>{WA_QUEUE[0]}</span>
+                    <span className="flex shrink-0 items-center">{btn("return", "Send now", hint)}{btn("edit", "Edit in composer")}{btn("x", "Remove from queue")}</span>
+                  </div>
+                ) : (
+                  <>
+                    <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="flex w-full items-center gap-2 min-h-[36px] px-3 text-start">
+                      <span className="font-medium" style={{ color: "var(--cds-text-primary)" }}>{queued} messages queued</span>
+                      <span className="wa-rail-caret ms-auto" data-open={open || undefined}><WaGlyph k="caret" size={12} /></span>
+                    </button>
+                    {open && (
+                      <div role="list" aria-label="Queued messages" className="px-1.5 pb-1.5">
+                        {WA_QUEUE.slice(0, queued).map((q) => (
+                          <div key={q} role="listitem" className="wa-queue-row">
+                            <span className="min-w-0 flex-1 line-clamp-2 py-0.5 ps-1" style={{ color: "var(--cds-text-primary)" }}>{q}</span>
+                            <span className="flex shrink-0 items-center">
+                              {btn("return", "Send now", hint)}{btn("x", "Remove from queue")}
+                              <span className="wa-icon-btn" role="img" aria-label="Reorder queued message" style={{ cursor: "grab" }}><WaGlyph k="grip" /></span>
+                              <button type="button" className="wa-icon-btn" aria-label="Queued message actions"><Icon name="dotsVertical" size={14} /></button>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+              <div className="flex h-[44px] items-center rounded-[10px] px-3 text-[13px]" style={{ boxShadow: "0 0 0 1px var(--cds-border)", color: "var(--cds-text-muted)" }}>输入框（占位）</div>
+              <p className="text-[11px] font-mono text-neutral-500 leading-relaxed">Send now 的说明文字（aria-describedby）：{hint} 只有队首那条走「打断」（steerHeadOnly）。多条时每行操作在示意里常显。</p>
+            </div>
+            <WaTable head={["操作", "桌面", "网页", "说明"]} rows={keys} />
+          </div>
+        </div>
+      );
+    }
+
+    function WaThinkSection() {
+      const fp = [
+        ["安全复查", "4441 个文件都在 AppxBlockMap.xml 声明内；令牌、Cookie 键值、邮箱、SQLite 均为 0；开机自启 Enabled=false"],
+        ["REA", "analyze_javascript_application · 7 个 chunk · 647,473 个 AST 节点 · 0 解析失败 · ev_b8da18d1…"],
+        ["状态行", "c96d752d0 T8() / w8() / Vet() · Net() / h8() / p8() / ITe() / Iw()"],
+        ["TurnStatus", "c734f318c（TurnStatus、TurnStatus.Step）· shared-frame Aj（ShimmerText）/ MT（Spark）"],
+        ["工作标记", "c05970c42 Q() · cc39db724（clay 状态机）· c8677db5f（帧表）· c77e464d3（活动推断）"],
+        ["对话视图", "c03935b01（normal / thinking / verbose）· c227f4d5e bY() / yY() · cc43287c9 pW() · cd19fedd2"],
+        ["思考块", "c96d752d0 UZ() / HZ() / s$e() / BZ() / Ott() / ktt()"],
+        ["输入", "cf74bc599（排队消息）· shared-19（快捷键表）· c518a31cc（快捷键面板）"],
+        ["语言", "安装包没有 zh-CN 语言包，界面文字用 en-US 原文"],
+      ];
+      const steps = [
+        "安全复查：重新核对了 4441 个文件，都在安装包签名清单（AppxBlockMap.xml）里，没有运行后留下的配置、Cookie 或缓存；令牌、Cookie 键值、邮箱、SQLite 的扫描结果都是 0，开机自启 Enabled=false，没有触发熔断。",
+        "用 ion-dist/i18n/en-US.json 把「Thinking…」「Thought for {seconds}s」「Thought process」等文案对到消息 id，定位到 Code 对话 chunk c96d752d0，再顺着导入读 TurnStatus、ShimmerText、Spark、clay 标记、对话视图 store 和排队消息。",
+        "REA analyze_javascript_application 静态解析其中 7 个 chunk（只解析，不执行）；其余依赖用正则在文件上取片段核对，闪烁动画取自 chunk 里注入的内联 CSS 字符串。",
+        "全程只读 F:\\REA\\Claude_2.42304.0.0_x64__pzs8sxrjxfjjc：没有启动 claude.exe，没有附加、读取或修改任何正在运行的 Claude 进程，也没有用内置浏览器。",
+      ];
+      const diff = [
+        ["Thinking 视图", "对话里已有非空思考内容才出现在菜单里；否则只有 Normal / Verbose，存下来的 thinking 退回 normal", "本地会话（id 以 local_ 开头）总是可选", "c227f4d5e bY() · shared-52 yi() · c03935b01 Ui() · cc43287c9 pW()"],
+        ["Ctrl + O 循环", "Normal ↔ Verbose（跳过不可用的 Thinking）", "Normal → Thinking → Verbose", "c11959232 · shared-19"],
+        ["思考摘要提示", "不出现", "切到 Thinking / Verbose 时，如果已有对话的主线程里还没有思考内容，就提示「Thinking summaries will appear from the next response.」（开关 ccd_thinking_summary_on_demand）", "c96d752d0 Ott() / ktt() · c227f4d5e yY()"],
+        ["快捷键", "模式菜单 ⌘/Ctrl + Alt + M；预览 ⌘/Ctrl + Alt + P；差异 Ctrl + Shift + D", "模式菜单另有 ⌘/Ctrl + Shift + M；预览 ⌘/Ctrl + Shift + P；差异 ⌘/Ctrl + Shift + D；草图模式 ⌘/Ctrl + Shift + X 只在桌面", "shared-19（when: isClaudeApp）"],
+        ["其余", "思考文案阈值、2s 补足、两种状态行、ShimmerText、clay 标记、思考块、排队条", "相同（同一份前端代码）", "c96d752d0 · c734f318c · cf74bc599"],
+      ];
+      const nums = [
+        ["思考文案", "按本轮已用时间切换，不是思考时长：<15s Thinking… · 15s Still thinking… · 30s Thinking more… · 45s Thinking some more… · ≥60s Almost done thinking…", "c96d752d0 Net() · l8 / u8 / d8 / f8"],
+        ["思考收尾", "思考不足 2s 也按 2s 显示（PTe）；随后「Thought for Ns」停 2s（FTe），N = max(1, round(时长))，不闪烁", "c96d752d0 ITe()"],
+        ["计时", "Iw() 每 1s 取一次样；传给状态行前用 p8() 量成 0 / 2 / 15 / 30 / 45 / 60 档，≥2s 才显示；文字是 en-US narrow：12s · 1m 5s · 1h 2m 3s", "c96d752d0 Iw() / p8() · shared-frame Ij()"],
+        ["阶段文案", "Connecting… / Sending… / Starting session… / Preparing… / Waiting for Claude… / Running tools…；换文案先等 150ms，每条至少停 650ms，出现 token 后不再沿用上一条", "c96d752d0 h8() / S8() / uM()"],
+        ["token 计数", "字符数 ÷ 4；平滑计数每 100ms 刷新，减少动态效果时改成 1000ms 跳变；格式 1.0k / 12.3k / 1.2M", "c96d752d0 Aet · shared-8 AV()"],
+        ["旧版闪烁", "@keyframes epitaxy-thinking-shimmer { 0%, to { opacity: 1 } 50% { opacity: .75 } }；2s ease-in-out，延迟 3s 后无限循环；减少动态效果时关闭", "内联 CSS cd4c7d572"],
+        ["Step 版闪光", "ShimmerText secondary：120° 渐变（text-secondary → 混 30% 白 → text-secondary），background-size 400%，3s 一轮从 83.333% 扫到 16.667%，0–15% 和 85–100% 停住；支持 -webkit-mask-clip: text 的 Chromium 改用克隆层合成，峰值色同为 --cds-shimmer-text-peak。示意按非合成路径画", "shared-frame Aj / pj / dj / Oj"],
+        ["旧版火花", "Spark 雪碧图：thinking 9 帧 × 90ms 循环；尺寸随「对话文字大小」S / M / L = 16 / 18 / 20px", "shared-frame MT() · cf2613ee5 · c96d752d0 c8"],
+        ["Step 版标记", "clay 标记 20px 槽，悬挂 calc(20px + 12px)；48px 帧、30fps；think 循环 110 帧（接缝 54），code 75 帧（接缝 18 / 37 / 56）", "c05970c42 Q() · cc39db724 · c8677db5f"],
+        ["状态最短停留", "TurnStatus：有子步骤的 busy 至少 2000ms，状态切换 settle 250ms", "c734f318c"],
+        ["后台任务", "运行数归零后「N tasks finished」再保留 1500ms", "c96d752d0 zet()"],
+      ];
+      return (
+        <div className="wa-code space-y-4">
+          <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-r from-sky-500/5 via-transparent to-clay/5 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h4 className="text-base font-bold text-neutral-900 dark:text-neutral-100">Code 标签 · 思考与输入</h4>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 font-bold">REA Static</span>
+              </div>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                Code 标签里的「思考」分三层表现。状态行：旧版在火花后面按本轮已用时间换五档 Thinking… 文案，思考结束先补足 2 秒，再显示 2 秒「Thought for Ns」；Step 版（功能开关）去掉文字，改由左侧陶土色标记在 think、read、search、write 等形体之间切换。对话：只有 Thinking 和 Verbose 视图才渲染思考内容，Verbose 强制展开。输入：Claude 工作时发出的消息进入排队条，Send now 要么在下一步被读到，要么直接打断当前回复。网页端和桌面端跑的是同一份前端代码，差别只在 Thinking 视图能不能选、思考摘要提示和几组快捷键。
+              </p>
+              <ol className="text-[11px] text-neutral-600 dark:text-neutral-400 space-y-1.5 list-decimal ps-4 leading-relaxed">
+                {steps.map((s) => <li key={s}>{s}</li>)}
+              </ol>
+            </div>
+            <WaTable head={["证据", "位置"]} rows={fp} />
+          </div>
+          <ComponentShowcase
+            title="思考状态机：状态行"
+            tag="code-working-line · ITe()"
+            description="拖动时间轴或点播放（4 倍速），看同一轮里状态行的文案、闪烁、计时和 token 怎么变。切到「短思考 0.5s」看思考结束后的 2 秒补足。"
+            code={`// c96d752d0（整理后的伪代码，变量名为意译）
+thinkingOf(live, now):                                         // ITe()
+  if (live.thinkingStart !== null) return { kind: "active", open: true }
+  dur  = end − start
+  hold = end + max(0, 2000 − dur)                             // PTe：最短显示 2s
+  now < hold        → { kind: "active", open: false }
+  now < hold + 2000 → { kind: "done", seconds: max(1, round(dur / 1000)) }   // FTe：再停 2s
+  否则               → null
+elapsed = p8(本轮已用秒数)                                     // 0 / 2 / 15 / 30 / 45 / 60
+label = thinking?.kind === "active" ? Net(elapsed)             // 15 / 30 / 45 / 60：Still → more → some more → Almost done
+      : thinking?.kind === "done"   ? \`Thought for \${seconds}s\`
+      : 至少停 650ms(去抖 150ms(h8(waiting)))                  // Sending… / Waiting for Claude… / Running tools…
+<span class={label && thinking?.kind !== "done" ? "epitaxy-thinking-shimmer" : ""}>{label}</span>
+
+/* 内联 CSS cd4c7d572 */
+@keyframes epitaxy-thinking-shimmer { 0%, to { opacity: 1 } 50% { opacity: .75 } }
+.epitaxy-root .epitaxy-thinking-shimmer { will-change: opacity; animation: 2s ease-in-out 3s infinite epitaxy-thinking-shimmer }
+@media (prefers-reduced-motion: reduce) { .epitaxy-root .epitaxy-thinking-shimmer { will-change: auto; animation: none } }`}
+          >
+            <WaThinkTimelineDemo />
+          </ComponentShowcase>
+          <ComponentShowcase
+            title="Step 版左侧标记：雪碧图状态机"
+            tag="clay mark · grow → in → loop → out"
+            description="切换活动或勾选「等你输入」，看标记怎样等到接缝或循环末尾再退出、换成新形体。"
+            code={`// cc39db724 / c8677db5f（整理后的伪代码）
+target = blocked ? "blocked" : tile ? "sphere" : activity        // ue()
+next(stage, target):                                             // fe()
+  grow → in(target);  in → loop;  out → in(target)
+  loop / tail → 同一形体继续 loop，否则 out
+循环中途换目标：有接缝（think 54；code 18 / 37 / 56）就在下一个接缝切出；
+  涉及 blocked / default / sphere 时先满 2s，剩余超过 1.5s 就跳到最后 20 帧（tail）
+每段：el.animate(translateY(−帧号 × 尺寸) …, { duration: 33.3333ms × 帧数, easing: \`steps(\${帧数}, jump-none)\` })
+减少动态效果：停在 rest 帧（think 95 · default 38 · blocked 0 …）`}
+          >
+            <WaClayDemo />
+          </ComponentShowcase>
+          <ComponentShowcase title="对话视图与思考块" tag="Normal · Thinking · Verbose" description="切换宿主、版式和视图，看「Transcript view」菜单、思考块和提示文字怎么变。点 Step 版右侧的「⋯」可以看到 Copy as quote。">
+            <WaThinkViewDemo />
+          </ComponentShowcase>
+          <ComponentShowcase title="输入：Claude 工作时发出的消息" tag="queued · Send now" description="Claude 还在思考或调用工具时发出的消息先进排队条。右表是和输入相关的快捷键，⌘ 在 Windows 上对应 Ctrl。">
+            <WaQueueDemo />
+          </ComponentShowcase>
+          <ComponentShowcase title="网页与桌面逐项对照" tag="远程会话 × local_" description="证据列的 chunk 都在 ion-dist/assets/v1 下。">
+            <WaTable head={["位置", "网页 / 远程会话", "桌面 2.42304.0.0 · 本地会话", "证据"]} rows={diff} />
+          </ComponentShowcase>
+          <ComponentShowcase title="数值与时序" tag="原值" description="上面几个示意用到的常量，都取自安装包内置的 ion-dist。">
+            <WaTable head={["项目", "原值", "证据"]} rows={nums} />
+          </ComponentShowcase>
+        </div>
+      );
+    }
+
+    // --------------------------------------------------------------------------
     // 页面
     // --------------------------------------------------------------------------
     function ClaudeAiWebAuditPage() {
@@ -6729,6 +7299,9 @@ placeBy  = { recency: "best-member", alpha: "parent", created: "parent" }[sort]
           </WaPart>
           <WaPart id="wa-code" number="W14" title="Code 会话族谱与会话栏" enTitle="Code Session Lineage & Session Rail" badge="REA static" description="桌面版 2.42304.0.0 的 Code 标签：分叉和旁支会话怎样挂到父会话下，对话里怎样显示它们的汇报，以及右侧「环境 / 上下文 / 连接器 / 更改」会话栏。逐项对照网页端的 Remote Control 镜像。">
             <WaCodeSection />
+          </WaPart>
+          <WaPart id="wa-think" number="W15" title="Code 对话与输入：思考状态机" enTitle="Code Transcript & Input: Thinking State Machine" badge="REA static" description="桌面版 2.42304.0.0 的 Code 标签：状态行怎样从 Thinking… 走到 Thought for Ns，Step 版左侧标记怎样在思考、读取、搜索、写入之间切换，三种对话视图怎样显示思考内容，以及 Claude 工作时输入的消息怎样排队。逐项对照网页端。">
+            <WaThinkSection />
           </WaPart>
         </main>
       );
