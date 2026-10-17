@@ -17,14 +17,15 @@ export const CdsMotionEngine: React.FC = () => {
             setPopped(true);
             setTimeout(() => setPopped(false), 240);
           }}
-          className={`px-3 py-1.5 rounded-full bg-amber-600 text-white text-xs font-medium transition-transform ${
-            popped ? 'scale-125' : 'scale-100 hover:scale-105 active:scale-95'
+          className={`group/btn relative isolate px-3 py-1.5 rounded-full text-white text-xs font-medium transition-transform ${
+            popped ? 'scale-125' : 'scale-100'
           }`}
           style={{
             transitionTimingFunction: 'cubic-bezier(0.34, 1.3, 0.64, 1)',
             transitionDuration: '200ms'
           }}
         >
+          <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-amber-600" />
           Pill Spring Trigger
         </button>
       </div>

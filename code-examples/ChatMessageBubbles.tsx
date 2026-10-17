@@ -7,7 +7,7 @@
  * - `shared-styles-Bl9zqrv-.css`: --chat-turn-gap, --chat-item-gap, --chat-leading 排版律动
  * 
  * 核心真实生产规范：
- * 1. 用户气泡圆角律：--cds-message-bubble-radius: calc(var(--cds-radius) + calc(.25rem * var(--cds-rem-scale, 1))) (默认 18px)
+ * 1. 用户气泡圆角律：--cds-message-bubble-radius: calc(var(--cds-radius) + calc(.25rem * var(--cds-rem-scale, 1))) (= 控件 8 + 4 = 12px，claude.ai 实测)
  * 2. 气泡内边距与量度：px-[var(--cds-message-bubble-pad-x)] py-[var(--cds-message-bubble-pad-y)] max-w-[85%]
  * 3. 动态色阶：默认 var(--cds-bg-user-message, var(--cds-bg-neutral))；Personal 模式为 var(--cds-bg-tint-blue, #dde8f7/#193c5f)
  * 4. 气泡超长折叠：超过 collapseThreshold (默认 300px) 应用 [mask-image:linear-gradient(to_bottom,black_calc(100%_-_3rem),transparent)]
@@ -138,7 +138,7 @@ export function UserMessageBubble({
 
       {/* 气泡本体容器 */}
       <div
-        className={`relative flex min-w-0 flex-col gap-xs rounded-[var(--cds-message-bubble-radius,18px)] px-[var(--cds-message-bubble-pad-x,16px)] py-[var(--cds-message-bubble-pad-y,12px)] max-w-[var(--cds-message-bubble-measure,85%)] text-heading font-normal break-words select-text ${
+        className={`relative flex min-w-0 flex-col gap-xs rounded-[var(--cds-message-bubble-radius,12px)] px-[var(--cds-message-bubble-pad-x,16px)] py-[var(--cds-message-bubble-pad-y,12px)] max-w-[var(--cds-message-bubble-measure,85%)] text-heading font-normal break-words select-text ${
           state === "failed"
             ? "border border-red-500/30 bg-red-50/10 dark:bg-red-950/20 text-neutral-900 dark:text-neutral-100"
             : "bg-[var(--cds-bg-user-message-personal,#f0f4f8)] dark:bg-[var(--cds-bg-user-message,rgba(255,255,255,0.06))] text-neutral-900 dark:text-neutral-100"
@@ -406,8 +406,9 @@ export function AssistantMessageBubble({
           <button
             type="button"
             onClick={() => onOpenArtifact?.(artifact)}
-            className="h-7 px-3 rounded-lg bg-clay text-white text-xs font-medium hover:bg-clay-hover shadow-2xs flex items-center gap-1.5 transition-all shrink-0 active:scale-95 cursor-pointer"
+            className="group/btn relative isolate h-7 px-3 rounded-lg text-[var(--cds-on-primary)] text-xs font-medium flex items-center gap-1.5 shrink-0 cursor-pointer"
           >
+            <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-fill-primary)] group-hover/btn:bg-[var(--cds-fill-primary-hover)] shadow-2xs transition-colors" />
             <span>Open Artifact</span>
           </button>
         </div>
@@ -421,8 +422,9 @@ export function AssistantMessageBubble({
               key={idx}
               type="button"
               onClick={() => onSelectChip?.(chip)}
-              className="px-3 py-1 rounded-full border border-neutral-200/80 dark:border-neutral-700/80 bg-neutral-50/80 dark:bg-neutral-800/60 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-xs text-neutral-700 dark:text-neutral-300 transition-colors active:scale-95 cursor-pointer"
+              className="group/btn relative isolate px-3 py-1 rounded-full text-xs text-neutral-700 dark:text-neutral-300 cursor-pointer"
             >
+              <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] border border-neutral-200/80 dark:border-neutral-700/80 bg-neutral-50/80 dark:bg-neutral-800/60 group-hover/btn:bg-neutral-100 dark:group-hover/btn:bg-neutral-700 transition-colors" />
               {chip}
             </button>
           ))}

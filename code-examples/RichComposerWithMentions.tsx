@@ -338,7 +338,7 @@ export const RichComposerWithMentions: React.FC<RichComposerProps> = ({
 
       {/* 输入框主卡片 */}
       <div
-        className="relative flex flex-col w-full rounded-[20px] bg-[var(--cds-surface-1,#ffffff)] dark:bg-[var(--cds-surface-1,#1f1e1d)] border border-[var(--cds-border,#e5e5e3)] dark:border-[var(--cds-border,#2e2e2c)] p-[0.875rem] gap-y-2 cursor-text transition-all duration-200 shadow-card-ring focus-within:border-[var(--cds-clay,#d97757)] focus-within:shadow-focus"
+        className="relative flex flex-col w-full rounded-composer bg-[var(--cds-surface-1,#ffffff)] dark:bg-[var(--cds-surface-1,#1f1e1d)] border border-[var(--cds-border,#e5e5e3)] dark:border-[var(--cds-border,#2e2e2c)] p-[0.875rem] gap-y-2 cursor-text transition-all duration-200 shadow-card-ring focus-within:border-[var(--cds-border-strong)]"
       >
         {/* 顶部标签条：激活的 Slash 指令与 Mention 胶囊 */}
         {(activeSlashCommand || attachedMentions.length > 0) && (
@@ -440,9 +440,10 @@ export const RichComposerWithMentions: React.FC<RichComposerProps> = ({
               type="button"
               disabled={disabled || (!text.trim() && !activeSlashCommand && attachedMentions.length === 0)}
               onClick={handleSend}
-              className="size-8 rounded-lg flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:cursor-not-allowed bg-[var(--cds-fill-brand,#c6613f)] hover:bg-[#b05232] text-white cursor-pointer active:scale-95 shadow-2xs"
+              className="group/btn relative isolate size-8 rounded-lg flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed text-white cursor-pointer"
               title="发送 (Enter)"
             >
+              <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-fill-brand)] group-hover/btn:bg-[var(--cds-fill-brand-hover)] shadow-2xs transition-colors" />
               <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>

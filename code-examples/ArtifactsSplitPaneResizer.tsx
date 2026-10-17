@@ -210,8 +210,9 @@ export const ArtifactsSplitPaneResizer: React.FC<SplitPaneProps> = ({
             setIsRightCollapsed(false);
             setSplitRatio(0.5);
           }}
-          className="absolute right-2 top-3 z-30 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[var(--cds-bg-surface,#ffffff)] dark:bg-[var(--cds-bg-surface,#222221)] border border-[var(--cds-border-subtle,#e0e0de)] dark:border-[var(--cds-border-subtle,#333331)] shadow-sm text-xs font-medium text-[var(--cds-text-secondary,#666666)] hover:text-[var(--cds-text-primary,#1a1a1a)] hover:border-[var(--cds-fill-brand,#d97757)] active:scale-95 transition-all"
+          className="group/btn absolute isolate right-2 top-3 z-30 flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-[var(--cds-text-secondary,#666666)] hover:text-[var(--cds-text-primary,#1a1a1a)] transition-colors"
         >
+          <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-bg-surface,#ffffff)] dark:bg-[var(--cds-bg-surface,#222221)] border border-[var(--cds-border-subtle,#e0e0de)] dark:border-[var(--cds-border-subtle,#333331)] group-hover/btn:border-[var(--cds-fill-brand,#d97757)] shadow-sm transition-colors" />
           <span>展开产物</span>
           <span>⇥</span>
         </button>

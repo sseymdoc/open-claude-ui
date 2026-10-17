@@ -190,8 +190,9 @@ export const DraggableSessionList: React.FC<DraggableSessionListProps> = ({
         <button
           type="button"
           aria-label="新开对话"
-          className="flex items-center gap-1 px-2 py-1 rounded-md bg-[var(--cds-bg-surface,#ffffff)] dark:bg-[var(--cds-bg-surface,#1f1f1e)] border border-[var(--cds-border-subtle,#e5e5e5)] dark:border-[var(--cds-border-subtle,#333)] text-[var(--cds-text-primary,#1a1a1a)] dark:text-[var(--cds-text-primary,#f0f0f0)] hover:bg-[var(--cds-bg-hover,#f5f5f5)] active:scale-95 transition-all shadow-xs"
+          className="group/btn relative isolate flex items-center gap-1 px-2 py-1 rounded-md text-[var(--cds-text-primary,#1a1a1a)] dark:text-[var(--cds-text-primary,#f0f0f0)]"
         >
+          <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-bg-surface,#ffffff)] dark:bg-[var(--cds-bg-surface,#1f1f1e)] border border-[var(--cds-border-subtle,#e5e5e5)] dark:border-[var(--cds-border-subtle,#333)] group-hover/btn:bg-[var(--cds-bg-hover,#f5f5f5)] shadow-xs transition-colors" />
           <span>＋</span>
           <span className="font-medium">新建</span>
         </button>

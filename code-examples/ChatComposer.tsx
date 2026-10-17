@@ -3,10 +3,10 @@
  * 
  * 逆向溯源：提取自 /Applications/Claude.app ion-dist 生产环境输入终端实现。
  * 核心规范：
- *   - 20px 圆角 (--cds-radius-composer: 20px)
+ *   - .875rem 圆角 (--cds-radius-composer：comfortable 14px，compact .75rem = 12px；claude.ai 实测)
  *   - 三态双环动态弥散投影 (--cds-shadow-composer, :hover, :focus-within)
  *   - 原生 CSS field-sizing: content 自适应弹性伸缩 (min 48px, max 384px)
- *   - 陶土主色发送按钮按压弹簧物理反馈 (active:scale-95)
+ *   - 陶土发送键 (--cds-fill-brand #c6613f → hover #d97757)，按压只缩放背景层 .cds-btn-squish
  *   - 双环悬浮弹出菜单 (--cds-shadow-popover)
  */
 
@@ -97,9 +97,9 @@ export function ChatComposer({
 
   return (
     <div className={`w-full max-w-3xl mx-auto px-4 ${className}`}>
-      {/* 核心终端外壳：严格 20px 圆角与三态双环投影 */}
+      {/* 核心终端外壳：--cds-radius-composer 圆角与三态双环投影 */}
       <div
-        className="relative flex flex-col w-full rounded-[20px] bg-white dark:bg-[#1a1a19] p-[0.875rem] gap-y-2 transition-all duration-200"
+        className="relative flex flex-col w-full rounded-composer bg-white dark:bg-[#1a1a19] p-[0.875rem] gap-y-2 transition-all duration-200"
         style={{
           boxShadow: "var(--cds-shadow-composer, 0 4px 20px rgba(0, 0, 0, 0.035), inset 0 0 0 1px var(--cds-border, rgba(0, 0, 0, 0.08)))",
         }}
@@ -250,14 +250,15 @@ export function ChatComposer({
             </button>
           </div>
 
-          {/* 右侧发送按钮：陶土色、按压微缩放 */}
+          {/* 右侧发送按钮：陶土色，只有背景层随按压缩放 */}
           <button
             type="button"
             onClick={handleSend}
             disabled={!inputText.trim() && attachments.length === 0}
-            className="size-8 rounded-lg flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:cursor-not-allowed bg-clay hover:bg-clay-hover text-white shadow-xs active:scale-95 shrink-0"
+            className="group/btn relative isolate size-8 rounded-lg flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed text-white shrink-0"
             aria-label="Send message"
           >
+            <span aria-hidden="true" className="cds-btn-squish absolute inset-0 -z-10 rounded-[inherit] bg-[var(--cds-fill-brand)] group-hover/btn:bg-[var(--cds-fill-brand-hover)] shadow-xs transition-colors" />
             <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14" />
               <path d="M12 5l7 7-7 7" />

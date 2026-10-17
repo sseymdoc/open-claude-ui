@@ -117,9 +117,9 @@ export const CDS_EASING = {
 // 4. 标准 Framer Motion 动画变体 (Reusable Motion Variants)
 // ============================================================================
 
-/** 消息上浮进入变体 */
+/** 消息上浮进入变体（位移 10px，claude.ai 实测；纯 CSS 版见 cds-theme.css .message-fade-up 的 1.1s linear() 弹簧） */
 export const motionMessageFadeUp: Variants = {
-  initial: { opacity: 0, y: 12 },
+  initial: { opacity: 0, y: 10 },
   animate: {
     opacity: 1,
     y: 0,
