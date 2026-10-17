@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - `feat/rea-ground-truth-audit`
 
+### 🚀 Claude Desktop v2.42304.0 Design Aesthetics & Architecture Ground-Truth Audit
+
+> Based on REA static and archive analysis of Windows MSIX `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc` (`@ant/desktop v2.42304.0`, commit `e7f60e658f15cfece9efa384a78a39aec3c12845`, build `2026-10-15T05:54:05.000Z`, bundled Claude Code CLI `2.1.299`, `app.asar` SHA-256 `8f4d3dec5e4f3ddffb150321060b18807d83a40f3a65618fe4f29325379da9db`, REA Evidence `ev_db29cf6b5757fd86666fd272343cccd383bf391d00dac49aada8f2d616fa36c8` and `_frame-rt` Evidence `ev_22511fe4b0510120cb637aec50b4b588fa8a301da945139efa71bd25ad0e3587`).
+
+- **Official `@ant/cds` 6-Layer Token Architecture & Core Aesthetic Laws (`index.chunk-BYMGAPtw.js`)**:
+  - Extracted embedded `@ant/cds` official documentation (`gen-cds-skill.mjs`): documented the 6-layer token hierarchy (`1. Base palette` 9 hues × 36 stops → `2. Theme ramps` `--neutral-N`/`--alpha-N` → `3. Elevation` `--surface-{0..3}` → `4. Purpose` → `5. Density` → `6. Motion`).
+  - Documented the **"Clay is Claude's color"** restraint rule (clay reserved strictly for Claude-initiated actions and spark marks; user primary CTAs use neutral primary or blue accent) and **"Serif is Claude's voice"** (`--font-voice` for assistant responses, `--font-sans` for surrounding chrome).
+  - Extracted the Relative Color Syntax un-mixing equation for translucent chip tints (`--bg-tint-{hue}` solving 35% light / 75% dark alpha against `surface-1`) and the **Cove 8-Color Categorical Palette** (`#2a78d6`, `#eb6834`, `#1baf7a`, `#eda100`, `#e87ba4`, `#008300`, `#6250d6`, `#e34948`).
+- **Floating Composer 3-State Morphing & 16-Stop Non-Linear Scrim (`c0d1f1ea0-CRwfFWY4.css`)**:
+  - Reverse engineered `.fc-holder` morphing across `handle` (`2rem × 2rem`), `pill` (`2.5rem` height), and `composer` states via `fc-reveal` `clip-path: inset(... round ...)` and `fc-arrive-ring` (`-95deg` to `265deg` conic gradient).
+  - Extracted the 15rem `.fc-scrim` 16-stop `color-mix()` non-linear bottom gradient (`0%`, `1.3%`, `4.9%`, `10.4%`, `17.5%`, `25.9%`, `35.2%`, `45%`, `55%`, `64.8%`, `74.1%`, `82.5%`, `89.6%`, `95.1%`, `98.7%`, `100%`).
+- **Usage Ring Meter (`.urm`) & 3-Tier Physiological Double-Beat Curves (`c403c4b83-yqAXiELG.css`)**:
+  - Documented `.urm` comet trail (`urm-comet-travel` + `urm-comet-fade`) and 19-keyframe physiological double-beat cardiac waveforms for `urm-beat-warning` (2.3s), `urm-beat-critical` (1.45s), and `urm-beat-limit` (2.45s, peak `scale(1.0458)`).
+- **Oklab Sheet Card Lighting, Document Rail & 5-Face Optical Hanging Punctuation (`c6a73f447-LaXKuzWp.css`, `c3fde7009-BH42YUtA.css`, `c4a9ee384-DqjuRPPC.css`)**:
+  - Extracted Oklab `165deg → 200deg` hover light sweep on `.sheet-card-page` and `-4deg` under-sheet rotation on `.sheet-card-under`.
+  - Documented `.epitaxy-document-rail-ticks` 18px sticky margin reading progress ticks and `[data-hang-face]` optical hanging punctuation + negative kerning (`--hq-kern-oJ: -0.18em`) across `system`, `serif`, `sans`, `atkinson`, and `dyslexia` font faces.
+- **Expanded 52 `data-cds` Namespaces, 152 CSS Keyframes & Five Native Desktop Surfaces**:
+  - Expanded `data-cds` catalog from 40 to **52 components** (adding `ChatComposerActions`, `Checkbox`, `Collapsible`, `OverflowTooltip`, `Switch`, `Tabs`, `TextArea`, `TextInput`, `TextLink`, `Toolbar`, `TurnStatus`, `VideoPlayer`) and 152 `@keyframes`.
+  - Deconstructed **SableOtter Caret HUD** (`index.chunk-BN7PaJ_P.js`), **CuTeach Click-Through Overlay** (`computerUseTeach.js`), **CuWatchRecord Pill & Chooser** (`computerUseWatchRecord.js`), **Hardware Buddy BLE Console** (`BuddyWindow-_Jgif_qX.js`), and **ClawdQuest Torn-Parchment Offline Game** (`clawdQuestEngine-C2Z1JudX.css`).
+
 ### 🔍 REA v6.5.0 Ground-Truth Precision Audit (Chapter-by-Chapter)
 
 > Based on deep AST analysis and runtime extraction from Claude Desktop `/Applications/Claude.app` (`@ant/desktop v2.37337.1`, build `2026-10-13T22:16:06Z`, ASAR evidence `ev_e0bd89cee50a5b7d0dbf9e75cef5dfbca2bcb1699df4d4371449dd08452a8358`) using **[REA (Reverse Engineer Anything) v6.5.0](https://github.com/morluto/rea)**.

@@ -36,7 +36,7 @@
 * **严苛的交互物理学 (Interaction Physics)**：4 套生产级物理弹簧参数调校、4px 指针移动死区、CJK 输入法合成守卫、7 档渐隐非线性 Alpha 遮罩；
 * **高阶视听与系统架构 (Audiovisual & Architecture)**：基于原生 Web Audio API 的零延迟合成提示音、以光标为锚点的画廊跑道平移缩放、macOS 桌面毛玻璃透明融合与 Cowork 多代理协同拓扑。
 
-> ⚖️ **版权与合规声明 (DMCA & Assets Policy)**：  
+> ⚖️ **版权与合规声明 (DMCA & Assets Policy)**：
 > 本开源项目**不公开分发任何专有二进制资产**（包括商业字体 `.ttf` 与录音 `.mp3`）。本项目提供原生系统级字体回退栈与 Web Audio API 纯代码合成音效，完全自包含、合规安全。详情参见 [assets/README.md](assets/README.md)。
 
 ---
@@ -46,7 +46,7 @@
 ```mermaid
 graph TD
     OCUI["open-claude-ui"]
-    
+
     OCUI --> Tokens["1. 设计哲学与令牌体系<br/>(Surfaces 0-3, Clay, Hairlines, System Fonts)"]
     OCUI --> Atoms["2. 基础原子交互控件<br/>(CdsButton, SegmentedControl, StatusIndicators, Dialog)"]
     OCUI --> Stream["3. 会话流与指令引擎<br/>(Composer, IME Guard, Model Switcher, MCP Cards)"]
@@ -120,8 +120,8 @@ graph TD
 ### 🤖 第八篇：AI Agent 前端 UI 与动效开发指南
 * **[8.1~8.7 Agent 角色定位、设计令牌契约与弹簧决策树](docs/v1/08-AI-Agent-前端-UI-与动效开发指南.md)**：专为 AI Agent 定制的前端 UI 与动效装配自检指南。
 
-### 🚀 第二版：Claude Desktop 2.0 (v2.37337.1) 全量版本更新深度逆向分析
-* **[v2/README.md 综述、新增特性、架构重构、底座解密与参考实现](docs/v2/README.md)**：全量划分为 6 大独立章节，深度解析 2.0 桌面端架构大跃迁。
+### 🚀 第二版：Claude Desktop 2.0 (v2.42304.0 / v2.37337.1) 全量版本更新深度逆向分析
+* **[v2/README.md 综述、新增特性、架构重构、底座解密与参考实现](docs/v2/README.md)**：全量划分为 6 大独立章节，深度解析 v2.42304.0 官方 6 层设计令牌、Cove 8 色图表色板、FloatingComposer 三态变形、`.urm` 环形心跳仪、Oklab 纸张卡片、5 字体光学悬挂标点及 SableOtter HUD / CuTeach / CuWatchRecord / Hardware Buddy / ClawdQuest 桌面交互美学。
 
 ---
 
@@ -271,11 +271,11 @@ module.exports = {
 
 ```tsx
 import React, { useState } from 'react';
-import { 
-  ChatComposer, 
-  CdsButton, 
-  ModelSwitcherWithTokenGauge, 
-  ScrollFadeContainer 
+import {
+  ChatComposer,
+  CdsButton,
+  ModelSwitcherWithTokenGauge,
+  ScrollFadeContainer
 } from 'open-claude-ui';
 
 export function App() {
@@ -332,8 +332,8 @@ open docs/claude-components-storybook.html
 * **Claude Code 专用指引**：[`CLAUDE.md`](CLAUDE.md)（针对 Anthropic 官方 CLI 工具链的指令与开发约束）。
 * **IDE Agent 规则**：[`.cursorrules`](.cursorrules) 与 [`.github/copilot-instructions.md`](.github/copilot-instructions.md)。
 
-> 💡 **给使用 AI 助手的开发者提示**：  
-> 当你让 Cursor / Claude Code / Copilot 为你的产品实现前端页面或动效时，可直接向 Agent 提示：  
+> 💡 **给使用 AI 助手的开发者提示**：
+> 当你让 Cursor / Claude Code / Copilot 为你的产品实现前端页面或动效时，可直接向 Agent 提示：
 > *“请严格遵循本仓库中的 AGENTS.md 规范，使用 CDS 陶土设计令牌与 ClaudeMotionPresets 弹簧预设构建当前组件。”*
 
 ---
