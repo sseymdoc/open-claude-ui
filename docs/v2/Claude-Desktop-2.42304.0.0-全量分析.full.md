@@ -85,7 +85,7 @@ graph TD
 同时，我们明确划分桌面端包与命令行独立发布的边界：
 * **桌面端捆绑版本**：v2.42304.0 内部捆绑的 Claude Code CLI 清单为 **2.1.299**（Commit `c416f56ec7eca27e49747c35af51d5c92c856ba1`，`@anthropic-ai/claude-agent-sdk@0.3.299`），各平台二进制以 `.zst` 镜像分发；
 * **多进程宿主边界**：Windows MSIX 生产包除主程序 `app\Claude.exe` 外，随包集成了 `cowork-svc.exe`、`claude-ssh-broker.exe`、`claude-ssh-proxy.exe`、`claude-ssh-askpass.exe`、`chrome-native-host.exe` 与 `smol-bin.x64.vhdx` 虚拟化镜像；
-* **桌面版与网页版的关系**：普通账号（1P）下，主窗口的 `WebContentsView` 直接加载 `https://claude.ai`（`index.chunk-lzaSYO3Q.js` 中 `getMainWindowUrl()` 返回 Anthropic 源站），与网页版是同一份线上构建；随包的 `ion-dist` 单页应用（`app://localhost`）只在第三方推理（3P）模式下使用。网页版的运行时实测与逐节对照见 [故事书 W13 桌面版对照](../claude-components-storybook.html#wa-desktop)。
+* **桌面版与网页版的关系**：普通账号（1P）下，主窗口的 `WebContentsView` 直接加载 `https://claude.ai`（`index.chunk-lzaSYO3Q.js` 中 `getMainWindowUrl()` 返回 Anthropic 源站），与网页版是同一份线上构建；随包的 `ion-dist` 单页应用（`app://localhost`）只在第三方推理（3P）模式下使用。网页版的运行时实测见 [故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)：两端行为不同的项在各节就地并排，桌面端独有功能见 [W15](../claude-components-storybook.html#wa-desktop)。
 
 ---
 
@@ -148,7 +148,7 @@ Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQue
 * **行内操作**：`Send now`（ghost · xs，快捷键 `cmd+enter`）、`Edit in composer`、`Remove from queue`；多条时可折叠、可拖动排序；
 * **Send now 的说明**（`aria-describedby`）：`Stops Claude’s current step so it reads this message next.`，或 `Stops Claude’s current response.`。
 
-交互演示见 [故事书 W15](../claude-components-storybook.html#wa-think)。
+交互演示见 [故事书 W14](../claude-components-storybook.html#wa-think)。
 
 ---
 
@@ -883,4 +883,4 @@ Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个�
 2. **动效与排版物理化**：**5 阶响应时间 Token、15 阶 `linear()` 按钮弹簧、152 项纯 CSS 关键帧、16 阶非线性渐隐遮罩、三阶双搏生理心跳曲线与 5 字体光学悬挂标点矩阵**，动效由 CSS 关键帧与 Scroll-Driven 时间轴承担，不占用流式输出时的主线程；
 3. **全场景桌面原生化**：弹出窗口与窗口级页面搜索、排队消息，以及 **SableOtter 光标级悬浮 HUD、CuTeach 教学穿透气泡、CuWatchRecord 屏幕录制与技能提炼胶囊、Hardware Buddy 创客蓝牙终端与 ClawdQuest 手工撕边羊皮纸离线彩蛋**。
 
-网页版（claude.ai）的运行时实测与桌面版逐节对照，见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W15）。
+网页版（claude.ai）的运行时实测见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W15）：两端行为不同的项在各节就地并排，桌面端独有功能单列在 W15。

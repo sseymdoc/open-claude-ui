@@ -73,7 +73,7 @@ Everything is based on the Claude Desktop 2.42304.0.0 package and claude.ai runt
 * **[Chapter 4: System Foundations](docs/v2/04-系统底座全景解密.md)**: 152 pure-CSS keyframes, 52 `data-cds` component namespaces, 5 duration tokens, the official 6-layer token model, and the Cove 8-color data-visualization palette.
 * **[Chapter 5: Reference Implementations](docs/v2/05-生产级参考实现代码.md)**: `ModelSelectorEffort.tsx`, `ChatComposerChin.tsx`, `CdsMotionEngine.tsx`.
 * **[Chapter 6: Summary](docs/v2/06-总结.md)**: Structural standardization, physics-driven motion, and desktop-native integration.
-* **[claude.ai Web Measurements](docs/claude-components-storybook.html#claude-ai-web)**: Shell coordinates, sidebar, composer, menus, message stream, button anatomy, icon font, motion durations, tokens, login page, hidden mechanisms, plus the desktop comparison, Code session lineage, and thinking state machine (W0–W15).
+* **[claude.ai Web Measurements](docs/claude-components-storybook.html#claude-ai-web)**: Shell coordinates, sidebar, composer, menus, message stream, button anatomy, icon font, motion durations, tokens, login page, hidden mechanisms, Code session lineage, and thinking state machine (W0–W14, with web and desktop shown side by side wherever they behave differently), plus desktop-only features (W15).
 
 ---
 
@@ -268,7 +268,7 @@ open docs/claude-components-storybook.html
 
 The storybook includes:
 * Component chapters 01–09: foundations, app shell, chat & composer, controls, code & artifacts, overlays, motion, border philosophy, and v2.42304.0 design aesthetics
-* The claude.ai web measurement page (W0–W15): coordinates, tokens, menus, motion durations, and the desktop comparison
+* The claude.ai web measurement page (W0–W15): coordinates, tokens, menus, motion durations, web and desktop side by side, and desktop-only features
 * Real-time Dark Mode switching and second-order spring motion demos
 
 ---

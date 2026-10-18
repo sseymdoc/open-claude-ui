@@ -73,7 +73,7 @@ graph TD
 * **[第 4 章：系统底座全景解密](docs/v2/04-系统底座全景解密.md)**：152 项纯 CSS 动效关键帧、52 个 `data-cds` 组件命名空间、5 阶时间 Token、官方 6 层令牌架构与 Cove 8 色数据可视化色板。
 * **[第 5 章：生产级参考实现代码](docs/v2/05-生产级参考实现代码.md)**：`ModelSelectorEffort.tsx`、`ChatComposerChin.tsx`、`CdsMotionEngine.tsx`。
 * **[第 6 章：总结](docs/v2/06-总结.md)**：结构规范化、动效物理化与桌面原生化。
-* **[claude.ai 网页版实测页](docs/claude-components-storybook.html#claude-ai-web)**：外壳坐标、侧栏、输入框、菜单、消息流、按钮解剖、图标字体、动效时长、令牌、登录页、隐藏机制，以及桌面版对照、Code 会话族谱与思考状态机（W0–W15）。
+* **[claude.ai 网页版实测页](docs/claude-components-storybook.html#claude-ai-web)**：外壳坐标、侧栏、输入框、菜单、消息流、按钮解剖、图标字体、动效时长、令牌、登录页、隐藏机制、Code 会话族谱与思考状态机（W0–W14，两端行为不同的项网页与桌面就地并排），以及桌面端独有功能（W15）。
 
 ---
 
@@ -267,7 +267,7 @@ open docs/claude-components-storybook.html
 ```
 故事书包含：
 * 01–09 组件库章节：设计基石、应用框架、对话与输入、交互表单、代码与产物、弹窗与浮层、动效与物理、边界哲学、v2.42304.0 设计美学
-* claude.ai 网页版实测页（W0–W15）：坐标、令牌、菜单、动效时长与桌面版对照
+* claude.ai 网页版实测页（W0–W15）：坐标、令牌、菜单、动效时长，网页与桌面并排，桌面端独有功能单列
 * 深色模式即时切换与二阶弹簧动效实时演示
 
 ---
