@@ -58,8 +58,8 @@ graph TD
 
 1. **33 Independent Code Modules**: React components, Hooks, and an Electron main-window factory, plus the global theme stylesheet and Tailwind config. Copy-paste ready with zero black-box dependencies.
 2. **Native System Typography & Procedural Audio**: Engineered system font fallback stacks and zero-latency Web Audio oscillator synthesis engines.
-3. **Interactive Storybook Preview**: A single-file offline storybook with component chapters 01–09 and the claude.ai web measurement page (W0–W15).
-4. **Reverse Engineering Report**: Six chapters in [`docs/v2/`](docs/v2/README.md) (Simplified Chinese), plus a [merged full text](docs/v2/Claude-Desktop-2.42304.0.0-全量分析.full.md).
+3. **Interactive Storybook Preview**: A single-file offline storybook with component chapters 01–09 and the claude.ai web measurement page (W0–W22); W16–W22 cover every visual effect in the package, including those that only appear under specific conditions.
+4. **Reverse Engineering Report**: Seven chapters in [`docs/v2/`](docs/v2/README.md) (Simplified Chinese), plus a [merged full text](docs/v2/Claude-Desktop-2.42304.0.0-全量分析.full.md).
 
 ---
 
@@ -70,10 +70,11 @@ Everything is based on the Claude Desktop 2.42304.0.0 package and claude.ai runt
 * **[Chapter 1: Overview & Version Boundary](docs/v2/01-综述与版本边界.md)**: Bundled CLI 2.1.299 and MSIX multi-process boundaries, how the desktop app loads the web app, the Clay restraint rule, and the human-voice serif boundary.
 * **[Chapter 2: Core Features](docs/v2/02-核心特性逆向.md)**: Popout windows and window-level find-in-page, the Cowork artifact library allowlist, queued messages, 5 effort levels, FloatingComposer tri-state morphing, `.urm` quota-ring heartbeat, Oklab gloss sheet cards, 5-font optical hanging punctuation, and SableOtter HUD / CuTeach / CuWatchRecord / Hardware Buddy / ClawdQuest.
 * **[Chapter 3: UI Architecture & Style System](docs/v2/03-界面架构与样式系统.md)**: Canvas colors, compact / comfortable radius and density, pill and skeleton micro-interactions, chapter pins, and the Tailwind v4 `@layer cds-card` architecture.
-* **[Chapter 4: System Foundations](docs/v2/04-系统底座全景解密.md)**: 152 pure-CSS keyframes, 52 `data-cds` component namespaces, 5 duration tokens, the official 6-layer token model, and the Cove 8-color data-visualization palette.
+* **[Chapter 4: System Foundations](docs/v2/04-系统底座全景解密.md)**: 309 keyframes across the package (152 in the main stylesheet), 52 `data-cds` component namespaces, 5 duration tokens, the official 6-layer token model, and the Cove 8-color data-visualization palette.
 * **[Chapter 5: Reference Implementations](docs/v2/05-生产级参考实现代码.md)**: `ModelSelectorEffort.tsx`, `ChatComposerChin.tsx`, `CdsMotionEngine.tsx`.
 * **[Chapter 6: Summary](docs/v2/06-总结.md)**: Structural standardization, physics-driven motion, and desktop-native integration.
-* **[claude.ai Web Measurements](docs/claude-components-storybook.html#claude-ai-web)**: Shell coordinates, sidebar, composer, menus, message stream, button anatomy, icon font, motion durations, tokens, login page, hidden mechanisms, Code session lineage, and thinking state machine (W0–W14, with web and desktop shown side by side wherever they behave differently), plus desktop-only features (W15).
+* **[Chapter 7: Hidden & Condition-Gated Effects](docs/v2/07-隐藏与条件触发效果.md)**: How 309 keyframes and 153 non-keyframe effects were catalogued, which effects only appear under specific conditions, code paths that 2.42304.0.0 never reaches, reduced motion and forced colors, and corrections to earlier values.
+* **[claude.ai Web Measurements](docs/claude-components-storybook.html#claude-ai-web)**: Shell coordinates, sidebar, composer, menus, message stream, button anatomy, icon font, motion durations, tokens, login page, hidden mechanisms, Code session lineage, and thinking state machine (W0–W14, with web and desktop shown side by side wherever they behave differently), desktop-only features (W15), and a census and replicas of every visual effect in the package (W16–W22).
 
 ---
 
@@ -185,7 +186,7 @@ open-claude-ui/
 │   └── useRateLimitBackoff.ts        # 429/503 exponential backoff Hook
 ├── docs/
 │   ├── README.md                     # Documentation index
-│   ├── v2/                           # Claude Desktop 2.42304.0.0 report (6 chapters + merged text)
+│   ├── v2/                           # Claude Desktop 2.42304.0.0 report (7 chapters + merged text)
 │   └── claude-components-storybook.html # Interactive storybook (double-click to open offline)
 ├── src/
 │   └── index.ts                      # Unified TypeScript library entry point
@@ -268,7 +269,8 @@ open docs/claude-components-storybook.html
 
 The storybook includes:
 * Component chapters 01–09: foundations, app shell, chat & composer, controls, code & artifacts, overlays, motion, border philosophy, and v2.42304.0 design aesthetics
-* The claude.ai web measurement page (W0–W15): coordinates, tokens, menus, motion durations, web and desktop side by side, and desktop-only features
+* The claude.ai web measurement page (W0–W22): coordinates, tokens, menus, motion durations, web and desktop side by side, and desktop-only features
+* W16 keyframe census: each of the 309 keyframes with its feature, trigger condition and evidence, replayable on click; W17–W22 replicate effects that only appear under specific conditions (computer-use screen glow, the weather tool card, the upgrade celebration page, Imagine widgets and more)
 * Real-time Dark Mode switching and second-order spring motion demos
 
 ---

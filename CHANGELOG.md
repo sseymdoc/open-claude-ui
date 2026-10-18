@@ -9,6 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - `feat/rea-ground-truth-audit`
 
+### 🔍 Added — Visual-Effect Census & Hidden-Effect Replicas (Claude Desktop 2.42304.0.0)
+
+> REA static analysis of the MSIX folder only; no running Claude process was launched, attached or read. `analyze_javascript_application` was scoped with `source_paths` to 12 `app.asar` windows and preloads (`ev_74e299b3…`, `app.asar` SHA-256 `8f4d3dec…5379da9db`) and 6 `ion-dist` feature chunks (`ev_63b65e99…`, `ion-dist` SHA-256 `c52bb551…dc2521`, 0 parse failures). A read-only scan of every `.css` / `.html` / `.js` text in the package found the keyframes.
+
+- **Storybook W16 — Keyframe Census**: all 309 `@keyframes` names across 51 files, grouped by feature. Each has its feature, trigger condition, evidence and a replay tile.
+  - Sources: 152 in the main stylesheet `c6a992d55-sXiDGMFQ.css`; a 55-keyframe CDS set copied into 6 local windows; 17 third-party.
+  - 44 of the 309 appeared in the storybook before; the other 250 non-vendor keyframes are new.
+  - 153 non-keyframe effects are listed alongside: View Transitions, scroll timelines, canvas / WebGL, Lottie, GIF / video and native windows.
+- **Storybook W17–W22**:
+  - CDS primitives: reaction pill state machine, ShimmerText variants and render paths, working dot, resolve check, drop zone, scroll-driven fades, delayed skeleton reveal, flipbook, word fade-in, image-preview View Transition.
+  - Code (Epitaxy) and workflow motion.
+  - Chat micro-motion: the `.animate-*` utilities and the code that applies them.
+  - Condition-gated scenes: weather tool card `WeatherToolUseCell` (14 conditions × day / night), quiet-hours canvas, relaunch countdown, guest pass, command-palette row cards, deep-link highlight, usage-ring draw / quiet entrance.
+  - Module-embedded motion: file-card hover drawing, install hub, Claude Code upgrade celebration, login Cowork demo, buying specialist, Cowork upload zone, Claude Tag onboarding, Code terminal typing, Coach, memory panel, skill proposals.
+  - Non-CSS effects: Imagine `show_widget` widgets, voice WebGL orb, dictation waveform, simulator gesture SMIL, Ultracode charge bar, Cowork dot-grid spiral, Lottie / flipbook / GIF inventory, motion springs.
+- **Storybook W15 (second half)**: clean-room replicas of desktop-only windows:
+  - computer-use screen glow (`glow-pulse` / `badge-center-to-corner` / `dot-pulse`) and the 520×720 side-panel dock;
+  - CuTeach, the recording chooser and pill, the find-in-page bar, quick entry, the about window, Hardware Buddy and the local-exec consent dialog;
+  - launch skeleton, load failure and ClawdQuest (GrowthBook `543332958`);
+  - tray and taskbar states.
+- **Docs**: new chapter `docs/v2/07-隐藏与条件触发效果.md`, also merged into the full text. It covers the census method and counts, condition-gated effects, code paths 2.42304.0.0 never reaches, reduced motion and forced colors, and corrections. Chapter 4.1, 2.11, the summary and both READMEs now use the package-wide counts.
+
+### 🛠 Fixed — Values that disagreed with 2.42304.0.0
+
+- W12: the `weather-*` keyframes belong to the chat weather tool card, not a greeting ambience.
+- Chapter 09, usage ring: heartbeats play once per tier rise, not `infinite`. The comet arc is 10% of the circumference and travels `max(0, pct × 3.6° − 36°)`.
+- Chapter 09, CuWatchRecord pill: it reads `Capturing · m:ss` with Discard / Done and a 1.5s `pulse` dot, then shows a 900ms spinner with Processing.
+- Chapter 07, status dots: the clay dot runs `3s` with scale `.86 ↔ 1` and brightness `.96 ↔ 1.06`. The running dot uses `dframe-dot-blink` 1.2s.
+- Chapter 07, quiet dots and skeleton: the three quiet dots are the step timeline's `.timeline-quiet-dots`, which this build does not enable. The skeleton sweep is `2s linear` with a 105° band.
+- Chapter 03, file thumbnails: they grow from `max-width: 0` over `.3s ease-out`. The upload pulse dips to `.5` opacity over 1.2s after a .5s delay.
+- Deep links into the audit page (e.g. `#wa-census`) keep re-aligning until Tailwind CDN styles and web fonts settle.
+
 ### 🚀 Claude Desktop v2.42304.0 Design Aesthetics & Architecture Ground-Truth Audit
 
 > Based on REA static and archive analysis of Windows MSIX `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc` (`@ant/desktop v2.42304.0`, commit `e7f60e658f15cfece9efa384a78a39aec3c12845`, build `2026-10-15T05:54:05.000Z`, bundled Claude Code CLI `2.1.299`, `app.asar` SHA-256 `8f4d3dec5e4f3ddffb150321060b18807d83a40f3a65618fe4f29325379da9db`, REA Evidence `ev_db29cf6b5757fd86666fd272343cccd383bf391d00dac49aada8f2d616fa36c8` and `_frame-rt` Evidence `ev_22511fe4b0510120cb637aec50b4b588fa8a301da945139efa71bd25ad0e3587`).
@@ -25,14 +57,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Oklab Sheet Card Lighting, Document Rail & 5-Face Optical Hanging Punctuation (`c6a73f447-LaXKuzWp.css`, `c3fde7009-BH42YUtA.css`, `c4a9ee384-DqjuRPPC.css`)**:
   - Extracted Oklab `165deg → 200deg` hover light sweep on `.sheet-card-page` and `-4deg` under-sheet rotation on `.sheet-card-under`.
   - Documented `.epitaxy-document-rail-ticks` 18px sticky margin reading progress ticks and `[data-hang-face]` optical hanging punctuation + negative kerning (`--hq-kern-oJ: -0.18em`) across `system`, `serif`, `sans`, `atkinson`, and `dyslexia` font faces.
-- **52 `data-cds` Namespaces, 152 CSS Keyframes & Five Native Desktop Surfaces**:
-  - Documented the **52 `data-cds` component namespaces** (including `ChatComposerActions`, `Checkbox`, `Collapsible`, `OverflowTooltip`, `Switch`, `Tabs`, `TextArea`, `TextInput`, `TextLink`, `Toolbar`, `TurnStatus`, `VideoPlayer`) and 152 `@keyframes`.
+- **52 `data-cds` Namespaces, 152 Main-Stylesheet Keyframes & Five Native Desktop Surfaces**:
+  - Documented the **52 `data-cds` component namespaces** (including `ChatComposerActions`, `Checkbox`, `Collapsible`, `OverflowTooltip`, `Switch`, `Tabs`, `TextArea`, `TextInput`, `TextLink`, `Toolbar`, `TurnStatus`, `VideoPlayer`) and the 152 `@keyframes` of the main stylesheet `c6a992d55-sXiDGMFQ.css` (309 keyframe names across the whole package; see the keyframe census entry above).
   - Deconstructed **SableOtter Caret HUD** (`index.chunk-BN7PaJ_P.js`), **CuTeach Click-Through Overlay** (`computerUseTeach.js`), **CuWatchRecord Pill & Chooser** (`computerUseWatchRecord.js`), **Hardware Buddy BLE Console** (`BuddyWindow-_Jgif_qX.js`), and **ClawdQuest Torn-Parchment Offline Game** (`clawdQuestEngine-C2Z1JudX.css`).
 - **Storybook Chapter 09 — v2.42304.0 Design Aesthetics Lab (`docs/claude-components-storybook.html`)**:
   - Re-verified via REA archive extraction (Evidence `ev_f278e91f62c65aef5754e15781774e5d9eb14a14534db136f896e9b3c3e329ef`, same `app.asar` SHA-256) and embedded verbatim `ion-dist` keyframes: `fc-reveal` / `fc-arrive` / `fc-arrive-ring` (`@property --fc-edge-turn`), all 19/38-stop `urm-beat-*` and `urm-beat-*-glow` curves, `urm-breath`, `urm-comet-*`.
   - Recorded `.fc-scrim` evidence with its 16 gradient **positions** (`0% → 8.1% → 15.5% → … → 91.9% → 100%`) alongside the mix weights.
   - Interactive demos: FloatingComposer `handle/pill/composer` morph + arrive ring + 16-stop scrim, Usage Ring Meter 4-tier beats, Oklab Sheet Card (`@property`-interpolated 165°→200° light), Epitaxy Document Rail ticks, serif/sans hanging punctuation, 6-layer token model, Cove 8-color palette (light/dark), SableOtter HUD strip and CuWatchRecord pill.
-  - Header badge reads `v2.42304.0 Production`; footer reports 52 `data-cds` namespaces and 152 keyframes.
+  - Header badge reads `v2.42304.0 Production`; footer reports 52 `data-cds` namespaces and 309 catalogued `@keyframes` (152 in the main stylesheet).
 - **Storybook claude.ai Web Audit Page (`docs/claude-components-storybook.html#claude-ai-web`)**:
   - New standalone page (hash-routed `#claude-ai-web` / `#wa-*`, page switch in the sub-nav) recording live DOM measurements of `https://claude.ai` (build `541957a01b`, git `541957a01be20fcf87bee91b771498997b8fc640`, `2026-10-17T17:10:41Z`) at 1440×900 and 375×812 via `getBoundingClientRect` / `getComputedStyle` and a CSSOM walk (30 sheets, 16,933 rules, 203 keyframes). Personal content (names, plan, conversation and project titles) is replaced with placeholders.
   - Sections W0–W12: build fingerprint; `dframe` shell rect maps for `/new`, `/chat` and mobile; 1:1 sidebar rebuild with the compact / comfortable / `variant=desktop` / phone-sheet `--df-*` density table (`variant=desktop` is a dframe variant that neither claude.ai nor desktop 2.42304.0.0 uses: `shared-78 dW()` returns `web` when `isClaudeApp`); home composer with the external Chin (280ms grid-rows reveal, 60ms voice/send crossfade, IME-guarded Enter); reply composer and chat header; Base UI model, effort and "+" menus (224×290, 320×210, 219.4×282) and tooltip; transcript metrics (`clamp(0px, (100% - 384px) * .175, 56px)` text stop, 1.1s `linear()` `message-fade-up`); Anthropicons variable icon font (`@property --cds-anim`, PUA codepoints); verbatim animation durations; light/dark tokens; login page; hidden mechanisms (Fizzy Lake flags and the `stacks:` variant, `[data-size]` token remap, touch-grow Chin, `scroll-fade-y`, `hit-row`).

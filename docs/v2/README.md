@@ -3,7 +3,7 @@
 > **目标应用载体**：Anthropic 官方桌面端生产包 Windows MSIX `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc`
 > **二进制元数据**：`@ant/desktop v2.42304.0`（Build: `2026-10-15T05:54:05Z`，Commit: `e7f60e658f15cfece9efa384a78a39aec3c12845`，捆绑 CLI `2.1.299`，`app.asar` Evidence: `ev_db29cf6b5757fd86666fd272343cccd383bf391d00dac49aada8f2d616fa36c8`）
 > **逆向工具栈**：**[REA (Reverse Engineer Anything)](https://github.com/morluto/rea)**：ASAR 解包、`ion-dist` CSS / JS 静态分析与 AST 解构。
-> **网页版对照**：claude.ai 运行时实测（DOM 测量、CSSOM 遍历）见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W15）。
+> **网页版对照**：claude.ai 运行时实测（DOM 测量、CSSOM 遍历）见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W22；W16–W22 是安装包全部可视化效果的盘点与复刻）。
 
 ---
 
@@ -31,7 +31,7 @@
   - 3.4 章节标记 (Pin as chapter 与 mark_chapter)
   - 3.5 Tailwind v4 CSS-First 引擎与样式共存 (@layer cds-card 法则与桌面按钮箭头光标约定)
 - [第四章：系统底座全景解密](04-系统底座全景解密.md)
-  - 4.1 纯 CSS 动效参数 (152 项全域 @keyframes 与 55 项主窗口关键帧)
+  - 4.1 纯 CSS 动效参数 (全包 309 个 @keyframes、主样式表 152 个，55 个 CDS 核心关键帧复制进 6 处本地窗口)
   - 4.2 原生组件命名空间 (52 个 data-cds 原生组件命名空间契约与 79 项结构槽位)
   - 4.3 响应时间与贝塞尔曲线 (5 阶时间 Token 60ms~450ms 与 3 大精确贝塞尔控制点)
   - 4.4 官方 @ant/cds 六层令牌架构与 Cove 数据可视化设计体系 (6 层模型、逆混色方程与 Cove 8 色色板)
@@ -40,5 +40,12 @@
   - 5.2 输入框底部工具行 (`ChatComposerChin.tsx`)
   - 5.3 动效引擎与微交互 (`CdsMotionEngine.tsx`)
 - [第六章：总结](06-总结.md)
+- [第七章：隐藏与条件触发效果](07-隐藏与条件触发效果.md)
+  - 7.1 盘点口径与结果 (309 个关键帧、51 个文件、153 项非关键帧效果)
+  - 7.2 需要特定条件才出现的效果 (电脑使用光晕、天气工具卡片、升级庆祝页、Imagine 部件等)
+  - 7.3 代码在、界面走不到的路径
+  - 7.4 减少动效与强制颜色
+  - 7.5 对既有内容的更正
+  - 7.6 与故事书的对应 (W15 后半与 W16–W22)
 
 > 💡 **单文件检索**：如需离线单文件全局搜索全文，可直接参阅 [单文件完整版](Claude-Desktop-2.42304.0.0-全量分析.full.md)。

@@ -58,8 +58,8 @@ graph TD
 
 1. **33 个独立代码模块**：React 组件、Hooks 与 Electron 主窗口工厂，另附全局主题样式表与 Tailwind 配置，即拷即用，零黑盒依赖。
 2. **纯原生系统级排版与音效**：支持系统高保真字体回退栈，内置基于 Web Audio 振荡器的零延迟提示音合成引擎。
-3. **交互式组件故事书 (Storybook Preview)**：单文件离线 Storybook，含 01–09 组件库章节与 claude.ai 网页版实测页（W0–W15）。
-4. **逆向分析报告**：[`docs/v2/`](docs/v2/README.md) 6 章，另有[合并全文](docs/v2/Claude-Desktop-2.42304.0.0-全量分析.full.md)。
+3. **交互式组件故事书 (Storybook Preview)**：单文件离线 Storybook，含 01–09 组件库章节与 claude.ai 网页版实测页（W0–W22）；其中 W16–W22 把安装包里全部可视化效果过了一遍，包括要特定条件才出现的效果。
+4. **逆向分析报告**：[`docs/v2/`](docs/v2/README.md) 7 章，另有[合并全文](docs/v2/Claude-Desktop-2.42304.0.0-全量分析.full.md)。
 
 ---
 
@@ -70,10 +70,11 @@ graph TD
 * **[第 1 章：综述与版本边界](docs/v2/01-综述与版本边界.md)**：捆绑 CLI 2.1.299 与 MSIX 多进程边界、桌面版与网页版的加载关系、陶土品牌色克制守则与人声衬线分界。
 * **[第 2 章：核心特性逆向](docs/v2/02-核心特性逆向.md)**：弹出窗口与窗口级页面搜索、Cowork 产物库白名单、排队消息、5 档努力程度、FloatingComposer 三态变形、`.urm` 环形配额心跳、Oklab 光泽折页卡片、5 字体光学悬挂标点及 SableOtter HUD / CuTeach / CuWatchRecord / Hardware Buddy / ClawdQuest。
 * **[第 3 章：界面架构与样式系统](docs/v2/03-界面架构与样式系统.md)**：画布底色、compact / comfortable 圆角与密度系统、胶囊与骨架屏微交互、章节标记与 Tailwind v4 `@layer cds-card` 架构。
-* **[第 4 章：系统底座全景解密](docs/v2/04-系统底座全景解密.md)**：152 项纯 CSS 动效关键帧、52 个 `data-cds` 组件命名空间、5 阶时间 Token、官方 6 层令牌架构与 Cove 8 色数据可视化色板。
+* **[第 4 章：系统底座全景解密](docs/v2/04-系统底座全景解密.md)**：全包 309 个关键帧（主样式表 152 个）、52 个 `data-cds` 组件命名空间、5 阶时间 Token、官方 6 层令牌架构与 Cove 8 色数据可视化色板。
 * **[第 5 章：生产级参考实现代码](docs/v2/05-生产级参考实现代码.md)**：`ModelSelectorEffort.tsx`、`ChatComposerChin.tsx`、`CdsMotionEngine.tsx`。
 * **[第 6 章：总结](docs/v2/06-总结.md)**：结构规范化、动效物理化与桌面原生化。
-* **[claude.ai 网页版实测页](docs/claude-components-storybook.html#claude-ai-web)**：外壳坐标、侧栏、输入框、菜单、消息流、按钮解剖、图标字体、动效时长、令牌、登录页、隐藏机制、Code 会话族谱与思考状态机（W0–W14，两端行为不同的项网页与桌面就地并排），以及桌面端独有功能（W15）。
+* **[第 7 章：隐藏与条件触发效果](docs/v2/07-隐藏与条件触发效果.md)**：309 个关键帧与 153 项非关键帧效果的盘点口径、需要特定条件才出现的效果、代码在但走不到的路径、减少动效与强制颜色，以及对既有数值的更正。
+* **[claude.ai 网页版实测页](docs/claude-components-storybook.html#claude-ai-web)**：外壳坐标、侧栏、输入框、菜单、消息流、按钮解剖、图标字体、动效时长、令牌、登录页、隐藏机制、Code 会话族谱与思考状态机（W0–W14，两端行为不同的项网页与桌面就地并排）、桌面端独有功能（W15），以及安装包全部可视化效果的盘点与复刻（W16–W22）。
 
 ---
 
@@ -185,7 +186,7 @@ open-claude-ui/
 │   └── useRateLimitBackoff.ts        # 429/503 指数退避与熔断状态机 Hook
 ├── docs/
 │   ├── README.md                     # 文档目录
-│   ├── v2/                           # Claude Desktop 2.42304.0.0 逆向分析报告（6 章 + 合并全文）
+│   ├── v2/                           # Claude Desktop 2.42304.0.0 逆向分析报告（7 章 + 合并全文）
 │   └── claude-components-storybook.html # 交互式可视化故事书 (双击即可离线体验)
 ├── src/
 │   └── index.ts                      # 统一对外导出的 TypeScript 库入口
@@ -267,7 +268,8 @@ open docs/claude-components-storybook.html
 ```
 故事书包含：
 * 01–09 组件库章节：设计基石、应用框架、对话与输入、交互表单、代码与产物、弹窗与浮层、动效与物理、边界哲学、v2.42304.0 设计美学
-* claude.ai 网页版实测页（W0–W15）：坐标、令牌、菜单、动效时长，网页与桌面并排，桌面端独有功能单列
+* claude.ai 网页版实测页（W0–W22）：坐标、令牌、菜单、动效时长，网页与桌面并排，桌面端独有功能单列
+* W16 关键帧全目录：309 个关键帧逐个写明功能、触发条件与证据，可点按重放；W17–W22 复刻要特定条件才出现的效果（电脑使用屏幕光晕、天气工具卡片、升级庆祝页、Imagine 可视化部件等）
 * 深色模式即时切换与二阶弹簧动效实时演示
 
 ---
