@@ -116,13 +116,14 @@
 
       /* Claude Official Chat Composer Shadow Formula */
       --cds-shadow-composer: 0 4px 20px rgba(0, 0, 0, 0.035), inset 0 0 0 1px var(--cds-border);
-      --cds-shadow-composer-hover: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--cds-border-strong);
-      --cds-shadow-composer-focus: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 0 0 1px var(--cds-border-strong), 0 0 0 1px var(--cds-border-strong);
+      --cds-shadow-composer-hover: 0 4px 20px rgba(0, 0, 0, 0.035), inset 0 0 0 1px var(--cds-border-strong);
+      --cds-shadow-composer-focus: 0 4px 20px rgba(0, 0, 0, 0.075), inset 0 0 0 1px var(--cds-border-strong), 0 0 0 1px var(--cds-border-strong);
 
       /* Triple-Layer Focus Ring & Drop Glow（焦点环是 accent 蓝，claude.ai 实测） */
       --cds-fill-accent: #2a78d6;
       --cds-bg-accent: #cde2fb;
-      --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px var(--cds-bg-accent);
+      --cds-page-bg: var(--cds-surface-1);
+      --cds-focus-shadow: inset 0 0 0 1px var(--cds-page-bg), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px var(--cds-bg-accent);
       --cds-shadow-drop-glow: inset 0 0 24px -2px rgba(217, 119, 87, 0.20), inset 0 0 0 2px var(--cds-clay);
 
       /* Interactive Hover / Fill Tokens */
@@ -205,7 +206,8 @@
       --cds-shadow-composer-hover: 0 4px 24px rgba(0, 0, 0, 0.55), inset 0 0 0 1px var(--cds-border-strong);
       --cds-shadow-composer-focus: 0 4px 24px rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.22);
 
-      --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px rgb(24 79 149 / 60%);
+      --cds-page-bg: var(--cds-surface-1);
+      --cds-focus-shadow: inset 0 0 0 1px var(--cds-page-bg), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px rgb(24 79 149 / 60%);
       --cds-shadow-drop-glow: inset 0 0 24px -2px rgba(217, 119, 87, 0.30), inset 0 0 0 2px var(--cds-clay);
 
       --cds-fill-ghost-hover: var(--cds-alpha-1);
@@ -298,10 +300,10 @@
       font-variation-settings: "wght" 465;
     }
     .dark .font-semibold {
-      font-variation-settings: "wght" 560;
+      font-variation-settings: "wght" 540;
     }
     .dark .font-bold {
-      font-variation-settings: "wght" 660;
+      font-variation-settings: "wght" 560;
     }
 
     /* 2. 行内图标光学负偏置 */
@@ -786,7 +788,7 @@
     .wa-switch[aria-checked="true"] { background: var(--cds-fill-accent); }
     .wa-switch[aria-checked="true"]::after { translate: 10px 0; }
 
-    /* W14 Code 对话与输入：默认版状态行（c96d752d0 code-working-line：h-5 · gap 16 · footnote 紧凑档 12/15）与 epitaxy-thinking-shimmer（内联 CSS cd4c7d572 原文），
+    /* W14 Code 对话与输入：默认版状态行（c96d752d0 code-working-line：h-5 · gap 16 · footnote 紧凑档 12/15）与 epitaxy-thinking-shimmer（c96d752d0 注入的内联 CSS 原文），
        Step 版 TurnStatus（c734f318c：body 紧凑档 13/19 · gap-xs 6 · 控件高 24）与 ShimmerText（shared-frame pj / dj），排队条（cf74bc599） */
     @keyframes wa-epitaxy-thinking-shimmer { 0%, 100% { opacity: 1; } 50% { opacity: .75; } }
     .wa-think-pulse { will-change: opacity; animation: 2s ease-in-out 3s infinite wa-epitaxy-thinking-shimmer; }
@@ -2352,7 +2354,7 @@
       const typographyTiers = [
         { name: "caption", token: "--cds-font-size-caption", px: "12px", leading: "17px (1.42)", weight: "500 / 580", role: "微型标签、快捷键徽章 (Kbd)、时间戳、模型角标", specimen: "Opus 5.5 • 10:24 AM • ⌘K", calcPx: "12px", calcLh: "17px" },
         { name: "footnote", token: "--cds-font-size-footnote", px: "13px", leading: "17px (1.31)", weight: "400 / 500", role: "辅助说明、文件大小 (4.2 KB)、Token 统计、次级元信息", specimen: "design-tokens.json • 4.2 KB • 2,410 tokens", calcPx: "13px", calcLh: "17px" },
-        { name: "code", token: "--cds-font-size-code", px: "11px ~ 12px", leading: "16px (1.42)", weight: "400 (Mono)", role: "代码块、行内代码、Git Diff 差异对比", specimen: "const scale = calc(16 / 17); // 0.941", calcPx: "12px", calcLh: "16px" },
+        { name: "code", token: "--cds-font-size-code", px: "12px ~ 13px", leading: "17px ~ 19px (1.42 ~ 1.46)", weight: "400 (Mono)", role: "代码块、行内代码、Git Diff 差异对比", specimen: "const scale = calc(16 / 17); // 0.941", calcPx: "13px", calcLh: "19px" },
         { name: "body (基准)", token: "--cds-font-size-body", px: "14px", leading: "20px (1.43)", weight: "400 (深色减薄 360)", role: "菜单项、SM / MD 按钮、思考摘要（实测均 14/20）", specimen: "在深色背景下，高对比度白字因视网膜光渗效应在视觉上会比实际粗约 10%~15%。", calcPx: "14px", calcLh: "20px" },
         { name: "prose", token: "--cds-font-size-prose", px: "16px（sm 15 · lg 18）", leading: "24px (1.5)（sm 22 · lg 27）", weight: "400 / 500", role: "助手回复正文（data-size=sm：15/22 衬线）、长文排版段落、Artifacts 独立文档正文", specimen: "Claude Desktop 采用低对比度表面分层与无边框流式排版，打造通透呼吸感。", calcPx: "16px", calcLh: "24px" },
         { name: "heading", token: "--cds-font-size-heading", px: "15px", leading: "20px (1.33)", weight: "580 / 600", role: "卡片小节标题、弹窗对话框标题 (Modal Title)、代码语言", specimen: "Delete Conversation? • TypeScript • IrradiationCompensation.css", calcPx: "15px", calcLh: "20px" },
@@ -2372,7 +2374,7 @@
         { area: "composer", element: "输入框占位符 (Placeholder)", size: "15px", weight: "400 (Regular)", font: "Sans", roleDesc: "--cds-text-muted 弱化提示（claude.ai 实测 .wa-editor::placeholder）" },
         { area: "composer", element: "操作按钮 ('+ Add content')", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "Ghost 变体，图标 -0.125em 负偏置" },
         { area: "composer", element: "发送按钮 (Send)", size: "12px", weight: "500 (Medium)", font: "Sans", roleDesc: "陶土 #c6613f（hover #d97757）32×32 · 圆角 8，按压只缩放背景层" },
-        { area: "artifacts", element: "代码块语法高亮", size: "12px ~ 13px", weight: "400 (Regular)", font: "Mono", roleDesc: "Fira Code/Menlo，1.46 行高，tabular-nums" },
+        { area: "artifacts", element: "代码块语法高亮", size: "12px ~ 13px", weight: "400 (Regular)", font: "Mono", roleDesc: "Anthropic Mono / SF Mono → ui-monospace → Menlo → Consolas（--cds-font-mono），1.46 行高，tabular-nums" },
         { area: "artifacts", element: "Artifact 卡片标题", size: "13px", weight: "580 (Semibold)", font: "Sans", roleDesc: "单行截断，高优先级识别" },
         { area: "artifacts", element: "附件文件名 / 大小", size: "12px / 10px", weight: "500 / 400", font: "Sans / Mono", roleDesc: "文件名称中粗，体积等宽弱化" },
         { area: "controls", element: "标准按钮 (SM 28px / MD 32px)", size: "14px / 14px", weight: "500 (Medium)", font: "Sans", roleDesc: "中粗视觉抓手；按压只缩放背景层 .975（60ms 按下 / 450ms 弹簧回弹）" },
@@ -2566,26 +2568,26 @@
               <div className="p-3.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 space-y-2">
                 <div className="flex items-center justify-between text-xs font-bold text-neutral-900 dark:text-neutral-100">
                   <span>Semibold (次级标题)</span>
-                  <span className="font-mono text-clay">580 → 550</span>
+                  <span className="font-mono text-clay">580 → 540</span>
                 </div>
-                <div className="p-3 rounded bg-white dark:bg-[#111] border border-neutral-200/60 dark:border-neutral-800 text-sm text-neutral-800 dark:text-neutral-200 font-sans" style={{ fontVariationSettings: isDark ? "'wght' 550" : "'wght' 580" }}>
+                <div className="p-3 rounded bg-white dark:bg-[#111] border border-neutral-200/60 dark:border-neutral-800 text-sm text-neutral-800 dark:text-neutral-200 font-sans" style={{ fontVariationSettings: isDark ? "'wght' 540" : "'wght' 580" }}>
                   用于卡片 Header、助手身份 ("Claude")、弹窗标题与 Artifact 标题。
                 </div>
                 <div className="text-[10px] text-neutral-400 font-mono">
-                  浅色: wght 580 | 深色: wght 550 (-30)
+                  浅色: wght 580 | 深色: wght 540 (-40)
                 </div>
               </div>
 
               <div className="p-3.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 space-y-2">
                 <div className="flex items-center justify-between text-xs font-bold text-neutral-900 dark:text-neutral-100">
                   <span>Bold (强强调)</span>
-                  <span className="font-mono text-clay">600 → 660</span>
+                  <span className="font-mono text-clay">600 → 560</span>
                 </div>
-                <div className="p-3 rounded bg-white dark:bg-[#111] border border-neutral-200/60 dark:border-neutral-800 text-sm text-neutral-800 dark:text-neutral-200 font-sans" style={{ fontVariationSettings: isDark ? "'wght' 660" : "'wght' 600" }}>
+                <div className="p-3 rounded bg-white dark:bg-[#111] border border-neutral-200/60 dark:border-neutral-800 text-sm text-neutral-800 dark:text-neutral-200 font-sans" style={{ fontVariationSettings: isDark ? "'wght' 560" : "'wght' 600" }}>
                   用于大标题与强警告。在极少数需要强冲击的场景提供清晰锐利边缘。
                 </div>
                 <div className="text-[10px] text-neutral-400 font-mono">
-                  浅色: wght 600 | 深色: wght 660 (+60)
+                  浅色: wght 600 | 深色: wght 560 (-40)
                 </div>
               </div>
             </div>
@@ -2817,8 +2819,8 @@
                   {activeShadowTab === "sm" && "近层 rgb(11 11 11 / 6%) + 远层 8% 双层漫射；深色只把远层换成 #0000003d（claude.ai 实测）。"}
                   {activeShadowTab === "md" && "鼠标悬浮升高或右键展开菜单时的轻量悬空层级，自然脱离背景。"}
                   {activeShadowTab === "lg" && "对话框与抽屉独享的大弥散度阴影，向下深潜 28px。"}
-                  {activeShadowTab === "popover" && "两种主题都是 1px 外环 0 0 0 1px var(--cds-border)（深色为白 10%），再叠两层弥散投影（claude.ai 实测 .wa-menu）。"}
-                  {activeShadowTab === "composer" && "14px 圆角输入框（comfortable .875rem；compact 12px），悬浮与聚焦时向外扩散 24px 双环微投影。"}
+                  {activeShadowTab === "popover" && "--cds-shadow-popover 本身只有两层弥散投影（0 8px 24px + 0 2px 6px）；菜单上看到的 1px 外环来自面板层 --shadow-panel 的 --cds-ring-inner / --cds-ring-outer（颜色 --cds-ring-color = --cds-alpha-2），claude.ai 实测 .wa-menu 是两者的合成。"}
+                  {activeShadowTab === "composer" && "14px 圆角输入框（comfortable .875rem；compact 12px）。随包 CSS 是 .shadow-composer* 工具类：常态与悬停同为 20px 模糊、3.5% 的投影，聚焦加深到 7.5%，1px 边框由 --cds-ring-inner / outer 环变量给出；--cds-shadow-composer* 是本仓库的别名。"}
                   {activeShadowTab === "focus" && "内嵌 1px 页面底色垫片 + 1px accent 蓝环 (#2a78d6) + 6px 淡蓝光晕 (#cde2fb；深色 rgb(24 79 149 / 60%))。"}
                 </p>
               </div>
@@ -2861,41 +2863,40 @@ box-shadow: 0 4px 8px 0 rgb(11 11 11 / 8%),
                 )}
                 {activeShadowTab === "popover" && (
                   <pre className="text-neutral-300">
-{`/* 浅色模式: 1px 外框 + 弥散 */
-box-shadow: inset 0 0 0 0px var(--cds-border),
-            0 0 0 1px var(--cds-border),
-            0 8px 24px rgba(0, 0, 0, 0.12), 
-            0 2px 6px rgba(0, 0, 0, 0.08);
+{`/* --cds-shadow-popover 本身只有两层弥散投影 */
+--cds-shadow-popover: 0 8px 24px #0000001f, 0 2px 6px #00000014;
+/* 深色：投影加深 */
+--cds-shadow-popover: 0 8px 24px #00000052, 0 2px 6px #0003;
 
-/* 深色模式: 同样是 1px 外环（--cds-border = 白 10%），投影加深 */
-box-shadow: 0 0 0 1px var(--cds-border),
-            0 8px 24px #00000052,
-            0 2px 6px #0003;`}
+/* 1px 外环来自面板层 --shadow-panel，不在 popover 令牌里 */
+--shadow-panel: inset 0 0 0 var(--cds-ring-inner) var(--cds-ring-color),
+                0 0 0 var(--cds-ring-outer) var(--cds-ring-color),
+                var(--cds-shadow-popover);   /* --cds-ring-color: var(--cds-alpha-2) */`}
                   </pre>
                 )}
                 {activeShadowTab === "composer" && (
                   <pre className="text-neutral-300">
-{`/* 常态 (Resting) */
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.035), inset 0 0 0 1px var(--cds-border);
+{`/* 随包 CSS 为 .shadow-composer* 工具类；--cds-shadow-composer* 只是本仓库别名 */
+/* 常态 (Resting) 与悬停 (Hover)：同一层 3.5% 投影 + 环变量 */
+--tw-shadow: 0 .25rem 1.25rem color-mix(in srgb, var(--cds-black) 3.5%, transparent),
+             inset 0 0 0 var(--cds-ring-inner) var(--cds-ring-color),
+             0 0 0 var(--cds-ring-outer) var(--cds-ring-color);
 
-/* 悬停 (Hover) */
-box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--cds-border-strong);
-
-/* 聚焦态 (Focus-Within) */
-box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 
-            inset 0 0 0 1px var(--cds-border-strong), 
-            0 0 0 1px var(--cds-border-strong);`}
+/* 聚焦态 (Focus-Within / Focus-Visible)：投影加深到 7.5% */
+--tw-shadow: 0 .25rem 1.25rem color-mix(in srgb, var(--cds-black) 7.5%, transparent),
+             inset 0 0 0 var(--cds-ring-inner) var(--cds-ring-color),
+             0 0 0 var(--cds-ring-outer) var(--cds-ring-color);`}
                   </pre>
                 )}
                 {activeShadowTab === "focus" && (
                   <pre className="text-neutral-300">
 {`/* 全局交互焦点环 (Triple-Layer Ring)，claude.ai 实测 */
-box-shadow: inset 0 0 0 1px var(--cds-surface-1), /* 1px 页面底色垫片 */
+box-shadow: inset 0 0 0 1px var(--cds-page-bg),    /* 1px 页面底色垫片（--cds-page-bg） */
             0 0 0 1px var(--cds-fill-accent),     /* 1px accent 蓝 #2a78d6 */
             0 0 6px 1px var(--cds-bg-accent);     /* 6px 淡蓝光晕 #cde2fb */
 
 /* 深色：末段换成 accent-600 / 60% */
-box-shadow: inset 0 0 0 1px var(--cds-surface-1),
+box-shadow: inset 0 0 0 1px var(--cds-page-bg),
             0 0 0 1px var(--cds-fill-accent),
             0 0 6px 1px rgb(24 79 149 / 60%);`}
                   </pre>
@@ -3056,7 +3057,7 @@ box-shadow: inset 0 0 0 1px var(--cds-surface-1),
                 </div>
               </div>
               <div className="p-4 text-xs text-neutral-400 font-mono text-center">
-                高度 46px (--cds-h-titlebar，桌面端) | 交通灯左内边距 74px (--df-traffic-light-spacer) | 网页端实测 44px
+                高度 46px (shared-styles 的 .df-titlebar 规则，桌面端) | 交通灯左内边距 74px (--df-traffic-light-spacer) | 网页端实测 44px
               </div>
             </div>
           </ComponentShowcase>
@@ -3932,7 +3933,7 @@ export const irradiationCompensation = {
   </div>
   <pre>{code}</pre>
 </div>`}
-            description="暗黑背景代码块（rounded-xl 12px），点击复制后即刻变为绿色勾选，静默展示 2.5 秒后平滑淡退（saved-check-decay）。"
+            description="暗黑背景代码块（rounded-xl 12px），点击复制后即刻变为绿色勾选，静默展示 2.5 秒后平滑淡退（复刻关键帧 saved-check-decay，安装包无对应关键帧）。"
           >
             <div className="rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-[#0d0d0c] text-neutral-200 font-mono text-xs shadow-md">
               <div className="flex items-center justify-between px-3.5 py-2 bg-neutral-950/80 border-b border-neutral-800">
@@ -4187,7 +4188,7 @@ export const irradiationCompensation = {
             <ComponentShowcase
               title="陶土呼吸指示灯"
               tag='status-dot[data-kind="clay"]'
-              description="侧栏会话运行中、且处于 shared-21 LS() 判定的模式时，状态点换成陶土色圆点（原为 clay 贴图），以 scale .86 ↔ 1、brightness .96 ↔ 1.06 呼吸，3s ease-in-out 循环；减少动效与 .df-chorus-code 下静止。"
+              description="侧栏会话运行中、且处于 shared-21 LS() 判定的模式时，状态点变成陶土色（安装包用 shared-21 的 clay 贴图 backgroundImage，这里用纯色圆点复刻），以 scale .86 ↔ 1、brightness .96 ↔ 1.06 呼吸，3s ease-in-out 循环；减少动效与 .df-chorus-code 下静止。"
             >
               <div className="flex items-center justify-center py-4 gap-3">
                 <span className="size-3.5 rounded-full bg-clay shadow-sm" style={{ animation: "dframe-clay-breathe 3s ease-in-out infinite" }} />
@@ -4710,7 +4711,7 @@ export const irradiationCompensation = {
       // 9.5 Token layers
       const [activeLayer, setActiveLayer] = useState(3);
       const tokenLayers = [
-        { name: "1. Base Palette", ns: "--{hue}-{stop}", rule: "9 色相 × 36 阶网格，0 = #ffffff / 900 = #0b0b0b，跨明暗不变", use: "组件禁用" },
+        { name: "1. Base Palette", ns: "--{hue}-{stop}", rule: "9 色相 × 35 阶网格（0, 10~100, 150~800, 810~900；规范原文写 36），0 = #ffffff / 900 = #0b0b0b，跨明暗不变", use: "组件禁用" },
         { name: "2. Theme Ramps", ns: "--neutral-N / --alpha-N", rule: "深色下 neutral-N → gray-(900-N) 自动反转；alpha 为 neutral-900 的 5%~95%", use: "组件禁用" },
         { name: "3. Elevation", ns: "--surface-{0..3}", rule: "明暗均守“0 最暗 → 3 最亮”；Light gray-20/10/0/0，Dark gray-900/850/830/800", use: "Surface 重映射" },
         { name: "4. Purpose", ns: "--text-* / --fill-* / --bg-* / --border-*", rule: "accent 蓝 · brand 陶土 · danger · success · warning · pro 紫；fill 实心 vs bg 淡彩", use: "组件唯一可消费层" },
@@ -4813,12 +4814,12 @@ export const irradiationCompensation = {
             <ComponentShowcase
               title="环形配额仪表与三阶生理心跳 (Usage Ring Meter)"
               tag=".urm[data-beat]"
-              description="不是正弦缩放，而是逐帧采样的“主搏 + 次搏”心电双峰：Warning 2.3s、Critical 1.45s、Limit 2.45s（四峰，峰值 scale(1.0458)，光晕 opacity .329）。心跳只在档位上升、且这个用量窗口没播过该档时播一次（点圆环重放）。入场为 2×450ms overshoot 弧线绘制；点击“彗星”重放 2s 呼吸 + 彗星尾迹：彗星弧长为周长 10%，行程 max(0, pct × 3.6° − 36°)。弧与轨道淡入、光晕闪亮和 quiet 入场见实测页 W20。"
+              description="不是正弦缩放，而是逐帧采样的“主搏 + 次搏”心电双峰：Warning 2.3s、Critical 1.45s、Limit 2.45s（四峰，峰值 scale(1.0458)，光晕 opacity .329）。心跳只在档位上升、且这个用量窗口没播过该档时播一次（点圆环重放）。入场为 2×450ms overshoot 弧线绘制；点击“彗星”重放 1.5s 呼吸 + 2s 彗星尾迹：彗星弧长为周长 10%，行程 max(0, pct × 3.6° − 36°)。弧与轨道淡入、光晕闪亮和 quiet 入场见实测页 W20。"
               code={`.urm[data-beat="1"] .urm__beat { animation: 2.3s linear urm-beat-warning }
 .urm[data-beat="2"] .urm__beat { animation: 1.45s linear urm-beat-critical }
 .urm[data-beat="3"] .urm__beat { animation: 2.45s linear urm-beat-limit }
 @keyframes urm-beat-warning { 0% {scale(1)} 27.13% {scale(1.0352)} 39.57% {scale(1.0006)}
-  52% {scale(1.0004)} 67.83% {scale(1.0192)} 83.65% {scale(1.0004)} to {scale(1)} } /* 19 stops */
+  52% {scale(1.0004)} 67.83% {scale(1.0192)} 83.65% {scale(1.0004)} to {scale(1)} } /* 20 stops */
 .urm[data-entrance=draw] [data-ring-arc] { animation: urm-arc-sweep calc(2 * var(--cds-dur-slow)) var(--cds-ease-overshoot) backwards }
 .urm[data-shimmer] .urm__breath { animation: 1.5s ease-in-out urm-breath } /* 50% scale(1.0384) */
 .urm[data-shimmer] .urm__comet  { animation: 2s linear urm-comet-travel, 2s linear urm-comet-fade }`}
@@ -5271,14 +5272,14 @@ span[data-hang-quote] {
           "开工前检查过目录：只有 MSIX 程序文件，没有 Cookie、SQLite / LevelDB 库、令牌、用户数据目录或启动脚本，开机自启任务为 Enabled=false。",
           "SPA 的桌面分支取自 ion-dist。它和线上构建同源、早两天，只用来说明线上那份在桌面里会走哪条分支。",
           "证据列里 lzaSYO3Q 指 app.asar 的 .vite/build/index.chunk-lzaSYO3Q.js（主进程），其余 chunk 都在 ion-dist/assets/v1 下。",
-          "可视化效果盘点（W16–W22）：只读脚本扫描安装包里全部 .css / .html / .js 文本，得到 309 个关键帧名、分布在 51 个文件；再按类名追到加上它的 JS 和条件（路由、组件状态、GrowthBook 开关、平台、RTL、减少动效）。不靠关键帧的效果（View Transition、canvas / WebGL、Lottie、动图、原生窗口）另列 153 项。",
+          "可视化效果盘点（W16–W22）：只读脚本扫描安装包里全部 .css / .html / .js 文本，得到 309 个关键帧名、分布在 53 个文件（ion-dist 42 个 + app.asar 11 个）；再按类名追到加上它的 JS 和条件（路由、组件状态、GrowthBook 开关、平台、RTL、减少动效）。不靠关键帧的效果（View Transition、canvas / WebGL、Lottie、动图、原生窗口）另列 153 项。",
           "REA：analyze_javascript_application 用 source_paths 限定范围，分析 app.asar 的 12 个本地窗口与预加载脚本（ev_74e299b3…）和 ion-dist 的 6 个功能 chunk（ev_63b65e99…，ion-dist 目录 sha256 c52bb551…dc2521，0 个解析失败）。",
         ],
         head: ["指纹", "静态值"],
         rows: [
           ["安装包", "Claude_2.42304.0.0_x64（MSIX 只读副本）"],
           ["Electron", "44.7.2（app\\version）"],
-          ["app.asar", "sha256 8f4d3dec…5379da9db · 549 项（507 个文件 · 42 个目录）"],
+          ["app.asar", "sha256 8f4d3dec…5379da9db · 548 项（506 个文件 · 42 个目录，其中 6 个文件在 app.asar.unpacked）"],
           ["主窗口", "BrowserWindow · titleBarStyle hidden · titleBarOverlay · 最小 600×400"],
           ["主视图", "WebContentsView · 预加载 mainView.js · sandbox"],
           ["普通账号（1P）加载", "https://claude.ai，与左边是同一份线上构建"],
@@ -6874,7 +6875,7 @@ span.cds-btn-squish.stacks:transform-none!`,
 
     function WaCodeSection() {
       const fp = [
-        ["安全复查", "4441 个文件都在 AppxBlockMap.xml 声明内；令牌、Cookie 键值、邮箱、SQLite 均为 0；开机自启 Enabled=false"],
+        ["安全复查", "4441 个文件中，除 AppxBlockMap.xml 与 AppxSignature.p7x 本身外的 4439 个都在 AppxBlockMap.xml 声明内；令牌、Cookie 键值、邮箱、SQLite 均为 0；开机自启 Enabled=false"],
         ["REA", "analyze_javascript_application · ion-dist 6 个 chunk · 371,676 个 AST 节点 · 0 解析失败 · ev_1bb4ed39…"],
         ["侧栏数据", "shared-11：sideParentId / sideSpawnerId / lineageKind / hasNestedSessions"],
         ["侧栏树", "shared-21 rz() / az() / UR · shared-22 sC() / uC()"],
@@ -6884,7 +6885,7 @@ span.cds-btn-squish.stacks:transform-none!`,
         ["语言", "安装包没有 zh-CN 语言包；中文照截图里线上的译文，英文原文见证据"],
       ];
       const steps = [
-        "安全复查：目录里 4441 个文件都在安装包签名清单（AppxBlockMap.xml）里，没有运行后留下的配置、Cookie 或缓存；令牌、Cookie 键值、邮箱、SQLite 的扫描结果都是 0，开机自启 Enabled=false，没有触发熔断。",
+        "安全复查：目录里 4441 个文件中，除块映射与签名文件本身外的 4439 个都在安装包签名清单（AppxBlockMap.xml）里，没有运行后留下的配置、Cookie 或缓存；令牌、Cookie 键值、邮箱、SQLite 的扫描结果都是 0，开机自启 Enabled=false，没有触发熔断。",
         "用 ion-dist/i18n/en-US.json 把截图里的文字对到消息 id，再定位到用它的 chunk。",
         "REA analyze_javascript_application 静态解析其中 6 个 chunk（只解析，不执行），再顺着导入关系读 shared-20 / 22 / 78、c96d752d0 的相关函数和 shared-styles 里的 CSS。",
         "全程只读 F:\\REA\\Claude_2.42304.0.0_x64__pzs8sxrjxfjjc：没有启动 claude.exe，没有附加、读取或修改任何正在运行的 Claude 进程，也没有用内置浏览器。",
@@ -7396,7 +7397,7 @@ placeBy  = { recency: "best-member", alpha: "parent", created: "parent" }[sort]
 
     function WaThinkSection() {
       const fp = [
-        ["安全复查", "4441 个文件都在 AppxBlockMap.xml 声明内；令牌、Cookie 键值、邮箱、SQLite 均为 0；开机自启 Enabled=false"],
+        ["安全复查", "4441 个文件中，除 AppxBlockMap.xml 与 AppxSignature.p7x 本身外的 4439 个都在 AppxBlockMap.xml 声明内；令牌、Cookie 键值、邮箱、SQLite 均为 0；开机自启 Enabled=false"],
         ["REA", "analyze_javascript_application · 7 个 chunk · 647,473 个 AST 节点 · 0 解析失败 · ev_b8da18d1…"],
         ["状态行", "c96d752d0 T8() / w8() / Vet() · Net() / h8() / p8() / ITe() / Iw()"],
         ["TurnStatus", "c734f318c（TurnStatus、TurnStatus.Step）· shared-frame Aj（ShimmerText）/ MT（Spark）"],
@@ -7407,7 +7408,7 @@ placeBy  = { recency: "best-member", alpha: "parent", created: "parent" }[sort]
         ["语言", "安装包没有 zh-CN 语言包，界面文字用 en-US 原文"],
       ];
       const steps = [
-        "安全复查：重新核对了 4441 个文件，都在安装包签名清单（AppxBlockMap.xml）里，没有运行后留下的配置、Cookie 或缓存；令牌、Cookie 键值、邮箱、SQLite 的扫描结果都是 0，开机自启 Enabled=false，没有触发熔断。",
+        "安全复查：重新核对了 4441 个文件，除块映射与签名文件本身外的 4439 个都在安装包签名清单（AppxBlockMap.xml）里，没有运行后留下的配置、Cookie 或缓存；令牌、Cookie 键值、邮箱、SQLite 的扫描结果都是 0，开机自启 Enabled=false，没有触发熔断。",
         "用 ion-dist/i18n/en-US.json 把「Thinking…」「Thought for {seconds}s」「Thought process」等文案对到消息 id，定位到 Code 对话 chunk c96d752d0，再顺着导入读 TurnStatus、ShimmerText、Spark、clay 标记、对话视图 store 和排队消息。",
         "REA analyze_javascript_application 静态解析其中 7 个 chunk（只解析，不执行）；其余依赖用正则在文件上取片段核对，闪烁动画取自 chunk 里注入的内联 CSS 字符串。",
         "全程只读 F:\\REA\\Claude_2.42304.0.0_x64__pzs8sxrjxfjjc：没有启动 claude.exe，没有附加、读取或修改任何正在运行的 Claude 进程，也没有用内置浏览器。",
@@ -7418,7 +7419,7 @@ placeBy  = { recency: "best-member", alpha: "parent", created: "parent" }[sort]
         ["计时", "Iw() 每 1s 取一次样；传给状态行前用 p8() 量成 0 / 2 / 15 / 30 / 45 / 60 档，≥2s 才显示；文字是 en-US narrow：12s · 1m 5s · 1h 2m 3s", "c96d752d0 Iw() / p8() · shared-frame Ij()"],
         ["阶段文案", "Connecting… / Sending… / Starting session… / Preparing… / Waiting for Claude… / Running tools…；换文案先等 150ms，每条至少停 650ms，出现 token 后不再沿用上一条", "c96d752d0 h8() / S8() / uM()"],
         ["token 计数", "字符数 ÷ 4；平滑计数每 100ms 刷新，减少动态效果时改成 1000ms 跳变；格式 1.0k / 12.3k / 1.2M", "c96d752d0 Aet · shared-8 AV()"],
-        ["默认版闪烁", "@keyframes epitaxy-thinking-shimmer { 0%, to { opacity: 1 } 50% { opacity: .75 } }；2s ease-in-out，延迟 3s 后无限循环；减少动态效果时关闭", "内联 CSS cd4c7d572"],
+        ["默认版闪烁", "@keyframes epitaxy-thinking-shimmer { 0%, to { opacity: 1 } 50% { opacity: .75 } }；2s ease-in-out，延迟 3s 后无限循环；减少动态效果时关闭", "内联 CSS（c96d752d0-BOCqU7c2.js 注入）"],
         ["Step 版闪光", "ShimmerText secondary：120° 渐变（text-secondary → 混 30% 白 → text-secondary），background-size 400%，3s 一轮从 83.333% 扫到 16.667%，0–15% 和 85–100% 停住；支持 -webkit-mask-clip: text 的 Chromium 改用克隆层合成，峰值色同为 --cds-shimmer-text-peak。示意按非合成路径画", "shared-frame Aj / pj / dj / Oj"],
         ["默认版火花", "Spark 雪碧图：thinking 9 帧 × 90ms 循环；尺寸随「对话文字大小」S / M / L = 16 / 18 / 20px", "shared-frame MT() · cf2613ee5 · c96d752d0 c8"],
         ["Step 版标记", "clay 标记 20px 槽，悬挂 calc(20px + 12px)；48px 帧、30fps；think 循环 110 帧（接缝 54），code 75 帧（接缝 18 / 37 / 56）", "c05970c42 Q() · cc39db724 · c8677db5f"],
@@ -7460,7 +7461,7 @@ label = thinking?.kind === "active" ? Net(elapsed)             // 15 / 30 / 45 /
       : 至少停 650ms(去抖 150ms(h8(waiting)))                  // Sending… / Waiting for Claude… / Running tools…
 <span class={label && thinking?.kind !== "done" ? "epitaxy-thinking-shimmer" : ""}>{label}</span>
 
-/* 内联 CSS cd4c7d572 */
+/* 内联 CSS（c96d752d0-BOCqU7c2.js 注入） */
 @keyframes epitaxy-thinking-shimmer { 0%, to { opacity: 1 } 50% { opacity: .75 } }
 .epitaxy-root .epitaxy-thinking-shimmer { will-change: opacity; animation: 2s ease-in-out 3s infinite epitaxy-thinking-shimmer }
 @media (prefers-reduced-motion: reduce) { .epitaxy-root .epitaxy-thinking-shimmer { will-change: auto; animation: none } }`}
@@ -7511,7 +7512,7 @@ next(stage, target):                                             // fe()
           ["覆盖层颜色", incog ? "无痕对话：浅色主题 #141412 配白色图标，深色主题 #f9f8f4 配黑色图标" : "底色 #00000000；图标 #3d3d3a（浅色）/ #c2c0b6（深色）"],
         ],
         mac: [
-          ["交通灯位置", `x = y = round(22.5 × ${zoom} − 6) = ${lightsDip} DIP ≈ ${css(lightsDip)} CSS px，在 44 高标题行里竖直居中`],
+          ["交通灯位置", `x = y = round(22.5 × ${zoom} − 6) = ${lightsDip} DIP ≈ ${css(lightsDip)} CSS px，圆点中心落在 22.5 × zoom DIP（相当于 45 高标题行的中线）`],
           ["标题行让位", "--df-traffic-light-spacer（CSS 回退值 74px）"],
         ],
       };
@@ -7536,7 +7537,7 @@ next(stage, target):                                             // fe()
     function WaDesktopOnlySection() {
       const shell = [
         ["窗口尺寸", "最小 600×400；没有保存记录时为 1200×800；上次退出时未登录，则按 600×600 的登录窗口打开，登录后换回保存的应用尺寸", "lzaSYO3Q V6a()：minWidth: 600, minHeight: 400 · u = l ? \"app\" : \"login\" · oI · V$n · window-state.json"],
-        ["启动占位", "预加载声明 bootPlaceholder 后加 html[data-desktop-boot-placeholder]：就绪前背景透明，露出原生窗口底色 #fcfcfb / #151515，顶部留一条 48px 拖拽条；10 秒内没就绪就强制写入 data-boot-ui-ready=timeout", "index.html · lzaSYO3Q MF()：{ light: \"#fcfcfb\", dark: \"#151515\" }"],
+        ["启动占位", "两层：① 主窗口壳层 main_window/index.html 用 html[data-boot-placeholder]（lzaSYO3Q tZn 写入，另有 data-boot-placeholder-drag）：就绪前背景透明，露出原生窗口底色 #fcfcfb / #151515，顶部留一条 48px 拖拽条；② SPA 侧 ion-dist/index.html 在预加载声明 bootPlaceholder 后加 html[data-desktop-boot-placeholder]，10 秒内没就绪就强制写入 data-boot-ui-ready=timeout", "asar main_window/index.html · lzaSYO3Q tZn / MF()：{ light: \"#fcfcfb\", dark: \"#151515\" } · ion-dist/index.html 内联脚本"],
         ["无痕对话的标题栏", "Windows 主窗口进入无痕对话时，覆盖层换成反色实底：浅色主题 #141412 配白色图标，深色主题 #f9f8f4 配黑色图标，高度从 36 增到 44", "lzaSYO3Q setIncognitoMode → xYn() → RYn()：PYn = 44"],
         ["模态遮罩", "页面用 reportModalScrim 上报遮罩色，主进程把系统按钮区的底色混成同色，免得三个按钮亮在遮罩外面；遮罩撤掉后延迟 200ms 复原，整页跳转时清除", "lzaSYO3Q EYn() / TYn() · wYn = 200"],
         ["主题同步", "SPA 调 setThemeMode 改写 nativeTheme.themeSource，原生窗口底色和系统按钮图标色跟着切换", "lzaSYO3Q setThemeMode(e) { nativeTheme.themeSource = e … }"],
@@ -7676,7 +7677,7 @@ const WK_DATA = [
 {"n":"ping","k":"cds","g":"Tailwind 通用动画","a":"（JS 内联或另行声明）","d":"dot","f":"引导指针：强调色圆点扩到 2 倍并消失（1s 循环）","t":"概览页页签条（overview-tab-strip）上某个页签被引导指向时（E.tab===n，data-testid=overview-tab-pointer）；motion-reduce 关闭","e":"c6a992d55 --animate-ping；cca4865c3-DWRLf_sj.js overview-tab-pointer","p":"wk-ping .6s var(--cds-ease-out) both","s":["c6a992d55-sXiDGMFQ.css"],"x":1},
 {"n":"pulse","k":"cds","g":"Tailwind 通用动画","a":"1.5s ease-in-out infinite","d":"box","f":"Tailwind animate-pulse：透明度 1↔.5（2s）","t":"36 个 chunk：项目设置按钮的引导环（c10f0af0c settings-button-pointer）、搜索历史光标（c227f4d5e）、待发送附件（c4a9ee384）、Globe 图标（shared-18）等","e":"c6a992d55 --animate-pulse","s":["asar index.chunk-lzaSYO3Q.js","c6a992d55-sXiDGMFQ.css","frame-shell-chrome-CAw-tYzh.js"],"nd":3,"c":1},
 {"n":"pulse-dot","k":"cds","g":"Tailwind 通用动画","a":"1.5s ease-in-out infinite","d":"dot","f":"灰色状态点 scale .75↔1 呼吸（1.5s）","t":"shared-19 gz（会话状态点）","e":"c6a992d55 .animate-pulse-dot；shared-19-CkPOiIKm.js gz","s":["c6a992d55-sXiDGMFQ.css"]},
-{"n":"shimmer","k":"cds","g":"Tailwind 通用动画","a":"1.5s infinite","d":"bar","f":"旧版骨架 / 进度条光泽（-100%→100% 后停 40%，1.5s）","t":"c6492bb57 旧 Skeleton；ca2ef848d「Compacting our conversation…」压缩进度条","e":"c6a992d55 .after:animate-[shimmer_1.5s_infinite]","s":["asar index.chunk-lzaSYO3Q.js","c6a992d55-sXiDGMFQ.css"],"nd":2},
+{"n":"shimmer","k":"cds","g":"Tailwind 通用动画","a":"1.5s infinite","d":"bar","f":"旧版骨架 / 进度条光泽（-100%→100% 后停 40%，1.5s）","t":"c6492bb57 旧 Skeleton；ca2ef848d「Compacting our conversation…」压缩进度条","e":"c6a992d55 .after:animate-[shimmer_1.5s_infinite]","s":["asar index.chunk-lzaSYO3Q.js","c6a992d55-sXiDGMFQ.css","asar npm_gridjs@5.0.2_dist_theme_mermaid.min.css"],"nd":3},
 {"n":"static-composer-actions-fade-in","k":"cds","g":"dframe 外壳","a":".24s ease-out both","d":"box","f":"首屏静态输入框水合后，操作行与产品切换胶囊从 .01 透明度 .24s 淡入","t":"静态首屏输入框（index.html 内联 #static-composer）交接期：shared-182 sl() 给 <html> 临时加 data-static-composer-boot，期间 .static-composer-boot-fade 与 ChatComposerActions 底部行淡入","e":"c6a992d55 [data-static-composer-boot] .static-composer-boot-fade；shared-21 df-pills","s":["c6a992d55-sXiDGMFQ.css"],"c":1},
 {"n":"vt-image-preview-decoration-in","k":"cds","g":"图片预览 View Transition","a":".35s cubic-bezier(.32,.72,0,1) both","d":"none","f":"点开聊天图片：过渡层 inset 从源图留白收至 0、阴影 0→30% / 25%、圆角源→.375rem（.35s ease-snap）","t":"支持 document.startViewTransition、未减少动效、有可见源缩略图（view-transition-name: chat-image-preview）","e":"cd5136de8-DQmKjkcG.css ::view-transition-image-pair(chat-image-preview)；cd5136de8-DkRyzn25.js M()","s":["cd5136de8-DQmKjkcG.css"]},
 {"n":"vt-image-preview-decoration-out","k":"cds","g":"图片预览 View Transition","a":"（JS 内联或另行声明）","d":"none","f":"关闭预览时反向收回到缩略图（.25s）","t":"关闭时 html.vt-image-preview-closing 且源缩略图在视口内","e":"cd5136de8-DQmKjkcG.css html.vt-image-preview-closing::view-transition-image-pair","s":["cd5136de8-DQmKjkcG.css"]},
@@ -7806,7 +7807,7 @@ const WK_DATA = [
 {"n":"weather-aurora-wash-1","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"12s ease-in-out infinite","d":"box","f":"极光绿色径向光团（rgba(0,255,150,.4)，blur 40px）左右漂 ±5%，opacity .5↔.75","t":"weather_fetch 结果 condition = aurora","e":"cc0c7aeb5-Di8hlO-L.js ae：animation:\"weather-aurora-wash-1 12s ease-in-out infinite\"","s":["c6a992d55-sXiDGMFQ.css"]},
 {"n":"weather-aurora-wash-2","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"15s ease-in-out infinite","d":"box","f":"极光蓝紫光团（rgba(80,140,255,.35)→rgba(140,80,220,.12)，blur 45px）反向漂移，opacity .4↔.6","t":"weather_fetch 结果 condition = aurora","e":"cc0c7aeb5-Di8hlO-L.js ae：animation:\"weather-aurora-wash-2 15s ease-in-out infinite\"","s":["c6a992d55-sXiDGMFQ.css"]},
 {"n":"weather-aurora-wash-3","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"18s ease-in-out infinite","d":"box","f":"极光青色光团（rgba(0,200,180,.25)，blur 50px）上浮 5%，opacity .35↔.55","t":"weather_fetch 结果 condition = aurora","e":"cc0c7aeb5-Di8hlO-L.js ae：animation:\"weather-aurora-wash-3 18s ease-in-out infinite\"","s":["c6a992d55-sXiDGMFQ.css"]},
-{"n":"weather-band-move","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"8s ease-in-out infinite","d":"bar","f":"白天天空里的横向白色光带（blur 15–18px）左右摆 ±20%；晴天 4 条 8/10/12/14s、局部多云 3 条 10/12/14s，逐条错开 1.5s / 2s","t":"weather_fetch 结果 condition = clear 或 partly_cloudy，且 current.is_day = true","e":"cc0c7aeb5-Di8hlO-L.js U / G：animation:`weather-band-move ${8 + t*2}s ease-in-out infinite`","s":["c6a992d55-sXiDGMFQ.css"]},
+{"n":"weather-band-move","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"8–14s ease-in-out infinite（`${8+t*2}s` / `${10+t*2}s`）","d":"bar","f":"白天天空里的横向白色光带（blur 15–18px）左右摆 ±20%；晴天 4 条 8/10/12/14s、局部多云 3 条 10/12/14s，逐条错开 1.5s / 2s","t":"weather_fetch 结果 condition = clear 或 partly_cloudy，且 current.is_day = true","e":"cc0c7aeb5-Di8hlO-L.js U / G：animation:`weather-band-move ${8 + t*2}s ease-in-out infinite`","s":["c6a992d55-sXiDGMFQ.css"]},
 {"n":"weather-cloud-drift","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"70s linear infinite","d":"bar","f":"局部多云的两条 180% 宽云带（blur 22px）向左漂 40%，70s / 85s 线性循环，第二条延迟 −20s","t":"weather_fetch 结果 condition = partly_cloudy（夜间云带换成灰紫色）","e":"cc0c7aeb5-Di8hlO-L.js G：animation:`weather-cloud-drift ${70 + e*15}s linear infinite`","s":["c6a992d55-sXiDGMFQ.css"]},
 {"n":"weather-snow-glow","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"7s ease-in-out infinite","d":"dot","f":"雪天右上角 180×120 的径向光晕呼吸，opacity .22↔.42","t":"weather_fetch 结果 condition = snow（白天白色、夜间 rgba(200,210,230,.15)）","e":"cc0c7aeb5-Di8hlO-L.js Q / te：animation:\"weather-snow-glow 7s ease-in-out infinite\"","s":["c6a992d55-sXiDGMFQ.css"]},
 {"n":"weather-star-twinkle","k":"feat","g":"天气卡片（weather_fetch 结果）","a":"3.25s ease-in-out infinite","d":"dot","f":"雪夜 35 颗星点明灭，opacity .3↔.9，每颗 2–4.5s、延迟 0–3s 随机","t":"weather_fetch 结果 condition = snow 且 current.is_day = false","e":"cc0c7aeb5-Di8hlO-L.js te：animation:`weather-star-twinkle ${duration}s ease-in-out infinite`","s":["c6a992d55-sXiDGMFQ.css"]},
@@ -7884,8 +7885,8 @@ const WK_DATA = [
 {"n":"cm-blink","k":"vendor","g":"代码编辑器（CodeMirror 6）","a":"steps(1) 1.2s infinite","d":"none","f":"CodeMirror 光标闪烁（两套关键帧交替使用以便重启动画）","t":"CodeMirror 编辑器获得焦点","e":"c148e7537-BbnhrJJt.js","s":["c148e7537-BbnhrJJt.js"],"v":1},
 {"n":"cm-blink2","k":"vendor","g":"代码编辑器（CodeMirror 6）","a":"（JS 内联或另行声明）","d":"none","f":"同上，cm-blink 的备用副本","t":"光标移动后重新开始闪烁","e":"c148e7537-BbnhrJJt.js","s":["c148e7537-BbnhrJJt.js"],"v":1},
 {"n":"codicon-spin","k":"vendor","g":"代码编辑器（Monaco）","a":"1.25s steps(30,end) infinite","d":"none","f":"codicon 加载图标按 30 步旋转","t":"Monaco 树节点加载中、同步 / 齿轮图标带 modifier-spin","e":"c5aee9dbd-cvLUb2-y.css .codicon-modifier-spin","s":["c5aee9dbd-cvLUb2-y.css"],"v":1},
-{"n":"dash","k":"vendor","g":"图表渲染（Mermaid 11.17.2）","a":"50s linear infinite","d":"none","f":"连线虚线流动：stroke-dashoffset 归零，慢速档 50s linear infinite","t":"Mermaid 流程图连线声明了动画（edge-animation-slow / fast）","e":"ca731282d-C5rwrIL3.js .edge-animation-slow","s":["mermaid-11.17.2.min.js","ca731282d-C5rwrIL3.js"],"nd":2,"c":1,"v":1},
-{"n":"edge-animation-frame","k":"vendor","g":"图表渲染（Mermaid 11.17.2）","a":"（JS 内联或另行声明）","d":"none","f":"连线动画的起始帧（stroke-dashoffset 从 0 开始）","t":"同上","e":"ca731282d-C5rwrIL3.js","s":["mermaid-11.17.2.min.js","ca731282d-C5rwrIL3.js"],"nd":2,"v":1},
+{"n":"dash","k":"vendor","g":"图表渲染（Mermaid 11.17.2）","a":"50s linear infinite","d":"none","f":"连线虚线流动：stroke-dashoffset 归零，慢速档 50s linear infinite","t":"Mermaid 流程图连线声明了动画（edge-animation-slow / fast）","e":"ca731282d-C5rwrIL3.js .edge-animation-slow","s":["mermaid-11.17.2.min.js","ca731282d-C5rwrIL3.js","asar npm_mermaid@11.17.2_dist_mermaid.min.js"],"nd":3,"c":1,"v":1},
+{"n":"edge-animation-frame","k":"vendor","g":"图表渲染（Mermaid 11.17.2）","a":"（JS 内联或另行声明）","d":"none","f":"连线动画的起始帧（stroke-dashoffset 从 0 开始）","t":"同上","e":"ca731282d-C5rwrIL3.js","s":["mermaid-11.17.2.min.js","ca731282d-C5rwrIL3.js","asar npm_mermaid@11.17.2_dist_mermaid.min.js"],"nd":3,"v":1},
 {"n":"fadeIn","k":"vendor","g":"代码编辑器（Monaco）","a":".15s ease-out","d":"none","f":"编辑器浮层消息淡入 .15s","t":"Monaco 弹出只读提示等 overlay message","e":"c5aee9dbd-cvLUb2-y.css .monaco-editor-overlaymessage.fadeIn","s":["c5aee9dbd-cvLUb2-y.css"],"v":1},
 {"n":"fadein","k":"vendor","g":"代码编辑器（Monaco）","a":".1s linear","d":"none","f":"悬停卡片、CodeLens 淡入 .1s","t":"Monaco 悬停提示出现","e":"c5aee9dbd-B55U_qvj.css .monaco-hover","s":["c5aee9dbd-cvLUb2-y.css"],"v":1},
 {"n":"fadeOut","k":"vendor","g":"代码编辑器（Monaco）","a":".1s ease-out","d":"none","f":"编辑器浮层消息淡出 .1s","t":"overlay message 关闭","e":"c5aee9dbd-cvLUb2-y.css .monaco-editor-overlaymessage.fadeOut","s":["c5aee9dbd-cvLUb2-y.css"],"v":1},
@@ -8565,7 +8566,7 @@ const WK_EXTRA = [
             <div className="wx-native-taskbar" style={{ background: "#202020", color: "#ddd" }}>深色任务栏 · Tray-Win32-Dark.ico <WxNativeStar size={16} color="#fff" rays={8} /><span>14:05</span></div>
           </div>
           <WaTable head={["项目", "行为", "证据"]} rows={WX_NATIVE_TRAY_ROWS} />
-          <WxNativeNote>图标按 .ico 帧的平均色画的示意（16–256px 共 9 帧 32 位位图：浅色版平均 #000000、深色版 #ffffff）。托盘图片 / 提示的运行时覆盖钩子 W9 在这个版本里从未赋值，所以没有动态托盘状态。</WxNativeNote>
+          <WxNativeNote>图标按 .ico 帧的平均色画的示意（共 13 帧：16–256px 的 9 帧为 32 位位图，另有 32×32 / 16×16 的 4 帧 4/8 位低色帧；浅色版平均 #000000、深色版 #ffffff）。托盘图片 / 提示的运行时覆盖钩子 W9 在这个版本里从未赋值，所以没有动态托盘状态。</WxNativeNote>
         </div>
       );
     }
@@ -8766,7 +8767,7 @@ const WK_EXTRA = [
       const pan = (inD, outD) => ({ animation: out ? `wx-mod-down20 400ms ease-out ${outD}ms forwards` : `wx-mod-up20 400ms ease-out ${inD}ms both` });
       return (
         <ComponentShowcase title="登录页 Chat / Cowork 演示卡" tag="cvc-*"
-          description="登录页右侧（≥64rem）：带 Cowork 来源访客通行证（referralSource=cowork 且 promotionId 有效，未被 __gb__2700899281 抑制）时显示 500×600 演示卡。进入 Cowork：48px 网格 clip-path 圆形 0→150% 扩散 2500ms，三块浮层 650 / 900 / 1150ms 依次上移淡入；切回 Chat：网格 80%→0 收拢 600ms，浮层按 300 / 150 / 0ms 反序下沉，500ms 后换成对话，工具步骤 cvc-tool-step-enter。背景动画关闭或减少动效时全部静态。证据：c632c9594-BqPynXkK.js wh() / bh() / vh() / gh() / kh()。">
+          description="登录页右侧（≥64rem）：带 Cowork 来源访客通行证（referralSource=cowork 且 promotionId 有效，未被 __gb__2700899281 抑制）时显示 500×600 演示卡。进入 Cowork：48px 网格 clip-path 圆形 0→150% 扩散 2500ms，三块浮层 650 / 900 / 1150ms 依次上移淡入；切回 Chat：网格 80%→0 收拢 600ms，浮层按 300 / 150 / 0ms 反序下沉，500ms 后换成对话，工具步骤 cvc-tool-step-enter。背景动画关闭或减少动效时全部静态。证据：c632c9594-BqPynXkK.js wh() / bh() / vh() / gh() / kh()；开关 __gb__2700899281 在 cdd345228-CMyXUFLn.js er()。">
           <div className="space-y-3">
             <WxModSeg value={mode} options={[["chat", "Chat"], ["cowork", "Cowork"]]} onChange={go} />
             <div className="wx-mod-cvc">
@@ -8952,7 +8953,7 @@ const WK_EXTRA = [
       const [mob, setMob] = useState(false);
       return (
         <ComponentShowcase title="面板与列表入场：Coach 侧栏、记忆面板、技能提案、营销页头" tag="coach* · memory-* · skill-proposal-in · header-menu-curtain · navbar-mobile-item-enter"
-          description="① /admin-settings/success-team（Coach，导航项只对 Enterprise、early access）：≥1024px 右侧 380px 组织栏首次挂载宽度 0→380（dur-slow .45s）；对话里的「下一步」卡滚出视野时停靠到栏下，dur-snap 后 dur-base 淡入；「外观 → 背景动画」关闭或系统减少动效时不展开、改 coach-dock-settle（隐藏 120ms 后直接出现）。② 自定义 → 记忆：左侧列表 .memory-stagger 每项 30ms，右侧详情换选中项时 .2s 上移 4px。③ Cowork 技能提案列表行每行 45ms、.28s 上移 4px。④ 公开页（/login、/gift、/perks/*、/form/*）页头：桌面下拉面板 clip-path inset(0 0 100%)→inset(0) .6s cubic-bezier(.22,1,.36,1)；手机菜单各分组 .2s + i×40ms 上移 20px，底部按钮 .3s。证据：c3cc77624 Rd()、c953053b7 Y()、ca1acf783 / cce47845f、c5c2c83f5。">
+          description="① /admin-settings/success-team（Coach，导航项只对 Enterprise、early access）：≥1024px 右侧 380px 组织栏首次挂载宽度 0→380（dur-slow .45s）；对话里的「下一步」卡滚出视野时停靠到栏下，dur-snap 后 dur-base 淡入；「外观 → 背景动画」关闭或系统减少动效时不展开、改 coach-dock-settle（隐藏 120ms 后直接出现）。② 自定义 → 记忆：左侧列表 .memory-stagger 每项 30ms，右侧详情换选中项时 .2s 上移 4px。③ Cowork 技能提案列表行每行 45ms、.28s 上移 4px。④ 公开页（/login、/gift、/perks/*、/form/*）页头：桌面下拉面板 clip-path inset(0 0 100%)→inset(0) .6s cubic-bezier(.22,1,.36,1)；手机菜单各分组延迟 .2s + i×40ms 后以 .3s 上移 20px 进入，底部按钮区延迟 .3s。证据：c3cc77624 Rd()、c953053b7 Y()、ca1acf783 / cce47845f、c5c2c83f5。">
           <div className="space-y-3">
             <div className="flex flex-wrap gap-2 items-center"><WxModReplay onClick={() => setK(k + 1)} /><WaBtn size="sm" variant={anim ? "primary" : "secondary"} onClick={() => { setAnim(!anim); setK(k + 1); }}>背景动画：{anim ? "开" : "关"}</WaBtn></div>
             <div key={"c" + k} className="wx-mod-coach">
@@ -10966,7 +10967,7 @@ function WxMediaSpringDemo() {
 
 // 卡片：[标题, 标签, 说明（触发条件 + 证据）, 内容, 占两栏]
 const WX_MEDIA_CARDS = [
-  ["模型生成可视化：流式入场 · 脚本加载扫光 · 复制中", "#vis-container · show_widget", "Claude 调 visualize 的 show_widget 时，部件在 MCP App 沙箱 iframe（*.claudemcpcontent.com，sandbox=allow-scripts allow-same-origin allow-forms，内层由沙箱代理页再嵌一层）里渲染。首个 tool-input-partial 给 #vis-container 加 .streaming：新插入的 svg / rect / path / text… 走 svgFadeInScale .5s ease-out（opacity 0→1、scale .95→1），带 transform / opacity 属性的元素除外；partial 含 <script 时再加 .scripts-loading（opacity .7、禁点、60%×200% 斜 25° 扫光 scriptsShimmer 2s ease-in-out 循环），定稿执行完脚本移除。「⋯」菜单「复制为图片」进行中 aria-busy，环形 Spinner moreItemSpin 1s linear（减少动效时不转），成功后对勾 1.5s。门控：网页 GrowthBook claudeai_mcp_apps_visualize + 组织功能 inline_visualizations；桌面本地会话 GrowthBook 3444158716。证据：cde7c3a92-CxkUSvuF.js y()（widget-main renderPartialCode / renderFinal）、asar build/index.chunk-BYMGAPtw.js。", WxMediaWidgetDemo],
+  ["模型生成可视化：流式入场 · 脚本加载扫光 · 复制中", "#vis-container · show_widget", "Claude 调 visualize 的 show_widget 时，部件在 MCP App 沙箱 iframe（*.claudemcpcontent.com，sandbox=allow-scripts allow-same-origin allow-forms，内层由沙箱代理页再嵌一层）里渲染。首个 tool-input-partial 给 #vis-container 加 .streaming：新插入的 svg / rect / path / text… 走 svgFadeInScale .5s ease-out（opacity 0→1、scale .95→1），带 transform / opacity 属性的元素除外；partial 含 <script 时再加 .scripts-loading（opacity .7、禁点、60%×200% 斜 25° 扫光 scriptsShimmer 2s ease-in-out 循环），定稿执行完脚本移除。「⋯」菜单「复制为图片」进行中 aria-busy，环形 Spinner moreItemSpin 1s linear（减少动效时不转），成功后对勾 1.5s。门控：网页 GrowthBook claudeai_mcp_apps_visualize + 组织功能 inline_visualizations；桌面本地会话 GrowthBook 3444158716。证据：cde7c3a92-CxkUSvuF.js y()（widget-main renderPartialCode / renderFinal）、asar build/index.chunk-BVryDrIy.js（开关 3444158716 / 2742800629）、asar build/index.chunk-BYMGAPtw.js（关键帧）。", WxMediaWidgetDemo],
   ["read_me 指南示例：热水器对流 · 火焰 · 暖光", "conv · flicker · glow", "这三个关键帧不属于产品界面，而是 visualize read_me(modules: diagram) 返回给模型的「插图式图解」示例代码，只在宽度 ≥680（platform 不是 mobile）时附带；模型照搬示例时才出现在部件里。.conv：stroke-dasharray 5 5，dashoffset → −20，--dur 1.6 / 2.1 / 2.6s linear；#flames：奇数路径 flicker .6s、偶数 .8s 延迟 .15s，opacity 1↔.82；#warm-glow：glow 3s，opacity .3↔.6；关掉 Heating 时 .off 让三者透明并停下。指南要求动画包在 prefers-reduced-motion: no-preference 里，但示例自己没包。证据：cde7c3a92-CxkUSvuF.js m(e)（e ≥ 680 分支）。", WxMediaHeaterDemo],
   ["语音模式音频可视化", "VoiceAudioVisualizer · WebGL", "进入语音模式后挂在主 composer 背后（容器宽 150%、4:1，画布再高出 40%，opacity 随 isActive 500ms 过渡）。7 个椭圆光团对应 85–3500Hz 七段频谱，电平经 0.92 / 0.08 与 0.9 / 0.1 两级平滑；电平 e 让 scaleX .6→.76、scaleY .6→1.8、透明度 .05→.8、上移 .1，无电平时仍按各自正弦慢漂。WebGL 先画到 1/4 分辨率，做 11 次 Kawase 模糊（偏移 .5→10 texel），末遍叠 24fps 颗粒。Claude 说话用 speakerAnalyser + 陶土 rgba(217,119,87)，其余状态用 micAnalyser + 蓝 rgba(106,155,204)，颜色每帧 3% 插值；软件渲染（SwiftShader / llvmpipe）时不显示。证据：c6dd1f86a-Dc7V1C-l.js、shared-7-B8UIMGDr.js SP、shared-9 composer card holder。", WxMediaVoiceDemo],
   ["听写波形 · 语音按钮活动条", "DictationWaveform · LiveMicActivityBars", "听写（Dictate）时 composer 换成听写条：每 80ms 取一次麦克风时域 RMS，level = min(1, ((rms − .015) / .985)^.5 × 2.2)，2px 柱、7px 间距、平滑左移，两端 21px 内按圆弧压矮，最矮 2px。语音模式按钮的 6 柱图标（viewBox 21.2，柱宽 1.2、间距 2.8）：idle 为 6 / 10 / 16 / 10 / 16 / 6；connecting 时 1、2、4 号变 5px 圆点，1.8s 周期依次亮起再一起变暗；active 时三柱宽 4，按 200–4000Hz 三个对数频段在 6–16 间跳（噪声底 .06 / .04 / .06，增益 1.5 / 2 / 1.5）；高度弹簧 300 / 20 / .5，连接中 150 / 15 / .8，宽度 200 / 25 / .5。证据：ce1d55484-DnJUf06h.js、c4a1e6da6-OklNVuRg.js、shared-8-B5lJ8U5C.js Hj / iM / HA。", WxMediaDictationDemo],
@@ -10979,7 +10980,7 @@ const WX_MEDIA_CARDS = [
       <WaTable head={["动图 / 视频", "规格（文件头读取）", "出现位置与条件"]} rows={WX_MEDIA_FILES} />
     </div>
   ), true],
-  ["motion 弹簧参数与重放", "vendor-motion · type: spring", "22 个 chunk 用了 motion 弹簧，参数见表（stiffness / damping / mass）。全局 MotionConfig：外观「减少动效」= reduce 时 reducedMotion: always，否则 user（跟随系统）。上方四条按各自参数用 1ms 子步长积分重放，虚线为目标位。WAAPI（约 25 个 chunk 的 element.animate，几乎都是 FLIP）与 6 处 startViewTransition 的调用点列在报告里。证据：index-D3kGySMO.js Po()、shared-156 fE()（appearance:reduceMotion），其余见表。", WxMediaSpringDemo, true],
+  ["motion 弹簧参数与重放", "vendor-motion · type: spring", "20 个 chunk（含 vendor-motion）用了 motion 弹簧，参数见表（stiffness / damping / mass）。全局 MotionConfig：外观「减少动效」= reduce 时 reducedMotion: always，否则 user（跟随系统）。上方四条按各自参数用 1ms 子步长积分重放，虚线为目标位。WAAPI（约 25 个 chunk 的 element.animate，几乎都是 FLIP）与 5 处 startViewTransition 调用点（c10f0af0c、c24100247、shared-2、vendor-router ×2；typeof 能力检测不计）列在报告里。证据：index-D3kGySMO.js Po()、shared-156 fE()（appearance:reduceMotion），其余见表。", WxMediaSpringDemo, true],
 ];
 function WxMediaScenes() {
   return (
@@ -11340,7 +11341,7 @@ function WxMediaScenes() {
                 number="09"
                 title="Claude Desktop v2.42304.0 设计美学"
                 enTitle="v2.42304.0 Design Aesthetics & @ant/cds Ground Truth"
-                description="基于 REA 对 Windows MSIX v2.42304.0（Build 2026-10-15，commit e7f60e65）ion-dist 原文 CSS 的复核：悬浮输入框三态变形与 16 阶渐隐遮罩、环形配额仪表三阶双搏心跳、Oklab 纸张光泽与文档刻度尺、5 字体光学悬挂标点、官方 6 层令牌模型、Cove 8 色色板与桌面全局交互壳层。"
+                description="基于 REA 对 Windows MSIX v2.42304.0（commit e7f60e65，2026-10-15）ion-dist 原文 CSS 的复核：悬浮输入框三态变形与 16 阶渐隐遮罩、环形配额仪表三阶双搏心跳、Oklab 纸张光泽与文档刻度尺、5 字体光学悬挂标点、官方 6 层令牌模型、Cove 8 色色板与桌面全局交互壳层。"
                 badge="v2.42304.0 REA"
               />
               <div className="mt-6">
