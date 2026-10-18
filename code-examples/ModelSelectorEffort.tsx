@@ -60,7 +60,7 @@ export const ModelSelectorEffort: React.FC<{
           <div className="px-2 py-1.5 border-b border-[var(--cds-border-subtle,rgba(0,0,0,0.06))] mb-1.5">
             <p className="text-xs font-semibold text-[var(--cds-text-primary,#1F1E1D)]">Thinking Effort</p>
             <p className="text-[11px] text-[var(--cds-text-secondary,#6B6966)] leading-tight mt-0.5">
-              Higher effort means more thorough responses, but takes longer and uses limits faster.
+              Higher effort means more thorough responses, but takes longer and uses your limits faster.
             </p>
           </div>
 

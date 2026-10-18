@@ -73,9 +73,9 @@ tags:
 
 ### 1.1 版本边界声明
 
-本报告的分析对象是 Claude 桌面端生产包 **v2.42304.0**（`@ant/desktop@2.42304.0`，MSIX 包标识 `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc`，Commit `e7f60e658f15cfece9efa384a78a39aec3c12845`，Build Timestamp `2026-10-15T05:54:05.000Z`）。
+本报告的分析对象是 Claude 桌面端生产包 **v2.42304.0**（`@ant/desktop@2.42304.0`，MSIX 包标识 `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc`，Commit `e7f60e658f15cfece9efa384a78a39aec3c12845`，Commit Timestamp `2026-10-15T05:54:05.000Z`，随包 ion-dist 构建时间戳 `1792044185`（2026-10-15T06:03:05Z））。
 
-依托 REA 对该版本 `app.asar`（SHA-256: `8f4d3dec5e4f3ddffb150321060b18807d83a40f3a65618fe4f29325379da9db`，REA 证据 ID: `ev_db29cf6b5757fd86666fd272343cccd383bf391d00dac49aada8f2d616fa36c8`）及 `ion-dist/_frame-rt`（SHA-256: `bf7f0d4d90fe36017d28545260461bf654084e45b3abb4bb7e9a91d2acde81c0`，REA 证据 ID: `ev_22511fe4b0510120cb637aec50b4b588fa8a301da945139efa71bd25ad0e3587`）解包出的 `MainWindowPage-DTxMhyWF.css`、`c6a992d55-sXiDGMFQ.css`、`index.chunk-BYMGAPtw.js`（内嵌官方 `@ant/cds` 与 Imagine 规范）、`index.chunk-lzaSYO3Q.js` 以及 15 个 BrowserWindow 宿主入口的审查，本报告按以下结构组织：
+依托 REA 对该版本 `app.asar`（SHA-256: `8f4d3dec5e4f3ddffb150321060b18807d83a40f3a65618fe4f29325379da9db`，REA 证据 ID: `ev_db29cf6b5757fd86666fd272343cccd383bf391d00dac49aada8f2d616fa36c8`）及 `ion-dist/_frame-rt`（SHA-256: `bf7f0d4d90fe36017d28545260461bf654084e45b3abb4bb7e9a91d2acde81c0`，REA 证据 ID: `ev_22511fe4b0510120cb637aec50b4b588fa8a301da945139efa71bd25ad0e3587`）的审查——涉及 `ion-dist/assets/v1/c6a992d55-sXiDGMFQ.css`（主样式表）、app.asar 内 `.vite/renderer/main_window/assets/MainWindowPage-DTxMhyWF.css`、`.vite/build/index.chunk-BYMGAPtw.js`（内嵌官方 `@ant/cds` 与 Imagine 规范）、`.vite/build/index.chunk-lzaSYO3Q.js`（主进程）以及 15 处 `new BrowserWindow(` 宿主入口；`_frame-rt/_runtime` 只装字体与 Artifact 运行时——，本报告按以下结构组织：
 
 ```mermaid
 graph TD
@@ -152,7 +152,7 @@ graph TD
 Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQueuedMessages` 是 `ChatComposerDock` 中的一个独立槽位（`c6a992d55-sXiDGMFQ.css` 中与 `ChatComposerNotices` 并列，不参与 dock 项之间的 `margin-bottom` 间距），排队条贴在输入框上沿（`cf74bc599-D9NZWRyl.js`）：
 
 * **计数文案**：`{count, plural, one {# message queued} other {# messages queued}}`，以及 `1 message queued. Will send after the current response.`；
-* **行内操作**：`Send now`（ghost · xs，快捷键 `cmd+enter`）、`Edit in composer`、`Remove from queue`；多条时可折叠、可拖动排序；
+* **行内操作**：`Send now`（ghost · sm，图标 `ArrowReturn`）、`Edit in composer`、`Remove from queue`；多条时可折叠、可拖动排序；
 * **Send now 的说明**（`aria-describedby`）：`Stops Claude’s current step so it reads this message next.`，或 `Stops Claude’s current response.`。
 
 交互演示见 [故事书 W14](../claude-components-storybook.html#wa-think)。
@@ -161,7 +161,7 @@ Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQue
 
 ### 2.4 推理努力程度（Effort）
 
-努力程度共 5 档 `low | medium | high | xhigh | max`，每档的说明文案（`shared-23-Bu_lvvVo.js` / `ion-dist/i18n/en-US.json`）：
+努力程度共 5 档 `low | medium | high | xhigh | max`，每档的说明文案（`shared-23-Bu_lvvVo.js` / `ion-dist/i18n/dynamic/en-US.json`）：
 
 | 档位 | 文案 |
 | :--- | :--- |
@@ -172,7 +172,7 @@ Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQue
 | `max` | The hardest problems. Takes longest. |
 
 * **Max 警示**：`May use excessive tokens resulting in long response times and may hit token limits. Use sparingly for the hardest tasks.`
-* **`maxEffort` 配置键**（`index.chunk-lzaSYO3Q.js` / `c6f6cf4c2-hWQ7JCh6.js` 的模型配置 schema，`availableInVersion: "2.110.0"`）：标签 `Max effort`，说明 `Highest effort level offered for this model; higher levels are hidden and never requested by Claude Desktop. An unrecognized value caps the model at low.`
+* **`maxEffort` 配置键**（主进程 `index.chunk-lzaSYO3Q.js` 的模型配置 schema 只有标签 `Max effort` 与 `availableInVersion: "2.110.0"`，说明文案在 `c6f6cf4c2-hWQ7JCh6.js` / `i18n/en-US.json`）： `Highest effort level offered for this model; higher levels are hidden and never requested by Claude Desktop. An unrecognized value caps the model at low.`
 * **网页版形态**：claude.ai 把努力程度收在模型菜单的子菜单里，默认推荐“中等”，见 [故事书 W5](../claude-components-storybook.html#wa-menus)。
 
 ---
@@ -208,7 +208,7 @@ Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQue
 ```
 
 #### 3. Scroll-Driven 滚动驱动渐变透明遮罩系统
-滚动视口边缘不再使用纯色伪元素遮挡，而是直接绑定 CSS 滚动时间轴：
+滚动视口边缘的渐隐直接绑定 CSS 滚动时间轴，而不是固定的纯色伪元素：
 ```css
 @keyframes cds-scroll-fade-top {
   0% { --cds-scroll-fade-top-raw: 0px; }
@@ -243,7 +243,7 @@ Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQue
 
 ### 2.7 悬浮输入框三态几何变形与 16 阶渐隐遮罩 (`FloatingComposer`)
 
-在 `v2.42304.0` 的 `ion-dist/assets/v1/c0d1f1ea0-CRwfFWY4.css` 中，Anthropic 引入了悬浮式输入终端架构（`.fc-holder`），支持在 **把手态（`handle`）**、**胶囊态（`pill`）** 与 **完整编辑器态（`composer`）** 之间进行基于 `clip-path` 与圆锥渐变光环的丝滑几何变形：
+在 `v2.42304.0` 的 `ion-dist/assets/v1/c0d1f1ea0-CRwfFWY4.css` 定义了悬浮式输入终端架构（`.fc-holder`），支持在 **把手态（`handle`）**、**胶囊态（`pill`）** 与 **完整编辑器态（`composer`）** 之间进行基于 `clip-path` 与圆锥渐变光环的丝滑几何变形：
 
 ```css
 /* 提取自 ion-dist/assets/v1/c0d1f1ea0-CRwfFWY4.css */
@@ -295,7 +295,7 @@ Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQue
 }
 ```
 
-* **16 阶超平滑底部非线性渐隐遮罩 (`.fc-scrim`)**：为了消除悬浮输入框下方长文档滚动的生硬边界，`.fc-scrim` 在 `15rem`（240px）高度内采用 **16 个 `color-mix()` 非线性采样点**（颜色权重依次为 `0% → 1.3% → 4.9% → 10.4% → 17.5% → 25.9% → 35.2% → 45% → 55% → 64.8% → 74.1% → 82.5% → 89.6% → 95.1% → 98.7% → 100%`），构成了对人眼对比度灵敏度曲线（CSF）零断层的余弦级过渡。
+* **16 阶超平滑底部非线性渐隐遮罩 (`.fc-scrim`)**：为了消除悬浮输入框下方长文档滚动的生硬边界，`.fc-scrim` 在 `15rem`（240px）高度内采用 **16 个非线性色标**（15 个 `color-mix()` 加末端纯色 `var(--fc-scrim-color)`，颜色权重依次为 `0% → 1.3% → 4.9% → 10.4% → 17.5% → 25.9% → 35.2% → 45% → 55% → 64.8% → 74.1% → 82.5% → 89.6% → 95.1% → 98.7% → 100%`），构成了对人眼对比度灵敏度曲线（CSF）零断层的余弦级过渡。
 
 ---
 
@@ -318,7 +318,7 @@ Claude 正在回复时继续发送的消息会进入排队区。`ChatComposerQue
 .urm[data-shimmer] .urm__comet { animation: 2s linear urm-comet-travel, 2s linear urm-comet-fade; }
 ```
 
-* **双搏生理心跳数学模型**：`urm-beat-warning`（周期 `2.3s`）与 `urm-beat-critical`（周期 `1.45s`）并非简谐正弦缩放，而是精确采样了 **19 个关键帧时间点**，模拟人类心脏收缩与舒张的“主搏峰值 `scale(1.0352)` + 次搏回音 `scale(1.0192)`”双峰波形；而在 `data-beat="3"`（触达限流上限）时，峰值放大至 `scale(1.0458)` 并伴随 `32.9%` 光晕爆发。
+* **双搏生理心跳数学模型**：`urm-beat-warning`（周期 `2.3s`）与 `urm-beat-critical`（周期 `1.45s`）并非简谐正弦缩放，而是精确采样了 **20 个关键帧时间点**，模拟人类心脏收缩与舒张的“主搏峰值 `scale(1.0352)` + 次搏回音 `scale(1.0192)`”双峰波形；而在 `data-beat="3"`（触达限流上限）时，峰值放大至 `scale(1.0458)` 并由独立关键帧 `urm-beat-limit-glow` 伴随 `opacity: .329` 的光晕爆发。
 
 ---
 
@@ -368,7 +368,7 @@ span[data-hang-quote] { margin-inline-start: calc(-1 * var(--hq-hang)); }
 | **SableOtter 光标级悬浮 HUD** | `index.chunk-BN7PaJ_P.js`<br/>`index.chunk-VXoZYQbU.js` | Strip 胶囊条（`border-radius: 18px`, `max-width: 590px`）与 Card 卡片（`width: 420px`, `border-radius: 14px`）双态；浅色 `rgba(255,255,255,0.97)` / 深色 `rgba(38,38,36,0.97)`；5 柱对称声学电平表 `height = 4 + 12 * level px` | 跟随系统任意应用输入光标（Caret）弹出；区分指令紫（`--tell: #6b5ec7`）与听写陶土橙（`--dictate: #d97757`）；自动过滤终端与密码框（1Password/Bitwarden 等） |
 | **CuTeach 计算机使用教学浮层** | `computerUseTeach.js`<br/>`index.chunk-lzaSYO3Q.js` | `16px` 圆角气泡 + `::before` 17px `0.5px` 发丝内框；双层 `drop-shadow` 三角形锚点箭头；`300ms cubic-bezier(0.16, 1, 0.3, 1)` 缩放位移过渡 | 全屏透明穿透窗口（`setIgnoreMouseEvents(true, {forward: true})`），优先按 `below → above → right → left` 自动避让屏幕边缘；进入计算机控制时主窗口以 `220ms` 三次方缓动自动停靠为右侧 `520×720px` 边栏 |
 | **CuWatchRecord 屏幕录制与技能提炼** | `computerUseWatchRecord.js`<br/>`watchRecordChooser.js` | 底部悬浮暗色毛玻璃胶囊（`472×112px` 含阴影余量，本体 `rgba(21,21,21,0.95)`, `border-radius: 12px`, `backdrop-filter: blur(10px)`）；8px `#d97757` 圆点 `pulse 1.5s`（opacity 1 → .4），「Capturing · m:ss」计时（250ms 刷新）与 Discard / Done 按钮 | 支持 `Share screen`（上下文录制）与 `Record a skill`（自动提炼可复用技能）双模式；Chooser 窗口内置 `INPUT_PROTECTION_MS` 防误触门禁；录制结束转为 900ms 圆环 + `Processing` 扫光态，并按实际内容宽度 `min(408, max(160, w)) + 64` 收缩窗口；胶囊窗口 `setContentProtection(true)`，不会被录进画面；只支持 Windows / macOS |
-| **Hardware Buddy 创客蓝牙硬件终端** | `buddy_window/BuddyWindow-_Jgif_qX.js`<br/>`main-a4mzyXdA.css` | 暖米色画布（`--cream: #f4f3ee`）；左侧拟物化橙色硬件掌机预览（`115×245px`, `145deg` 渐变外壳，`77×134px` `image-rendering: pixelated` 像素屏与实体按键阴影） | 基于 Nordic UART Service (`6e400001-...`) BLE 协议连接外部创客硬件（如桌面电子宠物），每 10s 同步活跃会话数、今日 Token 消耗并支持硬件按键直接审批 `Bash` 工具权限（`once` / `deny`） |
+| **Hardware Buddy 创客蓝牙硬件终端** | `buddy_window/BuddyWindow-_Jgif_qX.js`<br/>`main-a4mzyXdA.css` | 暖米色画布（`--cream: #f4f3ee`）；左侧拟物化橙色硬件掌机预览（`115×245px`, `145deg` 渐变外壳，`77×134px` `image-rendering: pixelated` 像素屏与实体按键阴影） | 基于 Nordic UART Service (`6e400001-...`) BLE 协议连接外部创客硬件（如桌面电子宠物），每 10s 同步活跃会话数、今日 Token 消耗并支持硬件按键直接审批对话里的工具权限请求（`once` / `deny`，对任何 `cmd === "permission"` 生效；协议示例里的工具名为 `Bash`） |
 | **ClawdQuest 离线断网彩蛋游戏** | `clawdQuestEngine-CdvdlRdl.js`<br/>`clawdQuestEngine-C2Z1JudX.css` | 断网报错页（`data-load-error-overlay`）底部提示 `Press Space to play`；叙事纸条采用 `#f3efe4` 底色 + 内联 SVG `feTurbulence`（`baseFrequency="1.15"`）分形噪点滤镜 + 不规则多边形 `clip-path` 模拟手工撕边羊皮纸：叙事纸条 13 顶点、倾斜 `-0.6deg`，开始纸条 10 顶点、倾斜 `+0.8deg` | 只在主视图加载失败（`load_failed`）且 GrowthBook 开关 `543332958` 打开时挂载（主进程 `dYn(…, { offersOfflineGame })`）；把报错页变成平台跳跃游戏，报错卡片自动折叠为顶部紧凑横幅（`data-compact`），并通过 `ResizeObserver` 动态避让游戏 HUD 顶栏 |
 
 
@@ -485,7 +485,7 @@ span[data-hang-quote] { margin-inline-start: calc(-1 * var(--hq-hang)); }
 
 ### 4.1 纯 CSS 动效参数
 
-在 `v2.42304.0` 中，全包共有 **309 个 `@keyframes` 关键帧名**（同名多处定义按 1 个计），分布在 51 个文件里，其中第三方库 17 个；逐个的功能与触发条件见[第七章](#7-全量盘点)和故事书 W16。主样式表 `c6a992d55-sXiDGMFQ.css` 定义了其中 **152 个**；以 `cds-*` 为主的 **55 个 CDS 核心关键帧** 另被复制进 6 处本地窗口（about / buddy / find-in-page / quick-window 的内联 html、`MainWindowPage-DTxMhyWF.css`、`frame-window-054FFK51.js`）。主要家族如下：
+在 `v2.42304.0` 中，全包共有 **309 个 `@keyframes` 关键帧名**（同名多处定义按 1 个计），分布在 53 个文件里，其中第三方库 17 个；逐个的功能与触发条件见[第七章](#7-全量盘点)和故事书 W16。主样式表 `c6a992d55-sXiDGMFQ.css` 定义了其中 **152 个**；其中 **56 个 `cds-*` CDS 核心关键帧** 里有 54 个被原样复制进 7 处（about / buddy / find-in-page / quick-window 四个本地窗口的内联 html、`MainWindowPage-DTxMhyWF.css`、`frame-window-054FFK51.js`、`frame-shell-chrome-CAw-tYzh.js`；`cds-anim-loop` 与 `cds-um-enter` 只在主样式表）。主要家族如下：
 
 * **Pill 微形变族**：`cds-pill-in`, `cds-pill-pop-up`, `cds-pill-pop-down`, `cds-pill-dip-down`, `cds-pill-dip-up`, `cds-pill-roll-in-up`, `cds-pill-roll-in-down`, `cds-pill-roll-out`, `cds-pill-out`
 * **骨架屏呼吸与扫光族**：`cds-skeleton-breathe`, `cds-skeleton-sweep`, `cds-placeholder-reveal`
@@ -565,7 +565,7 @@ span[data-hang-quote] { margin-inline-start: calc(-1 * var(--hq-hang)); }
 
 | 层级 | 令牌命名空间 | 物理机制与暗黑反转规则 | 组件消费约束 |
 | :--- | :--- | :--- | :--- |
-| **1. Base Palette** | `--{hue}-{stop}` | 9 大色相（`gray, red, orange, yellow, green, aqua, blue, violet, magenta`）共享 36 阶网格（`0, 10~100, 150~800, 810~900`），锚定 `0 = #ffffff` 与 `900 = #0b0b0b`，跨浅/深模式保持绝对像素不变 | 内部底层接线，组件禁止直接引用 |
+| **1. Base Palette** | `--{hue}-{stop}` | 9 大色相（`gray, red, orange, yellow, green, aqua, blue, violet, magenta`）共享 35 阶网格（`0, 10~100, 150~800, 810~900`；`index.chunk-BYMGAPtw.js` 内嵌规范原文写作 36-stop，按主样式表实际定义为 35），锚定 `0 = #ffffff` 与 `900 = #0b0b0b`，跨浅/深模式保持绝对像素不变 | 内部底层接线，组件禁止直接引用 |
 | **2. Theme Ramps** | `--neutral-N` / `--alpha-N` | 浅色下 `neutral-N = gray-N`，深色下自动反转为 `gray-(900-N)`；`--alpha-N` 为 `neutral-900` 的固定透明度（`5% ~ 95%`） | 内部底层接线，自动完成明暗翻转 |
 | **3. Elevation** | `--surface-{0..3}` | 在浅色与深色模式下均遵守“0 最暗、3 最亮”绝对明度序（Light: `gray-20/10/0/0`；Dark: `gray-900/850/830/800`） | 由 `Surface` 与浮层重映射 `--page-bg` |
 | **4. Purpose** | `--surface-{popover,panel}`、`--text-*`、`--fill-*`、`--bg-*`、`--border-*` | 6 大语义角色（`accent` 蓝、`brand` 陶土、`danger` 红、`success` 绿、`warning` 黄、`pro` 紫）及 `git-*` 状态色；区分饱和实心控件色 `fill-{role}` 与柔和背景淡彩 `bg-{role}` | **所有 UI 组件唯一允许直接消费的语义层** |
@@ -611,7 +611,7 @@ span[data-hang-quote] { margin-inline-start: calc(-1 * var(--hq-hang)); }
 
 ### 5.1 模型选择与努力程度调节器
 
-> 📄 **独立工程源码**：[`code-examples/ModelSelectorEffort.tsx`](../../code-examples/ModelSelectorEffort.tsx)（已集成至 `src/index.ts`）。各档说明与 Max 警示文案取自 2.42304.0.0 的 `ion-dist/i18n/en-US.json`，默认推荐档与 claude.ai 一致（中等）。
+> 📄 **独立工程源码**：[`code-examples/ModelSelectorEffort.tsx`](../../code-examples/ModelSelectorEffort.tsx)（已集成至 `src/index.ts`）。各档说明与 Max 警示文案取自 2.42304.0.0 的 `ion-dist/assets/v1/shared-23-Bu_lvvVo.js` 内联 `defaultMessage`（副标题 `Higher effort means…` 另见 `ion-dist/i18n/en-US.json`），默认推荐档与 claude.ai 一致（中等）。
 
 ```tsx
 import React, { useState } from 'react';
@@ -676,7 +676,7 @@ export const ModelSelectorEffort: React.FC<{
           <div className="px-2 py-1.5 border-b border-[var(--cds-border-subtle,rgba(0,0,0,0.06))] mb-1.5">
             <p className="text-xs font-semibold text-[var(--cds-text-primary,#1F1E1D)]">Thinking Effort</p>
             <p className="text-[11px] text-[var(--cds-text-secondary,#6B6966)] leading-tight mt-0.5">
-              Higher effort means more thorough responses, but takes longer and uses limits faster.
+              Higher effort means more thorough responses, but takes longer and uses your limits faster.
             </p>
           </div>
 
@@ -918,11 +918,11 @@ Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个�
 
 | 项目 | 数量 |
 | :--- | :--- |
-| 关键帧名（同名多处定义按 1 个计） | **309** 个，分布在 51 个文件 |
+| 关键帧名（同名多处定义按 1 个计） | **309** 个，分布在 53 个文件 |
 | 主样式表 `c6a992d55-sXiDGMFQ.css` | 152 个 |
 | Artifact 外壳 `frame-shell-chrome-CAw-tYzh.js` 内嵌副本 | 61 个 |
-| 55 个 CDS 关键帧的副本 | 6 处：about / buddy / find-in-page / quick-window 四个窗口的 html、`MainWindowPage-DTxMhyWF.css`、`frame-window-054FFK51.js` |
-| 第三方库内部 | 17 个：Monaco、ProseMirror、CodeMirror、Mermaid |
+| 56 个 `cds-*` 关键帧中 54 个的副本 | 7 处：about / buddy / find-in-page / quick-window 四个窗口的 html、`MainWindowPage-DTxMhyWF.css`、`frame-window-054FFK51.js`、`frame-shell-chrome-CAw-tYzh.js`（`cds-anim-loop`、`cds-um-enter` 只在主样式表） |
+| 第三方库内部 | 17 个：Monaco、ProseMirror、CodeMirror、Mermaid（其中 `progress` 按用途归入下表「对话与通用 UI」，所以下表第三方分组为 16） |
 | 盘点前故事书已出现的 | 44 个（按完整标识符匹配） |
 | 本次补齐的 | **250** 个（不含第三方） |
 | 非关键帧效果 | 153 项 |
@@ -954,13 +954,13 @@ Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个�
 | Guest Pass 票面与赠送票券 | 用户菜单的分享弹窗；Code 项目频道通知 | referral 资格可用；`onboarding_grant` 通知；点击票券时晃动和扫光 | `guest-pass-shimmer`、`ticket-*` | W20 |
 | 命令面板行操作卡 `palette-card-*` | cmdk 命令面板 | 选中行后按 Alt+Enter 或点行尾按钮 | 主样式表 | W20 |
 | 设置项深链高亮 `feature-anchor-*` | 设置页、管理员设置 | 带 #锚点打开、设置搜索、上手清单定位；有 RTL 版本 | 主样式表 | W20 |
-| 用量环 draw / quiet 入场 | 输入框用量环、Code 页脚 | 每个用量窗口（`orgUuid:resetsAt`）第一次在本机显示时播 draw（1200ms），之后播 quiet（200ms） | `c403c4b83`、`cb979c293` | W20、第 09 章 9.2 |
+| 用量环 draw / quiet 入场 | 输入框用量环、Code 页脚 | 每个用量窗口（`orgUuid:resetsAt`）第一次在本机显示时播 draw（1200ms），之后播 quiet（200ms） | `c403c4b83-CRKgA1Gz.js`（逻辑）、`c403c4b83-yqAXiELG.css`（关键帧） | W20、第 09 章 9.2 |
 | Claude Code 升级庆祝页票券 `ccc-*` | `/cli_landing` | 网页端升级支付成功后，按 GrowthBook 实验 `cc_celebration_post_upgrade` 跳转。桌面 App、Max 套餐和移动端不会被自动送到这里 | `ce78157a2-mEBrZTqq.js`、`cbbbe68ed` | W21 |
 | 安装中心插画 `install-hub-*` | `/downloads`、Cowork 下载步 | 动态配置 `claude_ai_install_hub_config.enabled`；悬停卡片才动 | `ce985dfcc-DyJUYVnx.js` | W21 |
 | 登录页 Cowork 演示卡 `cvc-*` | 登录页右侧 500×600 | 带 Cowork 来源的访客通行证，视口 ≥ 64rem | `c632c9594-BqPynXkK.js` | W21 |
 | Cowork 首次上传区 `ucoub-*` | Cowork 引导会话 | 会话 tags 含 `cowork-use-case-onboarding` | `cead24596-B5ed_4l4.js` | W21 |
 | 文件卡片悬停描绘 `sheet-card-*` | 对话里的文件 / Artifact 卡片 | 指针悬停（`hover:hover`），按 12 种 `data-sheet-kind` 画不同标记 | `c6a73f447-LaXKuzWp.css` | W21 |
-| Imagine 可视化部件（`svgFadeInScale`、`scriptsShimmer`、`moreItemSpin`） | `*.claudemcpcontent.com` 沙箱 iframe | 网页端：GrowthBook `claudeai_mcp_apps_visualize`，且组织功能 `inline_visualizations` 可用。桌面本地会话：GrowthBook `3444158716` | `cde7c3a92`、`asar build/index.chunk-BYMGAPtw.js` | W22 |
+| Imagine 可视化部件（`svgFadeInScale`、`scriptsShimmer`、`moreItemSpin`） | `*.claudemcpcontent.com` 沙箱 iframe | 网页端：GrowthBook `claudeai_mcp_apps_visualize`，且组织功能 `inline_visualizations` 可用。桌面本地会话：GrowthBook `3444158716` | `cde7c3a92`、`asar build/index.chunk-BVryDrIy.js`（开关）、`asar build/index.chunk-BYMGAPtw.js`（关键帧） | W22 |
 | 语音模式 WebGL 光团、听写波形 | 输入框 | 语音模式进行中（非软件渲染）；听写进行中 | `VoiceAudioVisualizer`、`DictationWaveform` | W22 |
 | Ultracode 充能条、Cowork 点阵螺旋、Code 落地页字符风纹 | 模型选择器、`/task/new`、新会话页 | 充能条在 Effort 最后一档为 ultracode 且拉到顶时出现。字符风纹和点阵螺旋要求外观「背景动画」没关：字符风纹在页面可见 3s 后才开始；背景动画关闭时点阵螺旋只显示静帧 | WebGL2 着色器 | W22 |
 | 计数胶囊状态机 `cds-pill-*` | Artifact 页面评论的表情回应 | 单次变化才动：本人点亮播 pop、取消播 dip，计数增减滚动，归零时留幽灵副本 | 主样式表、`frame-shell-chrome` | W17 |
@@ -975,7 +975,7 @@ Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个�
 | 效果 | 走不到的原因 | 证据 |
 | :--- | :--- | :--- |
 | `cc-project-tile-enter-forward / -back` | 开关链恒为假：`Ev()` 写死返回 false，`Ov()` 最终取常量 `vm=!1` | `c96d752d0` |
-| `timeline-status-rise / -fall / -quiet-dot / -expand` | 没有调用方传入对应参数 | `cc1aae219` |
+| `timeline-status-rise / -fall`、`timeline-quiet-dot`、`timeline-expand` | 没有调用方传入对应参数 | `cc1aae219` |
 | `new-task-shake`（权限模式回退抖动） | 触发它的 `fellBackFrom` 全包只有读取、没有赋值 | 主样式表 `.animate-mode-fell-back` |
 | ClawdQuest 开始纸条 `cq-slipIn` / `cq-fadeIn` | 只在 `createClawdQuest({ boot: true })` 时出现，桌面离线页挂载游戏时没有传 `boot` | `clawdQuestEngine-CdvdlRdl.js`、`MainWindowPage-BM1J3SeB.js` |
 | 页头「标题离开 / 页签到达」 | 只在 Fizzy Lake panels 下启用，`shared-4` 的允许列表为空（`Cf=[]`） | 主样式表 `[data-cds-title-leaves]` |
@@ -989,7 +989,7 @@ Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个�
 | `melange-strip-spin`、`slideDown` | 只在没用到的 fab 变体里出现，或者全包没有引用 | `c04e7453f`、`c9500abe8` |
 | ShimmerText strong 变体 | 样式齐全，没找到调用方 | 主样式表 |
 | 只在样式表里出现的类：`skill-menu-in`、`pill-drop-in`、`check-pop-in`、`tail-reply-expand`、`suggestions-in`、`click-ring-fade`、`cds-editor-comment-working`、`.dframe-dot` | JS 里搜不到引用 | 主样式表、`shared-styles` |
-| 5 个已注册的 GIF 插画：NodeBubble、ObjectFlowers、ObjectGiftOpenTag、ObjectLighthouse、ObjectQuill | 没找到调用点 | `c97db5174-*`、`cf4ec74fb-*` |
+| 5 个已注册的 GIF 插画：NodeBubble、ObjectFlowers、ObjectGiftOpenTag、ObjectLighthouse、ObjectQuill | 注册表 `cc8fbca95-Dn8stCZ5.js` 登记 8 个 GIF，导入方只用 ObjectBlocks / ObjectHandCoin / ObjectPiggyBank，这 5 个没找到调用点 | `cc8fbca95-Dn8stCZ5.js`、资源 `c97db5174-*`、`cf4ec74fb-*` |
 
 ### 7.4 减少动效与强制颜色
 
@@ -1001,7 +1001,7 @@ Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个�
   - AnimatedPictogram 只显示静帧。
   - 用量环整套动画返回空状态。
 - **不受影响的**：天气卡片的 canvas 粒子不读这个设置。
-- **强制颜色**：`forced-colors: active` 下只有三处做了处理，其余关键帧照常播放。
+- **强制颜色**：`forced-colors: active` 下只有三个组件对动效做了处理（主样式表共 35 段 forced-colors 规则，其余与关键帧无关），别的关键帧照常播放。
   - ShimmerText 的合成克隆层隐藏，回退层去掉渐变、文字改用 `CanvasText`。
   - `.editor-comment-working` 改成 Highlight 色 2px 下划线。
   - Code 活动面板按钮的光泽层隐藏（`shared-16`）。
@@ -1013,14 +1013,29 @@ Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个�
 | 位置 | 原内容 | 改正为 | 依据 |
 | :--- | :--- | :--- | :--- |
 | 故事书 W12 | weather-* 用于「问候区的天气氛围」 | 对话里的天气工具卡片 `WeatherToolUseCell`，完整复刻见 W20 | `cc0c7aeb5` |
-| 第 09 章 9.2 用量环 | 心跳 `infinite` 循环；彗星弧长为周长 8%；行程 `pct × 3.6°` | 心跳只播一次；弧长为周长 10%；行程 `max(0, pct × 3.6° − 36°)` | `c403c4b83`、`cb979c293` |
+| 第 09 章 9.2 用量环 | 心跳 `infinite` 循环；彗星弧长为周长 8%；行程 `pct × 3.6°` | 心跳只播一次；弧长为周长 10%；行程 `max(0, pct × 3.6° − 36°)` | `c403c4b83-CRKgA1Gz.js`、`c403c4b83-yqAXiELG.css` |
 | 第 09 章 9.6 录制胶囊 | `dframe-dot-pulse 1.4s`；「Recording a skill · 00:42」；按钮 Stop / Resume | 红点 pulse 1.5s（opacity 1 → .4）；「Capturing · m:ss」；按钮 Discard / Done；点 Done 后转 900ms 圆环与 Processing | `lzaSYO3Q` `TBa()` |
 | 第 07 章状态点 | 陶土点 2.4s、scale .92 ↔ 1.08；运行点用 `dframe-dot-pulse` 1.2s 缩放 | 陶土点 3s ease-in-out、scale .86 ↔ 1、brightness .96 ↔ 1.06；运行点用 `dframe-dot-blink` 1.2s 只变透明度 | `shared-styles-Bl9zqrv-.css` |
 | 第 07 章 Quiet Dots | 标为 `.df-tab-dot-running`，1.9s 默认缓动 | 三颗点实为 claude.ai 步骤时间线的 `.timeline-quiet-dots`（3px、1.9s cubic-bezier(.4,0,.2,1)），本版本状态行默认走 shimmer 变体、没有调用方启用；`.df-tab-dot-running` 是单点 `dframe-dot-blink` 1.2s | `cc1aae219-DtZTxCKj.css`、`shared-styles-Bl9zqrv-.css` |
 | 第 07 章骨架屏 | 90° 光带，`cds-skeleton-sweep` 1.8s cubic-bezier(.4,0,.2,1) | 105° 光带（35%–65%），2s linear；实物在组内按所有骨架的并集裁一条光带 | 主样式表、`shared-frame` |
 | 第 03 章附件缩略图 | `file-thumbnail-grow-in` 0.25s，scale .85 → 1；上传呼吸 .45 | max-width 0 → 原宽、.3s ease-out；上传呼吸 opacity .5，1.2s，延迟 .5s | `shared-styles-Bl9zqrv-.css` |
-| 本报告 4.1 | 「主窗口基础样式表 55 个核心关键帧，全量 152 个」 | 152 个只是主样式表的数量；全包 309 个；55 个 CDS 关键帧被复制进 6 处本地窗口 | 见 7.1 |
+| 本报告 4.1 | 「主窗口基础样式表 55 个核心关键帧，全量 152 个」 | 152 个只是主样式表的数量；全包 309 个；主样式表 56 个 `cds-*` 关键帧中 54 个被复制进 7 处（含 `frame-shell-chrome`） | 见 7.1 |
 | 本报告 2.11 | ClawdQuest 叙事纸条为 12 顶点 `clip-path` | 叙事纸条 13 顶点、倾斜 −0.6°；开始纸条 10 顶点、倾斜 +0.8°；游戏受开关 `543332958` 控制 | `clawdQuestEngine-C2Z1JudX.css`、`lzaSYO3Q` |
+
+2026-10-18 的全量复核（四路只读核查，共对照约 2,170 条断言；WK_DATA 309 条逐条机器比对全部对上）又改正了下列各处：
+
+| 位置 | 原内容 | 改正为 | 依据 |
+| :--- | :--- | :--- | :--- |
+| 故事书 W0 | app.asar 549 项（507 个文件）；关键帧分布在 51 个文件 | 548 项（506 个文件 + 42 个目录，6 个在 app.asar.unpacked）；含 `@keyframes` 的文件 53 个（ion-dist 42 + app.asar 11，多出的两个是 `resources/artifact-libs/` 里的 Mermaid / Grid.js 副本） | app.asar 头部 JSON、只读扫描 |
+| 第 01 章 1.1 | 「Build Timestamp 2026-10-15T05:54:05Z」；`c6a992d55` / `MainWindowPage` 解自 `ion-dist/_frame-rt` | 该值是 `aboutWindow.js` 的 `commitTimestamp`，ion-dist 构建戳为 1792044185（06:03:05Z）；主样式表在 `ion-dist/assets/v1`，`MainWindowPage-*` 在 app.asar `.vite/renderer/main_window`，`_frame-rt/_runtime` 只装字体与 Artifact 运行时 | `aboutWindow.js`、`ion-dist/index.html` |
+| 第 02 章 2.3 / 2.4 / 2.7 / 2.8 | `Send now` ghost · xs、快捷键 cmd+enter；文案在 `i18n/en-US.json`；16 个 `color-mix()`；19 个心跳帧；32.9% 光晕在 `urm-beat-limit` 内 | ghost · sm（`ArrowReturn`），cmd+enter 属于 epitaxy「Send reply」；文案在 `i18n/dynamic/en-US.json` 与 `shared-23` 内联；15 个 `color-mix()` + 末端纯色共 16 个色标；20 个停靠点；光晕是独立关键帧 `urm-beat-limit-glow` | `cf74bc599`、`c0d1f1ea0`、`c403c4b83` |
+| 故事书 01–03 章 | code 11~12px / 16px；深色 Semibold 550、Bold 660（+60）；代码字体 Fira Code；焦点环内层 `--cds-surface-1`；`--cds-shadow-popover` 自带 1px 环；输入框悬停 / 聚焦 24px 投影 .06 / .08；`--cds-h-titlebar` | code 12/17（compact）与 13/19（comfortable）；`--cds-font-wght-semibold` 540、`-bold` 560，深色一律减薄；`--cds-font-mono` = Anthropic Mono / SF Mono → ui-monospace → Menlo → Consolas；内层为 `--cds-page-bg`；环来自 `--shadow-panel` 的 `--cds-ring-*`，popover 令牌只含两层投影；`.shadow-composer*` 常态与悬停 3.5%、聚焦 7.5%，`--cds-shadow-composer*` 为本仓库别名；46px 来自 `shared-styles` 的 `.df-titlebar` | 主样式表、`shared-styles-Bl9zqrv-.css` |
+| 第 04 章 4.1 / 4.4、本章 7.1 | 55 个 CDS 关键帧复制进 6 处；36 阶色阶 | 主样式表 56 个 `cds-*` 中 54 个复制进 7 处（补 `frame-shell-chrome-CAw-tYzh.js`；`cds-anim-loop`、`cds-um-enter` 只在主样式表）；每色相 35 阶（`BYMGAPtw` 规范原文写 36） | 只读扫描、主样式表 |
+| 第 05 章 | 努力程度文案取自 `en-US.json`；`uses limits faster` | 取自 `shared-23-Bu_lvvVo.js` 内联 `defaultMessage`；`uses your limits faster`（含 `code-examples/ModelSelectorEffort.tsx`） | `shared-23`、`en-US.json` |
+| 故事书 W14 / W15 | 闪烁关键帧「内联 CSS cd4c7d572」；启动占位写成一层；交通灯「在 44 高标题行里竖直居中」；托盘 .ico 9 帧 | 由 `c96d752d0-BOCqU7c2.js` 注入（包内没有 cd4c7d572）；壳层 `html[data-boot-placeholder]`（`lzaSYO3Q` `tZn`）与 SPA `html[data-desktop-boot-placeholder]` + 10 秒 `data-boot-ui-ready=timeout` 两层；圆点中心 22.5 × zoom DIP，相当于 45 高行中线；13 帧（9 帧 32 位 + 4 帧 4/8 位低色） | `c96d752d0`、`main_window/index.html`、`lzaSYO3Q`、`Tray-Win32*.ico` |
+| 本章 7.2 / 7.3 / 7.4、故事书 W21 / W22 | 开关 `3444158716` 归于 `BYMGAPtw`；`timeline-status-quiet-dot / -expand`；用量环证据 `cb979c293`；「只有三处」；22 个 chunk 用弹簧；6 处 `startViewTransition`；`__gb__2700899281` 在 `c632c9594`；营销页头 .2s 为时长 | 开关在 `index.chunk-BVryDrIy.js`；`timeline-quiet-dot` / `timeline-expand`；逻辑在 `c403c4b83-CRKgA1Gz.js`；三个组件；20 个；5 处调用；在 `cdd345228-CMyXUFLn.js` `er()`；.2s 是延迟、时长 .3s | 全包 grep |
+| 第 02 章 2.11 | Hardware Buddy 审批 `Bash` 工具权限 | 对任何 `cmd === "permission"` 请求生效，`Bash` 只是协议示例里的工具名 | `index.chunk-CzY1tCPL.js` |
+| 故事书 W13 / W15 | 「4441 个文件都在 AppxBlockMap.xml 声明内」 | 块映射与签名文件本身不在内，声明的是其余 4439 个 | `AppxBlockMap.xml` |
 
 ### 7.6 与故事书的对应
 

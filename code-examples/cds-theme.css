@@ -125,13 +125,14 @@
 
   /* 7. 核心输入终端双环阴影 (Composer Shadow) */
   --cds-shadow-composer: 0 4px 20px rgba(0, 0, 0, 0.035), inset 0 0 0 1px var(--cds-border);
-  --cds-shadow-composer-hover: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--cds-border-strong);
-  --cds-shadow-composer-focus: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 0 0 1px var(--cds-border-strong), 0 0 0 1px var(--cds-border-strong);
+  --cds-shadow-composer-hover: 0 4px 20px rgba(0, 0, 0, 0.035), inset 0 0 0 1px var(--cds-border-strong);
+  --cds-shadow-composer-focus: 0 4px 20px rgba(0, 0, 0, 0.075), inset 0 0 0 1px var(--cds-border-strong), 0 0 0 1px var(--cds-border-strong);
 
   /* 8. 三层焦点微光环与拖拽微光（焦点环为 accent 蓝 1px + 6px 光晕，claude.ai 实测；陶土只给发送键与 Spark） */
   --cds-fill-accent: #2a78d6;
   --cds-bg-accent: #cde2fb;
-  --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px var(--cds-bg-accent);
+  --cds-page-bg: var(--cds-surface-1);
+  --cds-focus-shadow: inset 0 0 0 1px var(--cds-page-bg), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px var(--cds-bg-accent);
   --cds-shadow-drop-glow: inset 0 0 24px -2px rgba(217, 119, 87, 0.20), inset 0 0 0 2px var(--cds-clay);
 
   /* 9. 交互填充与文本色阶 */
@@ -328,7 +329,8 @@
   --cds-shadow-composer-hover: 0 4px 24px rgba(0, 0, 0, 0.55), inset 0 0 0 1px var(--cds-border-strong);
   --cds-shadow-composer-focus: 0 4px 24px rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.22);
 
-  --cds-focus-shadow: inset 0 0 0 1px var(--cds-surface-1), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px rgb(24 79 149 / 60%);
+  --cds-page-bg: var(--cds-surface-1);
+  --cds-focus-shadow: inset 0 0 0 1px var(--cds-page-bg), 0 0 0 1px var(--cds-fill-accent), 0 0 6px 1px rgb(24 79 149 / 60%);
   --cds-shadow-drop-glow: inset 0 0 24px -2px rgba(217, 119, 87, 0.30), inset 0 0 0 2px var(--cds-clay);
 
   --cds-fill-ghost-hover: var(--cds-alpha-1);
@@ -372,10 +374,10 @@
   font-variation-settings: "wght" 465;
 }
 .dark .font-semibold, [data-mode="dark"] .font-semibold {
-  font-variation-settings: "wght" 560;
+  font-variation-settings: "wght" 540;
 }
 .dark .font-bold, [data-mode="dark"] .font-bold {
-  font-variation-settings: "wght" 660;
+  font-variation-settings: "wght" 560;
 }
 
 /* 行内图标光学负偏置 */
