@@ -20,7 +20,7 @@ tags:
 > **目标应用载体**：Anthropic 官方桌面端生产包 Windows MSIX `Claude_2.42304.0.0_x64__pzs8sxrjxfjjc`
 > **二进制元数据**：`@ant/desktop v2.42304.0`（Build: `2026-10-15T05:54:05Z`，Commit: `e7f60e658f15cfece9efa384a78a39aec3c12845`，捆绑 CLI `2.1.299`，`app.asar` Evidence: `ev_db29cf6b5757fd86666fd272343cccd383bf391d00dac49aada8f2d616fa36c8`）
 > **逆向工具栈**：**[REA (Reverse Engineer Anything)](https://github.com/morluto/rea)**：ASAR 解包、`ion-dist` CSS / JS 静态分析与 AST 解构。
-> **网页版对照**：claude.ai 运行时实测（DOM 测量、CSSOM 遍历）见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W15）。
+> **网页版对照**：claude.ai 运行时实测（DOM 测量、CSSOM 遍历）见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W22；W16–W22 是安装包全部可视化效果的盘点与复刻）。
 
 ---
 
@@ -57,6 +57,13 @@ tags:
   - [5.2 输入框底部工具行](#52-输入框底部工具行)
   - [5.3 动效引擎与微交互](#53-动效引擎与微交互)
 - [6. 总结](#6-总结)
+- [7. 全量盘点](#7-全量盘点)
+  - [7.1 盘点口径与结果](#71-盘点口径与结果)
+  - [7.2 需要特定条件才出现的效果](#72-需要特定条件才出现的效果)
+  - [7.3 代码在、界面走不到的路径](#73-代码在界面走不到的路径)
+  - [7.4 减少动效与强制颜色](#74-减少动效与强制颜色)
+  - [7.5 对既有内容的更正](#75-对既有内容的更正)
+  - [7.6 与故事书的对应](#76-与故事书的对应)
 
 ---
 
@@ -360,10 +367,12 @@ span[data-hang-quote] { margin-inline-start: calc(-1 * var(--hq-hang)); }
 | :--- | :--- | :--- | :--- |
 | **SableOtter 光标级悬浮 HUD** | `index.chunk-BN7PaJ_P.js`<br/>`index.chunk-VXoZYQbU.js` | Strip 胶囊条（`border-radius: 18px`, `max-width: 590px`）与 Card 卡片（`width: 420px`, `border-radius: 14px`）双态；浅色 `rgba(255,255,255,0.97)` / 深色 `rgba(38,38,36,0.97)`；5 柱对称声学电平表 `height = 4 + 12 * level px` | 跟随系统任意应用输入光标（Caret）弹出；区分指令紫（`--tell: #6b5ec7`）与听写陶土橙（`--dictate: #d97757`）；自动过滤终端与密码框（1Password/Bitwarden 等） |
 | **CuTeach 计算机使用教学浮层** | `computerUseTeach.js`<br/>`index.chunk-lzaSYO3Q.js` | `16px` 圆角气泡 + `::before` 17px `0.5px` 发丝内框；双层 `drop-shadow` 三角形锚点箭头；`300ms cubic-bezier(0.16, 1, 0.3, 1)` 缩放位移过渡 | 全屏透明穿透窗口（`setIgnoreMouseEvents(true, {forward: true})`），优先按 `below → above → right → left` 自动避让屏幕边缘；进入计算机控制时主窗口以 `220ms` 三次方缓动自动停靠为右侧 `520×720px` 边栏 |
-| **CuWatchRecord 屏幕录制与技能提炼** | `computerUseWatchRecord.js`<br/>`watchRecordChooser.js` | 底部悬浮暗色毛玻璃胶囊（`472×112px` 含阴影余量，本体 `rgba(21,21,21,0.95)`, `border-radius: 12px`, `backdrop-filter: blur(10px)`）；8px 陶土脉冲圆点 | 支持 `Share screen`（上下文录制）与 `Record a skill`（自动提炼可复用技能）双模式；Chooser 窗口内置 `INPUT_PROTECTION_MS` 防误触门禁；录制结束转为 `Processing` 扫光态并按实际内容宽度动态收缩窗口 |
+| **CuWatchRecord 屏幕录制与技能提炼** | `computerUseWatchRecord.js`<br/>`watchRecordChooser.js` | 底部悬浮暗色毛玻璃胶囊（`472×112px` 含阴影余量，本体 `rgba(21,21,21,0.95)`, `border-radius: 12px`, `backdrop-filter: blur(10px)`）；8px `#d97757` 圆点 `pulse 1.5s`（opacity 1 → .4），「Capturing · m:ss」计时（250ms 刷新）与 Discard / Done 按钮 | 支持 `Share screen`（上下文录制）与 `Record a skill`（自动提炼可复用技能）双模式；Chooser 窗口内置 `INPUT_PROTECTION_MS` 防误触门禁；录制结束转为 900ms 圆环 + `Processing` 扫光态，并按实际内容宽度 `min(408, max(160, w)) + 64` 收缩窗口；胶囊窗口 `setContentProtection(true)`，不会被录进画面；只支持 Windows / macOS |
 | **Hardware Buddy 创客蓝牙硬件终端** | `buddy_window/BuddyWindow-_Jgif_qX.js`<br/>`main-a4mzyXdA.css` | 暖米色画布（`--cream: #f4f3ee`）；左侧拟物化橙色硬件掌机预览（`115×245px`, `145deg` 渐变外壳，`77×134px` `image-rendering: pixelated` 像素屏与实体按键阴影） | 基于 Nordic UART Service (`6e400001-...`) BLE 协议连接外部创客硬件（如桌面电子宠物），每 10s 同步活跃会话数、今日 Token 消耗并支持硬件按键直接审批 `Bash` 工具权限（`once` / `deny`） |
-| **ClawdQuest 离线断网彩蛋游戏** | `clawdQuestEngine-CdvdlRdl.js`<br/>`clawdQuestEngine-C2Z1JudX.css` | 断网报错页（`data-load-error-overlay`）底部提示 `Press Space to play`；叙事纸条采用 `#f3efe4` 底色 + 内联 SVG `feTurbulence`（`baseFrequency="1.15"`）分形噪点滤镜 + 12 顶点不规则多边形 `clip-path` 模拟手工撕边羊皮纸，配合 `-0.6deg` / `+0.8deg` 微倾角 | 在网络中断时将枯燥的报错页转化为高艺术质感的平台跳跃游戏，报错卡片自动折叠为顶部紧凑横幅（`data-compact`），并通过 `ResizeObserver` 动态避让游戏 HUD 顶栏 |
+| **ClawdQuest 离线断网彩蛋游戏** | `clawdQuestEngine-CdvdlRdl.js`<br/>`clawdQuestEngine-C2Z1JudX.css` | 断网报错页（`data-load-error-overlay`）底部提示 `Press Space to play`；叙事纸条采用 `#f3efe4` 底色 + 内联 SVG `feTurbulence`（`baseFrequency="1.15"`）分形噪点滤镜 + 不规则多边形 `clip-path` 模拟手工撕边羊皮纸：叙事纸条 13 顶点、倾斜 `-0.6deg`，开始纸条 10 顶点、倾斜 `+0.8deg` | 只在主视图加载失败（`load_failed`）且 GrowthBook 开关 `543332958` 打开时挂载（主进程 `dYn(…, { offersOfflineGame })`）；把报错页变成平台跳跃游戏，报错卡片自动折叠为顶部紧凑横幅（`data-compact`），并通过 `ResizeObserver` 动态避让游戏 HUD 顶栏 |
 
+
+> 补充：电脑使用时还有一扇全屏透明的屏幕光晕窗口（cu-glow）。会话拿到电脑使用锁时，四周出现陶土色内阴影脉冲（`glow-pulse` 2s），中央徽标「Claude is using your computer」停约 5s 后飞向右上角（`badge-center-to-corner` 6s）；同时主窗口缩成右上角 520×720 侧边面板。ClawdQuest 的「Start game」开始纸条（`cq-slipIn`）只在引擎的 `boot` 模式出现，桌面离线页不传 `boot`，所以看不到。详见[7.2 需要特定条件才出现的效果](#72-需要特定条件才出现的效果)。
 ---
 
 # 第三章：界面架构与样式系统
@@ -476,7 +485,7 @@ span[data-hang-quote] { margin-inline-start: calc(-1 * var(--hq-hang)); }
 
 ### 4.1 纯 CSS 动效参数
 
-在 `v2.42304.0` 中，主窗口基础样式表（`MainWindowPage-DTxMhyWF.css`）包含 **55 个核心关键帧**，而全量前端样式包（`c6a992d55-sXiDGMFQ.css` 及独立功能包）共定义了 **152 个纯 CSS `@keyframes` 关键帧**：
+在 `v2.42304.0` 中，全包共有 **309 个 `@keyframes` 关键帧名**（同名多处定义按 1 个计），分布在 51 个文件里，其中第三方库 17 个；逐个的功能与触发条件见[第七章](#7-全量盘点)和故事书 W16。主样式表 `c6a992d55-sXiDGMFQ.css` 定义了其中 **152 个**；以 `cds-*` 为主的 **55 个 CDS 核心关键帧** 另被复制进 6 处本地窗口（about / buddy / find-in-page / quick-window 的内联 html、`MainWindowPage-DTxMhyWF.css`、`frame-window-054FFK51.js`）。主要家族如下：
 
 * **Pill 微形变族**：`cds-pill-in`, `cds-pill-pop-up`, `cds-pill-pop-down`, `cds-pill-dip-down`, `cds-pill-dip-up`, `cds-pill-roll-in-up`, `cds-pill-roll-in-down`, `cds-pill-roll-out`, `cds-pill-out`
 * **骨架屏呼吸与扫光族**：`cds-skeleton-breathe`, `cds-skeleton-sweep`, `cds-placeholder-reveal`
@@ -880,7 +889,148 @@ export const CdsMotionEngine: React.FC = () => {
 Claude 桌面端 2.42304.0.0 的界面与 CDS 设计规范可以归纳为三个层面：
 
 1. **结构规范化**：**52 个 `data-cds` 顶级命名空间与 79 项 `data-cds-*` 结构槽位**，官方 6 层设计令牌架构、Cove 8 色可视化标准色板与 Tailwind v4 `@layer cds-card` 级联体系；
-2. **动效与排版物理化**：**5 阶响应时间 Token、15 阶 `linear()` 按钮弹簧、152 项纯 CSS 关键帧、16 阶非线性渐隐遮罩、三阶双搏生理心跳曲线与 5 字体光学悬挂标点矩阵**，动效由 CSS 关键帧与 Scroll-Driven 时间轴承担，不占用流式输出时的主线程；
-3. **全场景桌面原生化**：弹出窗口与窗口级页面搜索、排队消息，以及 **SableOtter 光标级悬浮 HUD、CuTeach 教学穿透气泡、CuWatchRecord 屏幕录制与技能提炼胶囊、Hardware Buddy 创客蓝牙终端与 ClawdQuest 手工撕边羊皮纸离线彩蛋**。
+2. **动效与排版物理化**：**5 阶响应时间 Token、15 阶 `linear()` 按钮弹簧、全包 309 个关键帧（主样式表 152 个）、16 阶非线性渐隐遮罩、三阶双搏生理心跳曲线与 5 字体光学悬挂标点矩阵**，动效由 CSS 关键帧与 Scroll-Driven 时间轴承担，不占用流式输出时的主线程；
+3. **全场景桌面原生化**：弹出窗口与窗口级页面搜索、排队消息，以及 **SableOtter 光标级悬浮 HUD、CuTeach 教学穿透气泡、CuWatchRecord 屏幕录制与技能提炼胶囊、Hardware Buddy 创客蓝牙终端与 ClawdQuest 手工撕边羊皮纸离线彩蛋**；
+4. **条件触发的隐藏效果**：相当一部分效果只在特定条件下出现，例如电脑使用时的屏幕光晕、模型调用天气工具后的天气卡片、升级后的庆祝页票券和 Imagine 可视化部件；还有一批样式和组件都在、但本版本代码路径走不到的效果。完整盘点见[第七章](#7-全量盘点)。
 
-网页版（claude.ai）的运行时实测见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W15）：两端行为不同的项在各节就地并排，桌面端独有功能单列在 W15。
+网页版（claude.ai）的运行时实测见 [交互式故事书 · claude.ai 实测页](../claude-components-storybook.html#claude-ai-web)（W0–W22）：两端行为不同的项在各节就地并排，桌面端独有功能单列在 W15；W16–W22 是安装包全部可视化效果的盘点与复刻，对应[第七章](#7-全量盘点)。
+
+---
+
+# 第七章：隐藏与条件触发效果
+
+本章把 Claude Desktop 2.42304.0.0 安装包里的可视化效果完整过了一遍，重点是平时看不到、要满足特定条件才出现的效果。交互复刻在故事书 claude.ai 实测页的 [W16–W22](../claude-components-storybook.html#wa-census)，本地窗口部分在 [W15](../claude-components-storybook.html#wa-desktop) 的后半部分。
+
+## 7. 全量盘点
+
+### 7.1 盘点口径与结果
+
+**方法**：纯静态分析，没有运行 `claude.exe`，也没有附加或读取任何正在运行的 Claude 进程。
+
+1. 用只读脚本扫描安装包里全部 `.css` / `.html` / `.js` 文本，收集 `@keyframes` 名与定义所在的文件：`ion-dist`（内置的 claude.ai 前端）和 `app.asar`（主进程、预加载脚本、本地渲染窗口）。
+2. 对每个关键帧，找出引用它的 `animation` 声明（样式表与 JS 内联样式都扫），再按类名在 JS 里追到谁加上这个类、在什么条件下加。条件包括路由、组件状态、GrowthBook 开关、平台、RTL、减少动效等。
+3. 不靠关键帧的效果另列，包括 View Transition、canvas / WebGL、Lottie、动图视频和原生窗口。
+4. REA 证据：`analyze_javascript_application` 用 `source_paths` 限定范围，分析了两组文件。
+   - app.asar 的 12 个本地窗口与预加载脚本：`ev_74e299b3…`，app.asar sha256 `8f4d3dec…5379da9db`。
+   - ion-dist 的 6 个功能 chunk：`ev_63b65e99…`，ion-dist 目录 sha256 `c52bb551…dc2521`，0 个解析失败。
+
+**结果**：
+
+| 项目 | 数量 |
+| :--- | :--- |
+| 关键帧名（同名多处定义按 1 个计） | **309** 个，分布在 51 个文件 |
+| 主样式表 `c6a992d55-sXiDGMFQ.css` | 152 个 |
+| Artifact 外壳 `frame-shell-chrome-CAw-tYzh.js` 内嵌副本 | 61 个 |
+| 55 个 CDS 关键帧的副本 | 6 处：about / buddy / find-in-page / quick-window 四个窗口的 html、`MainWindowPage-DTxMhyWF.css`、`frame-window-054FFK51.js` |
+| 第三方库内部 | 17 个：Monaco、ProseMirror、CodeMirror、Mermaid |
+| 盘点前故事书已出现的 | 44 个（按完整标识符匹配） |
+| 本次补齐的 | **250** 个（不含第三方） |
+| 非关键帧效果 | 153 项 |
+
+按分析方向分组：
+
+| 方向 | 关键帧 | 主要来源 | 故事书 |
+| :--- | :--- | :--- | :--- |
+| CDS 原语与外壳 | 94 | 主样式表、`frame-shell-chrome`、`shared-styles-Bl9zqrv-.css` | W17 |
+| Code 与工作流 | 55 | `c96d752d0`、`c3fde7009`、`cc1aae219` 等 | W18 |
+| 对话与通用 UI | 37 | 主样式表 `.animate-*` 工具类 | W19 |
+| 条件触发的功能场景 | 40 | `cc0c7aeb5`（天气）、主样式表 | W20 |
+| 功能模块自带样式 | 56 | 16 个功能 chunk 的内联 CSS、`c6a73f447` | W21 |
+| 模型生成部件 | 6 | `cde7c3a92` / `asar build/index.chunk-BYMGAPtw.js` | W22 |
+| 桌面本地窗口 | 5 | `asar build/index.chunk-lzaSYO3Q.js`、`clawdQuestEngine` | W15 |
+| 第三方库 | 16 | Monaco、ProseMirror、CodeMirror、Mermaid | W16（只列参数） |
+
+### 7.2 需要特定条件才出现的效果
+
+| 效果 | 出现位置 | 触发条件 | 证据 | 故事书 |
+| :--- | :--- | :--- | :--- | :--- |
+| 电脑使用屏幕光晕：`glow-pulse` 2s、徽标 `badge-center-to-corner` 6s、`dot-pulse` 1.8s | 所选显示器全屏透明窗口（screen-saver 层级、忽略鼠标） | 会话拿到电脑使用独占锁（`cuLockChanged`）。同时主窗口用 220ms 缩成右上角 520×720 侧边面板，徽标终点 `100% − 280px` 落在面板中线上。释放锁时 0.3s 淡出，320ms 后隐藏 | `lzaSYO3Q` `TVr` / `IVr()` / `LVr()` / `RVr()` | W15 |
+| CuTeach 教学浮层 | 工作区大小的穿透窗口 | 模型调用 `request_teach_access` 并获批后，每个 `teach_step` 推一步；按下 → 上 → 右 → 左避让屏幕边缘 | `lzaSYO3Q` `uLa()` / `SLa()` | W15 |
+| 录制选择器与录制胶囊（「Capturing · m:ss」、Discard / Done、Processing 扫光） | 主屏幕工作区底部居中 | Windows / macOS 上从输入框发起 Record a skill 或 Share screen；胶囊窗口设了内容保护，不会被录进画面 | `lzaSYO3Q` `gRa()` / `TBa()` / `DBa()` | W15、第 09 章 9.6 |
+| 离线小游戏 ClawdQuest | 主窗口加载失败覆盖层 | `load_failed` 且 GrowthBook 开关 `543332958` 打开。`JJn` 默认是 `() => !1`，主窗口创建主视图时被 `dYn(…, { offersOfflineGame: () => ey("543332958") })` 改写 | `lzaSYO3Q` `YJn()` / `dYn()` | W15 |
+| 天气工具卡片：9 个 `weather-*` 关键帧加 canvas 粒子 | 对话里的工具卡片 `WeatherToolUseCell` | 模型调用 `weather_fetch`。天空按 `current.condition`（14 种）× `current.is_day` 选择，与应用深浅色无关 | `cc0c7aeb5-Di8hlO-L.js` | W20 |
+| 安静时段画布 `hide-after-hold` | 整窗盖层 | GrowthBook `cardinal` 打开，reflections 设置里的 `quiet_hours` 覆盖当前本地时间（可跨午夜） | 主样式表 `.animate-quiet-hours-canvas-release` | W20 |
+| 重启倒计时 `lf-enter` / `lf-drain` / `lf-tick` | 桌面端整窗盖层 | 登录、退出登录、应用 3P 配置等需要重启时 | `.animate-relaunch-*` | W20 |
+| Guest Pass 票面与赠送票券 | 用户菜单的分享弹窗；Code 项目频道通知 | referral 资格可用；`onboarding_grant` 通知；点击票券时晃动和扫光 | `guest-pass-shimmer`、`ticket-*` | W20 |
+| 命令面板行操作卡 `palette-card-*` | cmdk 命令面板 | 选中行后按 Alt+Enter 或点行尾按钮 | 主样式表 | W20 |
+| 设置项深链高亮 `feature-anchor-*` | 设置页、管理员设置 | 带 #锚点打开、设置搜索、上手清单定位；有 RTL 版本 | 主样式表 | W20 |
+| 用量环 draw / quiet 入场 | 输入框用量环、Code 页脚 | 每个用量窗口（`orgUuid:resetsAt`）第一次在本机显示时播 draw（1200ms），之后播 quiet（200ms） | `c403c4b83`、`cb979c293` | W20、第 09 章 9.2 |
+| Claude Code 升级庆祝页票券 `ccc-*` | `/cli_landing` | 网页端升级支付成功后，按 GrowthBook 实验 `cc_celebration_post_upgrade` 跳转。桌面 App、Max 套餐和移动端不会被自动送到这里 | `ce78157a2-mEBrZTqq.js`、`cbbbe68ed` | W21 |
+| 安装中心插画 `install-hub-*` | `/downloads`、Cowork 下载步 | 动态配置 `claude_ai_install_hub_config.enabled`；悬停卡片才动 | `ce985dfcc-DyJUYVnx.js` | W21 |
+| 登录页 Cowork 演示卡 `cvc-*` | 登录页右侧 500×600 | 带 Cowork 来源的访客通行证，视口 ≥ 64rem | `c632c9594-BqPynXkK.js` | W21 |
+| Cowork 首次上传区 `ucoub-*` | Cowork 引导会话 | 会话 tags 含 `cowork-use-case-onboarding` | `cead24596-B5ed_4l4.js` | W21 |
+| 文件卡片悬停描绘 `sheet-card-*` | 对话里的文件 / Artifact 卡片 | 指针悬停（`hover:hover`），按 12 种 `data-sheet-kind` 画不同标记 | `c6a73f447-LaXKuzWp.css` | W21 |
+| Imagine 可视化部件（`svgFadeInScale`、`scriptsShimmer`、`moreItemSpin`） | `*.claudemcpcontent.com` 沙箱 iframe | 网页端：GrowthBook `claudeai_mcp_apps_visualize`，且组织功能 `inline_visualizations` 可用。桌面本地会话：GrowthBook `3444158716` | `cde7c3a92`、`asar build/index.chunk-BYMGAPtw.js` | W22 |
+| 语音模式 WebGL 光团、听写波形 | 输入框 | 语音模式进行中（非软件渲染）；听写进行中 | `VoiceAudioVisualizer`、`DictationWaveform` | W22 |
+| Ultracode 充能条、Cowork 点阵螺旋、Code 落地页字符风纹 | 模型选择器、`/task/new`、新会话页 | 充能条在 Effort 最后一档为 ultracode 且拉到顶时出现。字符风纹和点阵螺旋要求外观「背景动画」没关：字符风纹在页面可见 3s 后才开始；背景动画关闭时点阵螺旋只显示静帧 | WebGL2 着色器 | W22 |
+| 计数胶囊状态机 `cds-pill-*` | Artifact 页面评论的表情回应 | 单次变化才动：本人点亮播 pop、取消播 dip，计数增减滚动，归零时留幽灵副本 | 主样式表、`frame-shell-chrome` | W17 |
+| 拖放遮罩 `cds-drop-ring-in` / `cds-drop-icon-rise` | 窗口 / 输入框 | 拖文件进窗口 | 主样式表 | W17 |
+| 聊天图片预览 View Transition `vt-image-preview-*` | 图片灯箱 | 支持 `startViewTransition` 且未开启减少动效 | `cd5136de8` | W17 |
+| Code 文档改动高亮、审批卡升位、建议任务通知、多代理网格 | Code 标签 | 文件被改写；停靠审批卡挂载；有后台任务建议；Workflow 代理运行中 | `c3fde7009`、`c96d752d0`、`cf74bc599` | W18 |
+
+### 7.3 代码在、界面走不到的路径
+
+下列效果的样式和组件都在安装包里，但 2.42304.0.0 的代码路径到不了。故事书照样按参数复刻，并在卡片上标明不可达。
+
+| 效果 | 走不到的原因 | 证据 |
+| :--- | :--- | :--- |
+| `cc-project-tile-enter-forward / -back` | 开关链恒为假：`Ev()` 写死返回 false，`Ov()` 最终取常量 `vm=!1` | `c96d752d0` |
+| `timeline-status-rise / -fall / -quiet-dot / -expand` | 没有调用方传入对应参数 | `cc1aae219` |
+| `new-task-shake`（权限模式回退抖动） | 触发它的 `fellBackFrom` 全包只有读取、没有赋值 | 主样式表 `.animate-mode-fell-back` |
+| ClawdQuest 开始纸条 `cq-slipIn` / `cq-fadeIn` | 只在 `createClawdQuest({ boot: true })` 时出现，桌面离线页挂载游戏时没有传 `boot` | `clawdQuestEngine-CdvdlRdl.js`、`MainWindowPage-BM1J3SeB.js` |
+| 页头「标题离开 / 页签到达」 | 只在 Fizzy Lake panels 下启用，`shared-4` 的允许列表为空（`Cf=[]`） | 主样式表 `[data-cds-title-leaves]` |
+| 应用安装横幅 `appInstallSlideUp` | 两个挂载点都没传 `forceShow` | 主样式表 |
+| 提问卡片提交键 `pop-in-90`、换题轮播 | 转录卡片的渲染器不传 `onAnswersSubmit`；只有 catch-up 对话框里能确定看到换题滑入 | `shared-5`、`cca4865c3` |
+| Clarkdown 编辑态 `ckd-*` | `<clarkdown-editor>` 只被只读查看器注册，没有挂载编辑态的宿主 | `c4517f799`、`ce598b86c` |
+| 录制技能时的屏幕光晕 | 先执行 `h5 = !1` 再判断 `h5 && (…)`，那段代码不会执行 | `lzaSYO3Q` `DBa()` |
+| 托盘动态状态 | 运行时覆盖钩子 `W9` 从未赋值 | `lzaSYO3Q` |
+| Windows 任务栏数字角标 | 代码调了 `app.setBadgeCount`，但这个 API 在 Windows 上无效，安装包里也没调用 `setOverlayIcon` | `lzaSYO3Q` `Ehe()` |
+| `wl-bob / wl-glow / wl-halo` | 安装包里所有 JS 都没有用到这几个类 | 主样式表 |
+| `melange-strip-spin`、`slideDown` | 只在没用到的 fab 变体里出现，或者全包没有引用 | `c04e7453f`、`c9500abe8` |
+| ShimmerText strong 变体 | 样式齐全，没找到调用方 | 主样式表 |
+| 只在样式表里出现的类：`skill-menu-in`、`pill-drop-in`、`check-pop-in`、`tail-reply-expand`、`suggestions-in`、`click-ring-fade`、`cds-editor-comment-working`、`.dframe-dot` | JS 里搜不到引用 | 主样式表、`shared-styles` |
+| 5 个已注册的 GIF 插画：NodeBubble、ObjectFlowers、ObjectGiftOpenTag、ObjectLighthouse、ObjectQuill | 没找到调用点 | `c97db5174-*`、`cf4ec74fb-*` |
+
+### 7.4 减少动效与强制颜色
+
+- **CSS**：主样式表有一条全局规则，在 `prefers-reduced-motion: reduce` 下把所有动画压到 `.01ms`、只播一次。`[data-reduce-motion=true] *` 下有同样的一份。Tailwind 的 `motion-safe:` 变体同时要求媒体查询为 `no-preference`，并且不在 `[data-reduce-motion=true]` 之下。
+- **`<html data-reduce-motion>` 的来源**：设置 → 外观 → Motion 的分段控件有 System / Reduced 两项，值存在 `appearance:reduceMotion`。`shared-156` 里 `fE()` 计算 `shouldReduceMotion = mode === "reduce" || matchMedia("(prefers-reduced-motion: reduce)")`，`pE()` 据此写入这个属性。
+- **JS**：`shared-frame` 的 `Nm()`（导出名 `Tc`）是 `useReducedMotion`，用 MutationObserver 监听上面这个属性。用到它的地方各自退化：
+  - 计数胶囊直接 resync，不播动画。
+  - 页头不设 `data-cds-title-leaves`。
+  - AnimatedPictogram 只显示静帧。
+  - 用量环整套动画返回空状态。
+- **不受影响的**：天气卡片的 canvas 粒子不读这个设置。
+- **强制颜色**：`forced-colors: active` 下只有三处做了处理，其余关键帧照常播放。
+  - ShimmerText 的合成克隆层隐藏，回退层去掉渐变、文字改用 `CanvasText`。
+  - `.editor-comment-working` 改成 Highlight 色 2px 下划线。
+  - Code 活动面板按钮的光泽层隐藏（`shared-16`）。
+
+### 7.5 对既有内容的更正
+
+这次盘点顺带核对了故事书和本报告已有的数值，下列各处已按 2.42304.0.0 改正：
+
+| 位置 | 原内容 | 改正为 | 依据 |
+| :--- | :--- | :--- | :--- |
+| 故事书 W12 | weather-* 用于「问候区的天气氛围」 | 对话里的天气工具卡片 `WeatherToolUseCell`，完整复刻见 W20 | `cc0c7aeb5` |
+| 第 09 章 9.2 用量环 | 心跳 `infinite` 循环；彗星弧长为周长 8%；行程 `pct × 3.6°` | 心跳只播一次；弧长为周长 10%；行程 `max(0, pct × 3.6° − 36°)` | `c403c4b83`、`cb979c293` |
+| 第 09 章 9.6 录制胶囊 | `dframe-dot-pulse 1.4s`；「Recording a skill · 00:42」；按钮 Stop / Resume | 红点 pulse 1.5s（opacity 1 → .4）；「Capturing · m:ss」；按钮 Discard / Done；点 Done 后转 900ms 圆环与 Processing | `lzaSYO3Q` `TBa()` |
+| 第 07 章状态点 | 陶土点 2.4s、scale .92 ↔ 1.08；运行点用 `dframe-dot-pulse` 1.2s 缩放 | 陶土点 3s ease-in-out、scale .86 ↔ 1、brightness .96 ↔ 1.06；运行点用 `dframe-dot-blink` 1.2s 只变透明度 | `shared-styles-Bl9zqrv-.css` |
+| 第 07 章 Quiet Dots | 标为 `.df-tab-dot-running`，1.9s 默认缓动 | 三颗点实为 claude.ai 步骤时间线的 `.timeline-quiet-dots`（3px、1.9s cubic-bezier(.4,0,.2,1)），本版本状态行默认走 shimmer 变体、没有调用方启用；`.df-tab-dot-running` 是单点 `dframe-dot-blink` 1.2s | `cc1aae219-DtZTxCKj.css`、`shared-styles-Bl9zqrv-.css` |
+| 第 07 章骨架屏 | 90° 光带，`cds-skeleton-sweep` 1.8s cubic-bezier(.4,0,.2,1) | 105° 光带（35%–65%），2s linear；实物在组内按所有骨架的并集裁一条光带 | 主样式表、`shared-frame` |
+| 第 03 章附件缩略图 | `file-thumbnail-grow-in` 0.25s，scale .85 → 1；上传呼吸 .45 | max-width 0 → 原宽、.3s ease-out；上传呼吸 opacity .5，1.2s，延迟 .5s | `shared-styles-Bl9zqrv-.css` |
+| 本报告 4.1 | 「主窗口基础样式表 55 个核心关键帧，全量 152 个」 | 152 个只是主样式表的数量；全包 309 个；55 个 CDS 关键帧被复制进 6 处本地窗口 | 见 7.1 |
+| 本报告 2.11 | ClawdQuest 叙事纸条为 12 顶点 `clip-path` | 叙事纸条 13 顶点、倾斜 −0.6°；开始纸条 10 顶点、倾斜 +0.8°；游戏受开关 `543332958` 控制 | `clawdQuestEngine-C2Z1JudX.css`、`lzaSYO3Q` |
+
+### 7.6 与故事书的对应
+
+| 故事书小节 | 内容 |
+| :--- | :--- |
+| [W15 桌面端独有（后半）](../claude-components-storybook.html#wa-desktop) | 电脑使用光晕与侧边停靠、CuTeach、录制选择器与胶囊、页内查找条、快速输入、关于窗口、Hardware Buddy、本地执行确认、启动骨架 / 加载失败 / 离线游戏、托盘与任务栏 |
+| [W16 关键帧全目录](../claude-components-storybook.html#wa-census) | 309 个关键帧逐个写明功能、触发条件与证据，可重放；另附 153 项非关键帧效果清单 |
+| [W17 CDS 原语与外壳动效](../claude-components-storybook.html#wa-cds-fx) | 计数胶囊、ShimmerText、工作点、解决评论、拖放、滚动驱动、骨架、flipbook、逐词淡入、图片预览 View Transition |
+| [W18 Code 与工作流动效](../claude-components-storybook.html#wa-code-fx) | 文档预览、审批卡、建议任务通知、代理网格、步骤时间线、项目磁贴、对话反馈 |
+| [W19 对话与通用 UI 微动效](../claude-components-storybook.html#wa-chat-fx) | 署名栏、提问卡片、排序题、进度时间轴、展开、灯箱、无痕对话、横幅、跑马灯、选区提示 |
+| [W20 条件触发的功能场景](../claude-components-storybook.html#wa-cond) | 天气卡片、安静时段、重启倒计时、Guest Pass、命令面板、深链高亮、用量环入场 |
+| [W21 功能模块自带动效](../claude-components-storybook.html#wa-modules) | 文件卡片描绘、安装中心、升级庆祝页、登录页 Cowork 演示、购买专员、Cowork 上传区、Claude Tag 引导、终端打字、Coach、记忆面板、技能提案、营销页头 |
+| [W22 非 CSS 动效与媒体](../claude-components-storybook.html#wa-media) | Imagine 部件、语音光团、听写波形、模拟器手势、WebGL 效果、Lottie / flipbook / 动图视频清单、motion 弹簧 |
